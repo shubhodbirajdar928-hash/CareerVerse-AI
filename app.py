@@ -373,6 +373,7 @@ def roadmap():
         data = request.get_json()
 
         career = data.get("career", "").strip()
+        country = data.get("country", "").strip()
 
         if career == "":
             return failure("Please enter a career.", 400)
@@ -385,6 +386,10 @@ You are the world's best AI Career Mentor.
 The user wants to become:
 
 {career}
+
+Preferred Country:
+
+{country}
 
 Generate a COMPLETE professional career roadmap.
 
@@ -521,7 +526,13 @@ JSON format:
 "senior":""
 }},
 "top_organizations":[],
-"top_cities": [],
+"hiring_hotspots":[
+{{
+"city":"",
+"demand":"",
+"reason":""
+}}
+],
 "trending_skills":[],
 "daily_plan":[]
 }}
@@ -547,6 +558,12 @@ Rules:
 - Avoid duplicate books.
 - Keep salaries realistic.
 - Tailor everything to the selected career only.
+- hiring_hotspots must contain exactly 5 cities.
+- Every city must belong to the preferred country.
+- Every hotspot must include:
+  city
+  demand
+  reason
 - No markdown.
 - No explanation.
 """
@@ -585,6 +602,7 @@ def career_match_api():
         data = request.get_json()
 
         career = data.get("career", "").strip()
+        country = data.get("country", "").strip()
         qualification = data.get("qualification", "").strip()
         skills = data.get("skills", "").strip()
         strengths = data.get("strengths", "").strip()
@@ -1585,17 +1603,11 @@ def career_reality_api():
         data = request.get_json()
 
         career = data.get("career","").strip()
-
         country = data.get("country","").strip()
 
 
-        if not career:
-
-            return failure(
-                "Please enter a career.",
-                400
-            )
-
+        if career == "":
+          return failure("Please enter a career.", 400)
 
         prompt = f"""
 

@@ -4,6 +4,7 @@
 
 const generateBtn = document.getElementById("generateBtn");
 const careerInput = document.getElementById("careerInput");
+const countryInput = document.getElementById("countryInput");
 const resultCard = document.getElementById("resultCard");
 const downloadBtn = document.getElementById("downloadBtn");
 
@@ -15,7 +16,7 @@ const downloadBtn = document.getElementById("downloadBtn");
 generateBtn.addEventListener("click", async () => {
 
     const career = careerInput.value.trim();
-
+    const country = countryInput.value.trim();
     if (!career) {
         alert("Please enter a career.");
         return;
@@ -77,7 +78,8 @@ const loadingInterval = setInterval(() => {
             },
 
             body: JSON.stringify({
-                career: career
+                career: career,
+                country: country 
             })
 
         });
@@ -569,21 +571,31 @@ ${(resources.books || []).map(item => `
 
 </div>
 
-<!-- ================= COUNTRIES ================= -->
+<!-- ================= HIRING HOTSPOTS ================= -->
 
 <div class="roadmap-item">
 
-    <h2>🌍 Countries Hiring</h2>
+    <h2>🏙️ Hiring Hotspots</h2>
 
-    <ul>
+    <div class="hotspots">
 
-        ${(market.countries || []).map(country => `
-<li>${country}</li>
-`).join("")}
+        ${(market.hiring_hotspots || []).map(city => `
 
-    </ul>
+        <div class="hotspot-card">
 
-</div>
+            <h3>📍 ${city.city}</h3>
+
+            <p><strong>${city.demand}</strong></p>
+
+            <p>${city.reason}</p>
+
+        </div>
+
+        `).join("")}
+
+    </div>
+
+</div> 
 
 <!-- ================= TRENDING SKILLS ================= -->
 
