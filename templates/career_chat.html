@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>AI Career Chat | SkillSprint AI</title>
+
+
+<link rel="stylesheet"
+href="{{ url_for('static', filename='css/common.css') }}">
+
+
+<link rel="stylesheet"
+href="{{ url_for('static', filename='css/career_chat.css') }}">
+
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+rel="stylesheet">
+
+
+</head>
+
+
+<body>
+
+
+<nav class="navbar">
+
+<div class="logo">
+
+<img src="{{ url_for('static', filename='images/logo.png') }}">
+
+<h2>SkillSprint AI</h2>
+
+</div>
+
+
+<ul>
+
+<li><a href="/">Home</a></li>
+
+<li><a href="/generate">Roadmap</a></li>
+
+<li><a href="/ai-tools">AI Hub</a></li>
+
+<li><a href="/about">About</a></li>
+
+</ul>
+
+</nav>
+
+
+
+
+
+<section class="chat-page">
+
+
+<h1>
+🤖 AI Career Mentor
+</h1>
+
+
+<p>
+Your personal AI assistant for career guidance,
+skills and opportunities.
+</p>
+
+
+
+
+<div class="quick-actions">
+
+    <button id="newChatBtn" class="quick-btn new-chat-btn">
+        🆕 New Chat
+    </button>
+
+    <button class="quick-btn">🎯 Career Advice</button>
+
+    <button class="quick-btn">📚 Roadmap</button>
+
+    <button class="quick-btn">💼 Jobs</button>
+
+    <button class="quick-btn">💰 Salary</button>
+
+    <button class="quick-btn">📝 Resume</button>
+
+</div>
+
+
+
+
+<div id="chatBox" class="chat-box">
+
+
+<div class="ai-message">
+
+🤖 Hello 👋
+
+I am your SkillSprint AI Career Mentor.
+
+Ask me anything about careers, skills,
+roadmaps, jobs or interviews.
+
+</div>
+
+
+
+</div>
+
+
+
+
+
+
+<div class="chat-input">
+
+
+<input
+
+type="text"
+
+id="userMessage"
+
+placeholder="Ask your career question..."
+
+>
+
+
+<button id="sendBtn">
+
+🚀
+
+</button>
+
+
+</div>
+
+
+
+</div>
+
+
+
+</section>
+
+
+
+
+
+<footer>
+
+<h2>
+SkillSprint AI
+</h2>
+
+
+<p>
+Your Complete AI Career Development Platform
+</p>
+
+
+
+<div class="footer-links">
+
+<a href="/">Home</a>
+
+<a href="/generate">Roadmap</a>
+
+<a href="/ai-tools">AI Hub</a>
+
+<a href="/about">About</a>
+
+</div>
+
+
+<p class="copyright">
+
+© 2026 SkillSprint AI. All Rights Reserved.
+
+</p>
+
+
+</footer>
+
+
+
+
+
+<script src="{{ url_for('static', filename='js/career_chat.js') }}"></script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,66 @@
+@media(max-width:900px){
+
+.hero{
+
+    flex-direction:column-reverse;
+
+    text-align:center;
+
+    padding-top:40px;
+
+}
+
+.hero-buttons{
+
+    justify-content:center;
+
+}
+
+.hero h1{
+
+    font-size:42px;
+
+}
+
+.hero p{
+
+    font-size:17px;
+
+}
+
+}
+@media(max-width:900px){
+
+.steps{
+
+    flex-direction:column;
+
+}
+
+}
+@media(max-width:900px){
+
+.preview{
+
+    flex-direction:column;
+
+    text-align:center;
+
+}
+
+.roadmap-card{
+
+    width:100%;
+
+}
+
+}
+@media(max-width:900px){
+
+.testimonial-grid{
+
+    grid-template-columns:1fr;
+
+}
+
+}

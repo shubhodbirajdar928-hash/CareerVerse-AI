@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>SkillSprint AI</title>
+
+
+<link rel="stylesheet"
+href="{{ url_for('static', filename='css/common.css') }}">
+
+<link rel="stylesheet"
+href="{{ url_for('static', filename='css/home.css') }}">
+
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+rel="stylesheet">
+
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+
+
+</head>
+
+
+<body>
+
+
+<!-- NAVBAR -->
+
+<nav class="navbar">
+
+
+<div class="logo">
+
+<i class="fa-solid fa-graduation-cap"></i>
+
+<span>
+SkillSprint AI
+</span>
+
+</div>
+
+
+
+<ul>
+
+<li><a href="/">Home</a></li>
+
+<li><a href="/generate">Roadmap</a></li>
+
+<li><a href="/ai-tools">AI Hub</a></li>
+
+<li><a href="/about">About</a></li>
+
+</ul>
+
+
+</nav>
+
+
+
+
+<!-- HERO -->
+
+
+<section class="hero">
+
+
+<div class="hero-content">
+
+
+<span class="hero-badge">
+
+🚀 AI Powered Career Platform
+
+</span>
+
+
+
+<h1>
+
+Build Your Dream Career
+
+<br>
+
+<span>
+with AI
+</span>
+
+</h1>
+
+
+
+<p>
+
+Generate Career Roadmaps, Chat with AI,
+Analyze Resume, Predict Salary,
+Compare Careers and Discover Your Future —
+All in One Place.
+
+</p>
+
+
+
+<div class="hero-buttons">
+
+
+<a href="/generate"
+class="primary-btn">
+
+Get Started
+
+</a>
+
+
+
+<a href="/ai-tools"
+class="secondary-btn">
+
+Explore AI Tools
+
+</a>
+
+
+</div>
+
+
+</div>
+
+
+
+
+<div class="hero-image">
+
+
+<img src="{{ url_for('static', filename='images/robot.png') }}">
+
+
+</div>
+
+
+
+</section>
+
+
+
+
+
+<!-- FEATURES -->
+
+
+<section class="features">
+
+
+<div class="section-title">
+
+
+<h2>
+
+Everything You Need for Your Career
+
+</h2>
+
+
+<p>
+
+One platform. Eight powerful AI tools.
+
+</p>
+
+
+</div>
+
+
+
+
+<div class="feature-grid">
+
+
+
+<div class="feature-card">
+
+<i class="fa-solid fa-route"></i>
+
+<h3>
+AI Roadmap
+</h3>
+
+<p>
+Generate a complete learning roadmap for any career.
+</p>
+
+<a href="/generate">
+Open Tool →
+</a>
+
+</div>
+
+
+
+
+
+<div class="feature-card">
+
+<i class="fa-solid fa-robot"></i>
+
+<h3>
+AI Career Chat
+</h3>
+
+<p>
+Ask career questions and get instant AI guidance.
+</p>
+
+<a href="/career-chat">
+Open Tool →
+</a>
+
+</div>
+
+
+
+
+
+<div class="feature-card">
+
+<i class="fa-solid fa-bullseye"></i>
+
+<h3>
+Career Match
+</h3>
+
+<p>
+Discover the career that matches your profile.
+</p>
+
+<a href="/career-match">
+Open Tool →
+</a>
+
+</div>
+
+
+
+
+
+<div class="feature-card">
+
+<i class="fa-solid fa-chart-line"></i>
+
+<h3>
+Skill Gap
+</h3>
+
+<p>
+Identify missing skills and improve faster.
+</p>
+
+<a href="/skill-gap">
+Open Tool →
+</a>
+
+</div>
+
+
+
+
+
+<div class="feature-card">
+
+<i class="fa-solid fa-money-bill-trend-up"></i>
+
+<h3>
+Salary Predictor
+</h3>
+
+<p>
+Estimate salary based on skills and experience.
+</p>
+
+<a href="/salary-predictor">
+Open Tool →
+</a>
+
+</div>
+
+
+
+
+
+<div class="feature-card">
+
+<i class="fa-solid fa-scale-balanced"></i>
+
+<h3>
+Career Compare
+</h3>
+
+<p>
+Compare careers and choose the best path.
+</p>
+
+<a href="/compare">
+Open Tool →
+</a>
+
+</div>
+
+
+
+
+
+<div class="feature-card">
+
+<i class="fa-solid fa-file-lines"></i>
+
+<h3>
+Resume Analyzer
+</h3>
+
+<p>
+Analyze ATS score and improve your resume.
+</p>
+
+<a href="/resume">
+Open Tool →
+</a>
+
+</div>
+
+
+
+
+
+<div class="feature-card">
+
+<i class="fa-solid fa-earth-americas"></i>
+
+<h3>
+Career Reality AI
+</h3>
+
+<p>
+Understand salary, demand, growth and real-world opportunities.
+</p>
+
+<a href="/career-reality">
+Open Tool →
+</a>
+
+</div>
+
+
+
+
+</div>
+
+
+</section>
+
+
+
+
+
+
+<!-- WHY SECTION -->
+
+
+<section class="why">
+
+
+<h2>
+Why Choose SkillSprint AI?
+</h2>
+
+
+<p>
+
+Everything required to plan, build and grow your career.
+
+</p>
+
+
+
+<div class="why-grid">
+
+
+<div>
+
+<i class="fa-solid fa-brain"></i>
+
+<h3>
+AI Powered
+</h3>
+
+<p>
+Personalized career guidance using AI.
+</p>
+
+</div>
+
+
+
+<div>
+
+<i class="fa-solid fa-clock"></i>
+
+<h3>
+Save Time
+</h3>
+
+<p>
+All career tools in one platform.
+</p>
+
+</div>
+
+
+
+<div>
+
+<i class="fa-solid fa-user-graduate"></i>
+
+<h3>
+Student Friendly
+</h3>
+
+<p>
+Built for students and professionals.
+</p>
+
+</div>
+
+
+
+<div>
+
+<i class="fa-solid fa-chart-simple"></i>
+
+<h3>
+Career Growth
+</h3>
+
+<p>
+Become job ready faster.
+</p>
+
+</div>
+
+
+
+</div>
+
+
+</section>
+
+
+
+
+
+
+<!-- STATS -->
+
+
+<section class="stats">
+
+
+<div>
+
+<h2>
+8+
+</h2>
+
+<p>
+AI Tools
+</p>
+
+</div>
+
+
+
+<div>
+
+<h2>
+24/7
+</h2>
+
+<p>
+AI Assistant
+</p>
+
+</div>
+
+
+
+<div>
+
+<h2>
+100%
+</h2>
+
+<p>
+AI Powered
+</p>
+
+</div>
+
+
+
+<div>
+
+<h2>
+∞
+</h2>
+
+<p>
+Career Possibilities
+</p>
+
+</div>
+
+
+</section>
+
+
+
+
+
+
+
+<!-- ================= FOOTER ================= -->
+
+<footer>
+
+    <h2>SkillSprint AI</h2>
+
+    <p>Your Complete AI Career Development Platform</p>
+
+    <div class="footer-links">
+
+        <a href="/">Home</a>
+
+        <a href="/generate">Roadmap</a>
+
+        <a href="/ai-tools">AI Hub</a>
+
+        <a href="/about">About</a>
+
+    </div>
+
+    <p class="copyright">
+
+        © 2026 SkillSprint AI. All Rights Reserved.
+
+    </p>
+
+</footer>
+
+
+
+</body>
+
+</html>

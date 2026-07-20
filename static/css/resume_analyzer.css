@@ -1,0 +1,639 @@
+/* =====================================
+   AI RESUME ANALYZER
+===================================== */
+
+
+.resume-page{
+
+    width:90%;
+
+    max-width:1100px;
+
+    margin:120px auto 70px;
+
+    text-align:center;
+
+}
+
+
+
+.resume-page h1{
+
+    color:white;
+
+    font-size:45px;
+
+    font-weight:800;
+
+}
+
+
+
+.resume-page > p{
+
+    color:#94a3b8;
+
+    font-size:18px;
+
+    margin-bottom:45px;
+
+}
+
+
+
+
+
+
+/* =====================================
+   UPLOAD CARD
+===================================== */
+
+
+.resume-container{
+
+
+    background:#111827;
+
+    border:1px solid rgba(56,189,248,.2);
+
+    border-radius:30px;
+
+    padding:45px;
+
+    box-shadow:0 20px 50px rgba(0,0,0,.3);
+
+
+}
+
+
+
+.resume-container h2{
+
+
+    color:#38bdf8;
+
+    margin-bottom:30px;
+
+    font-size:28px;
+
+}
+
+
+
+
+
+/* UPLOAD BOX */
+
+
+.upload-box{
+
+
+    background:#1e293b;
+
+    border:2px dashed rgba(56,189,248,.5);
+
+    border-radius:25px;
+
+    padding:45px;
+
+    cursor:pointer;
+
+    transition:.3s;
+
+}
+
+
+
+.upload-box:hover{
+
+
+    border-color:#38bdf8;
+
+    background:#172554;
+
+
+}
+
+
+
+.upload-box input{
+
+
+    display:none;
+
+
+}
+
+
+
+.upload-box label{
+
+
+    color:#38bdf8;
+
+    font-size:20px;
+
+    font-weight:700;
+
+    cursor:pointer;
+
+
+}
+
+
+
+
+
+
+
+/* BUTTON */
+
+
+#analyzeResumeBtn{
+
+
+    margin-top:35px;
+
+    width:100%;
+
+    padding:20px;
+
+    border:none;
+
+    border-radius:25px;
+
+    background:#38bdf8;
+
+    color:#020617;
+
+    font-size:20px;
+
+    font-weight:800;
+
+    cursor:pointer;
+
+    transition:.3s;
+
+
+}
+
+
+
+#analyzeResumeBtn:hover{
+
+
+    transform:translateY(-4px);
+
+    box-shadow:0 15px 40px rgba(56,189,248,.4);
+
+
+}
+
+
+
+
+
+
+
+
+/* =====================================
+   RESULT DASHBOARD
+===================================== */
+
+
+#result{
+
+
+    margin-top:50px;
+
+
+}
+
+
+
+.resume-dashboard{
+
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:25px;
+
+
+}
+
+
+
+
+
+
+.resume-card{
+
+
+    background:#111827;
+
+    border:1px solid rgba(56,189,248,.2);
+
+    border-radius:25px;
+
+    padding:30px;
+
+    text-align:left;
+
+    color:white;
+
+    transition:.3s;
+
+
+}
+
+
+
+.resume-card:hover{
+
+
+    transform:translateY(-5px);
+
+    border-color:#38bdf8;
+
+
+}
+
+
+
+
+
+.resume-card h2{
+
+
+    color:#38bdf8;
+
+    margin-bottom:20px;
+
+
+}
+
+
+
+
+
+.resume-card p,
+.resume-card li{
+
+
+    color:#cbd5e1;
+
+    line-height:1.7;
+
+
+}
+
+
+
+
+
+/* =====================================
+   SCORE
+===================================== */
+
+
+.resume-score{
+
+
+    text-align:center;
+
+
+}
+
+
+
+.resume-score h1{
+
+
+    font-size:70px;
+
+    color:#38bdf8;
+
+    margin:10px;
+
+
+}
+
+
+
+
+
+
+
+/* ATS BAR */
+
+
+.ats-bar{
+
+
+    width:100%;
+
+    height:12px;
+
+    background:#0f172a;
+
+    border-radius:20px;
+
+    overflow:hidden;
+
+
+}
+
+
+
+.ats-fill{
+
+
+    height:100%;
+
+    background:#38bdf8;
+
+    border-radius:20px;
+
+
+}
+
+
+
+
+
+
+
+/* GRID */
+
+
+.resume-grid{
+
+
+    display:grid;
+
+    grid-template-columns:repeat(3,1fr);
+
+    gap:20px;
+
+
+}
+
+
+
+
+.small-resume-card{
+
+
+    background:#0f172a;
+
+    border-radius:20px;
+
+    padding:25px;
+
+    text-align:center;
+
+
+}
+
+
+
+.small-resume-card h3{
+
+
+    color:#38bdf8;
+
+
+}
+
+
+
+.small-resume-card h1{
+
+
+    color:white;
+
+    font-size:35px;
+
+
+}
+
+
+
+
+
+
+
+/* TAGS */
+
+
+.resume-tags{
+
+
+    display:flex;
+
+    flex-wrap:wrap;
+
+    gap:15px;
+
+
+}
+
+
+
+.resume-tag{
+
+
+    background:#0f172a;
+
+    border:1px solid rgba(56,189,248,.3);
+
+    padding:12px 18px;
+
+    border-radius:25px;
+
+    color:#cbd5e1;
+
+
+}
+
+
+
+
+
+
+
+/* AI CARD */
+
+
+.ai-resume-card{
+
+
+    background:linear-gradient(
+
+    135deg,
+
+    #111827,
+
+    #172554
+
+    );
+
+
+    border:1px solid #38bdf8;
+
+
+}
+
+
+
+
+
+
+@media(max-width:800px){
+
+
+.resume-page h1{
+
+    font-size:32px;
+
+}
+
+
+
+.resume-container{
+
+    padding:25px;
+
+}
+
+
+
+.resume-grid{
+
+    grid-template-columns:1fr;
+
+}
+
+
+
+}
+/* =====================================
+   CENTER FOOTER FIX
+===================================== */
+
+
+footer{
+
+    width:100%;
+
+    background:#020617;
+
+    padding:50px 20px;
+
+    text-align:center !important;
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+
+    justify-content:center;
+
+    box-sizing:border-box;
+
+}
+
+
+
+footer h2{
+
+    color:#38bdf8;
+
+    font-size:32px;
+
+    font-weight:800;
+
+    margin-bottom:15px;
+
+    text-align:center !important;
+
+}
+
+
+
+footer p{
+
+    color:#94a3b8;
+
+    font-size:18px;
+
+    text-align:center !important;
+
+    margin:10px 0;
+
+}
+
+
+
+.footer-links{
+
+    display:flex !important;
+
+    justify-content:center !important;
+
+    align-items:center;
+
+    gap:40px;
+
+    margin:25px 0;
+
+}
+
+
+
+.footer-links a{
+
+    color:white !important;
+
+    text-decoration:none;
+
+    font-size:18px;
+
+}
+
+
+
+.footer-links a:hover{
+
+    color:#38bdf8 !important;
+
+}
+
+
+
+.copyright{
+
+    text-align:center !important;
+
+    width:100%;
+
+    margin-top:20px;
+
+}
+
+
+
+@media(max-width:700px){
+
+.footer-links{
+
+    flex-direction:column;
+
+    gap:15px;
+
+}
+
+}

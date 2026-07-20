@@ -1,0 +1,801 @@
+/* =====================================
+   SALARY PREDICTOR AI
+   PREMIUM UI
+===================================== */
+
+
+
+/* PAGE */
+
+body{
+
+    padding-top:80px;
+
+}
+
+
+
+
+/* HERO TITLE */
+
+/* Fix navbar overlap */
+
+/* Salary Hero Center Alignment */
+
+.hero{
+
+    text-align:center;
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+
+    justify-content:center;
+
+    padding-top:120px;
+
+}
+
+
+
+.hero h1{
+
+    text-align:center;
+
+    width:100%;
+
+    font-size:52px;
+
+    font-weight:800;
+
+    margin:20px auto;
+
+}
+
+
+
+.hero p{
+
+    text-align:center;
+
+    max-width:800px;
+
+    margin:15px auto;
+
+    font-size:22px;
+
+    line-height:1.6;
+
+}
+
+
+
+/* =====================================
+   INPUT CONTAINER
+===================================== */
+
+
+.salary-form-container{
+
+
+    width:90%;
+
+    max-width:1100px;
+
+    margin:40px auto 30px;
+
+
+    background:#111827;
+
+
+    border:1px solid rgba(56,189,248,0.35);
+
+
+    border-radius:35px;
+
+
+    padding:35px;
+
+
+}
+
+
+
+
+
+
+.salary-input-group{
+
+
+    margin-bottom:28px;
+
+
+}
+
+
+
+
+
+.salary-input-group label{
+
+
+    display:block;
+
+
+    text-align:left;
+
+
+    color:#38bdf8;
+
+
+    font-size:25px;
+
+
+    font-weight:700;
+
+
+    margin-bottom:12px;
+
+
+}
+
+
+
+
+
+
+.salary-input{
+
+
+    width:100%;
+
+
+    padding:22px;
+
+
+    border-radius:20px;
+
+
+    border:none;
+
+
+    outline:none;
+
+
+    background:#1e293b;
+
+
+    color:white;
+
+
+    font-size:18px;
+
+
+    font-family:Poppins;
+
+
+}
+
+
+
+
+
+.salary-input::placeholder{
+
+
+    color:#94a3b8;
+
+
+}
+
+
+
+
+
+
+/* =====================================
+   BUTTON
+===================================== */
+
+
+.salary-btn{
+
+
+    width:100%;
+
+
+    padding:24px;
+
+
+    border:none;
+
+
+    border-radius:35px;
+
+
+    background:#38bdf8;
+
+
+    color:#020617;
+
+
+    font-size:25px;
+
+
+    font-weight:800;
+
+
+    font-family:Poppins;
+
+
+    cursor:pointer;
+
+
+    margin-top:10px;
+
+
+    transition:.3s;
+
+
+}
+
+
+
+
+
+.salary-btn:hover{
+
+
+    transform:translateY(-5px);
+
+
+    box-shadow:0 15px 35px rgba(56,189,248,.4);
+
+
+}
+
+
+
+
+
+/* =====================================
+   RESULT DASHBOARD
+===================================== */
+
+
+#result{
+
+
+    margin-top:40px;
+
+
+}
+
+
+
+
+
+.salary-dashboard{
+
+
+    width:90%;
+
+
+    max-width:1200px;
+
+
+    margin:40px auto;
+
+
+}
+
+
+
+
+
+.salary-card{
+
+
+    background:#111827;
+
+
+    border:1px solid rgba(56,189,248,.25);
+
+
+    border-radius:30px;
+
+
+    padding:35px;
+
+
+    margin-bottom:30px;
+
+
+    text-align:center;
+
+
+}
+
+
+
+
+
+.salary-card h2{
+
+
+    color:#38bdf8;
+
+
+    font-size:26px;
+
+
+}
+
+
+
+
+
+.salary-card p{
+
+
+    color:#cbd5e1;
+
+
+    font-size:17px;
+
+
+}
+
+
+
+
+
+.salary-card h1{
+
+
+    color:white;
+
+
+    font-size:50px;
+
+
+}
+
+
+
+
+
+
+/* HERO SALARY */
+
+
+.hero-card{
+
+
+    background:linear-gradient(
+
+    135deg,
+
+    #111827,
+
+    #172554
+
+    );
+
+
+}
+
+
+
+
+
+.main-salary{
+
+
+    font-size:60px !important;
+
+
+    color:white;
+
+
+}
+
+
+
+
+
+
+
+.salary-info{
+
+
+    display:flex;
+
+
+    justify-content:center;
+
+
+    gap:40px;
+
+
+    flex-wrap:wrap;
+
+
+}
+
+
+
+
+
+
+
+/* ANALYTICS */
+
+
+.salary-grid{
+
+
+    display:grid;
+
+
+    grid-template-columns:repeat(3,1fr);
+
+
+    gap:25px;
+
+
+}
+
+
+
+
+
+
+
+.progress{
+
+
+    height:12px;
+
+
+    background:#1e293b;
+
+
+    border-radius:20px;
+
+
+    overflow:hidden;
+
+
+}
+
+
+
+.progress-fill{
+
+
+    height:100%;
+
+
+    background:#38bdf8;
+
+
+}
+
+
+
+
+
+
+
+/* TIMELINE */
+
+
+.timeline{
+
+
+    display:grid;
+
+
+    grid-template-columns:repeat(4,1fr);
+
+
+    gap:20px;
+
+
+}
+
+
+
+
+
+.timeline-item{
+
+
+    background:#0f172a;
+
+
+    padding:25px;
+
+
+    border-radius:20px;
+
+
+    border:1px solid rgba(56,189,248,.2);
+
+
+}
+
+
+
+
+
+.timeline-item h3{
+
+
+    color:#38bdf8;
+
+
+}
+
+
+
+
+
+.timeline-item p{
+
+
+    color:white;
+
+
+    font-weight:700;
+
+
+}
+
+
+
+
+
+
+/* CHIPS */
+
+
+.chip-box{
+
+
+    display:flex;
+
+
+    justify-content:center;
+
+
+    flex-wrap:wrap;
+
+
+    gap:15px;
+
+
+}
+
+
+
+
+
+.chip{
+
+
+    background:#1e293b;
+
+
+    padding:12px 20px;
+
+
+    border-radius:25px;
+
+
+    color:white;
+
+
+    border:1px solid rgba(56,189,248,.2);
+
+
+}
+
+
+
+
+
+
+/* AI CARD */
+
+
+.ai-card{
+
+
+    background:linear-gradient(
+
+    135deg,
+
+    #172554,
+
+    #111827
+
+    );
+
+
+}
+
+
+
+
+
+.ai-card p{
+
+
+    font-size:18px;
+
+
+    line-height:1.8;
+
+
+}
+
+
+
+
+
+
+/* =====================================
+   FOOTER FIX
+===================================== */
+
+
+footer{
+
+
+    margin-top:20px;
+
+
+    padding:35px 20px;
+
+
+}
+
+
+
+
+
+
+
+/* RESPONSIVE */
+
+
+@media(max-width:900px){
+
+
+.hero h1{
+
+
+font-size:38px;
+
+
+}
+
+
+
+.salary-grid{
+
+
+grid-template-columns:1fr;
+
+
+}
+
+
+
+.timeline{
+
+
+grid-template-columns:1fr;
+
+
+}
+
+
+
+.main-salary{
+
+
+font-size:38px !important;
+
+
+}
+
+
+}
+/* =====================================
+   FOOTER CENTER DESIGN
+===================================== */
+
+footer{
+
+    text-align:center;
+
+    padding:50px 20px;
+
+    background:#0f172a;
+
+}
+
+
+footer h2{
+
+    color:white;
+
+    font-size:32px;
+
+    font-weight:800;
+
+    margin-bottom:10px;
+
+}
+
+
+footer p{
+
+    color:#cbd5e1;
+
+    font-size:18px;
+
+}
+
+
+
+.footer-links{
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    gap:30px;
+
+    margin:20px 0;
+
+}
+
+
+
+.footer-links a{
+
+    color:#38bdf8;
+
+    text-decoration:none;
+
+    font-size:18px;
+
+    font-weight:500;
+
+}
+
+
+
+.footer-links a:hover{
+
+    color:white;
+
+}
+
+
+
+.copyright{
+
+    margin-top:20px;
+
+    color:#94a3b8;
+
+}

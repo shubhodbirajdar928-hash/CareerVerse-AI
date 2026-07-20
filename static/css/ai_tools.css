@@ -1,0 +1,762 @@
+/* ==========================================
+GOOGLE FONT
+========================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    background:#020617;
+    font-family:'Poppins',sans-serif;
+    color:white;
+}
+
+/* ==========================================
+CONTAINER
+========================================== */
+
+section{
+
+    padding:90px 8%;
+
+}
+
+/* ==========================================
+HERO
+========================================== */
+
+/* ================= HERO ================= */
+
+.ai-hero{
+
+    min-height:520px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    padding:140px 10% 80px;
+
+    gap:80px;
+
+}
+
+.hero-left{
+
+    flex:1;
+
+    max-width:620px;
+
+}
+
+.hero-right{
+
+    flex:1;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+}
+
+.badge{
+
+    display:inline-block;
+
+    background:#172554;
+
+    padding:10px 20px;
+
+    border-radius:30px;
+
+    color:#38bdf8;
+
+    font-weight:600;
+
+    margin-bottom:25px;
+
+}
+
+.hero-left h1{
+
+    font-size:70px;
+
+    line-height:1.1;
+
+    font-weight:800;
+
+    margin-bottom:25px;
+
+}
+
+.hero-left h1 span{
+
+    color:#38bdf8;
+
+}
+
+.hero-left p{
+
+    color:#94a3b8;
+
+    font-size:20px;
+
+    line-height:1.7;
+
+    margin-bottom:40px;
+
+}
+
+.hero-buttons{
+
+    display:flex;
+
+    gap:20px;
+
+}
+
+.btn-primary{
+
+    display:inline-block;
+
+    padding:16px 35px;
+
+    border-radius:30px;
+
+    background:#38bdf8;
+
+    color:#020617;
+
+    text-decoration:none;
+
+    font-weight:700;
+
+    transition:.3s;
+
+}
+
+.btn-primary:hover{
+
+    transform:translateY(-5px);
+
+}
+
+.btn-secondary{
+
+    display:inline-block;
+
+    padding:16px 35px;
+
+    border-radius:30px;
+
+    border:1px solid #38bdf8;
+
+    color:#38bdf8;
+
+    text-decoration:none;
+
+    font-weight:700;
+
+    transition:.3s;
+
+}
+
+.btn-secondary:hover{
+
+    background:#38bdf8;
+
+    color:#020617;
+
+}
+
+.hero-right img{
+
+    width:600px;
+
+    max-width:100%;
+
+    filter:drop-shadow(0 0 40px rgba(56,189,248,.4));
+
+}
+@keyframes float{
+
+0%{
+
+transform:translateY(0);
+
+}
+
+50%{
+
+transform:translateY(-18px);
+
+}
+
+100%{
+
+transform:translateY(0);
+
+}
+
+}
+/* ==========================================
+SEARCH SECTION
+========================================== */
+
+.search-section{
+
+    padding:70px 8%;
+
+    text-align:center;
+
+}
+
+.search-section h2{
+
+    font-size:42px;
+
+    margin-bottom:15px;
+
+    color:#fff;
+
+}
+
+.search-section p{
+
+    color:#94A3B8;
+
+    margin-bottom:35px;
+
+    font-size:17px;
+
+}
+
+.search-box{
+
+    background:#111827;
+
+    border:1px solid rgba(56,189,248,.15);
+
+    border-radius:20px;
+
+    padding:18px;
+
+}
+
+.search-box:hover{
+
+    border-color:#3B82F6;
+
+    box-shadow:0 0 25px rgba(59,130,246,.18);
+
+}
+
+.search-box i{
+
+    color:#3B82F6;
+
+    font-size:20px;
+
+}
+
+.search-box input{
+
+    width:100%;
+
+    margin-left:15px;
+
+    border:none;
+
+    outline:none;
+
+    background:transparent;
+
+    color:white;
+
+    font-size:17px;
+
+}
+
+.search-box input::placeholder{
+
+    color:#94A3B8;
+
+}
+
+/* ==========================================
+TOOLS SECTION
+========================================== */
+
+.tools-section{
+
+    padding:80px 8%;
+
+}
+
+.tools-grid{
+
+    display:grid;
+
+    grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
+
+    gap:30px;
+
+}
+
+/* ==========================================
+TOOL CARD
+========================================== */
+
+.tool-card{
+
+    background:#111827;
+
+    border:1px solid rgba(56,189,248,.15);
+
+    border-radius:20px;
+
+    padding:25px;
+
+    transition:.3s;
+
+}
+
+.tool-card:hover{
+
+    transform:translateY(-8px);
+
+    border-color:#38bdf8;
+
+    box-shadow:0 20px 40px rgba(56,189,248,.15);
+
+}
+
+.tool-icon{
+
+    width:70px;
+
+    height:70px;
+
+    background:#172554;
+
+    border-radius:18px;
+
+    color:#38bdf8;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    font-size:30px;
+
+}
+
+.tool-card h3{
+
+    font-size:27px;
+
+    margin-bottom:15px;
+
+    color:white;
+
+}
+
+.tool-card p{
+
+    color:#CBD5E1;
+
+    line-height:1.8;
+
+    min-height:120px;
+
+    margin-bottom:28px;
+
+}
+
+.tool-btn{
+
+    background:#38bdf8;
+
+    color:#020617;
+
+    padding:14px 30px;
+
+    border-radius:30px;
+
+    text-decoration:none;
+
+    font-weight:700;
+
+}
+
+.tool-btn:hover{
+
+    background:#2563EB;
+
+}
+/* ==========================================
+WHY SECTION
+========================================== */
+
+/* ================= WHY SECTION ================= */
+
+.why-section{
+
+    padding:70px 10%;
+
+    text-align:center;
+
+}
+
+.why-section h2{
+
+    font-size:40px;
+
+    margin-bottom:15px;
+
+}
+
+.why-section>p{
+
+    color:#94a3b8;
+
+}
+
+.why-grid{
+
+    margin-top:50px;
+
+    display:grid;
+
+    grid-template-columns:repeat(3,1fr);
+
+    gap:25px;
+
+}
+
+.why-card{
+
+    background:#111827;
+
+    padding:30px;
+
+    border-radius:20px;
+
+    border:1px solid rgba(56,189,248,.15);
+
+    transition:.3s;
+
+}
+
+.why-card:hover{
+
+    transform:translateY(-8px);
+
+    border-color:#38bdf8;
+
+    box-shadow:0 20px 40px rgba(56,189,248,.15);
+
+}
+
+.why-card i{
+
+    width:75px;
+
+    height:75px;
+
+    margin:auto;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    border-radius:18px;
+
+    background:#38bdf8;
+
+    color:white;
+
+    font-size:30px;
+
+    margin-bottom:25px;
+
+}
+
+.why-card h3{
+
+    font-size:28px;
+
+    margin-bottom:18px;
+
+}
+
+.why-card p{
+
+    color:#94a3b8;
+
+    line-height:1.8;
+
+}
+
+@media(max-width:900px){
+
+.why-grid{
+
+    grid-template-columns:1fr;
+
+}
+
+}
+
+/* ================= FOOTER ================= */
+
+footer{
+
+    text-align:center;
+
+    padding:50px;
+
+    background:#020617;
+    
+    border-top:1px solid rgba(56,189,248,.08);
+}
+
+footer h2{
+
+    color:#38bdf8;
+
+    font-size:42px;
+
+    margin-bottom:10px;
+
+}
+
+footer p{
+
+    color:#94a3b8;
+
+    font-size:18px;
+
+    margin-bottom:15px;
+
+}
+
+.footer-links{
+
+    display:flex;
+
+    justify-content:center;
+
+    gap:35px;
+
+    margin:20px 0;
+
+    flex-wrap:wrap;
+
+}
+
+.footer-links a{
+
+    color:white;
+
+    text-decoration:none;
+
+    font-size:18px;
+
+    font-weight:600;
+
+    transition:.3s;
+
+}
+
+.footer-links a:hover{
+
+    color:#38bdf8;
+
+}
+
+.copyright{
+
+    color:#94a3b8;
+
+    font-size:17px;
+
+}
+/* ==========================================
+RESPONSIVE
+========================================== */
+
+@media(max-width:1000px){
+
+.ai-hero{
+
+    grid-template-columns:1fr;
+
+    text-align:center;
+
+    gap:50px;
+
+}
+
+.hero-left p{
+
+    margin:auto;
+
+}
+
+.hero-buttons{
+
+    margin-top:40px;
+
+    display:flex;
+
+    gap:25px;
+
+}
+
+.hero-right img{
+
+    width:420px;
+
+}
+
+}
+
+@media(max-width:768px){
+.hero-left{
+
+    flex:1;
+
+}
+.hero-left h1{
+
+    font-size:70px;
+
+    line-height:1.1;
+
+}
+
+.search-section h2{
+
+    font-size:34px;
+
+}
+
+.tools-grid{
+
+    grid-template-columns:1fr;
+
+}
+
+.why-grid{
+
+    grid-template-columns:1fr;
+
+}
+
+.hero-buttons{
+
+    flex-direction:column;
+
+    align-items:center;
+
+}
+
+.btn-primary,
+.btn-secondary{
+
+    width:220px;
+
+    text-align:center;
+
+}
+
+.hero-right img{
+
+    width:300px;
+
+}
+
+.tool-card{
+
+    padding:28px;
+
+}
+
+}
+
+@media(max-width:500px){
+
+section{
+
+    padding:60px 5%;
+
+}
+
+.hero-left h1{
+
+    font-size:36px;
+
+}
+
+.badge{
+
+    font-size:13px;
+
+}
+
+.search-box{
+
+    padding:14px 18px;
+
+}
+
+.footer-links{
+
+    gap:18px;
+
+}
+
+}
+
+/* ==========================================
+SCROLLBAR
+========================================== */
+
+::-webkit-scrollbar{
+
+    width:10px;
+
+}
+
+::-webkit-scrollbar-track{
+
+    background:#0F172A;
+
+}
+
+::-webkit-scrollbar-thumb{
+
+    background:#3B82F6;
+
+    border-radius:20px;
+
+}

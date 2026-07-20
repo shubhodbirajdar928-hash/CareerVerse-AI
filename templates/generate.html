@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>SkillSprint AI</title>
+
+<link rel="stylesheet" href="{{ url_for('static', filename='css/common.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/generate.css') }}">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+
+</head>
+
+<body>
+
+<div class="blur blur1"></div>
+<div class="blur blur2"></div>
+
+<nav class="navbar">
+
+<div class="logo">
+
+<i class="fa-solid fa-graduation-cap"></i>
+
+<span>
+SkillSprint AI
+</span>
+
+</div>
+
+
+<ul>
+
+<li><a href="/">Home</a></li>
+
+<li><a href="/generate">Roadmap</a></li>
+
+<li><a href="/ai-tools">AI Hub</a></li>
+
+<li><a href="/about">About</a></li>
+
+</ul>
+
+</nav>
+<!-- ================= HERO ================= -->
+
+<section class="hero">
+
+    <div class="hero-content">
+
+        <span class="hero-badge">
+
+            🛣 AI Roadmap Generator
+
+        </span>
+
+        <h1>
+
+            Generate Your
+
+            <span>Personalized Roadmap</span>
+
+        </h1>
+
+        <p>
+
+            Let AI create a step-by-step learning roadmap tailored to your career goals,
+            current skills, study duration, and experience level. Start your journey with
+            a personalized plan designed for success.
+
+        </p>
+
+        <div class="hero-buttons">
+
+            <a href="#roadmap-form" class="primary-btn">
+
+                Generate Roadmap
+
+            </a>
+
+            <a href="/ai-tools" class="secondary-btn">
+
+                Explore AI Hub
+
+            </a>
+
+        </div>
+
+    </div>
+
+    <div class="hero-image">
+
+        <img src="{{ url_for('static', filename='images/robot.png') }}"
+             alt="AI Roadmap">
+
+    </div>
+
+</section>
+
+<!-- ================= LOADING ================= -->
+
+<section class="loading-section" id="loading">
+
+    <div class="loading-card">
+
+        <div class="loader"></div>
+
+        <h2>🤖 AI is Building Your Roadmap...</h2>
+
+        <p>Please wait while we analyze your career goals.</p>
+
+        <div class="loading-steps">
+
+            <div class="step">✅ Analyzing Career Goal</div>
+
+            <div class="step">📚 Finding Required Skills</div>
+
+            <div class="step">🛠 Preparing Projects</div>
+
+            <div class="step">🗓 Creating Weekly Plan</div>
+
+            <div class="step">🎯 Finalizing Roadmap</div>
+
+        </div>
+
+    </div>
+
+</section>
+<!-- ================= INPUT CARD ================= -->
+
+<section class="generate-section">
+
+    <div class="generate-card">
+
+        <h2>Career Goal</h2>
+
+        <p>
+
+            Example:
+            AI Engineer,
+            Data Scientist,
+            Full Stack Developer,
+            Cyber Security,
+            DevOps Engineer
+
+        </p>
+
+        <input
+            id="careerInput"
+            type="text"
+            placeholder="Enter your dream career">
+
+        <button id="generateBtn">
+
+            🚀 Generate Roadmap
+
+        </button>
+
+    </div>
+
+</section>
+
+<!-- ================= ACTION BUTTONS ================= -->
+
+<section class="action-buttons">
+
+    <button id="downloadBtn">
+
+        📄 Download PDF
+
+    </button>
+
+</section>
+
+<!-- ================= RESULT ================= -->
+
+<section class="result-section">
+
+    <div class="result-card" id="resultCard">
+
+        <div class="empty-state">
+
+            <h2>
+
+                🚀 Your AI Roadmap Will Appear Here
+
+            </h2>
+
+            <p>
+
+                Enter your dream career above and click
+
+                <strong>Generate Roadmap</strong>
+
+                to start your learning journey.
+
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.2/jspdf.plugin.autotable.min.js"></script>
+
+<script src="{{ url_for('static', filename='js/generate.js') }}"></script>
+</body>
+<!-- ================= FOOTER ================= -->
+
+<footer>
+
+    <h2>SkillSprint AI</h2>
+
+    <p>Your Complete AI Career Development Platform</p>
+
+    <div class="footer-links">
+
+        <a href="/">Home</a>
+
+        <a href="/generate">Roadmap</a>
+
+        <a href="/ai-tools">AI Hub</a>
+
+        <a href="/about">About</a>
+
+    </div>
+
+    <p class="copyright">
+
+        © 2026 SkillSprint AI. All Rights Reserved.
+
+    </p>
+
+</footer>
+
+</html>

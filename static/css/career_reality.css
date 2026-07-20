@@ -1,0 +1,553 @@
+/* =====================================
+CAREER REALITY AI
+===================================== */
+
+
+.reality-page{
+
+    width:90%;
+
+    max-width:1100px;
+
+    margin:120px auto 70px;
+
+    text-align:center;
+
+}
+
+
+
+.reality-page h1{
+
+    color:white;
+
+    font-size:45px;
+
+    font-weight:800;
+
+}
+
+
+
+.reality-page > p{
+
+    color:#94a3b8;
+
+    font-size:18px;
+
+    margin-bottom:40px;
+
+}
+
+
+
+
+
+/* INPUT CARD */
+
+.reality-container{
+
+
+    background:#111827;
+
+    border:1px solid rgba(56,189,248,.2);
+
+    border-radius:30px;
+
+    padding:40px;
+
+    text-align:left;
+
+}
+
+
+
+.reality-container label{
+
+
+    display:block;
+
+    color:#38bdf8;
+
+    font-size:20px;
+
+    font-weight:700;
+
+    margin-bottom:12px;
+
+}
+
+
+
+.reality-container input{
+
+
+    width:100%;
+
+    box-sizing:border-box;
+
+    background:#1e293b;
+
+    border:none;
+
+    outline:none;
+
+    color:white;
+
+    padding:18px;
+
+    border-radius:18px;
+
+    font-size:17px;
+
+    margin-bottom:30px;
+
+}
+
+
+
+.reality-container input::placeholder{
+
+    color:#94a3b8;
+
+}
+
+
+
+
+
+/* BUTTON */
+
+
+#realityBtn{
+
+
+    width:100%;
+
+    padding:20px;
+
+    border:none;
+
+    border-radius:25px;
+
+    background:#38bdf8;
+
+    color:#020617;
+
+    font-size:20px;
+
+    font-weight:800;
+
+    cursor:pointer;
+
+    transition:.3s;
+
+}
+
+
+
+#realityBtn:hover{
+
+
+    transform:translateY(-4px);
+
+    box-shadow:0 15px 40px rgba(56,189,248,.4);
+
+}
+
+
+
+
+
+/* RESULT AREA */
+
+
+#result{
+
+    margin-top:50px;
+
+}
+
+
+
+
+
+/* REALITY CARDS */
+
+
+.reality-dashboard{
+
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:25px;
+
+}
+
+
+
+
+
+.reality-card{
+
+
+    background:#111827;
+
+    border-radius:25px;
+
+    padding:30px;
+
+    border:1px solid rgba(56,189,248,.2);
+
+    color:white;
+
+    text-align:left;
+
+    transition:.3s;
+
+}
+
+
+
+.reality-card:hover{
+
+
+    transform:translateY(-5px);
+
+    border-color:#38bdf8;
+
+}
+
+
+
+
+
+.reality-card h2{
+
+
+    color:#38bdf8;
+
+    margin-bottom:20px;
+
+}
+
+
+
+
+
+.reality-card p,
+.reality-card li{
+
+
+    color:#cbd5e1;
+
+    line-height:1.7;
+
+}
+
+
+
+
+
+/* SCORE */
+
+
+.reality-score{
+
+
+    text-align:center;
+
+}
+
+
+
+.score-number{
+
+
+    font-size:65px;
+
+    font-weight:800;
+
+    color:#38bdf8;
+
+}
+
+
+
+
+
+/* BAR */
+
+
+.reality-bar{
+
+
+    width:100%;
+
+    height:12px;
+
+    background:#0f172a;
+
+    border-radius:20px;
+
+    overflow:hidden;
+
+}
+
+
+
+.reality-fill{
+
+
+    height:100%;
+
+    background:#38bdf8;
+
+    border-radius:20px;
+
+}
+
+
+
+
+
+/* GRID */
+
+
+.reality-grid{
+
+
+    display:grid;
+
+    grid-template-columns:repeat(3,1fr);
+
+    gap:20px;
+
+}
+
+
+
+
+
+.small-card{
+
+
+    background:#0f172a;
+
+    padding:25px;
+
+    border-radius:20px;
+
+    text-align:center;
+
+}
+
+
+
+
+
+.small-card h3{
+
+
+    color:#38bdf8;
+
+}
+
+
+
+
+
+/* WARNING */
+
+
+.warning-card{
+
+
+    border:1px solid rgba(239,68,68,.5);
+
+}
+
+
+
+.warning-card h2{
+
+    color:#f87171;
+
+}
+
+
+
+
+
+/* AI VERDICT */
+
+
+.ai-verdict{
+
+
+    background:
+
+    linear-gradient(
+
+    135deg,
+
+    #111827,
+
+    #172554
+
+    );
+
+
+    border:1px solid #38bdf8;
+
+}
+
+
+
+
+
+@media(max-width:800px){
+
+
+.reality-page h1{
+
+    font-size:32px;
+
+}
+
+
+.reality-grid{
+
+    grid-template-columns:1fr;
+
+}
+
+
+.reality-container{
+
+    padding:25px;
+
+}
+
+
+}
+/* =====================================
+   PERFECT CENTER FOOTER
+===================================== */
+
+footer {
+
+    width:100%;
+
+    background:#020617;
+
+    padding:50px 20px;
+
+    text-align:center;
+
+    margin-top:100px;
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+
+    justify-content:center;
+
+}
+
+
+footer h2{
+
+    color:#38bdf8;
+
+    font-size:32px;
+
+    font-weight:800;
+
+    margin-bottom:10px;
+
+    text-align:center;
+
+}
+
+
+
+footer p{
+
+    color:#94a3b8;
+
+    font-size:18px;
+
+    text-align:center;
+
+    margin:8px 0;
+
+}
+
+
+
+.footer-links{
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    gap:40px;
+
+    margin:25px 0;
+
+}
+
+
+
+.footer-links a{
+
+    color:white;
+
+    text-decoration:none;
+
+    font-size:18px;
+
+    font-weight:500;
+
+}
+
+
+
+.footer-links a:hover{
+
+    color:#38bdf8;
+
+}
+
+
+
+.copyright{
+
+    text-align:center;
+
+    color:#94a3b8;
+
+    margin-top:20px;
+
+}
+
+
+
+@media(max-width:700px){
+
+    .footer-links{
+
+        flex-direction:column;
+
+        gap:15px;
+
+    }
+
+}
