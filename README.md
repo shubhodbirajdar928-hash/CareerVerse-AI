@@ -1,32 +1,75 @@
 # 🚀 SkillSprint AI
 
-> Your Complete AI Career Development Platform
+An AI-powered Career Development Platform that helps students and professionals accelerate their careers through personalized roadmaps, resume analysis, skill gap detection, salary prediction, career matching, AI career guidance, and interview preparation.
 
-SkillSprint AI is an AI-powered career guidance platform that helps students and professionals make better career decisions using Google Gemini AI.
+---
+
+## 🌟 Overview
+
+SkillSprint AI is an intelligent career assistant designed to guide users from learning to landing their dream job. By leveraging Google's Gemini AI, the platform provides personalized career insights, learning paths, resume feedback, and AI-powered recommendations.
 
 ---
 
 ## ✨ Features
 
-🤖 AI Career Chat
+### 🎯 AI Career Roadmap
+- Personalized learning roadmap
+- Weekly learning plans
+- Skill recommendations
+- Project suggestions
 
-🗺️ AI Roadmap Generator
+### 📄 Resume Analyzer
+- AI-powered resume evaluation
+- ATS-friendly suggestions
+- Resume improvement tips
+- Strength & weakness analysis
 
-🎯 Career Match
+### 🧠 Skill Gap Analyzer
+- Compare your current skills with target careers
+- Identify missing technologies
+- Personalized learning recommendations
 
-⚖️ Career Compare
+### 💼 Career Match
+- Find careers based on your interests and skills
+- AI-generated career recommendations
+- Required skills and future scope
 
-📈 Salary Predictor
+### 💰 Salary Predictor
+- Predict salary based on
+  - Skills
+  - Experience
+  - Country
+  - Job Role
 
-📄 Resume Analyzer (ATS)
+### 🤖 AI Career Chat
+- Career guidance chatbot
+- Interview preparation
+- Learning advice
+- Career planning support
 
-📚 Skill Gap Analyzer
+### ⚖️ Career Comparison
+- Compare multiple career paths
+- Salary comparison
+- Growth opportunities
+- Required technologies
 
-🌍 Career Reality AI
+### 🌍 Career Reality Check
+- Industry insights
+- Future demand
+- Job market trends
+- Challenges and opportunities
+
+### 🛠 AI Tools Directory
+- Curated AI tools for:
+  - Coding
+  - Designing
+  - Productivity
+  - Learning
+  - Resume Building
 
 ---
 
-## 🛠️ Tech Stack
+## 🛠 Tech Stack
 
 ### Frontend
 - HTML5
@@ -37,80 +80,130 @@ SkillSprint AI is an AI-powered career guidance platform that helps students and
 - Python
 - Flask
 
-### AI
+### Artificial Intelligence
 - Google Gemini API
 
-### Tools
-- Git
-- GitHub
-- VS Code
+### Deployment
+- Render / Railway / PythonAnywhere (Compatible)
 
 ---
 
-## 📸 Screenshots
-
-### Home Page
-
-(Add screenshot here)
-
-### AI Hub
-
-(Add screenshot here)
-
-### Career Chat
-
-(Add screenshot here)
-
-### Roadmap Generator
-
-(Add screenshot here)
-
----
-
-## 🚀 Installation
-
-```bash
-git clone https://github.com/shubhodbirajdar928-hash/new-Skillsprint.-Ai.git
-
-cd new-Skillsprint.-Ai
-
-pip install -r requirements.txt
-
-python app.py
-```
-
----
-
-## 📂 Project Structure
+## 📁 Project Structure
 
 ```
-SkillSprint AI
+SkillSprint-AI/
+│
+├── app.py
+├── requirements.txt
+├── runtime.txt
+├── .env.example
+├── README.md
+│
+├── templates/
 │
 ├── static/
 │   ├── css/
 │   ├── js/
 │   ├── images/
+│   └── data/
 │
-├── templates/
-│
-├── uploads/
-│
-├── app.py
-├── requirements.txt
-└── README.md
+└── uploads/
 ```
+
+---
+
+## 🚀 Installation
+
+### Clone Repository
+
+```bash
+git clone https://github.com/shubhodbirajdar928-hash/new-Skillsprint.-Ai.git
+cd new-Skillsprint.-Ai
+```
+
+### Create Virtual Environment
+
+```bash
+python -m venv venv
+```
+
+### Activate Environment
+
+Windows
+
+```bash
+venv\Scripts\activate
+```
+
+Mac/Linux
+
+```bash
+source venv/bin/activate
+```
+
+### Install Requirements
+
+```bash
+pip install -r requirements.txt
+```
+
+### Create `.env`
+
+```env
+GEMINI_API_KEY=your_gemini_api_key
+```
+
+### Run
+
+```bash
+python app.py
+```
+
+Open:
+
+```
+http://127.0.0.1:5000
+```
+
+---
+
+## 📸 Screenshots
+
+Coming Soon...
+
+- 🏠 Home Page
+- 🎯 AI Roadmap Generator
+- 📄 Resume Analyzer
+- 🧠 Skill Gap Analyzer
+- 💰 Salary Predictor
+- 🤖 Career Chat
+- ⚖️ Career Comparison
+- 🌍 Career Reality
+- 🛠 AI Tools
 
 ---
 
 ## 🎯 Future Improvements
 
-- User Login
-- Save Roadmaps
-- PDF Export
-- Dark/Light Mode
-- AI Interview Preparation
-- Company-wise Preparation
-- Placement Tracker
+- 🔐 User Authentication
+- 📊 Progress Dashboard
+- 🎓 AI Mock Interviews
+- 📜 Certificate Generator
+- 📅 Daily Study Planner
+- 🌐 Multi-language Support
+- ☁ Cloud Database Integration
+
+---
+
+## 🤝 Contributing
+
+Contributions are welcome!
+
+1. Fork the repository
+2. Create a new feature branch
+3. Commit your changes
+4. Push your branch
+5. Open a Pull Request
 
 ---
 
@@ -118,11 +211,19 @@ SkillSprint AI
 
 **Shubhod Birajdar**
 
-AI & Machine Learning Student
+Artificial Intelligence & Machine Learning Student
+
+Passionate about AI, Full Stack Development, and building intelligent solutions that solve real-world problems.
 
 GitHub:
 https://github.com/shubhodbirajdar928-hash
 
 ---
 
-⭐ If you like this project, give it a star!
+## 📄 License
+
+This project is licensed under the MIT License.
+
+---
+
+⭐ If you found this project useful, don't forget to star the repository!
