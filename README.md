@@ -1,75 +1,37 @@
 # 🚀 SkillSprint AI
 
-An AI-powered Career Development Platform that helps students and professionals accelerate their careers through personalized roadmaps, resume analysis, skill gap detection, salary prediction, career matching, AI career guidance, and interview preparation.
+<p align="center">
+  <b>Your AI-Powered Career Companion</b><br>
+  Personalized career roadmaps, salary prediction, resume analysis, skill gap analysis, and AI-powered career guidance.
+</p>
 
 ---
 
 ## 🌟 Overview
 
-SkillSprint AI is an intelligent career assistant designed to guide users from learning to landing their dream job. By leveraging Google's Gemini AI, the platform provides personalized career insights, learning paths, resume feedback, and AI-powered recommendations.
+SkillSprint AI is an intelligent career guidance platform designed to help students and professionals make informed career decisions.
+
+Powered by Google's Gemini AI, it provides personalized career roadmaps, AI career mentoring, resume analysis, salary prediction, career comparison, skill gap analysis, and real-world career insights—all in one platform.
 
 ---
 
 ## ✨ Features
 
-### 🎯 AI Career Roadmap
-- Personalized learning roadmap
-- Weekly learning plans
-- Skill recommendations
-- Project suggestions
-
-### 📄 Resume Analyzer
-- AI-powered resume evaluation
-- ATS-friendly suggestions
-- Resume improvement tips
-- Strength & weakness analysis
-
-### 🧠 Skill Gap Analyzer
-- Compare your current skills with target careers
-- Identify missing technologies
-- Personalized learning recommendations
-
-### 💼 Career Match
-- Find careers based on your interests and skills
-- AI-generated career recommendations
-- Required skills and future scope
-
-### 💰 Salary Predictor
-- Predict salary based on
-  - Skills
-  - Experience
-  - Country
-  - Job Role
-
-### 🤖 AI Career Chat
-- Career guidance chatbot
-- Interview preparation
-- Learning advice
-- Career planning support
-
-### ⚖️ Career Comparison
-- Compare multiple career paths
-- Salary comparison
-- Growth opportunities
-- Required technologies
-
-### 🌍 Career Reality Check
-- Industry insights
-- Future demand
-- Job market trends
-- Challenges and opportunities
-
-### 🛠 AI Tools Directory
-- Curated AI tools for:
-  - Coding
-  - Designing
-  - Productivity
-  - Learning
-  - Resume Building
+- 🧠 AI Career Roadmap Generator
+- 💬 AI Career Chat Assistant
+- 📄 Resume Analyzer (ATS-style)
+- 📊 Skill Gap Analyzer
+- 💰 Salary Predictor
+- ⚖️ Career Comparison
+- 🌍 Country-Based Career Guidance
+- 📍 Hiring Hotspots by Country
+- 📈 Career Reality Checker
+- 📚 Learning Resources & Certifications
+- 🛠 Personalized Career Recommendations
 
 ---
 
-## 🛠 Tech Stack
+## 🖥️ Tech Stack
 
 ### Frontend
 - HTML5
@@ -80,26 +42,19 @@ SkillSprint AI is an intelligent career assistant designed to guide users from l
 - Python
 - Flask
 
-### Artificial Intelligence
+### AI
 - Google Gemini API
 
-### Deployment
-- Render / Railway / PythonAnywhere (Compatible)
+### Libraries
+- pdfplumber
+- python-dotenv
 
 ---
 
-## 📁 Project Structure
+## 📂 Project Structure
 
-```
+```text
 SkillSprint-AI/
-│
-├── app.py
-├── requirements.txt
-├── runtime.txt
-├── .env.example
-├── README.md
-│
-├── templates/
 │
 ├── static/
 │   ├── css/
@@ -107,27 +62,40 @@ SkillSprint-AI/
 │   ├── images/
 │   └── data/
 │
-└── uploads/
+├── templates/
+│
+├── uploads/
+│
+├── app.py
+├── requirements.txt
+├── .env
+├── README.md
+└── LICENSE
 ```
 
 ---
 
 ## 🚀 Installation
 
-### Clone Repository
+### 1. Clone the repository
 
 ```bash
-git clone https://github.com/shubhodbirajdar928-hash/new-Skillsprint.-Ai.git
-cd new-Skillsprint.-Ai
+git clone https://github.com/YOUR_USERNAME/SkillSprint-AI.git
 ```
 
-### Create Virtual Environment
+### 2. Open the project
+
+```bash
+cd SkillSprint-AI
+```
+
+### 3. Create a virtual environment
 
 ```bash
 python -m venv venv
 ```
 
-### Activate Environment
+### 4. Activate it
 
 Windows
 
@@ -135,63 +103,56 @@ Windows
 venv\Scripts\activate
 ```
 
-Mac/Linux
+Linux / macOS
 
 ```bash
 source venv/bin/activate
 ```
 
-### Install Requirements
+### 5. Install dependencies
 
 ```bash
 pip install -r requirements.txt
 ```
 
-### Create `.env`
+### 6. Add your Gemini API key
+
+Create a `.env` file
 
 ```env
-GEMINI_API_KEY=your_gemini_api_key
+GEMINI_API_KEY=YOUR_API_KEY
 ```
 
-### Run
+### 7. Run the project
 
 ```bash
 python app.py
 ```
 
-Open:
-
-```
-http://127.0.0.1:5000
-```
-
 ---
 
-## 📸 Screenshots
+## 🌍 Modules
 
-Coming Soon...
-
-- 🏠 Home Page
-- 🎯 AI Roadmap Generator
-- 📄 Resume Analyzer
-- 🧠 Skill Gap Analyzer
-- 💰 Salary Predictor
-- 🤖 Career Chat
-- ⚖️ Career Comparison
-- 🌍 Career Reality
-- 🛠 AI Tools
+- AI Career Mentor
+- Career Roadmap Generator
+- Resume Analyzer
+- Salary Predictor
+- Career Match
+- Skill Gap Analysis
+- Career Reality
+- Career Comparison
 
 ---
 
 ## 🎯 Future Improvements
 
-- 🔐 User Authentication
-- 📊 Progress Dashboard
-- 🎓 AI Mock Interviews
-- 📜 Certificate Generator
-- 📅 Daily Study Planner
-- 🌐 Multi-language Support
-- ☁ Cloud Database Integration
+- User Authentication
+- Dashboard
+- Roadmap PDF Export
+- Progress Tracking
+- AI Interview Preparation
+- Job Recommendation System
+- Mobile Responsive UI Enhancements
 
 ---
 
@@ -200,10 +161,16 @@ Coming Soon...
 Contributions are welcome!
 
 1. Fork the repository
-2. Create a new feature branch
+2. Create your feature branch
 3. Commit your changes
-4. Push your branch
+4. Push the branch
 5. Open a Pull Request
+
+---
+
+## 📜 License
+
+This project is licensed under the MIT License.
 
 ---
 
@@ -211,19 +178,11 @@ Contributions are welcome!
 
 **Shubhod Birajdar**
 
-Artificial Intelligence & Machine Learning Student
-
-Passionate about AI, Full Stack Development, and building intelligent solutions that solve real-world problems.
+AI & Machine Learning Student
 
 GitHub:
 https://github.com/shubhodbirajdar928-hash
 
 ---
 
-## 📄 License
-
-This project is licensed under the MIT License.
-
----
-
-⭐ If you found this project useful, don't forget to star the repository!
+⭐ If you found this project useful, consider giving it a star!
