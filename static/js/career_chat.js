@@ -294,7 +294,7 @@ newChatBtn.onclick = async function(){
 
     🤖 Hello 👋
 
-    I am your SkillSprint AI Career Mentor.
+    I am your CareerVerse AI Career Mentor.
 
     Ask me anything about careers, skills,
     roadmaps, jobs or interviews.
