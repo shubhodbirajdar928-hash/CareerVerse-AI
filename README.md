@@ -1,7 +1,7 @@
-# 🚀 SkillSprint AI
+# 🚀 CareerVerse AI
 
 <p align="center">
-  <b>Your AI-Powered Career Companion</b><br>
+  <b>Navigate Your Future with AI</b><br>
   Personalized career roadmaps, salary prediction, resume analysis, skill gap analysis, and AI-powered career guidance.
 </p>
 
@@ -9,9 +9,9 @@
 
 ## 🌟 Overview
 
-SkillSprint AI is an intelligent career guidance platform designed to help students and professionals make informed career decisions.
+**CareerVerse AI** is an intelligent AI-powered career guidance platform designed to help students and professionals make smarter career decisions.
 
-Powered by Google's Gemini AI, it provides personalized career roadmaps, AI career mentoring, resume analysis, salary prediction, career comparison, skill gap analysis, and real-world career insights—all in one platform.
+Powered by **Google Gemini AI**, CareerVerse AI provides personalized career roadmaps, AI career mentoring, resume analysis, salary prediction, career comparison, skill gap analysis, and real-world career insights—all in one platform.
 
 ---
 
@@ -54,7 +54,7 @@ Powered by Google's Gemini AI, it provides personalized career roadmaps, AI care
 ## 📂 Project Structure
 
 ```text
-SkillSprint-AI/
+CareerVerse-AI/
 │
 ├── static/
 │   ├── css/
@@ -80,13 +80,13 @@ SkillSprint-AI/
 ### 1. Clone the repository
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/SkillSprint-AI.git
+git clone https://github.com/YOUR_USERNAME/CareerVerse-AI.git
 ```
 
 ### 2. Open the project
 
 ```bash
-cd SkillSprint-AI
+cd CareerVerse-AI
 ```
 
 ### 3. Create a virtual environment
@@ -97,13 +97,13 @@ python -m venv venv
 
 ### 4. Activate it
 
-Windows
+**Windows**
 
 ```bash
 venv\Scripts\activate
 ```
 
-Linux / macOS
+**Linux / macOS**
 
 ```bash
 source venv/bin/activate
@@ -115,7 +115,7 @@ source venv/bin/activate
 pip install -r requirements.txt
 ```
 
-### 6. Add your Gemini API key
+### 6. Add your Gemini API Key
 
 Create a `.env` file
 
@@ -133,44 +133,45 @@ python app.py
 
 ## 🌍 Modules
 
-- AI Career Mentor
-- Career Roadmap Generator
-- Resume Analyzer
-- Salary Predictor
-- Career Match
-- Skill Gap Analysis
-- Career Reality
-- Career Comparison
+- 🤖 AI Career Mentor
+- 🛣️ Career Roadmap Generator
+- 📄 Resume Analyzer
+- 💰 Salary Predictor
+- 🎯 Career Match Analyzer
+- 📊 Skill Gap Analysis
+- 🌐 Country-Based Career Intelligence
+- 📈 Career Reality Checker
+- ⚖️ Career Comparison
 
 ---
 
 ## 🎯 Future Improvements
 
-- User Authentication
-- Dashboard
-- Roadmap PDF Export
-- Progress Tracking
-- AI Interview Preparation
-- Job Recommendation System
-- Mobile Responsive UI Enhancements
+- 👤 User Authentication
+- 📊 Personalized Dashboard
+- 📥 Roadmap PDF Export
+- 📈 Progress Tracking
+- 🎤 AI Interview Preparation
+- 💼 Job Recommendation System
+- 📱 Fully Responsive Mobile Experience
 
 ---
 
 ## 🤝 Contributing
 
-Contributions are welcome!
+Contributions are always welcome!
 
 1. Fork the repository
-2. Create your feature branch
+2. Create a feature branch
 3. Commit your changes
-4. Push the branch
+4. Push your branch
 5. Open a Pull Request
 
 ---
 
 ## 📜 License
 
-This project is licensed under the MIT License.
+This project is licensed under the **MIT License**.
 
 ---
 
@@ -180,9 +181,17 @@ This project is licensed under the MIT License.
 
 AI & Machine Learning Student
 
-GitHub:
+**GitHub:**  
 https://github.com/shubhodbirajdar928-hash
 
 ---
 
-⭐ If you found this project useful, consider giving it a star!
+## ⭐ Support
+
+If you found **CareerVerse AI** helpful, please consider giving this repository a ⭐ on GitHub. It motivates future development and helps others discover the project.
+
+---
+
+<p align="center">
+  <b>CareerVerse AI — Navigate Your Future with AI 🚀</b>
+</p>
