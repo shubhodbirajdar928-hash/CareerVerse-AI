@@ -151,7 +151,7 @@ def handle_gemini_error(e):
 try:
 
     print("\n===============================")
-    print("SkillSprint AI Started")
+    print("CareerVerse AI Started")
     print("===============================")
 
     print("Available Models:\n")
@@ -303,7 +303,7 @@ def career_chat_api():
         chat_history = chat_history[-10:]
 
         prompt = """
-You are SkillSprint AI.
+You are CareerVerse AI.
 
 You are an intelligent AI Career Mentor.
 
@@ -379,7 +379,7 @@ def roadmap():
             return failure("Please enter a career.", 400)
 
         prompt = f"""
-You are SkillSprint AI.
+You are CareerVerse AI.
 
 You are the world's best AI Career Mentor.
 
@@ -629,7 +629,7 @@ def career_match_api():
         score = min(score, 100)
 
         prompt = f"""
-You are SkillSprint AI.
+You are CareerVerse AI.
 
 Evaluate the user's profile for the selected career.
 
@@ -809,7 +809,7 @@ def skill_gap_api():
 
         prompt = f"""
 
-You are SkillSprint AI.
+You are CareerVerse AI.
 
 You are an expert career skill analyst.
 
@@ -965,7 +965,7 @@ def salary_predictor_api():
             return failure("Please enter a job role.", 400)
 
         prompt = f"""
-You are SkillSprint AI.
+You are CareerVerse AI.
 
 Predict the salary based on this profile.
 
@@ -1106,7 +1106,7 @@ def compare_api():
             return failure("Please enter both careers.", 400)
 
         prompt = f"""
-You are SkillSprint AI.
+You are CareerVerse AI.
 
 Compare these two careers professionally.
 
@@ -1611,7 +1611,7 @@ def career_reality_api():
 
         prompt = f"""
 
-You are SkillSprint AI Career Reality Expert.
+You are CareerVerse AI Career Reality Expert.
 
 Analyze the real-world truth of this career.
 
