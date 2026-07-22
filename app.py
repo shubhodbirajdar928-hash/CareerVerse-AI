@@ -20,7 +20,7 @@ with open("static/data/countries_currency.json", "r", encoding="utf-8") as f:
     COUNTRY_CURRENCY = json.load(f)
 
 API_KEY = os.getenv("GEMINI_API_KEY")
-print("CURRENT KEY:", API_KEY[:20])
+print("Gemini API Loaded Successfully")
 
 if not API_KEY:
     raise Exception("❌ GEMINI_API_KEY not found in .env")
@@ -1702,5 +1702,11 @@ Rules:
 # Run Flask
 # =====================================================
 
+import os
+
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=5000, debug=True)
+    app.run(
+        host="0.0.0.0",
+        port=int(os.environ.get("PORT", 5000)),
+        debug=False
+    )
