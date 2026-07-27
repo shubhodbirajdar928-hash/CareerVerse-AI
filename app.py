@@ -118,6 +118,13 @@ def failure(message, code=500):
         "success": False,
         "error": message
     }), code
+def validate_country(country):
+    country = country.strip().title()
+
+    if country and country not in COUNTRY_CURRENCY:
+        return None
+
+    return country
 # =====================================================
 # Gemini Error Handler
 # =====================================================
@@ -373,10 +380,16 @@ def roadmap():
         data = request.get_json()
 
         career = data.get("career", "").strip()
-        country = data.get("country", "").strip()
+        country = validate_country(data.get("country", ""))
 
         if career == "":
-            return failure("Please enter a career.", 400)
+         return failure("Please enter a career.", 400)
+
+        if country is None:
+          return failure(
+        "Invalid country name. Please enter a valid country.",
+        400
+    )
 
         prompt = f"""
 You are CareerVerse AI.
@@ -602,12 +615,18 @@ def career_match_api():
         data = request.get_json()
 
         career = data.get("career", "").strip()
-        country = data.get("country", "").strip()
+        country = validate_country(data.get("country", ""))
+
+        if country is None:
+           return failure(
+        "Invalid country name. Please enter a valid country.",
+        400
+    )
         qualification = data.get("qualification", "").strip()
         skills = data.get("skills", "").strip()
         strengths = data.get("strengths", "").strip()
         experience = data.get("experience", "").strip()
-        country = data.get("country", "").strip()
+        
 
         score = 0
 
@@ -958,7 +977,13 @@ def salary_predictor_api():
         qualification = data.get("qualification", "").strip()
         experience = data.get("experience", "").strip()
         skills = data.get("skills", "").strip()
-        country = data.get("country", "").strip()
+        country = validate_country(data.get("country", ""))
+
+        if country is None:
+            return failure(
+        "Invalid country name. Please enter a valid country.",
+        400
+    )
         city = data.get("city", "").strip()
 
         if not role:
@@ -1096,7 +1121,14 @@ def compare_api():
 
         career1 = data.get("career1", "").strip()
         career2 = data.get("career2", "").strip()
-        country = data.get("country", "").strip()
+
+        country = validate_country(data.get("country", ""))
+
+        if country is None:
+         return failure(
+        "Invalid country name. Please enter a valid country.",
+        400
+    )
         currency = COUNTRY_CURRENCY.get(
         country.title(),
         "Detect official currency"
@@ -1603,7 +1635,13 @@ def career_reality_api():
         data = request.get_json()
 
         career = data.get("career","").strip()
-        country = data.get("country","").strip()
+        country = validate_country(data.get("country", ""))
+
+        if country is None:
+           return failure(
+        "Invalid country name. Please enter a valid country.",
+        400
+    )
 
 
         if career == "":
