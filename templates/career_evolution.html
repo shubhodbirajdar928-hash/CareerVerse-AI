@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Career Evolution AI | CareerVerse AI</title>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/career_evolution.css') }}">
+
+    <!-- Remix Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.css" rel="stylesheet">
+
+    <!-- Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- ChartJS -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+</head>
+
+<body>
+
+    <!-- Background -->
+
+    <div class="bg-gradient"></div>
+    <div class="bg-circle one"></div>
+    <div class="bg-circle two"></div>
+    <div class="bg-circle three"></div>
+
+    <!-- ================= NAVBAR ================= -->
+
+    <nav class="navbar">
+
+        <div class="logo">
+
+            <i class="ri-cpu-line"></i>
+
+            <span>CareerVerse AI</span>
+
+        </div>
+
+        <div class="nav-right">
+
+            <a href="/">Home</a>
+
+            <a href="#">Dashboard</a>
+
+            <a href="#">About</a>
+
+        </div>
+
+    </nav>
+
+    <!-- ================= HERO ================= -->
+
+    <section class="hero">
+
+        <h1>
+
+            <span>Career Evolution</span>
+
+            AI Dashboard
+
+        </h1>
+
+        <p>
+
+            Discover future career growth, salary trends,
+
+            demand analysis, automation risk and AI-powered
+
+            insights with interactive visual analytics.
+
+        </p>
+
+    </section>
+
+    <!-- ================= SEARCH ================= -->
+
+    <section class="search-section">
+
+        <div class="search-box">
+
+            <input
+                type="text"
+                id="careerInput"
+                placeholder="Example : AI Engineer">
+
+            <button id="analyzeBtn">
+
+                <i class="ri-magic-line"></i>
+
+                Analyze Career
+
+            </button>
+
+        </div>
+
+    </section>
+
+    <!-- ================= LOADER ================= -->
+
+    <div id="loader" class="loader hidden">
+
+        <div class="loader-ring"></div>
+
+        <h2>CareerVerse AI</h2>
+
+        <p>
+
+            Analysing Career Evolution...
+
+        </p>
+
+    </div>
+
+    <!-- ================= DASHBOARD ================= -->
+
+    <main id="dashboard" class="dashboard hidden">
+
+        <!-- ================= MAIN CHARTS ================= -->
+
+<section class="charts-grid">
+
+    <!-- Career Demand -->
+    <div class="card chart-card large">
+
+        <div class="card-header">
+
+            <h2>
+                <i class="ri-pie-chart-2-fill"></i>
+                Career Demand
+            </h2>
+
+            <span class="badge high">
+                Live AI Analysis
+            </span>
+
+        </div>
+
+        <div class="chart-wrapper">
+
+            <canvas id="careerDemandChart"></canvas>
+
+        </div>
+
+        <div class="chart-footer">
+
+            <div>
+
+                <h3 id="careerDemandValue">
+                    0%
+                </h3>
+
+                <p>Market Demand</p>
+
+            </div>
+
+            <div>
+
+                <h3 id="careerDemandTrend">
+                    ↑
+                </h3>
+
+                <p>Growing</p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Salary Growth -->
+
+    <div class="card chart-card">
+
+        <div class="card-header">
+
+            <h2>
+
+                <i class="ri-line-chart-fill"></i>
+
+                Salary Growth
+
+            </h2>
+
+        </div>
+
+        <canvas id="salaryChart"></canvas>
+
+    </div>
+
+    <!-- Industry Adoption -->
+
+    <div class="card chart-card">
+
+        <div class="card-header">
+
+            <h2>
+
+                <i class="ri-bar-chart-box-fill"></i>
+
+                Industry Adoption
+
+            </h2>
+
+        </div>
+
+        <canvas id="industryChart"></canvas>
+
+    </div>
+
+</section>
+
+
+
+<!-- ================= SECOND ROW ================= -->
+
+<section class="charts-grid">
+
+
+
+    <!-- Radar -->
+
+    <div class="card chart-card">
+
+        <div class="card-header">
+
+            <h2>
+
+                <i class="ri-radar-line"></i>
+
+                Career Profile
+
+            </h2>
+
+        </div>
+
+        <canvas id="radarChart"></canvas>
+
+    </div>
+
+
+
+    <!-- Hiring -->
+
+    <div class="card chart-card">
+
+        <div class="card-header">
+
+            <h2>
+
+                <i class="ri-user-search-fill"></i>
+
+                Hiring Trend
+
+            </h2>
+
+        </div>
+
+        <canvas id="hiringChart"></canvas>
+
+    </div>
+
+
+
+    <!-- Automation -->
+
+    <div class="card chart-card">
+
+        <div class="card-header">
+
+            <h2>
+
+                <i class="ri-robot-2-fill"></i>
+
+                Automation Risk
+
+            </h2>
+
+        </div>
+
+        <canvas id="riskChart"></canvas>
+
+    </div>
+
+</section>
+
+
+
+
+<!-- ================= THIRD ROW ================= -->
+
+<section class="charts-grid">
+
+
+
+    <!-- Global -->
+
+    <div class="card chart-card">
+
+        <div class="card-header">
+
+            <h2>
+
+                <i class="ri-global-fill"></i>
+
+                Global Opportunities
+
+            </h2>
+
+        </div>
+
+        <canvas id="globalChart"></canvas>
+
+    </div>
+
+
+
+    <!-- AI Confidence -->
+
+    <div class="card chart-card">
+
+        <div class="card-header">
+
+            <h2>
+
+                <i class="ri-shield-check-fill"></i>
+
+                AI Confidence
+
+            </h2>
+
+        </div>
+
+        <canvas id="confidenceChart"></canvas>
+
+    </div>
+
+
+
+    <!-- Future Demand -->
+
+    <div class="card chart-card">
+
+        <div class="card-header">
+
+            <h2>
+
+                <i class="ri-funds-fill"></i>
+
+                Future Demand
+
+            </h2>
+
+        </div>
+
+        <canvas id="futureChart"></canvas>
+
+    </div>
+
+</section>
+<!-- ================= AI OVERVIEW ================= -->
+
+<section class="info-grid">
+
+    <!-- Career Overview -->
+
+    <div class="card overview-card">
+
+        <div class="card-header">
+
+            <h2>
+                <i class="ri-brain-fill"></i>
+                AI Career Overview
+            </h2>
+
+        </div>
+
+        <p id="careerOverview">
+            Waiting for AI Analysis...
+        </p>
+
+    </div>
+
+
+
+    <!-- AI Insights -->
+
+    <div class="card insights-card">
+
+        <div class="card-header">
+
+            <h2>
+
+                <i class="ri-lightbulb-flash-fill"></i>
+
+                AI Market Insights
+
+            </h2>
+
+        </div>
+
+        <ul id="marketInsights">
+
+            <li>Loading...</li>
+
+        </ul>
+
+    </div>
+
+</section>
+
+
+
+<!-- ================= SKILLS ================= -->
+
+<section class="card">
+
+    <div class="card-header">
+
+        <h2>
+
+            <i class="ri-code-box-fill"></i>
+
+            Emerging Skills
+
+        </h2>
+
+    </div>
+
+    <div id="skillsContainer" class="skills-container">
+
+    </div>
+
+</section>
+
+
+
+
+<!-- ================= FUTURE JOB ROLES ================= -->
+
+<section class="card">
+
+    <div class="card-header">
+
+        <h2>
+
+            <i class="ri-briefcase-fill"></i>
+
+            Future Job Roles
+
+        </h2>
+
+    </div>
+
+    <div id="futureRoles" class="role-grid">
+
+    </div>
+
+</section>
+
+
+
+
+<!-- ================= HIRING COUNTRIES ================= -->
+
+<section class="card">
+
+    <div class="card-header">
+
+        <h2>
+
+            <i class="ri-global-fill"></i>
+
+            Top Hiring Countries
+
+        </h2>
+
+    </div>
+
+    <div id="countryGrid" class="country-grid">
+
+    </div>
+
+</section>
+
+
+
+
+<!-- ================= TOP COMPANIES ================= -->
+
+<section class="card">
+
+    <div class="card-header">
+
+        <h2>
+
+            <i class="ri-building-2-fill"></i>
+
+            Top Hiring Companies
+
+        </h2>
+
+    </div>
+
+    <div id="companyGrid" class="company-grid">
+
+    </div>
+
+</section>
+
+
+
+
+<!-- ================= CAREER TIMELINE ================= -->
+
+<section class="card">
+
+    <div class="card-header">
+
+        <h2>
+
+            <i class="ri-time-fill"></i>
+
+            Career Evolution Timeline
+
+        </h2>
+
+    </div>
+
+    <div id="timeline" class="timeline">
+
+    </div>
+
+</section>
+
+
+
+
+<!-- ================= AI RECOMMENDATIONS ================= -->
+
+<section class="card">
+
+    <div class="card-header">
+
+        <h2>
+
+            <i class="ri-magic-fill"></i>
+
+            AI Recommendations
+
+        </h2>
+
+    </div>
+
+    <div id="recommendations" class="recommendations">
+
+    </div>
+
+</section>
+
+
+
+
+<!-- ================= FOOTER ================= -->
+
+<footer>
+
+    <h2>
+
+        CareerVerse AI
+
+    </h2>
+
+    <p>
+
+        AI Powered Career Intelligence Platform
+
+    </p>
+
+</footer>
+
+</main>
+
+
+
+<script src="{{ url_for('static', filename='js/career_evolution.js') }}"></script>
+
+</body>
+
+</html>

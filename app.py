@@ -6,6 +6,7 @@ import pdfplumber
 from dotenv import load_dotenv
 from google import genai
 from flask import Flask, render_template, request, jsonify
+from datetime import datetime
 
 # =====================================================
 # Load Environment Variables
@@ -207,6 +208,13 @@ def about():
 @app.route("/ai-tools")
 def ai_tools():
     return render_template("ai_tools.html")
+# =====================================================
+# Career Evolution AI
+# =====================================================
+
+@app.route("/career-evolution")
+def career_evolution():
+    return render_template("career_evolution.html")
 
 
 # =====================================================
@@ -380,16 +388,17 @@ def roadmap():
         data = request.get_json()
 
         career = data.get("career", "").strip()
+        current_year = datetime.now().year
         country = validate_country(data.get("country", ""))
 
         if career == "":
-         return failure("Please enter a career.", 400)
+            return failure("Please enter a career.", 400)
 
         if country is None:
-          return failure(
-        "Invalid country name. Please enter a valid country.",
-        400
-    )
+            return failure(
+                "Invalid country name. Please enter a valid country.",
+                400
+            )
 
         prompt = f"""
 You are CareerVerse AI.
@@ -579,6 +588,7 @@ Rules:
   reason
 - No markdown.
 - No explanation.
+
 """
         text = generate_with_fallback(prompt)
 
@@ -1735,7 +1745,195 @@ Rules:
         traceback.print_exc()
 
         return handle_gemini_error(e)
+    
+# =====================================================
+# Career Evolution AI API
+# =====================================================
 
+@app.route("/career-evolution-ai", methods=["POST"])
+def career_evolution_ai():
+
+    data = request.get_json()
+
+    career = data.get("career", "").strip()
+    current_year = datetime.now().year
+
+    if career == "":
+        return failure("Please enter a career.", 400)
+
+    prompt = f"""
+You are CareerVerse AI.
+
+Analyze this career:
+
+{career}
+
+Current Year: {current_year}
+
+Generate the career evolution starting from {current_year}.
+
+Return ONLY valid JSON.
+
+{{
+    "overview":"",
+    "skills":["","","","",""],
+    "market":"",
+    "timeline":[
+        {{
+            "year":"",
+            "event":""
+        }},
+        {{
+            "year":"",
+            "event":""
+        }},
+        {{
+            "year":"",
+            "event":""
+        }},
+        {{
+            "year":"",
+            "event":""
+        }},
+        {{
+            "year":"",
+            "event":""
+        }}
+    ],
+    "future":"",
+    "risk":"",
+    "insight":"",
+
+    "career_demand":0,
+    "career_demand_reason":"",
+
+    "salary_growth":[0,0,0,0,0],
+
+    "industry_adoption":[0,0,0,0,0],
+
+"salary_score":0,
+"salary_reason":"",
+
+"growth_score":0,
+"growth_reason":"",
+
+"global_score":0,
+"global_reason":"",
+
+"risk_score":0,
+"risk_reason":""
+}}
+
+Rules:
+
+Return ONLY valid JSON.
+
+Evaluate using REAL-WORLD market trends.
+
+Current Market Demand (career_demand)
+
+90-100 = Extremely High Demand
+75-89 = High Demand
+60-74 = Moderate Demand
+40-59 = Low Demand
+0-39 = Very Low Demand
+
+Salary Potential (salary_score)
+
+- Based on real earning potential.
+- Higher salary careers receive higher scores.
+
+Future Growth (growth_score)
+
+- Based on projected growth during the next 10 years.
+- Emerging careers score higher.
+
+Global Job Opportunities (global_score)
+
+- Based on worldwide hiring opportunities.
+- Careers with global demand score higher.
+
+Automation Risk (risk_score)
+
+- Higher score = Higher automation risk.
+- Human-centric careers should have low risk.
+- Routine jobs should have high risk.
+For every score, explain why.
+
+career_demand_reason
+- Explain why the demand is high, medium or low.
+
+salary_reason
+- Explain what affects salary for this career.
+
+growth_reason
+- Explain future industry growth.
+
+global_reason
+- Explain worldwide job opportunities.
+
+risk_reason
+- Explain why automation risk is high or low.
+
+Each explanation should be 1–2 concise sentences.
+
+Additional Rules:
+
+- salary_growth must contain exactly 5 increasing values.
+- industry_adoption must contain exactly 5 values between 0 and 100.
+- timeline must contain exactly 5 objects.
+- First timeline year must be {current_year}.
+- Remaining years should be realistic future milestones.
+- Do not hardcode years like 2025 or 2030.
+- No markdown.
+- No explanations.
+- JSON only.
+"""
+
+    try:
+
+        text = generate_with_fallback(prompt)
+
+        text = clean_json(text)
+
+        result = json.loads(text)
+
+        # Default values if Gemini misses any field
+        result.setdefault(
+    "career_demand_reason",
+    "No explanation available."
+)
+        result.setdefault("salary_growth", [5, 8, 10, 13, 15])
+        result.setdefault("industry_adoption", [40, 50, 60, 70, 80])
+
+        result.setdefault(
+    "salary_reason",
+    "No explanation available."
+)
+        result.setdefault(
+    "growth_reason",
+    "No explanation available."
+)
+        result.setdefault(
+    "global_reason",
+    "No explanation available."
+)
+        result.setdefault(
+    "risk_reason",
+    "No explanation available."
+)
+
+        return success(result)
+
+    except json.JSONDecodeError:
+
+        return failure("Gemini returned invalid JSON.")
+
+    except Exception as e:
+
+        traceback.print_exc()
+
+        return handle_gemini_error(e)
 # =====================================================
 # Run Flask
 # =====================================================
