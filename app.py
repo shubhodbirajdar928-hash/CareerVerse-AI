@@ -212,9 +212,9 @@ def ai_tools():
 # Career Evolution AI
 # =====================================================
 
-@app.route("/career-evolution")
-def career_evolution():
-    return render_template("career_evolution.html")
+@app.route("/career-intelligence")
+def career_intelligence():
+    return render_template("career_intelligence.html")
 
 
 # =====================================================
@@ -1746,194 +1746,276 @@ Rules:
 
         return handle_gemini_error(e)
     
+
 # =====================================================
-# Career Evolution AI API
+# Career Intelligence Dashboard API
 # =====================================================
 
-@app.route("/career-evolution-ai", methods=["POST"])
-def career_evolution_ai():
+@app.route("/career-intelligence-api", methods=["POST"])
+def career_intelligence_api():
 
-    data = request.get_json()
+    try:
 
-    career = data.get("career", "").strip()
-    current_year = datetime.now().year
+        data = request.get_json()
 
-    if career == "":
-        return failure("Please enter a career.", 400)
+        career = data.get("career", "").strip()
+        country = data.get("country", "").strip()
 
-    prompt = f"""
+        if career == "":
+            return failure("Please enter a career.", 400)
+
+        current_year = datetime.now().year
+
+        years = [
+            current_year - 3,
+            current_year - 2,
+            current_year - 1,
+            current_year,
+            current_year + 1,
+            current_year + 2,
+            current_year + 3,
+            current_year + 4,
+            current_year + 5
+        ]
+
+        prompt = f"""
 You are CareerVerse AI.
 
-Analyze this career:
+You are an expert Career Intelligence Analyst.
 
+Analyse ONLY the selected career.
+
+Career:
 {career}
 
-Current Year: {current_year}
+Country:
+{country if country else "Global"}
 
-Generate the career evolution starting from {current_year}.
+Current Year:
+{current_year}
 
-Return ONLY valid JSON.
+Timeline
+
+Past:
+{years[0]}, {years[1]}, {years[2]}
+
+Present:
+{years[3]}
+
+Future:
+{years[4]}, {years[5]}, {years[6]}, {years[7]}, {years[8]}
+
+IMPORTANT RULES
+
+- Never assume every career is related to programming.
+- Analyse only the selected profession.
+- Use realistic industry trends.
+- Base the analysis on the selected country whenever possible.
+- Past values should reflect historical trends.
+- Present values should reflect the current market.
+- Future values should be realistic predictions.
+- Explain WHY every trend changes.
+- Return ONLY valid JSON.
+- Do not use markdown.
+- Do not write explanations outside JSON.
+
+Return this JSON exactly:
 
 {{
+  "career":"",
+
+  "summary":{{
     "overview":"",
-    "skills":["","","","",""],
-    "market":"",
-    "timeline":[
-        {{
-            "year":"",
-            "event":""
-        }},
-        {{
-            "year":"",
-            "event":""
-        }},
-        {{
-            "year":"",
-            "event":""
-        }},
-        {{
-            "year":"",
-            "event":""
-        }},
-        {{
-            "year":"",
-            "event":""
-        }}
-    ],
-    "future":"",
-    "risk":"",
-    "insight":"",
+    "difficulty":"",
+    "education":"",
+    "average_salary":"",
+    "future_rating":0,
+    "confidence":0
+  }},
 
-    "career_demand":0,
-    "career_demand_reason":"",
+  "charts":{{
 
-    "salary_growth":[0,0,0,0,0],
+    "career_demand":{{
+      "labels":{years},
+      "values":[0,0,0,0,0,0,0,0,0],
+      "reason":""
+    }},
 
-    "industry_adoption":[0,0,0,0,0],
+    "salary_growth":{{
+      "labels":[
+        "Student",
+        "Intern",
+        "Entry",
+        "Junior",
+        "Mid",
+        "Senior",
+        "Expert"
+      ],
+      "values":[0,0,0,0,0,0,0],
+      "reason":""
+    }},
 
-"salary_score":0,
-"salary_reason":"",
+    "competition":{{
+      "labels":{years},
+      "values":[0,0,0,0,0,0,0,0,0],
+      "reason":""
+    }},
 
-"growth_score":0,
-"growth_reason":"",
+    "technology":{{
+      "labels":[
+        "Past",
+        "Present",
+        "Future"
+      ],
+      "values":[0,0,0],
+      "reason":""
+    }},
 
-"global_score":0,
-"global_reason":"",
+    "automation":{{
+      "score":0,
+      "reason":""
+    }},
 
-"risk_score":0,
-"risk_reason":""
+    "skills":{{
+      "technical":0,
+      "communication":0,
+      "leadership":0,
+      "management":0,
+      "problem_solving":0,
+      "reason":""
+    }},
+
+    "global_demand":{{
+      "countries":[],
+      "values":[],
+      "reason":""
+    }}
+
+  }},
+
+  "career_path":[],
+
+  "future_opportunities":[],
+
+  "top_companies":[],
+
+  "recommended_tools":[],
+
+  "certifications":[],
+
+  "ai_advice":[]
+
 }}
 
 Rules:
 
-Return ONLY valid JSON.
-
-Evaluate using REAL-WORLD market trends.
-
-Current Market Demand (career_demand)
-
-90-100 = Extremely High Demand
-75-89 = High Demand
-60-74 = Moderate Demand
-40-59 = Low Demand
-0-39 = Very Low Demand
-
-Salary Potential (salary_score)
-
-- Based on real earning potential.
-- Higher salary careers receive higher scores.
-
-Future Growth (growth_score)
-
-- Based on projected growth during the next 10 years.
-- Emerging careers score higher.
-
-Global Job Opportunities (global_score)
-
-- Based on worldwide hiring opportunities.
-- Careers with global demand score higher.
-
-Automation Risk (risk_score)
-
-- Higher score = Higher automation risk.
-- Human-centric careers should have low risk.
-- Routine jobs should have high risk.
-For every score, explain why.
-
-career_demand_reason
-- Explain why the demand is high, medium or low.
-
-salary_reason
-- Explain what affects salary for this career.
-
-growth_reason
-- Explain future industry growth.
-
-global_reason
-- Explain worldwide job opportunities.
-
-risk_reason
-- Explain why automation risk is high or low.
-
-Each explanation should be 1–2 concise sentences.
-
-Additional Rules:
-
-- salary_growth must contain exactly 5 increasing values.
-- industry_adoption must contain exactly 5 values between 0 and 100.
-- timeline must contain exactly 5 objects.
-- First timeline year must be {current_year}.
-- Remaining years should be realistic future milestones.
-- Do not hardcode years like 2025 or 2030.
-- No markdown.
-- No explanations.
-- JSON only.
+- confidence must be between 80 and 100.
+- future_rating must be between 0 and 100.
+- Every chart must contain realistic values.
+- career_path must contain exactly 5 stages.
+- future_opportunities must contain exactly 5 points.
+- top_companies must contain exactly 5 companies.
+- recommended_tools must contain exactly 5 tools.
+- certifications must contain exactly 5 certifications.
+- ai_advice must contain exactly 5 personalised suggestions.
+- Return ONLY valid JSON.
 """
-
-    try:
-
         text = generate_with_fallback(prompt)
 
         text = clean_json(text)
 
         result = json.loads(text)
 
-        # Default values if Gemini misses any field
-        result.setdefault(
-    "career_demand_reason",
-    "No explanation available."
-)
-        result.setdefault("salary_growth", [5, 8, 10, 13, 15])
-        result.setdefault("industry_adoption", [40, 50, 60, 70, 80])
+        # -------------------------------
+        # Default Structure
+        # -------------------------------
 
-        result.setdefault(
-    "salary_reason",
-    "No explanation available."
-)
-        result.setdefault(
-    "growth_reason",
-    "No explanation available."
-)
-        result.setdefault(
-    "global_reason",
-    "No explanation available."
-)
-        result.setdefault(
-    "risk_reason",
-    "No explanation available."
-)
+        result.setdefault("career", career)
+
+        summary = result.setdefault("summary", {})
+        summary.setdefault("overview", "")
+        summary.setdefault("difficulty", "")
+        summary.setdefault("education", "")
+        summary.setdefault("average_salary", "")
+        summary.setdefault("future_rating", 75)
+        summary.setdefault("confidence", 90)
+
+        charts = result.setdefault("charts", {})
+
+        charts.setdefault("career_demand", {
+            "labels": years,
+            "values": [70] * 9,
+            "reason": ""
+        })
+
+        charts.setdefault("salary_growth", {
+            "labels": [
+                "Student",
+                "Intern",
+                "Entry",
+                "Junior",
+                "Mid",
+                "Senior",
+                "Expert"
+            ],
+            "values": [0, 15, 35, 55, 75, 90, 100],
+            "reason": ""
+        })
+
+        charts.setdefault("competition", {
+            "labels": years,
+            "values": [60] * 9,
+            "reason": ""
+        })
+
+        charts.setdefault("technology", {
+            "labels": ["Past", "Present", "Future"],
+            "values": [40, 70, 95],
+            "reason": ""
+        })
+
+        charts.setdefault("automation", {
+            "score": 35,
+            "reason": ""
+        })
+
+        charts.setdefault("skills", {
+            "technical": 80,
+            "communication": 75,
+            "leadership": 60,
+            "management": 55,
+            "problem_solving": 90,
+            "reason": ""
+        })
+
+        charts.setdefault("global_demand", {
+            "countries": [],
+            "values": [],
+            "reason": ""
+        })
+
+        result.setdefault("career_path", [])
+        result.setdefault("future_opportunities", [])
+        result.setdefault("top_companies", [])
+        result.setdefault("recommended_tools", [])
+        result.setdefault("certifications", [])
+        result.setdefault("ai_advice", [])
 
         return success(result)
 
     except json.JSONDecodeError:
 
-        return failure("Gemini returned invalid JSON.")
+        traceback.print_exc()
+
+        return failure(
+            "Gemini returned invalid JSON. Please try again."
+        )
 
     except Exception as e:
 
         traceback.print_exc()
 
-        return handle_gemini_error(e)
+        return handle_gemini_error(e)        
 # =====================================================
 # Run Flask
 # =====================================================

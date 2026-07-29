@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Career Intelligence | CareerVerse AI</title>
+
+    <link rel="stylesheet"
+        href="{{ url_for('static', filename='css/career_intelligence.css') }}">
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+
+</head>
+
+<body>
+
+<div class="background"></div>
+
+<header class="hero">
+
+    <div class="hero-content">
+
+        <h1>Career Intelligence Dashboard</h1>
+
+        <p>
+            AI Powered Career Analytics • Salary Intelligence • Future Demand •
+            Market Trends
+        </p>
+
+    </div>
+
+</header>
+
+
+<section class="search-section">
+
+    <div class="search-card">
+
+        <h2>Analyse Any Career</h2>
+
+        <div class="form-grid">
+
+            <div class="input-box">
+
+                <label>Career</label>
+
+                <input
+                    type="text"
+                    id="career"
+                    placeholder="AI Engineer, Doctor, Architect, Lawyer...">
+
+            </div>
+
+            <div class="input-box">
+
+                <label>Country</label>
+
+                <input
+                    type="text"
+                    id="country"
+                    placeholder="India">
+
+            </div>
+
+        </div>
+
+        <button id="analyzeBtn">
+
+            Analyse Career
+
+        </button>
+
+    </div>
+
+</section>
+
+
+<div id="loading" class="loading hidden">
+
+    <div class="loader"></div>
+
+    <p>Generating Career Intelligence...</p>
+
+</div>
+
+
+<main id="dashboard" class="dashboard hidden">
+
+
+<section class="summary-grid">
+
+<div class="summary-card">
+
+    <span class="title">
+        Career Demand
+    </span>
+
+    <h2 id="futureRating">--</h2>
+
+</div>
+
+<div class="summary-card">
+
+    <span class="title">
+        Average Salary
+    </span>
+
+    <h2 id="averageSalary">--</h2>
+
+</div>
+
+<div class="summary-card">
+
+    <span class="title">
+        Confidence
+    </span>
+
+    <h2 id="confidence">--</h2>
+
+</div>
+
+<div class="summary-card">
+
+    <span class="title">
+        Education
+    </span>
+
+    <h2 id="education">--</h2>
+
+</div>
+
+</section>
+
+
+<section class="overview-card">
+
+<h2>
+
+Career Overview
+
+</h2>
+
+<p id="overview">
+
+Waiting for analysis...
+
+</p>
+
+</section>
+
+
+
+<!-- ===========================
+Analytics Charts
+=========================== -->
+
+<section class="chart-grid">
+
+    <div class="chart-card">
+        <h2>📈 Career Demand Trend</h2>
+        <canvas id="careerDemandChart"></canvas>
+        <p id="careerDemandReason"></p>
+    </div>
+
+    <div class="chart-card">
+        <h2>💰 Salary Growth</h2>
+        <canvas id="salaryGrowthChart"></canvas>
+        <p id="salaryReason"></p>
+    </div>
+
+</section>
+
+
+<section class="chart-grid">
+
+    <div class="chart-card">
+        <h2>🏆 Competition Trend</h2>
+        <canvas id="competitionChart"></canvas>
+        <p id="competitionReason"></p>
+    </div>
+
+    <div class="chart-card">
+        <h2>⚙ Technology Adoption</h2>
+        <canvas id="technologyChart"></canvas>
+        <p id="technologyReason"></p>
+    </div>
+
+</section>
+
+
+<section class="chart-grid">
+
+    <div class="chart-card">
+
+        <h2>🤖 AI Automation Risk</h2>
+
+        <div class="automation-box">
+
+            <h1 id="automationScore">0%</h1>
+
+            <p id="automationReason"></p>
+
+        </div>
+
+    </div>
+
+    <div class="chart-card">
+
+        <h2>🛠 Skills Analysis</h2>
+
+        <canvas id="skillsChart"></canvas>
+
+        <p id="skillsReason"></p>
+
+    </div>
+
+</section>
+
+
+<section class="chart-card">
+
+    <h2>🌍 Global Career Demand</h2>
+
+    <canvas id="globalDemandChart"></canvas>
+
+    <p id="globalReason"></p>
+
+</section>
+
+
+<section class="list-grid">
+
+    <div class="list-card">
+
+        <h2>🏢 Top Companies</h2>
+
+        <ul id="topCompanies"></ul>
+
+    </div>
+
+    <div class="list-card">
+
+        <h2>🛠 Recommended Tools</h2>
+
+        <ul id="recommendedTools"></ul>
+
+    </div>
+
+</section>
+
+
+<section class="list-grid">
+
+    <div class="list-card">
+
+        <h2>🎓 Certifications</h2>
+
+        <ul id="certifications"></ul>
+
+    </div>
+
+    <div class="list-card">
+
+        <h2>🚀 Future Opportunities</h2>
+
+        <ul id="futureOpportunities"></ul>
+
+    </div>
+
+</section>
+
+
+<section class="timeline-card">
+
+    <h2>🛤 Career Path</h2>
+
+    <div id="careerPath"></div>
+
+</section>
+
+
+<section class="advice-card">
+
+    <h2>🧠 AI Mentor Advice</h2>
+
+    <div id="aiAdvice"></div>
+
+</section>
+
+</main>
+
+<script src="{{ url_for('static', filename='js/career_intelligence.js') }}"></script>
+
+
+
+
+</body>
+
+</html>
