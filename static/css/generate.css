@@ -2,14 +2,8 @@
 GENERATE PAGE
 ========================================== */
 
-body{
-
-    background:#020617;
-
-    font-family:'Poppins',sans-serif;
-
-    color:white;
-
+body {
+    color: var(--text-primary);
 }
 
 
@@ -62,38 +56,22 @@ HEADER
 
 }
 
-.generate-header h1{
-
-    font-size:62px;
-
-    font-weight:800;
-
-    background:linear-gradient(
-    90deg,
-    #38bdf8,
-    #2563eb,
-    #8b5cf6);
-
-    -webkit-background-clip:text;
-
-    -webkit-text-fill-color:transparent;
-
-    margin-bottom:20px;
-
+.generate-header h1 {
+    font-size: clamp(2rem, 4vw, 3.25rem);
+    font-weight: 800;
+    background: linear-gradient(90deg, var(--accent), #6366f1);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 16px;
 }
 
-.generate-header p{
-
-    color:#cbd5e1;
-
-    font-size:20px;
-
-    line-height:1.8;
-
-    max-width:750px;
-
-    margin:auto;
-
+.generate-header p {
+    color: var(--text-secondary);
+    font-size: 1.05rem;
+    line-height: 1.75;
+    max-width: 680px;
+    margin: auto;
 }
 /* ==========================================
 GENERATE SECTION
@@ -109,15 +87,10 @@ GENERATE SECTION
 
 }
 
-.generate-card{
-
-    background:rgba(255,255,255,.06);
-
-    backdrop-filter:blur(20px);
-
-    border:1px solid rgba(255,255,255,.08);
-
-    border-radius:25px;
+.generate-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
 
     padding:45px;
 
@@ -689,63 +662,6 @@ ROADMAP CARDS
 
 }
 
-.hero-badge{
-
-    display:inline-block;
-
-    background:#172554;
-
-    color:#38bdf8;
-
-    padding:10px 20px;
-
-    border-radius:30px;
-
-    font-weight:600;
-
-}
-
-.hero h1{
-
-    font-size:70px;
-
-    line-height:1.1;
-
-    margin:25px 0;
-
-}
-
-.hero h1 span{
-
-    color:#38bdf8;
-
-}
-
-.hero p{
-
-    color:#94a3b8;
-
-    font-size:20px;
-
-    line-height:1.7;
-
-}
-
-.hero-buttons{
-
-    margin-top:35px;
-
-    display:flex;
-
-    gap:20px;
-
-}
-
-.hero-image img{
-    width: 520px;
-    max-width: 100%;
-    height: auto;
-}
 /* ================= LOADING ================= */
 
 .loading-section{
