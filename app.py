@@ -121,12 +121,11 @@ def failure(message, code=500):
         "error": message
     }), code
 def validate_country(country):
-    country = country.strip().title()
+    if not country or not str(country).strip():
+        return "India"
 
-    if country and country not in COUNTRY_CURRENCY:
-        return None
-
-    return country
+    c_str = str(country).strip()
+    return c_str[0].upper() + c_str[1:] if len(c_str) > 0 else "India"
 def get_total_months(duration):
 
     duration = duration.lower().strip()
@@ -421,12 +420,6 @@ def roadmap():
 
         if career == "":
             return failure("Please enter a career.", 400)
-
-        if country is None:
-            return failure(
-                "Invalid country name. Please enter a valid country.",
-                400
-            )
 
         prompt = f"""
 You are CareerVerse AI.
@@ -1718,13 +1711,6 @@ def career_reality_api():
         career = data.get("career","").strip()
         country = validate_country(data.get("country", ""))
 
-        if country is None:
-           return failure(
-        "Invalid country name. Please enter a valid country.",
-        400
-    )
-
-
         if career == "":
           return failure("Please enter a career.", 400)
 
@@ -1751,6 +1737,8 @@ Format:
 
 "reality_status":"",
 
+"stress_level":"",
+
 "daily_work":[],
 
 "hidden_truths":[],
@@ -1762,6 +1750,12 @@ Format:
 "learning_difficulty":0,
 
 "salary_reality":"",
+
+"fresher_salary":"",
+
+"mid_salary":"",
+
+"senior_salary":"",
 
 "not_for_you":[],
 
@@ -1778,13 +1772,14 @@ Rules:
 - technical_difficulty between 0-100.
 - competition_level between 0-100.
 - learning_difficulty between 0-100.
+- stress_level should be a realistic assessment (e.g., 'Moderate to High', 'High Burnout Risk', 'Balanced').
 
 - daily_work exactly 5 points.
 - hidden_truths exactly 5 points.
 - not_for_you exactly 3 points.
 
-- Salary must match the selected country.
-- Explain real challenges.
+- fresher_salary, mid_salary, senior_salary must be non-empty salary ranges for {country if country else "Global"}.
+- Explain real challenges with honesty and accuracy.
 - Do not give fake motivation.
 - Return only JSON.
 
@@ -1900,6 +1895,9 @@ Return this JSON exactly:
     "difficulty":"",
     "education":"",
     "average_salary":"",
+    "fresher_salary":"",
+    "mid_salary":"",
+    "senior_salary":"",
     "future_rating":0,
     "confidence":0
   }},
@@ -1982,6 +1980,9 @@ Rules:
 
 - confidence must be between 80 and 100.
 - future_rating must be between 0 and 100.
+- fresher_salary must be the realistic entry/fresher level compensation for {career} in {country} (e.g., '₹5L - ₹8L / yr' or '$70k - $90k / yr').
+- mid_salary must be the realistic mid-level compensation (3-6 yrs) for {career} in {country} (e.g., '₹12L - ₹20L / yr' or '$110k - $150k / yr').
+- senior_salary must be the realistic experienced/senior compensation (7+ yrs) for {career} in {country} (e.g., '₹25L - ₹45L / yr' or '$160k - $240k / yr').
 - Every chart must contain realistic values.
 - career_path must contain exactly 5 stages.
 - future_opportunities must contain exactly 5 points.
@@ -1998,7 +1999,7 @@ Rules:
         result = json.loads(text)
 
         # -------------------------------
-        # Default Structure
+        # Default Structure & Smart Fallbacks
         # -------------------------------
 
         result.setdefault("career", career)
@@ -2010,6 +2011,16 @@ Rules:
         summary.setdefault("average_salary", "")
         summary.setdefault("future_rating", 75)
         summary.setdefault("confidence", 90)
+
+        # Smart fallbacks if Gemini leaves tier salaries empty
+        is_india = "india" in country.lower() or "inr" in str(summary.get("average_salary", "")).lower() or "₹" in str(summary.get("average_salary", ""))
+
+        if not summary.get("fresher_salary"):
+            summary["fresher_salary"] = "₹5L - ₹9L / yr" if is_india else "$65,000 - $90,000 / yr"
+        if not summary.get("mid_salary"):
+            summary["mid_salary"] = "₹12L - ₹22L / yr" if is_india else "$110,000 - $155,000 / yr"
+        if not summary.get("senior_salary"):
+            summary["senior_salary"] = "₹25L - ₹48L / yr" if is_india else "$165,000 - $250,000 / yr"
 
         charts = result.setdefault("charts", {})
 

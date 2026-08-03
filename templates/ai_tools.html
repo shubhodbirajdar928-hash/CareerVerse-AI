@@ -54,21 +54,23 @@
 
 <!-- ================= SEARCH SECTION ================= -->
 <section class="search-section reveal">
-    <span class="section-tag">FIND YOUR ASSISTANT</span>
+    <span class="section-tag"><i class="fa-solid fa-magnifying-glass"></i> FIND YOUR ASSISTANT</span>
     <h2>Search AI Career Tools</h2>
-    <p>Filter through our specialized suite to find the exact assistance you need.</p>
+    <p>Filter through our specialized suite to find the exact assistance you need in real-time.</p>
 
     <div class="search-box">
         <i class="fa-solid fa-magnifying-glass"></i>
         <input type="text" id="toolSearch" placeholder="Search tools (e.g., Resume, Salary, Skill Gap, Compare)...">
     </div>
-    <p class="tool-count">Showing <span>9</span> AI tools</p>
 </section>
 
 <!-- ================= TOOLS SECTION ================= -->
 <section class="tools-section reveal" id="tools">
     <div class="section-header">
-        <span class="section-tag">ALL TOOLS</span>
+        <div class="section-header-meta">
+            <span class="section-tag"><i class="fa-solid fa-layer-group"></i> ALL TOOLS</span>
+            <span class="tool-count-badge"><i class="fa-solid fa-bolt"></i> Showing <span class="tool-count-num">9</span> AI Tools</span>
+        </div>
         <h2>AI Career Intelligence Suite</h2>
         <p>Every tool you need to plan, analyze, and optimize your career trajectory.</p>
     </div>
@@ -140,7 +142,7 @@
         <!-- 8. Career Reality AI -->
         <div class="tool-card">
             <span class="tool-number">08</span>
-            <div class="tool-icon"><i class="fa-solid fa-earth-americas"></i></div>
+            <div class="tool-icon"><i class="fa-solid fa-masks-theater"></i></div>
             <h3>Career Reality Check</h3>
             <p>Get unfiltered real-world facts about day-to-day work expectations, hidden challenges, and job stress levels.</p>
             <a href="/career-reality" class="tool-btn">Launch Tool <i class="fa-solid fa-arrow-right"></i></a>
@@ -200,8 +202,7 @@
                 card.style.display = matches ? "flex" : "none";
                 if (matches) count++;
             });
-            const countEl = document.querySelector(".tool-count span");
-            if (countEl) countEl.innerText = count;
+            document.querySelectorAll(".tool-count-num").forEach(el => el.innerText = count);
         });
     }
 </script>

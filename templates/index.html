@@ -43,16 +43,25 @@
             Discover your path, master high-impact skills, evaluate salaries, and navigate your professional journey with confidence.
         </p>
 
-        <div class="hero-actions">
-            <a href="/generate" class="main-btn">
-                Build My Roadmap
-                <i class="fa-solid fa-arrow-right"></i>
-            </a>
 
-            <a href="/career-match" class="secondary-btn">
-                <i class="fa-solid fa-compass"></i>
-                Find My Career
-            </a>
+
+        <!-- Live Instant AI Navigator Bar -->
+        <div class="hero-search-nav">
+            <div class="search-nav-inner">
+                <i class="fa-solid fa-wand-magic-sparkles search-icon"></i>
+                <input type="text" id="heroQuickSearch" placeholder="Type any career or skill (e.g. AI Engineer, Python, Cloud)...">
+                <button type="button" id="heroQuickSearchBtn" class="search-nav-btn">
+                    <span>Analyze Path</span>
+                    <i class="fa-solid fa-arrow-right"></i>
+                </button>
+            </div>
+            <div class="search-suggestions">
+                <span>Try:</span>
+                <button type="button" class="suggest-tag">⚡ AI Engineer</button>
+                <button type="button" class="suggest-tag">💻 Full Stack</button>
+                <button type="button" class="suggest-tag">📊 Data Analyst</button>
+                <button type="button" class="suggest-tag">🛡️ Cybersecurity</button>
+            </div>
         </div>
 
         <div class="hero-trust-tags">
@@ -62,56 +71,90 @@
         </div>
     </div>
 
-    <!-- Hero Interactive Preview Card -->
+    <!-- Hero Interactive AI Career Simulator Widget -->
     <div class="hero-visual">
-        <div class="hero-preview-card">
-            <div class="preview-header">
-                <div class="preview-user">
-                    <div class="user-avatar">
-                        <i class="fa-solid fa-user-astronaut"></i>
-                    </div>
-                    <div class="user-info">
-                        <strong>Target Path: AI & Data Engineer</strong>
-                        <small>Updated Live by CareerVerse AI</small>
-                    </div>
+        <div class="hero-simulator-card">
+            <div class="simulator-topbar">
+                <div class="window-dots">
+                    <span class="dot red"></span>
+                    <span class="dot yellow"></span>
+                    <span class="dot green"></span>
                 </div>
-                <span class="match-badge"><i class="fa-solid fa-fire"></i> 98% Match</span>
-            </div>
-
-            <div class="preview-roadmap-steps">
-                <div class="step-item active">
-                    <div class="step-icon"><i class="fa-solid fa-check"></i></div>
-                    <div class="step-text">
-                        <strong>1. Python & Core Fundamentals</strong>
-                        <small>Completed • Data Structures, OOP & SQL</small>
-                    </div>
-                </div>
-                <div class="step-item in-progress">
-                    <div class="step-icon"><i class="fa-solid fa-spinner fa-spin"></i></div>
-                    <div class="step-text">
-                        <strong>2. RAG & Vector Databases</strong>
-                        <small>Current Focus • LangChain, Pinecone & Embeddings</small>
-                    </div>
-                </div>
-                <div class="step-item upcoming">
-                    <div class="step-icon"><i class="fa-solid fa-lock"></i></div>
-                    <div class="step-text">
-                        <strong>3. Model Deployment & MLOps</strong>
-                        <small>Next Milestone • Docker, GCP & FastAPI</small>
-                    </div>
+                <div class="live-status">
+                    <span class="pulse-dot"></span> LIVE AI SIMULATOR
                 </div>
             </div>
 
-            <div class="preview-metrics">
-                <div class="metric-box">
+            <!-- Role Selector Pills -->
+            <div class="simulator-roles">
+                <button class="sim-role-pill active" data-role="ai"><i class="fa-solid fa-bolt"></i> AI Engineer</button>
+                <button class="sim-role-pill" data-role="dev"><i class="fa-solid fa-code"></i> Full Stack</button>
+                <button class="sim-role-pill" data-role="data"><i class="fa-solid fa-chart-pie"></i> Data Scientist</button>
+                <button class="sim-role-pill" data-role="cyber"><i class="fa-solid fa-shield-halved"></i> Cyber Security</button>
+            </div>
+
+            <!-- Simulator Main Header -->
+            <div class="sim-header">
+                <div class="sim-role-info">
+                    <h3 id="simRoleTitle">AI & Machine Learning Engineer</h3>
+                    <p id="simRoleSubtext">High-demand specialization in RAG, GenAI & LLM Ops</p>
+                </div>
+                <div class="sim-match-badge" id="simMatchBadge">
+                    <i class="fa-solid fa-fire"></i> 98% Match
+                </div>
+            </div>
+
+            <!-- Animated Progress Bar -->
+            <div class="sim-progress-box">
+                <div class="sim-progress-label">
+                    <span>Career Readiness Index</span>
+                    <strong id="simProgressValue">78%</strong>
+                </div>
+                <div class="sim-progress-track">
+                    <div class="sim-progress-fill" id="simProgressFill" style="width: 78%;"></div>
+                </div>
+            </div>
+
+            <!-- Milestone Steps -->
+            <div class="sim-steps" id="simStepsContainer">
+                <div class="sim-step-item completed">
+                    <div class="sim-step-badge"><i class="fa-solid fa-check"></i></div>
+                    <div class="sim-step-details">
+                        <strong>Phase 1: Python, Math & Data Structures</strong>
+                        <small>Completed • NumPy, Pandas, SQL & OOP</small>
+                    </div>
+                </div>
+                <div class="sim-step-item active">
+                    <div class="sim-step-badge"><i class="fa-solid fa-spinner fa-spin"></i></div>
+                    <div class="sim-step-details">
+                        <strong>Phase 2: RAG, LangChain & Embeddings</strong>
+                        <small>In Progress • Vector DBs & Fine-Tuning</small>
+                    </div>
+                </div>
+                <div class="sim-step-item upcoming">
+                    <div class="sim-step-badge"><i class="fa-solid fa-lock"></i></div>
+                    <div class="sim-step-details">
+                        <strong>Phase 3: Production MLOps & Deployment</strong>
+                        <small>Next Up • Docker, FastAPI, GCP & Triton</small>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Live Metrics Footer -->
+            <div class="sim-metrics">
+                <div class="sim-metric-item">
                     <small>Market Demand</small>
-                    <strong>Very High <i class="fa-solid fa-arrow-trend-up"></i></strong>
+                    <strong id="simDemand"><i class="fa-solid fa-arrow-trend-up"></i> Very High</strong>
                 </div>
-                <div class="metric-box">
+                <div class="sim-metric-item">
                     <small>Est. Salary Range</small>
-                    <strong>₹12L - ₹28L / yr</strong>
+                    <strong id="simSalary">₹14L - ₹32L / yr</strong>
                 </div>
             </div>
+
+            <a href="/generate" class="sim-cta-btn" id="simCtaBtn">
+                <span>Simulate My Roadmap</span> <i class="fa-solid fa-arrow-right"></i>
+            </a>
         </div>
     </div>
 </section>
@@ -384,19 +427,82 @@
 
 
 <!-- ================= FINAL CTA ================= -->
-<section class="final-cta reveal">
-    <div class="cta-content">
-        <small>TAKE THE NEXT STEP</small>
-        <h2>Your future doesn't need <span>guesswork.</span></h2>
-        <p>Start building your personalized, data-backed career path today.</p>
+<!-- ================= INSTANT CAREER QUIZ MODAL ================= -->
+<div class="modal-overlay" id="quizModal">
+    <div class="modal-card">
+        <button class="modal-close" id="closeQuizBtn" type="button"><i class="fa-solid fa-xmark"></i></button>
+
+        <div class="quiz-header">
+            <span class="quiz-badge"><i class="fa-solid fa-wand-magic-sparkles"></i> 30-Sec AI Career Finder</span>
+            <h2>Discover Your Perfect AI Pathway</h2>
+            <p>Answer 3 quick questions to get your personalized tool & roadmap recommendation.</p>
+        </div>
+
+        <form id="quizForm" class="quiz-body">
+            <!-- Step 1 -->
+            <div class="quiz-step active" data-step="1">
+                <h4>Step 1: What is your current background?</h4>
+                <div class="quiz-options">
+                    <label class="quiz-option"><input type="radio" name="q_bg" value="tech" checked> <span>💻 Tech / Coding / Engineering</span></label>
+                    <label class="quiz-option"><input type="radio" name="q_bg" value="business"> <span>📊 Business / Finance / Marketing</span></label>
+                    <label class="quiz-option"><input type="radio" name="q_bg" value="creative"> <span>🎨 Design / Writing / Media</span></label>
+                    <label class="quiz-option"><input type="radio" name="q_bg" value="beginner"> <span>🚀 Absolute Beginner / Student</span></label>
+                </div>
+            </div>
+
+            <!-- Step 2 -->
+            <div class="quiz-step" data-step="2">
+                <h4>Step 2: What is your primary career goal?</h4>
+                <div class="quiz-options">
+                    <label class="quiz-option"><input type="radio" name="q_goal" value="switch" checked> <span>🔄 Switch into High-Paying AI / Tech</span></label>
+                    <label class="quiz-option"><input type="radio" name="q_goal" value="resume"> <span>📄 Fix My Resume & Pass ATS Scanners</span></label>
+                    <label class="quiz-option"><input type="radio" name="q_goal" value="skills"> <span>⚡ Find My Skill Gaps & What To Learn Next</span></label>
+                    <label class="quiz-option"><input type="radio" name="q_goal" value="salary"> <span>💰 Compare Salaries & Negotiate Pay</span></label>
+                </div>
+            </div>
+
+            <!-- Step 3 -->
+            <div class="quiz-step" data-step="3">
+                <h4>Step 3: What work style excites you most?</h4>
+                <div class="quiz-options">
+                    <label class="quiz-option"><input type="radio" name="q_style" value="building" checked> <span>🛠️ Building AI Apps & Writing Code</span></label>
+                    <label class="quiz-option"><input type="radio" name="q_style" value="analytics"> <span>📈 Analyzing Trends & Data Strategy</span></label>
+                    <label class="quiz-option"><input type="radio" name="q_style" value="remote"> <span>🌍 Remote Global Consulting</span></label>
+                </div>
+            </div>
+
+            <!-- Result View -->
+            <div class="quiz-result" id="quizResultView" style="display: none;">
+                <div class="result-badge"><i class="fa-solid fa-bullseye"></i> Recommended For You</div>
+                <h3 id="quizResultTitle">AI & Data Engineering Roadmap</h3>
+                <p id="quizResultDesc">Based on your goals, our Gemini AI recommends building your custom 3-phase AI roadmap immediately.</p>
+
+                <div class="quiz-result-actions">
+                    <a href="/generate" id="quizResultBtn" class="main-btn">Launch Recommendation <i class="fa-solid fa-arrow-right"></i></a>
+                </div>
+            </div>
+
+            <div class="quiz-footer" id="quizFooter">
+                <button type="button" id="prevQuizStep" class="secondary-btn" style="visibility: hidden;">Back</button>
+                <button type="button" id="nextQuizStep" class="main-btn">Next Question <i class="fa-solid fa-arrow-right"></i></button>
+            </div>
+        </form>
     </div>
+</div>
 
-    <a href="/generate" class="main-btn">
-        Start My Journey
-        <i class="fa-solid fa-arrow-right"></i>
+<!-- ================= FLOATING AI ASSISTANT BADGE ================= -->
+<div class="floating-ai-bar">
+    <a href="/career-chat" class="floating-ai-btn" title="Talk to 24/7 AI Mentor">
+        <div class="floating-bot-icon">
+            <i class="fa-solid fa-headset"></i>
+            <span class="bot-status-dot"></span>
+        </div>
+        <div class="floating-bot-text">
+            <strong>24/7 AI Mentor</strong>
+            <small>Ask anything live</small>
+        </div>
     </a>
-</section>
-
+</div>
 
 {% include 'partials/footer.html' %}
 
