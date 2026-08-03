@@ -2,310 +2,174 @@
 <html lang="en">
 
 <head>
-
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="AI Powered Career Analytics, Salary Intelligence, Future Demand and Market Trends.">
 
     <title>Career Intelligence | CareerVerse AI</title>
 
-    <link rel="stylesheet"
-        href="{{ url_for('static', filename='css/career_intelligence.css') }}">
-
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/common.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/career_intelligence.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-
-    <link rel="preconnect"
-        href="https://fonts.gstatic.com"
-        crossorigin>
-
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
-        rel="stylesheet">
-
 </head>
 
 <body>
 
-<div class="background"></div>
+{% include 'partials/navbar.html' %}
 
-<header class="hero">
-
-    <div class="hero-content">
-
-        <h1>Career Intelligence Dashboard</h1>
-
-        <p>
-            AI Powered Career Analytics • Salary Intelligence • Future Demand •
-            Market Trends
-        </p>
-
+<section class="intel-page reveal">
+    <div class="hero-badge">
+        <span></span>
+        CAREER INTELLIGENCE DASHBOARD
     </div>
 
-</header>
-
-
-<section class="search-section">
+    <h1>Global Career <span>Market Intelligence</span></h1>
+    <p>AI Powered Analytics • Salary Intelligence • Future Demand Trends • Skill Vectors</p>
 
     <div class="search-card">
-
-        <h2>Analyse Any Career</h2>
+        <h2><i class="fa-solid fa-chart-pie"></i> Analyze Any Career Market</h2>
 
         <div class="form-grid">
-
             <div class="input-box">
-
-                <label>Career</label>
-
-                <input
-                    type="text"
-                    id="career"
-                    placeholder="AI Engineer, Doctor, Architect, Lawyer...">
-
+                <label for="career"><i class="fa-solid fa-briefcase"></i> Target Career Role</label>
+                <input type="text" id="career" placeholder="e.g. AI Engineer, Data Scientist, Doctor, Lawyer">
             </div>
 
             <div class="input-box">
-
-                <label>Country</label>
-
-                <input
-                    type="text"
-                    id="country"
-                    placeholder="India">
-
+                <label for="country"><i class="fa-solid fa-earth-americas"></i> Country / Region</label>
+                <input type="text" id="country" placeholder="e.g. India, USA, Germany, Japan">
             </div>
-
         </div>
 
-        <button id="analyzeBtn">
-
-            Analyse Career
-
+        <button id="analyzeBtn" type="button">
+            <i class="fa-solid fa-magnifying-glass-chart"></i> Generate Intelligence Report
         </button>
-
     </div>
 
-</section>
-
-
-<div id="loading" class="loading hidden">
-
-    <div class="loader"></div>
-
-    <p>Generating Career Intelligence...</p>
-
-</div>
-
-
-<main id="dashboard" class="dashboard hidden">
-
-
-<section class="summary-grid">
-
-<div class="summary-card">
-
-    <span class="title">
-        Career Demand
-    </span>
-
-    <h2 id="futureRating">--</h2>
-
-</div>
-
-<div class="summary-card">
-
-    <span class="title">
-        Average Salary
-    </span>
-
-    <h2 id="averageSalary">--</h2>
-
-</div>
-
-<div class="summary-card">
-
-    <span class="title">
-        Confidence
-    </span>
-
-    <h2 id="confidence">--</h2>
-
-</div>
-
-<div class="summary-card">
-
-    <span class="title">
-        Education
-    </span>
-
-    <h2 id="education">--</h2>
-
-</div>
-
-</section>
-
-
-<section class="overview-card">
-
-<h2>
-
-Career Overview
-
-</h2>
-
-<p id="overview">
-
-Waiting for analysis...
-
-</p>
-
-</section>
-
-
-
-<!-- ===========================
-Analytics Charts
-=========================== -->
-
-<section class="chart-grid">
-
-    <div class="chart-card">
-        <h2>📈 Career Demand Trend</h2>
-        <canvas id="careerDemandChart"></canvas>
-        <p id="careerDemandReason"></p>
+    <div id="loading" class="loading hidden">
+        <div class="loader"></div>
+        <p>Generating Deep Market Intelligence Report...</p>
     </div>
 
-    <div class="chart-card">
-        <h2>💰 Salary Growth</h2>
-        <canvas id="salaryGrowthChart"></canvas>
-        <p id="salaryReason"></p>
-    </div>
+    <main id="dashboard" class="dashboard hidden">
+        <section class="summary-grid">
+            <div class="summary-card">
+                <span class="title"><i class="fa-solid fa-fire"></i> Market Demand</span>
+                <h2 id="futureRating">--</h2>
+            </div>
 
+            <div class="summary-card">
+                <span class="title"><i class="fa-solid fa-sack-dollar"></i> Avg Salary Range</span>
+                <h2 id="averageSalary">--</h2>
+            </div>
+
+            <div class="summary-card">
+                <span class="title"><i class="fa-solid fa-shield-halved"></i> AI Confidence</span>
+                <h2 id="confidence">--</h2>
+            </div>
+
+            <div class="summary-card">
+                <span class="title"><i class="fa-solid fa-graduation-cap"></i> Entry Education</span>
+                <h2 id="education">--</h2>
+            </div>
+        </section>
+
+        <section class="overview-card">
+            <h2><i class="fa-solid fa-newspaper"></i> Executive Market Summary</h2>
+            <p id="overview">Waiting for analysis...</p>
+        </section>
+
+        <section class="chart-grid">
+            <div class="chart-card">
+                <h2><i class="fa-solid fa-chart-line"></i> Career Demand Trend</h2>
+                <canvas id="careerDemandChart"></canvas>
+                <p id="careerDemandReason"></p>
+            </div>
+
+            <div class="chart-card">
+                <h2><i class="fa-solid fa-sack-dollar"></i> Salary Trajectory</h2>
+                <canvas id="salaryGrowthChart"></canvas>
+                <p id="salaryReason"></p>
+            </div>
+        </section>
+
+        <section class="chart-grid">
+            <div class="chart-card">
+                <h2><i class="fa-solid fa-users"></i> Competition Density</h2>
+                <canvas id="competitionChart"></canvas>
+                <p id="competitionReason"></p>
+            </div>
+
+            <div class="chart-card">
+                <h2><i class="fa-solid fa-microchip"></i> Tech Adoption Rate</h2>
+                <canvas id="technologyChart"></canvas>
+                <p id="technologyReason"></p>
+            </div>
+        </section>
+
+        <section class="chart-grid">
+            <div class="chart-card">
+                <h2><i class="fa-solid fa-robot"></i> AI Automation Risk</h2>
+                <div class="automation-box">
+                    <h1 id="automationScore">0%</h1>
+                    <p id="automationReason"></p>
+                </div>
+            </div>
+
+            <div class="chart-card">
+                <h2><i class="fa-solid fa-list-check"></i> Skill Competency Matrix</h2>
+                <canvas id="skillsChart"></canvas>
+                <p id="skillsReason"></p>
+            </div>
+        </section>
+
+        <section class="chart-card">
+            <h2><i class="fa-solid fa-globe"></i> Global Demand Distribution</h2>
+            <canvas id="globalDemandChart"></canvas>
+            <p id="globalReason"></p>
+        </section>
+
+        <section class="list-grid">
+            <div class="list-card">
+                <h2><i class="fa-solid fa-building"></i> Top Recruiting Organizations</h2>
+                <ul id="topCompanies"></ul>
+            </div>
+
+            <div class="list-card">
+                <h2><i class="fa-solid fa-wrench"></i> Recommended Core Tools</h2>
+                <ul id="recommendedTools"></ul>
+            </div>
+        </section>
+
+        <section class="list-grid">
+            <div class="list-card">
+                <h2><i class="fa-solid fa-certificate"></i> Key Industry Certifications</h2>
+                <ul id="certifications"></ul>
+            </div>
+
+            <div class="list-card">
+                <h2><i class="fa-solid fa-rocket"></i> Emerging 5-Year Opportunities</h2>
+                <ul id="futureOpportunities"></ul>
+            </div>
+        </section>
+
+        <section class="timeline-card">
+            <h2><i class="fa-solid fa-route"></i> Career Progression Pathway</h2>
+            <div id="careerPath"></div>
+        </section>
+
+        <section class="advice-card">
+            <h2><i class="fa-solid fa-lightbulb"></i> Strategic AI Recommendations</h2>
+            <div id="aiAdvice"></div>
+        </section>
+    </main>
 </section>
 
+{% include 'partials/footer.html' %}
 
-<section class="chart-grid">
-
-    <div class="chart-card">
-        <h2>🏆 Competition Trend</h2>
-        <canvas id="competitionChart"></canvas>
-        <p id="competitionReason"></p>
-    </div>
-
-    <div class="chart-card">
-        <h2>⚙ Technology Adoption</h2>
-        <canvas id="technologyChart"></canvas>
-        <p id="technologyReason"></p>
-    </div>
-
-</section>
-
-
-<section class="chart-grid">
-
-    <div class="chart-card">
-
-        <h2>🤖 AI Automation Risk</h2>
-
-        <div class="automation-box">
-
-            <h1 id="automationScore">0%</h1>
-
-            <p id="automationReason"></p>
-
-        </div>
-
-    </div>
-
-    <div class="chart-card">
-
-        <h2>🛠 Skills Analysis</h2>
-
-        <canvas id="skillsChart"></canvas>
-
-        <p id="skillsReason"></p>
-
-    </div>
-
-</section>
-
-
-<section class="chart-card">
-
-    <h2>🌍 Global Career Demand</h2>
-
-    <canvas id="globalDemandChart"></canvas>
-
-    <p id="globalReason"></p>
-
-</section>
-
-
-<section class="list-grid">
-
-    <div class="list-card">
-
-        <h2>🏢 Top Companies</h2>
-
-        <ul id="topCompanies"></ul>
-
-    </div>
-
-    <div class="list-card">
-
-        <h2>🛠 Recommended Tools</h2>
-
-        <ul id="recommendedTools"></ul>
-
-    </div>
-
-</section>
-
-
-<section class="list-grid">
-
-    <div class="list-card">
-
-        <h2>🎓 Certifications</h2>
-
-        <ul id="certifications"></ul>
-
-    </div>
-
-    <div class="list-card">
-
-        <h2>🚀 Future Opportunities</h2>
-
-        <ul id="futureOpportunities"></ul>
-
-    </div>
-
-</section>
-
-
-<section class="timeline-card">
-
-    <h2>🛤 Career Path</h2>
-
-    <div id="careerPath"></div>
-
-</section>
-
-
-<section class="advice-card">
-
-    <h2>🧠 AI Mentor Advice</h2>
-
-    <div id="aiAdvice"></div>
-
-</section>
-
-</main>
-
+<script src="{{ url_for('static', filename='js/ui-effects.js') }}"></script>
 <script src="{{ url_for('static', filename='js/career_intelligence.js') }}"></script>
 
-
-
-
 </body>
-
 </html>

@@ -1,0 +1,25 @@
+# 知识卡导出索引文件
+schema_version: 1
+locale: en-US
+branch: main
+nodes_managed: true
+exported_at: "2026-08-02T06:42:33Z"
+modules:
+    static_assets:
+        dir_name: static_assets
+        title: static_assets
+        scope:
+            - static/
+        source_files: []
+        children: []
+        depends_on: []
+        related_to: []
+    templates:
+        dir_name: templates
+        title: templates
+        scope:
+            - templates/
+        source_files: []
+        children: []
+        depends_on: []
+        related_to: []

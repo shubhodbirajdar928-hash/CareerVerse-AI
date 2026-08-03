@@ -2,554 +2,405 @@
 <html lang="en">
 
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<meta charset="UTF-8">
+    <meta name="description"
+          content="CareerVerse AI — AI-powered career guidance, roadmaps, skill analysis, salary insights and more.">
 
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CareerVerse AI — Your AI Career Companion</title>
 
-<title>CareerVerse AI</title>
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/common.css') }}">
 
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/home.css') }}">
 
-<link rel="stylesheet"
-href="{{ url_for('static', filename='css/common.css') }}">
-
-<link rel="stylesheet"
-href="{{ url_for('static', filename='css/home.css') }}">
-
-
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
-
-
-<link rel="stylesheet"
-href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
-
-
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
 </head>
-
 
 <body>
 
-
-<!-- NAVBAR -->
-
-<nav class="navbar">
-
-
-<div class="logo">
-
-<i class="fa-solid fa-graduation-cap"></i>
-
-<span>
-CareerVerse AI
-</span>
-
-</div>
-
-
-
-<ul>
-
-        <li><a href="/" class="active">Home</a></li>
-
-<li><a href="/generate">Roadmap</a></li>
-
-<li><a href="/ai-tools">AI Hub</a></li>
-
-<li><a href="/about">About</a></li>
-
-</ul>
-
-
-</nav>
-
-
-
-
-<!-- HERO -->
-
-
-<section class="hero">
-
-
-<div class="hero-content">
-
-
-<span class="hero-badge">
-<i class="fa-solid fa-sparkles"></i>
-AI-Powered Career Platform
-</span>
-
-
-
-<h1>
-
-Build Your Dream Career
-
-<br>
-
-<span>
-with AI
-</span>
-
-</h1>
-
-
-
-<p>
-
-Generate Career Roadmaps, Chat with AI,
-Analyze Resume, Predict Salary,
-Compare Careers and Discover Your Future —
-All in One Place.
-
-</p>
-
-
-
-<div class="hero-buttons">
-
-
-<a href="/generate"
-class="primary-btn">
-
-Get Started
-
-</a>
-
-
-
-<a href="/ai-tools"
-class="secondary-btn">
-
-Explore AI Tools
-
-</a>
-
-
-</div>
-
-
-</div>
-
-
-
-
-<div class="hero-image">
-
-
-<img src="{{ url_for('static', filename='images/robot.png') }}">
-
-
-</div>
-
-
-
-</section>
-
-
-
-
-
-<!-- FEATURES -->
-
-
-<section class="features">
-
-
-<div class="section-title">
-
-
-<h2>
-
-Everything You Need for Your Career
-
-</h2>
-
-
-<p>
-
-One platform. Eight powerful AI tools.
-
-</p>
-
-
-</div>
-
-
-
-
-<div class="feature-grid">
-
-
-
-<div class="feature-card">
-<div class="icon-wrap"><i class="fa-solid fa-route"></i></div>
-
-<h3>
-AI Roadmap
-</h3>
-
-<p>
-Generate a complete learning roadmap for any career.
-</p>
-
-<a href="/generate">
-Open Tool →
-</a>
-
-</div>
-
-
-
-
-
-<div class="feature-card">
-<div class="icon-wrap"><i class="fa-solid fa-robot"></i></div>
-
-<h3>
-AI Career Chat
-</h3>
-
-<p>
-Ask career questions and get instant AI guidance.
-</p>
-
-<a href="/career-chat">
-Open Tool →
-</a>
-
-</div>
-
-
-
-
-
-<div class="feature-card">
-<div class="icon-wrap"><i class="fa-solid fa-bullseye"></i></div>
-
-<h3>
-Career Match
-</h3>
-
-<p>
-Discover the career that matches your profile.
-</p>
-
-<a href="/career-match">
-Open Tool →
-</a>
-
-</div>
-
-
-
-
-
-<div class="feature-card">
-<div class="icon-wrap"><i class="fa-solid fa-chart-line"></i></div>
-
-<h3>
-Skill Gap
-</h3>
-
-<p>
-Identify missing skills and improve faster.
-</p>
-
-<a href="/skill-gap">
-Open Tool →
-</a>
-
-</div>
-
-
-
-
-
-<div class="feature-card">
-<div class="icon-wrap"><i class="fa-solid fa-money-bill-trend-up"></i></div>
-
-<h3>
-Salary Predictor
-</h3>
-
-<p>
-Estimate salary based on skills and experience.
-</p>
-
-<a href="/salary-predictor">
-Open Tool →
-</a>
-
-</div>
-
-
-
-
-
-<div class="feature-card">
-<div class="icon-wrap"><i class="fa-solid fa-scale-balanced"></i></div>
-
-<h3>
-Career Compare
-</h3>
-
-<p>
-Compare careers and choose the best path.
-</p>
-
-<a href="/compare">
-Open Tool →
-</a>
-
-</div>
-
-
-
-
-
-<div class="feature-card">
-<div class="icon-wrap"><i class="fa-solid fa-file-lines"></i></div>
-
-<h3>
-Resume Analyzer
-</h3>
-
-<p>
-Analyze ATS score and improve your resume.
-</p>
-
-<a href="/resume">
-Open Tool →
-</a>
-
-</div>
-
-
-
-
-
-<div class="feature-card">
-<div class="icon-wrap"><i class="fa-solid fa-earth-americas"></i></div>
-
-<h3>
-Career Reality AI
-</h3>
-
-<p>
-Understand salary, demand, growth and real-world opportunities.
-</p>
-
-<a href="/career-reality">
-Open Tool →
-</a>
-
-</div>
-
-
-
-
-</div>
-
-
-</section>
-
-
-
-
-
-
-<!-- WHY SECTION -->
-
-
-<section class="why">
-
-
-<h2>
-Why Choose CareerVerse AI?
-</h2>
-
-
-<p>
-
-Everything required to plan, build and grow your career.
-
-</p>
-
-
-
-<div class="why-grid">
-
-
-<div>
-<div class="icon-wrap"><i class="fa-solid fa-brain"></i></div>
-
-<h3>
-AI Powered
-</h3>
-
-<p>
-Personalized career guidance using AI.
-</p>
-
-</div>
-
-
-
-<div>
-<div class="icon-wrap"><i class="fa-solid fa-clock"></i></div>
-
-<h3>
-Save Time
-</h3>
-
-<p>
-All career tools in one platform.
-</p>
-
-</div>
-
-
-
-<div>
-<div class="icon-wrap"><i class="fa-solid fa-user-graduate"></i></div>
-
-<h3>
-Student Friendly
-</h3>
-
-<p>
-Built for students and professionals.
-</p>
-
-</div>
-
-
-
-<div>
-<div class="icon-wrap"><i class="fa-solid fa-chart-simple"></i></div>
-
-<h3>
-Career Growth
-</h3>
-
-<p>
-Become job ready faster.
-</p>
-
-</div>
-
-
-
-</div>
-
-
-</section>
-
-
-
-
-
-
-<!-- STATS -->
-
-
-<section class="stats">
-
-
-<div>
-
-<h2>
-8+
-</h2>
-
-<p>
-AI Tools
-</p>
-
-</div>
-
-
-
-<div>
-
-<h2>
-24/7
-</h2>
-
-<p>
-AI Assistant
-</p>
-
-</div>
-
-
-
-<div>
-
-<h2>
-100%
-</h2>
-
-<p>
-AI Powered
-</p>
-
-</div>
-
-
-
-<div>
-
-<h2>
-∞
-</h2>
-
-<p>
-Career Possibilities
-</p>
-
-</div>
-
-
-</section>
-
-
-
-
-
-
-
-<!-- ================= FOOTER ================= -->
-
-<footer>
-
-    <h2>CareerVerse AI</h2>
-
-    <p>Your Complete AI Career Development Platform</p>
-
-    <div class="footer-links">
-
-        <a href="/">Home</a>
-
-        <a href="/generate">Roadmap</a>
-
-        <a href="/ai-tools">AI Hub</a>
-
-        <a href="/about">About</a>
-
+{% include 'partials/navbar.html' %}
+
+
+<!-- ================= HERO SECTION ================= -->
+<section class="hero reveal">
+    <div class="hero-content">
+        <div class="hero-badge">
+            <span></span>
+            YOUR AI CAREER COMPANION
+        </div>
+
+        <h1>
+            Don't Just Choose a Career.<br>
+            <span>Build One with AI.</span>
+        </h1>
+
+        <p>
+            CareerVerse AI turns career confusion into clear, actionable plans.
+            Discover your path, master high-impact skills, evaluate salaries, and navigate your professional journey with confidence.
+        </p>
+
+        <div class="hero-actions">
+            <a href="/generate" class="main-btn">
+                Build My Roadmap
+                <i class="fa-solid fa-arrow-right"></i>
+            </a>
+
+            <a href="/career-match" class="secondary-btn">
+                <i class="fa-solid fa-compass"></i>
+                Find My Career
+            </a>
+        </div>
+
+        <div class="hero-trust-tags">
+            <span><i class="fa-solid fa-shield-halved"></i> 100% Free Access</span>
+            <span><i class="fa-solid fa-bolt"></i> Instant Gemini AI Guidance</span>
+            <span><i class="fa-solid fa-chart-line"></i> Data-Backed Insights</span>
+        </div>
     </div>
 
-    <p class="copyright">
+    <!-- Hero Interactive Preview Card -->
+    <div class="hero-visual">
+        <div class="hero-preview-card">
+            <div class="preview-header">
+                <div class="preview-user">
+                    <div class="user-avatar">
+                        <i class="fa-solid fa-user-astronaut"></i>
+                    </div>
+                    <div class="user-info">
+                        <strong>Target Path: AI & Data Engineer</strong>
+                        <small>Updated Live by CareerVerse AI</small>
+                    </div>
+                </div>
+                <span class="match-badge"><i class="fa-solid fa-fire"></i> 98% Match</span>
+            </div>
 
-        © 2026 CareerVerse AI. All Rights Reserved.
+            <div class="preview-roadmap-steps">
+                <div class="step-item active">
+                    <div class="step-icon"><i class="fa-solid fa-check"></i></div>
+                    <div class="step-text">
+                        <strong>1. Python & Core Fundamentals</strong>
+                        <small>Completed • Data Structures, OOP & SQL</small>
+                    </div>
+                </div>
+                <div class="step-item in-progress">
+                    <div class="step-icon"><i class="fa-solid fa-spinner fa-spin"></i></div>
+                    <div class="step-text">
+                        <strong>2. RAG & Vector Databases</strong>
+                        <small>Current Focus • LangChain, Pinecone & Embeddings</small>
+                    </div>
+                </div>
+                <div class="step-item upcoming">
+                    <div class="step-icon"><i class="fa-solid fa-lock"></i></div>
+                    <div class="step-text">
+                        <strong>3. Model Deployment & MLOps</strong>
+                        <small>Next Milestone • Docker, GCP & FastAPI</small>
+                    </div>
+                </div>
+            </div>
 
-    </p>
+            <div class="preview-metrics">
+                <div class="metric-box">
+                    <small>Market Demand</small>
+                    <strong>Very High <i class="fa-solid fa-arrow-trend-up"></i></strong>
+                </div>
+                <div class="metric-box">
+                    <small>Est. Salary Range</small>
+                    <strong>₹12L - ₹28L / yr</strong>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 
-</footer>
+
+<!-- ================= METRICS BAR ================= -->
+<section class="metrics-bar reveal">
+    <div class="metric-card">
+        <div class="metric-icon"><i class="fa-solid fa-route"></i></div>
+        <div class="metric-number" data-count="50000" data-suffix="+">0</div>
+        <div class="metric-label">Roadmaps Generated</div>
+    </div>
+
+    <div class="metric-card">
+        <div class="metric-icon"><i class="fa-solid fa-bullseye"></i></div>
+        <div class="metric-number" data-count="98" data-suffix="%">0</div>
+        <div class="metric-label">Guidance Accuracy</div>
+    </div>
+
+    <div class="metric-card">
+        <div class="metric-icon"><i class="fa-solid fa-microchip"></i></div>
+        <div class="metric-number" data-count="9" data-suffix=" AI Tools">0</div>
+        <div class="metric-label">All-in-One Suite</div>
+    </div>
+
+    <div class="metric-card">
+        <div class="metric-icon"><i class="fa-solid fa-clock"></i></div>
+        <div class="metric-number" data-count="24" data-suffix="/7">0</div>
+        <div class="metric-label">Instant AI Mentorship</div>
+    </div>
+</section>
 
 
+<!-- ================= TOOLS SECTION ================= -->
+<section class="tools-section reveal" id="tools">
+    <div class="section-header">
+        <span class="section-tag">COMPLETE CAREER SUITE</span>
+        <h2>Everything You Need To Build Your Career</h2>
+        <p>Explore specialized AI tools designed to analyze your background, guide your next steps, and unlock your market potential.</p>
+    </div>
+
+    <div class="tools-grid">
+        <!-- 1. Roadmap -->
+        <a href="/generate" class="tool-card">
+            <div class="tool-card-top">
+                <div class="tool-icon">
+                    <i class="fa-solid fa-route"></i>
+                </div>
+                <span class="tool-tag">PLAN</span>
+            </div>
+            <h3>Career Roadmap</h3>
+            <p>Turn your ambitious career goals into structured, step-by-step learning journeys with curated milestones.</p>
+            <div class="tool-link">
+                <span>Build Roadmap</span>
+                <i class="fa-solid fa-arrow-right"></i>
+            </div>
+        </a>
+
+        <!-- 2. Career Match -->
+        <a href="/career-match" class="tool-card">
+            <div class="tool-card-top">
+                <div class="tool-icon">
+                    <i class="fa-solid fa-bullseye"></i>
+                </div>
+                <span class="tool-tag">DISCOVER</span>
+            </div>
+            <h3>Career Match</h3>
+            <p>Uncover ideal career paths tailored to your personality, technical skills, and long-term aspirations.</p>
+            <div class="tool-link">
+                <span>Find Match</span>
+                <i class="fa-solid fa-arrow-right"></i>
+            </div>
+        </a>
+
+        <!-- 3. Skill Gap -->
+        <a href="/skill-gap" class="tool-card">
+            <div class="tool-card-top">
+                <div class="tool-icon">
+                    <i class="fa-solid fa-chart-line"></i>
+                </div>
+                <span class="tool-tag">IMPROVE</span>
+            </div>
+            <h3>Skill Gap Analyzer</h3>
+            <p>Compare your current skillset against industry standards and pinpoint exactly what you need to learn next.</p>
+            <div class="tool-link">
+                <span>Analyze Gaps</span>
+                <i class="fa-solid fa-arrow-right"></i>
+            </div>
+        </a>
+
+        <!-- 4. Resume Analyzer -->
+        <a href="/resume" class="tool-card">
+            <div class="tool-card-top">
+                <div class="tool-icon">
+                    <i class="fa-solid fa-file-lines"></i>
+                </div>
+                <span class="tool-tag">PREPARE</span>
+            </div>
+            <h3>Resume Analyzer</h3>
+            <p>Upload your resume for instant AI scoring, ATS optimization, bullet point enhancement, and formatting fixes.</p>
+            <div class="tool-link">
+                <span>Analyze Resume</span>
+                <i class="fa-solid fa-arrow-right"></i>
+            </div>
+        </a>
+
+        <!-- 5. Salary Predictor -->
+        <a href="/salary-predictor" class="tool-card">
+            <div class="tool-card-top">
+                <div class="tool-icon">
+                    <i class="fa-solid fa-indian-rupee-sign"></i>
+                </div>
+                <span class="tool-tag">BENCHMARK</span>
+            </div>
+            <h3>Salary Predictor</h3>
+            <p>Explore real-world market valuation and compensation benchmarks across locations and experience levels.</p>
+            <div class="tool-link">
+                <span>Check Salary</span>
+                <i class="fa-solid fa-arrow-right"></i>
+            </div>
+        </a>
+
+        <!-- 6. Career Chat -->
+        <a href="/career-chat" class="tool-card">
+            <div class="tool-card-top">
+                <div class="tool-icon">
+                    <i class="fa-solid fa-comments"></i>
+                </div>
+                <span class="tool-tag">ASK</span>
+            </div>
+            <h3>AI Career Chat</h3>
+            <p>Get instant answers to tough career decisions, interview prep, and salary negotiation tactics 24/7.</p>
+            <div class="tool-link">
+                <span>Start Chat</span>
+                <i class="fa-solid fa-arrow-right"></i>
+            </div>
+        </a>
+
+        <!-- 7. Career Compare -->
+        <a href="/compare" class="tool-card">
+            <div class="tool-card-top">
+                <div class="tool-icon">
+                    <i class="fa-solid fa-scale-balanced"></i>
+                </div>
+                <span class="tool-tag">COMPARE</span>
+            </div>
+            <h3>Career Compare</h3>
+            <p>Compare two career paths side-by-side on difficulty, earning growth, required skills, and future demand.</p>
+            <div class="tool-link">
+                <span>Compare Paths</span>
+                <i class="fa-solid fa-arrow-right"></i>
+            </div>
+        </a>
+
+        <!-- 8. Career Reality -->
+        <a href="/career-reality" class="tool-card">
+            <div class="tool-card-top">
+                <div class="tool-icon">
+                    <i class="fa-solid fa-earth-americas"></i>
+                </div>
+                <span class="tool-tag">INSIGHTS</span>
+            </div>
+            <h3>Career Reality Check</h3>
+            <p>Get unfiltered truths about day-to-day work life, hidden stresses, and realistic expectations for any role.</p>
+            <div class="tool-link">
+                <span>Check Reality</span>
+                <i class="fa-solid fa-arrow-right"></i>
+            </div>
+        </a>
+
+        <!-- 9. Career Intelligence -->
+        <a href="/career-intelligence" class="tool-card">
+            <div class="tool-card-top">
+                <div class="tool-icon">
+                    <i class="fa-solid fa-chart-simple"></i>
+                </div>
+                <span class="tool-tag">INTELLIGENCE</span>
+            </div>
+            <h3>Career Intelligence</h3>
+            <p>Stay ahead of industry trends, hiring shifts, and automation risks with comprehensive market reports.</p>
+            <div class="tool-link">
+                <span>Explore Intelligence</span>
+                <i class="fa-solid fa-arrow-right"></i>
+            </div>
+        </a>
+    </div>
+</section>
+
+
+<!-- ================= HOW IT WORKS ================= -->
+<section class="how-it-works reveal">
+    <div class="section-header">
+        <span class="section-tag">THREE-STEP GUIDANCE</span>
+        <h2>How CareerVerse AI Works</h2>
+        <p>From career uncertainty to an actionable, step-by-step path in seconds.</p>
+    </div>
+
+    <div class="steps-grid">
+        <div class="step-card">
+            <div class="step-num">01</div>
+            <h3>Share Your Goal</h3>
+            <p>Tell us your target job role, current experience, or upload your resume to provide background context.</p>
+        </div>
+
+        <div class="step-card">
+            <div class="step-num">02</div>
+            <h3>AI Deep Analysis</h3>
+            <p>Our specialized Gemini engines evaluate market demands, required skills, and growth trends instantly.</p>
+        </div>
+
+        <div class="step-card">
+            <div class="step-num">03</div>
+            <h3>Execute & Succeed</h3>
+            <p>Receive your personalized roadmap, skill gap analysis, and tailored guidance to land your dream role.</p>
+        </div>
+    </div>
+</section>
+
+
+<!-- ================= FAQ SECTION ================= -->
+<section class="faq-section reveal">
+    <div class="section-header">
+        <span class="section-tag">GOT QUESTIONS?</span>
+        <h2>Frequently Asked Questions</h2>
+        <p>Find answers to common questions about CareerVerse AI and how our tools help your career.</p>
+    </div>
+
+    <div class="faq-container">
+        <div class="faq-item">
+            <button class="faq-question" type="button">
+                <span>How does CareerVerse AI generate career roadmaps?</span>
+                <i class="fa-solid fa-chevron-down"></i>
+            </button>
+            <div class="faq-answer">
+                <p>CareerVerse AI uses advanced Gemini AI models trained on real-world industry requirements, skill frameworks, and employment trends to generate step-by-step learning roadmaps customized to your experience level.</p>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <button class="faq-question" type="button">
+                <span>Is CareerVerse AI free to use?</span>
+                <i class="fa-solid fa-chevron-down"></i>
+            </button>
+            <div class="faq-answer">
+                <p>Yes! All core tools—including the Roadmap Generator, Career Match, Skill Gap Analyzer, Resume Analyzer, and Salary Predictor—are 100% free to access.</p>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <button class="faq-question" type="button">
+                <span>Can I analyze my existing resume?</span>
+                <i class="fa-solid fa-chevron-down"></i>
+            </button>
+            <div class="faq-answer">
+                <p>Absolutely. You can upload your PDF resume directly into our Resume Analyzer tool to receive detailed ATS compatibility scores, bullet point suggestions, and missing keyword alerts.</p>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <button class="faq-question" type="button">
+                <span>How accurate are the salary predictions?</span>
+                <i class="fa-solid fa-chevron-down"></i>
+            </button>
+            <div class="faq-answer">
+                <p>Our Salary Predictor combines AI synthesis with real-time market data across multiple currencies and geographic regions to provide realistic compensation bands based on experience and location.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- ================= FINAL CTA ================= -->
+<section class="final-cta reveal">
+    <div class="cta-content">
+        <small>TAKE THE NEXT STEP</small>
+        <h2>Your future doesn't need <span>guesswork.</span></h2>
+        <p>Start building your personalized, data-backed career path today.</p>
+    </div>
+
+    <a href="/generate" class="main-btn">
+        Start My Journey
+        <i class="fa-solid fa-arrow-right"></i>
+    </a>
+</section>
+
+
+{% include 'partials/footer.html' %}
+
+<script src="{{ url_for('static', filename='js/ui-effects.js') }}"></script>
 
 </body>
-
 </html>

@@ -2,247 +2,170 @@
 <html lang="en">
 
 <head>
-
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+          content="Generate your personalized step-by-step AI career roadmap with CareerVerse AI.">
 
-    <title>CareerVerse AI</title>
+    <title>AI Roadmap Generator | CareerVerse AI</title>
 
-<link rel="stylesheet" href="{{ url_for('static', filename='css/common.css') }}">
-<link rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}">
-<link rel="stylesheet" href="{{ url_for('static', filename='css/generate.css') }}">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
-
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/common.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/generate.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
 </head>
 
 <body>
 
-<div class="blur blur1"></div>
-<div class="blur blur2"></div>
+{% include 'partials/navbar.html' %}
 
-<nav class="navbar">
-
-<div class="logo">
-
-<i class="fa-solid fa-graduation-cap"></i>
-
-<span>
-CareerVerse AI
-</span>
-
-</div>
-
-
-<ul>
-
-<li><a href="/">Home</a></li>
-
-<li><a href="/generate">Roadmap</a></li>
-
-<li><a href="/ai-tools">AI Hub</a></li>
-
-<li><a href="/about">About</a></li>
-
-</ul>
-
-</nav>
-<!-- ================= HERO ================= -->
-
-<section class="hero">
-
+<!-- ================= HERO SECTION ================= -->
+<section class="hero reveal">
     <div class="hero-content">
-
-        <span class="hero-badge">
-            <i class="fa-solid fa-route"></i>
-            AI Roadmap Generator
-        </span>
-
+        <div class="hero-badge">
+            <span></span>
+            AI ROADMAP GENERATOR
+        </div>
         <h1>
-
-            Generate Your
-
-            <span>Personalized Roadmap</span>
-
+            Engineer Your Career,<br>
+            <span>Step by Step with AI.</span>
         </h1>
-
         <p>
-
-            Let AI create a step-by-step learning roadmap tailored to your career goals,
-            current skills, study duration, and experience level. Start your journey with
-            a personalized plan designed for success.
-
+            Get a tailored, phase-by-phase learning roadmap customized to your target role, preferred country, and learning timeline. Complete with skill breakdowns, curated resources, and salary benchmarks.
         </p>
-
         <div class="hero-buttons">
-
-            <a href="#roadmap-form" class="primary-btn">
-
-                Generate Roadmap
-
+            <a href="#roadmap-form" class="main-btn">
+                <i class="fa-solid fa-wand-magic-sparkles"></i> Build My Roadmap
             </a>
-
             <a href="/ai-tools" class="secondary-btn">
-
-                Explore AI Hub
-
+                <i class="fa-solid fa-layer-group"></i> Explore All AI Tools
             </a>
-
         </div>
-
     </div>
 
-    <div class="hero-image">
-
-        <img src="{{ url_for('static', filename='images/robot.png') }}"
-             alt="AI Roadmap">
-
+    <div class="hero-visual">
+        <div class="roadmap-preview-visual">
+            <div class="visual-header">
+                <i class="fa-solid fa-route visual-icon"></i>
+                <div>
+                    <strong>AI Master Roadmap Engine</strong>
+                    <small>Powered by Gemini 2.5 Intelligence</small>
+                </div>
+            </div>
+            <div class="visual-steps">
+                <div class="v-step done">
+                    <span class="v-num"><i class="fa-solid fa-check"></i></span>
+                    <span class="v-title">Phase 1: Fundamentals & Core Tech</span>
+                </div>
+                <div class="v-step active">
+                    <span class="v-num">02</span>
+                    <span class="v-title">Phase 2: Advanced System Architecture</span>
+                </div>
+                <div class="v-step">
+                    <span class="v-num">03</span>
+                    <span class="v-title">Phase 3: Portfolio Projects & Placement</span>
+                </div>
+            </div>
+        </div>
     </div>
-
 </section>
 
-<!-- ================= LOADING ================= -->
-
-<section class="loading-section" id="loading">
-
-    <div class="loading-card">
-
-        <div class="loader"></div>
-
-        <h2>AI is Building Your Roadmap...</h2>
-
-        <p>Please wait while we analyze your career goals.</p>
-
-        <div class="loading-steps">
-
-            <div class="step">Analyzing Career Goal</div>
-
-            <div class="step">Finding Required Skills</div>
-
-            <div class="step">Preparing Projects</div>
-
-            <div class="step">Creating Weekly Plan</div>
-
-            <div class="step">Finalizing Roadmap</div>
-
-        </div>
-
-    </div>
-
-</section>
-<!-- ================= INPUT CARD ================= -->
-
-<section class="generate-section">
-
+<!-- ================= FORM SECTION ================= -->
+<section class="generate-section reveal" id="roadmap-form">
     <div class="generate-card">
+        <div class="card-header">
+            <h2><i class="fa-solid fa-bullseye"></i> Define Your Target Career Path</h2>
+            <p>Select a popular role below or enter your specific dream career to generate your custom roadmap.</p>
+        </div>
 
-        <h2>Career Goal</h2>
+        <!-- Quick Select Role Pills -->
+        <div class="quick-roles">
+            <span class="role-pill" data-role="AI & Machine Learning Engineer">⚡ AI Engineer</span>
+            <span class="role-pill" data-role="Full Stack Developer">💻 Full Stack Dev</span>
+            <span class="role-pill" data-role="Data Scientist">📊 Data Scientist</span>
+            <span class="role-pill" data-role="Cyber Security Analyst">🛡️ Cyber Security</span>
+            <span class="role-pill" data-role="DevOps & Cloud Engineer">🚀 DevOps Engineer</span>
+            <span class="role-pill" data-role="Product Manager">🎯 Product Manager</span>
+        </div>
 
-        <p>
+        <div class="input-grid">
+            <div class="input-group">
+                <label for="careerInput"><i class="fa-solid fa-briefcase"></i> Target Career / Job Role</label>
+                <input id="careerInput" type="text" placeholder="e.g. AI Engineer, Full Stack Developer, Data Scientist">
+            </div>
 
-            Example:
-            AI Engineer,
-            Data Scientist,
-            Full Stack Developer,
-            Cyber Security,
-            DevOps Engineer
+            <div class="input-group">
+                <label for="countryInput"><i class="fa-solid fa-earth-americas"></i> Preferred Location / Country</label>
+                <input id="countryInput" type="text" placeholder="e.g. India, USA, Germany, Remote">
+            </div>
 
-        </p>
+            <div class="input-group full-width">
+                <label for="duration"><i class="fa-solid fa-calendar-days"></i> Target Timeline / Duration</label>
+                <input id="duration" type="text" placeholder="e.g. 3 Months, 6 Months, 1 Year">
+            </div>
+        </div>
 
-        <input
-    id="careerInput"
-    type="text"
-    placeholder="Enter your dream career">
-
-<input
-    id="countryInput"
-    type="text"
-    placeholder="Enter preferred country (e.g. India, Japan, Germany, Canada)">
-
-<button id="generateBtn">
-
-    Generate Roadmap
-
-</button>
-
+        <button id="generateBtn" type="button">
+            <i class="fa-solid fa-route"></i> Generate AI Roadmap
+        </button>
     </div>
-
 </section>
 
 <!-- ================= ACTION BUTTONS ================= -->
-
-<section class="action-buttons">
-
-    <button id="downloadBtn">
-
-        📄 Download PDF
-
+<section class="action-buttons" style="display: none;" id="actionSection">
+    <button id="downloadBtn" type="button">
+        <i class="fa-solid fa-file-pdf"></i> Download PDF Roadmap Report
     </button>
-
 </section>
 
-<!-- ================= RESULT ================= -->
-
-<section class="result-section">
-
+<!-- ================= RESULT SECTION ================= -->
+<section class="result-section reveal">
     <div class="result-card" id="resultCard">
-
         <div class="empty-state">
-
-            <h2>
-
-                Your AI Roadmap Will Appear Here
-
-            </h2>
-
+            <div class="empty-icon">
+                <i class="fa-solid fa-map-location-dot"></i>
+            </div>
+            <h2>Your AI Master Roadmap Will Appear Here</h2>
             <p>
-
-                Enter your dream career above and click
-
-                <strong>Generate Roadmap</strong>
-
-                to start your learning journey.
-
+                Enter your target career above and click
+                <strong>Generate AI Roadmap</strong>
+                to build your personalized step-by-step master plan.
             </p>
-
         </div>
-
     </div>
-
 </section>
+
+{% include 'partials/footer.html' %}
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.2/jspdf.plugin.autotable.min.js"></script>
-
+<script src="{{ url_for('static', filename='js/ui-effects.js') }}"></script>
 <script src="{{ url_for('static', filename='js/generate.js') }}"></script>
+
+<script>
+    // Quick role selection
+    document.querySelectorAll('.role-pill').forEach(pill => {
+        pill.addEventListener('click', () => {
+            const input = document.getElementById('careerInput');
+            if (input) {
+                input.value = pill.getAttribute('data-role');
+                input.focus();
+            }
+        });
+    });
+
+    // Show download button when roadmap generates
+    const observer = new MutationObserver(() => {
+        const actionSection = document.getElementById('actionSection');
+        if (actionSection && window.currentRoadmap) {
+            actionSection.style.display = 'flex';
+        }
+    });
+    const resultCardEl = document.getElementById('resultCard');
+    if (resultCardEl) {
+        observer.observe(resultCardEl, { childList: true, subtree: true });
+    }
+</script>
+
 </body>
-<!-- ================= FOOTER ================= -->
-
-<footer>
-
-    <h2>CareerVerse AI</h2>
-
-    <p>Your Complete AI Career Development Platform</p>
-
-    <div class="footer-links">
-
-        <a href="/">Home</a>
-
-        <a href="/generate">Roadmap</a>
-
-        <a href="/ai-tools">AI Hub</a>
-
-        <a href="/about">About</a>
-
-    </div>
-
-    <p class="copyright">
-
-        © 2026 CareerVerse AI. All Rights Reserved.
-
-    </p>
-
-</footer>
-
 </html>

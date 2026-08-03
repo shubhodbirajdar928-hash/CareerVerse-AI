@@ -2,196 +2,60 @@
 <html lang="en">
 
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Side-by-side AI career comparison tool — compare salary, demand, growth, and difficulty with CareerVerse AI.">
 
-<meta charset="UTF-8">
+    <title>Career Compare AI | CareerVerse AI</title>
 
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Career Compare AI | CareerVerse AI</title>
-
-
-<link rel="stylesheet"
-href="{{ url_for('static', filename='css/common.css') }}">
-
-
-<link rel="stylesheet"
-href="{{ url_for('static', filename='css/career_compare.css') }}">
-
-
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
-rel="stylesheet">
-
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/common.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/career_compare.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
 </head>
-
 
 <body>
 
-
-<nav class="navbar">
-
-<div class="logo">
-
-<img src="{{ url_for('static', filename='images/logo.png') }}">
-
-<h2>CareerVerse AI</h2>
-
-</div>
-
-
-<ul>
-
-<li><a href="/">Home</a></li>
-
-<li><a href="/generate">Roadmap</a></li>
-
-<li><a href="/ai-tools">AI Hub</a></li>
-
-<li><a href="/about">About</a></li>
-
-</ul>
-
-</nav>
-
-
-
-<section class="compare-page">
-
-
-<h1>
-⚖️ Career Compare AI
-</h1>
-
-
-<p>
-Compare careers with salary, demand, growth,
-learning difficulty and future scope.
-</p>
-
-
-
-<div class="compare-form-container">
-
-
-<div class="compare-input-group">
-
-<label>
-⚖️ Enter Career 1
-</label>
-
-
-<input
-
-type="text"
-
-id="career1"
-
-class="compare-input"
-
-placeholder="Example: AI Engineer"
-
->
-
-</div>
-
-
-
-
-
-<div class="compare-input-group">
-
-<label>
-🚀 Enter Career 2
-</label>
-
-
-<input
-
-type="text"
-
-id="career2"
-
-class="compare-input"
-
-placeholder="Example: Data Scientist"
-
->
-
-</div>
-
-
-
-
-
-<div class="compare-input-group">
-
-<label>
-🌍 Country (Optional)
-</label>
-
-
-<input
-
-type="text"
-
-id="country"
-
-class="compare-input"
-
-placeholder="Example: USA, India, Japan"
-
->
-
-</div>
-
-
-
-
-
-<button id="compareBtn" class="compare-btn">
-
-⚖️ Compare Careers
-
-</button>
-
-
-
-</div>
-
-
-<div id="result"></div>
-
-
+{% include 'partials/navbar.html' %}
+
+<section class="compare-page reveal">
+    <div class="hero-badge">
+        <span></span>
+        CAREER COMPARE ENGINE
+    </div>
+
+    <h1>Compare Career Paths <span>Side by Side</span></h1>
+    <p>Compare salary bands, market demand, learning difficulty, growth velocity, and top hiring cities between any two roles.</p>
+
+    <div class="compare-form-container">
+        <div class="compare-inputs-grid">
+            <div class="compare-input-group">
+                <label for="career1"><i class="fa-solid fa-briefcase"></i> Primary Career (Role 1)</label>
+                <input type="text" id="career1" class="compare-input" placeholder="e.g. AI Engineer, Software Architect">
+            </div>
+
+            <div class="compare-input-group">
+                <label for="career2"><i class="fa-solid fa-rocket"></i> Comparison Career (Role 2)</label>
+                <input type="text" id="career2" class="compare-input" placeholder="e.g. Data Scientist, Product Manager">
+            </div>
+
+            <div class="compare-input-group full-width">
+                <label for="country"><i class="fa-solid fa-earth-americas"></i> Target Location / Country (Optional)</label>
+                <input type="text" id="country" class="compare-input" placeholder="e.g. India, USA, Japan, Germany">
+            </div>
+        </div>
+
+        <button id="compareBtn" class="compare-btn" type="button">
+            <i class="fa-solid fa-scale-balanced"></i> Compare Careers Now
+        </button>
+    </div>
+
+    <div id="result" class="compare-results-container"></div>
 </section>
 
+{% include 'partials/footer.html' %}
 
-
-
-<footer>
-
-<h2>CareerVerse AI</h2>
-
-<p>Your Complete AI Career Development Platform</p>
-
-<div class="footer-links">
-
-<a href="/">Home</a>
-<a href="/generate">Roadmap</a>
-<a href="/ai-tools">AI Hub</a>
-<a href="/about">About</a>
-
-</div>
-
-<p class="copyright">
-© 2026 CareerVerse AI. All Rights Reserved.
-</p>
-
-</footer>
-
-
-
+<script src="{{ url_for('static', filename='js/ui-effects.js') }}"></script>
 <script src="{{ url_for('static', filename='js/career_compare.js') }}"></script>
 
-
 </body>
-
 </html>

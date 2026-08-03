@@ -2,176 +2,55 @@
 <html lang="en">
 
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Unfiltered day-in-the-life realities, stress levels, and salary scope with CareerVerse AI Career Reality Check.">
 
-<meta charset="UTF-8">
+    <title>Career Reality AI | CareerVerse AI</title>
 
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Career Reality AI | CareerVerse AI</title>
-
-
-<link rel="stylesheet"
-href="{{ url_for('static', filename='css/common.css') }}">
-
-
-<link rel="stylesheet"
-href="{{ url_for('static', filename='css/career_reality.css') }}">
-
-
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
-rel="stylesheet">
-
-
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/common.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/career_reality.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
 </head>
-
 
 <body>
 
+{% include 'partials/navbar.html' %}
 
-<nav class="navbar">
+<section class="reality-page reveal">
+    <div class="hero-badge">
+        <span></span>
+        CAREER REALITY ENGINE
+    </div>
 
+    <h1>Unfiltered <span>Career Reality Check</span></h1>
+    <p>Discover the honest day-in-the-life facts, stress indices, work-life balance, and actual growth trajectories before making your next career pivot.</p>
 
-<div class="logo">
+    <div class="reality-container">
+        <div class="reality-inputs-grid">
+            <div class="reality-input-group">
+                <label for="career"><i class="fa-solid fa-bullseye"></i> Target Career Role</label>
+                <input type="text" id="career" class="reality-input" placeholder="e.g. AI Engineer, Investment Banker, Doctor">
+            </div>
 
-<img src="{{ url_for('static', filename='images/logo.png') }}">
+            <div class="reality-input-group">
+                <label for="country"><i class="fa-solid fa-earth-americas"></i> Country / Region (Optional)</label>
+                <input type="text" id="country" class="reality-input" placeholder="e.g. India, USA, Japan, Germany">
+            </div>
+        </div>
 
-<h2>CareerVerse AI</h2>
+        <button id="realityBtn" class="reality-btn" type="button">
+            <i class="fa-solid fa-masks-theater"></i> Reveal Unfiltered Career Reality
+        </button>
+    </div>
 
-</div>
-
-
-<ul>
-
-<li><a href="/">Home</a></li>
-
-<li><a href="/generate">Roadmap</a></li>
-
-<li><a href="/career-match">Career Match</a></li>
-
-<li><a href="/about">About</a></li>
-
-</ul>
-
-
-</nav>
-
-
-
-
-
-<section class="reality-page">
-
-
-<h1>
-🪞 Career Reality AI
-</h1>
-
-
-<p>
-Understand the real world behind your dream career before choosing it.
-</p>
-
-
-
-
-
-<div class="reality-container">
-
-
-
-<label>
-🎯 Enter Career
-</label>
-
-
-<input 
-id="career"
-placeholder="Example: AI Engineer, Doctor, Lawyer"
->
-
-
-
-
-<label>
-🌍 Country (Optional)
-</label>
-
-
-<input
-id="country"
-placeholder="Example: India, USA, Japan"
->
-
-
-
-<button id="realityBtn">
-
-🔍 Analyze Career Reality
-
-</button>
-
-
-
-</div>
-
-
-
-
-
-
-<div id="result"></div>
-
-
-
+    <div id="result" class="reality-result"></div>
 </section>
 
+{% include 'partials/footer.html' %}
 
-
-
-
-
-<footer>
-
-<h2>
-CareerVerse AI
-</h2>
-
-
-<p>
-Your Complete AI Career Development Platform
-</p>
-
-
-<div class="footer-links">
-
-<a href="/">Home</a>
-
-<a href="/generate">Roadmap</a>
-
-<a href="/career-match">Career Match</a>
-
-<a href="/about">About</a>
-
-
-</div>
-
-
-<p class="copyright">
-
-© 2026 CareerVerse AI. All Rights Reserved.
-
-</p>
-
-
-</footer>
-
-
-
-
-
+<script src="{{ url_for('static', filename='js/ui-effects.js') }}"></script>
 <script src="{{ url_for('static', filename='js/career_reality.js') }}"></script>
 
-
 </body>
-
 </html>

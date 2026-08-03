@@ -1,639 +1,337 @@
-/* =====================================
-   AI RESUME ANALYZER
-===================================== */
+/* ===================================
+   AI RESUME ANALYZER — Clean Dark System & Dashboard
+   Color Scheme: Black (#0a0a0a) + Yellow (#facc15)
+=================================== */
 
-
-.resume-page{
-
-    width:90%;
-
-    max-width:1100px;
-
-    margin:120px auto 70px;
-
-    text-align:center;
-
+.resume-page {
+    width: 90%;
+    max-width: 1100px;
+    margin: calc(var(--nav-height) + 40px) auto 70px;
+    text-align: center;
 }
 
-
-
-.resume-page h1{
-
-    color:white;
-
-    font-size:45px;
-
-    font-weight:800;
-
+.hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    color: var(--accent);
+    background: var(--accent-soft);
+    border: 1px solid rgba(250, 204, 21, 0.25);
+    padding: 6px 14px;
+    border-radius: 100px;
+    margin-bottom: 16px;
 }
 
-
-
-.resume-page > p{
-
-    color:#94a3b8;
-
-    font-size:18px;
-
-    margin-bottom:45px;
-
+.hero-badge span {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--accent);
+    box-shadow: 0 0 10px var(--accent);
 }
 
-
-
-
-
-
-/* =====================================
-   UPLOAD CARD
-===================================== */
-
-
-.resume-container{
-
-
-    background:#111827;
-
-    border:1px solid rgba(56,189,248,.2);
-
-    border-radius:30px;
-
-    padding:45px;
-
-    box-shadow:0 20px 50px rgba(0,0,0,.3);
-
-
+.resume-page h1 {
+    font-size: clamp(2rem, 4.5vw, 3.2rem);
+    font-weight: 800;
+    color: var(--text-heading);
+    margin-bottom: 12px;
 }
 
-
-
-.resume-container h2{
-
-
-    color:#38bdf8;
-
-    margin-bottom:30px;
-
-    font-size:28px;
-
+.resume-page h1 span {
+    color: var(--accent);
 }
 
-
-
-
-
-/* UPLOAD BOX */
-
-
-.upload-box{
-
-
-    background:#1e293b;
-
-    border:2px dashed rgba(56,189,248,.5);
-
-    border-radius:25px;
-
-    padding:45px;
-
-    cursor:pointer;
-
-    transition:.3s;
-
+.resume-page > p {
+    color: var(--text-secondary);
+    font-size: 1rem;
+    max-width: 600px;
+    margin: 0 auto 36px;
+    line-height: 1.65;
 }
 
+/* UPLOAD FORM CONTAINER */
 
-
-.upload-box:hover{
-
-
-    border-color:#38bdf8;
-
-    background:#172554;
-
-
+.resume-container {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-xl);
+    padding: 40px;
+    text-align: left;
+    max-width: 800px;
+    margin: 0 auto;
+    box-shadow: var(--shadow-card);
+    transition: var(--transition);
 }
 
-
-
-.upload-box input{
-
-
-    display:none;
-
-
+.resume-container:hover {
+    border-color: var(--border-hover);
 }
 
-
-
-.upload-box label{
-
-
-    color:#38bdf8;
-
-    font-size:20px;
-
-    font-weight:700;
-
-    cursor:pointer;
-
-
+.resume-container h2 {
+    color: var(--accent);
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
 }
 
-
-
-
-
-
-
-/* BUTTON */
-
-
-#analyzeResumeBtn{
-
-
-    margin-top:35px;
-
-    width:100%;
-
-    padding:20px;
-
-    border:none;
-
-    border-radius:25px;
-
-    background:#38bdf8;
-
-    color:#020617;
-
-    font-size:20px;
-
-    font-weight:800;
-
-    cursor:pointer;
-
-    transition:.3s;
-
-
+.upload-box {
+    border: 2px dashed var(--border);
+    border-radius: var(--radius-lg);
+    padding: 40px 20px;
+    text-align: center;
+    background: var(--bg-primary);
+    cursor: pointer;
+    transition: var(--transition);
+    margin-bottom: 24px;
 }
 
-
-
-#analyzeResumeBtn:hover{
-
-
-    transform:translateY(-4px);
-
-    box-shadow:0 15px 40px rgba(56,189,248,.4);
-
-
+.upload-box:hover {
+    border-color: var(--accent);
+    background: var(--accent-soft);
 }
 
-
-
-
-
-
-
-
-/* =====================================
-   RESULT DASHBOARD
-===================================== */
-
-
-#result{
-
-
-    margin-top:50px;
-
-
+.upload-box i {
+    font-size: 2.8rem;
+    color: var(--accent);
+    margin-bottom: 12px;
 }
 
-
-
-.resume-dashboard{
-
-
-    display:flex;
-
-    flex-direction:column;
-
-    gap:25px;
-
-
+.upload-box h3 {
+    color: var(--text-heading);
+    font-size: 1.1rem;
+    margin-bottom: 6px;
 }
 
-
-
-
-
-
-.resume-card{
-
-
-    background:#111827;
-
-    border:1px solid rgba(56,189,248,.2);
-
-    border-radius:25px;
-
-    padding:30px;
-
-    text-align:left;
-
-    color:white;
-
-    transition:.3s;
-
-
+.upload-box p {
+    color: var(--text-secondary);
+    font-size: 0.85rem;
+    margin: 0;
 }
 
-
-
-.resume-card:hover{
-
-
-    transform:translateY(-5px);
-
-    border-color:#38bdf8;
-
-
+.input-group label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--accent);
+    font-size: 0.88rem;
+    font-weight: 700;
+    margin-bottom: 8px;
 }
 
-
-
-
-
-.resume-card h2{
-
-
-    color:#38bdf8;
-
-    margin-bottom:20px;
-
-
+.input-group input {
+    width: 100%;
+    box-sizing: border-box;
+    background: var(--bg-primary);
+    border: 1px solid var(--border);
+    outline: none;
+    color: var(--text-primary);
+    padding: 15px 18px;
+    border-radius: var(--radius-md);
+    font-size: 0.92rem;
+    font-family: var(--font-body);
+    margin-bottom: 24px;
+    transition: var(--transition);
 }
 
-
-
-
-
-.resume-card p,
-.resume-card li{
-
-
-    color:#cbd5e1;
-
-    line-height:1.7;
-
-
+.input-group input:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 15px var(--accent-soft);
 }
 
-
-
-
-
-/* =====================================
-   SCORE
-===================================== */
-
-
-.resume-score{
-
-
-    text-align:center;
-
-
+#analyzeResumeBtn {
+    width: 100%;
+    padding: 16px;
+    border: none;
+    border-radius: var(--radius-md);
+    background: var(--accent);
+    color: #0a0a0a;
+    font-size: 1rem;
+    font-weight: 700;
+    font-family: var(--font-body);
+    cursor: pointer;
+    transition: var(--transition);
+    box-shadow: 0 4px 20px var(--accent-soft);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
 }
 
-
-
-.resume-score h1{
-
-
-    font-size:70px;
-
-    color:#38bdf8;
-
-    margin:10px;
-
-
+#analyzeResumeBtn:hover {
+    background: var(--accent-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px var(--accent-glow);
 }
 
+/* DYNAMIC RESULT DASHBOARD STYLING */
 
-
-
-
-
-
-/* ATS BAR */
-
-
-.ats-bar{
-
-
-    width:100%;
-
-    height:12px;
-
-    background:#0f172a;
-
-    border-radius:20px;
-
-    overflow:hidden;
-
-
+.resume-result, #result {
+    max-width: 900px;
+    margin: 40px auto 0;
+    text-align: left;
 }
 
-
-
-.ats-fill{
-
-
-    height:100%;
-
-    background:#38bdf8;
-
-    border-radius:20px;
-
-
+.resume-dashboard {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
 }
 
-
-
-
-
-
-
-/* GRID */
-
-
-.resume-grid{
-
-
-    display:grid;
-
-    grid-template-columns:repeat(3,1fr);
-
-    gap:20px;
-
-
+.resume-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-xl);
+    padding: 30px 36px;
+    box-shadow: var(--shadow-card);
+    transition: var(--transition);
 }
 
-
-
-
-.small-resume-card{
-
-
-    background:#0f172a;
-
-    border-radius:20px;
-
-    padding:25px;
-
-    text-align:center;
-
-
+.resume-card:hover {
+    border-color: var(--border-hover);
 }
 
-
-
-.small-resume-card h3{
-
-
-    color:#38bdf8;
-
-
+.resume-card h2 {
+    color: var(--accent);
+    font-size: 1.25rem;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
 }
 
-
-
-.small-resume-card h1{
-
-
-    color:white;
-
-    font-size:35px;
-
-
+.resume-card p {
+    color: var(--text-secondary);
+    font-size: 0.92rem;
+    line-height: 1.7;
 }
 
+/* SCORE HEADER CARD */
 
-
-
-
-
-
-/* TAGS */
-
-
-.resume-tags{
-
-
-    display:flex;
-
-    flex-wrap:wrap;
-
-    gap:15px;
-
-
+.resume-score {
+    text-align: center;
+    background: linear-gradient(135deg, rgba(250, 204, 21, 0.08) 0%, var(--bg-card) 100%);
+    border-color: var(--accent);
+    padding: 36px;
 }
 
-
-
-.resume-tag{
-
-
-    background:#0f172a;
-
-    border:1px solid rgba(56,189,248,.3);
-
-    padding:12px 18px;
-
-    border-radius:25px;
-
-    color:#cbd5e1;
-
-
+.resume-score h2 {
+    justify-content: center;
 }
 
-
-
-
-
-
-
-/* AI CARD */
-
-
-.ai-resume-card{
-
-
-    background:linear-gradient(
-
-    135deg,
-
-    #111827,
-
-    #172554
-
-    );
-
-
-    border:1px solid #38bdf8;
-
-
+.resume-score h1 {
+    font-size: 3.5rem;
+    color: var(--accent);
+    font-weight: 800;
+    margin: 10px 0 6px;
+    line-height: 1;
 }
 
-
-
-
-
-
-@media(max-width:800px){
-
-
-.resume-page h1{
-
-    font-size:32px;
-
+.resume-score p {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--text-heading);
 }
 
+/* 4-COLUMN STAT CARDS GRID */
 
-
-.resume-container{
-
-    padding:25px;
-
+.resume-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
 }
 
-
-
-.resume-grid{
-
-    grid-template-columns:1fr;
-
+.small-resume-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 20px;
+    text-align: center;
+    transition: var(--transition);
 }
 
-
-
-}
-/* =====================================
-   CENTER FOOTER FIX
-===================================== */
-
-
-footer{
-
-    width:100%;
-
-    background:#020617;
-
-    padding:50px 20px;
-
-    text-align:center !important;
-
-    display:flex;
-
-    flex-direction:column;
-
-    align-items:center;
-
-    justify-content:center;
-
-    box-sizing:border-box;
-
+.small-resume-card:hover {
+    border-color: var(--border-hover);
 }
 
-
-
-footer h2{
-
-    color:#38bdf8;
-
-    font-size:32px;
-
-    font-weight:800;
-
-    margin-bottom:15px;
-
-    text-align:center !important;
-
+.small-resume-card h3 {
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    margin-bottom: 8px;
+    font-weight: 600;
 }
 
-
-
-footer p{
-
-    color:#94a3b8;
-
-    font-size:18px;
-
-    text-align:center !important;
-
-    margin:10px 0;
-
+.small-resume-card h1 {
+    font-size: 2rem;
+    color: var(--accent);
+    margin: 0;
+    font-weight: 800;
 }
 
+/* TAGS & BADGES */
 
-
-.footer-links{
-
-    display:flex !important;
-
-    justify-content:center !important;
-
-    align-items:center;
-
-    gap:40px;
-
-    margin:25px 0;
-
+.resume-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 12px;
 }
 
-
-
-.footer-links a{
-
-    color:white !important;
-
-    text-decoration:none;
-
-    font-size:18px;
-
+.resume-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 16px;
+    border-radius: 100px;
+    background: var(--accent-soft);
+    color: var(--accent);
+    border: 1px solid rgba(250, 204, 21, 0.3);
+    font-size: 0.85rem;
+    font-weight: 600;
 }
 
+/* LIST ITEMS */
 
-
-.footer-links a:hover{
-
-    color:#38bdf8 !important;
-
+.resume-card ul {
+    list-style: none;
+    padding: 0;
+    margin: 12px 0 0;
 }
 
-
-
-.copyright{
-
-    text-align:center !important;
-
-    width:100%;
-
-    margin-top:20px;
-
+.resume-card li {
+    padding: 12px 16px;
+    margin-bottom: 10px;
+    background: var(--bg-primary);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    line-height: 1.65;
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
 }
 
-
-
-@media(max-width:700px){
-
-.footer-links{
-
-    flex-direction:column;
-
-    gap:15px;
-
+.resume-card li::before {
+    content: "✦";
+    color: var(--accent);
+    font-weight: bold;
 }
 
+.ai-resume-card {
+    background: linear-gradient(135deg, rgba(250, 204, 21, 0.1) 0%, var(--bg-card) 100%);
+    border-color: var(--accent);
+}
+
+@media (max-width: 900px) {
+    .resume-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 600px) {
+    .resume-grid { grid-template-columns: 1fr; }
+    .resume-container, .resume-card { padding: 24px; }
 }

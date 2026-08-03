@@ -1,66 +1,24 @@
-@media(max-width:900px){
+/* =====================================
+   CareerVerse AI — Responsive Overrides
+===================================== */
 
-.hero{
+@media (max-width: 900px) {
+    .hero {
+        flex-direction: column-reverse;
+        text-align: center;
+        padding-top: 40px;
+    }
 
-    flex-direction:column-reverse;
+    .hero-buttons { justify-content: center; }
+    .hero h1 { font-size: 40px; }
+    .hero p { font-size: 16px; }
 
-    text-align:center;
+    .steps { flex-direction: column; }
 
-    padding-top:40px;
+    .preview {
+        flex-direction: column;
+        text-align: center;
+    }
 
-}
-
-.hero-buttons{
-
-    justify-content:center;
-
-}
-
-.hero h1{
-
-    font-size:42px;
-
-}
-
-.hero p{
-
-    font-size:17px;
-
-}
-
-}
-@media(max-width:900px){
-
-.steps{
-
-    flex-direction:column;
-
-}
-
-}
-@media(max-width:900px){
-
-.preview{
-
-    flex-direction:column;
-
-    text-align:center;
-
-}
-
-.roadmap-card{
-
-    width:100%;
-
-}
-
-}
-@media(max-width:900px){
-
-.testimonial-grid{
-
-    grid-template-columns:1fr;
-
-}
-
+    .roadmap-card { width: 100%; }
 }

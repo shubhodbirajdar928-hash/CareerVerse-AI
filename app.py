@@ -7,6 +7,7 @@ from dotenv import load_dotenv
 from google import genai
 from flask import Flask, render_template, request, jsonify
 from datetime import datetime
+import re
 
 # =====================================================
 # Load Environment Variables
@@ -126,6 +127,24 @@ def validate_country(country):
         return None
 
     return country
+def get_total_months(duration):
+
+    duration = duration.lower().strip()
+
+    if duration == "":
+        return 6
+
+    month = re.search(r"(\d+)\s*(month|months|m)", duration)
+
+    if month:
+        return int(month.group(1))
+
+    year = re.search(r"(\d+)\s*(year|years|y)", duration)
+
+    if year:
+        return int(year.group(1)) * 12
+
+    return 6
 # =====================================================
 # Gemini Error Handler
 # =====================================================
@@ -388,6 +407,15 @@ def roadmap():
         data = request.get_json()
 
         career = data.get("career", "").strip()
+        duration = data.get("duration", "").strip()
+        if duration == "":
+           duration = "6 months"
+        months = get_total_months(duration)
+        print("=" * 40)
+        print("Duration:", duration)
+        print("Months:", months)
+        print("=" * 40)
+        
         current_year = datetime.now().year
         country = validate_country(data.get("country", ""))
 
@@ -414,6 +442,38 @@ Preferred Country:
 {country}
 
 Generate a COMPLETE professional career roadmap.
+
+Roadmap Duration:
+
+{duration}
+
+Generate a roadmap for exactly {months} months.
+
+If the duration is 24 months:
+Return Month 1 through Month 24.
+
+If the duration is 18 months:
+Return Month 1 through Month 18.
+
+If the duration is 12 months:
+Return Month 1 through Month 12.
+
+If the duration is 6 months:
+Return Month 1 through Month 6.
+
+Returning fewer or more months is incorrect.
+
+Each roadmap object must contain:
+
+- Month
+- Title
+- Topics
+- Project
+- Goal
+
+Return exactly {months} roadmap objects.
+
+Do not skip months.
 
 The career may belong to ANY domain.
 
@@ -510,12 +570,13 @@ JSON format:
 }},
 
 "roadmap":[
-{{"month":"Month 1","topics":[]}},
-{{"month":"Month 2","topics":[]}},
-{{"month":"Month 3","topics":[]}},
-{{"month":"Month 4","topics":[]}},
-{{"month":"Month 5","topics":[]}},
-{{"month":"Month 6","topics":[]}}
+{{
+"month":"",
+"title":"",
+"topics":[],
+"project":"",
+"goal":""
+}}
 ],
 
 "resources":{{
@@ -569,7 +630,17 @@ Rules:
 - growth.percentage must be between 70 and 100.
 - learning_time.percentage must be between 40 and 100.
 - Every percentage must match its description.
-- Every roadmap month must contain at least 5 topics.
+The roadmap array must contain exactly {months} objects.
+
+Each object represents one month.
+
+Each month must include:
+
+- month
+- title
+- at least 5 topics
+- one project
+- one learning goal
 - Every applicable list must contain exactly 5 items.
 - Recommend official documentation whenever available.
 - Recommend globally trusted YouTube channels and courses.
@@ -591,7 +662,7 @@ Rules:
 
 """
         text = generate_with_fallback(prompt)
-
+        print(prompt)
         text = clean_json(text)
 
         roadmap = json.loads(text)
@@ -2026,5 +2097,5 @@ if __name__ == "__main__":
     app.run(
         host="0.0.0.0",
         port=int(os.environ.get("PORT", 5000)),
-        debug=False
+        debug=True
     )

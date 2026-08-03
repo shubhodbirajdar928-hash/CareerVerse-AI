@@ -2,274 +2,75 @@
 <html lang="en">
 
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Calculate your career compatibility and skill fit with CareerVerse AI Career Match.">
 
-<meta charset="UTF-8">
+    <title>Career Match AI | CareerVerse AI</title>
 
-<meta name="viewport"
-content="width=device-width, initial-scale=1.0">
-
-<title>Career Match AI | CareerVerse AI</title>
-
-<link rel="stylesheet"
-href="{{ url_for('static', filename='css/common.css') }}">
-
-<link rel="stylesheet"
-href="{{ url_for('static', filename='css/career_match.css') }}">
-
-<link rel="preconnect"
-href="https://fonts.googleapis.com">
-
-<link rel="preconnect"
-href="https://fonts.gstatic.com"
-crossorigin>
-
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
-rel="stylesheet">
-
-<link rel="stylesheet"
-href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
-
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/common.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/career_match.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
 </head>
 
 <body>
 
-<nav class="navbar">
-
-<div class="logo">
-
-<img src="{{ url_for('static', filename='images/logo.png') }}">
-
-<h2>CareerVerse AI</h2>
-
-</div>
-
-<ul>
-
-<li><a href="/">Home</a></li>
-
-<li><a href="/generate">Roadmap</a></li>
-
-<li><a href="/ai-tools">AI Hub</a></li>
-
-<li><a href="/about">About</a></li>
-
-</ul>
-
-</nav>
-
-<section class="hero">
-
-<h1>
-
-🎯 AI Career Match
-
-</h1>
-
-<p>
-
-Discover how well your profile matches your dream career with AI-powered analysis.
-
-</p>
-
-<div class="career-match-container">
-
-
-<div class="career-input-group">
-
-<label>
-🎯 Dream Career
-</label>
-
-<input
-type="text"
-id="career"
-class="career-input"
-placeholder="Example: AI Engineer, Data Scientist">
-
-</div>
-
-
-
-
-<div class="career-input-group">
-
-<label>
-🎓 Qualification
-</label>
-
-<input
-type="text"
-id="qualification"
-class="career-input"
-placeholder="Example: B.Tech CSE, MBA">
-
-</div>
-
-
-
-
-<div class="career-input-group">
-
-<label>
-🛠 Skills
-</label>
-
-<input
-type="text"
-id="skills"
-class="career-input"
-placeholder="Example: Python, AI, Machine Learning">
-
-</div>
-
-
-
-
-<div class="career-input-group">
-
-<label>
-💪 Your Strengths
-</label>
-
-<input
-type="text"
-id="strengths"
-class="career-input"
-placeholder="Example: Problem Solving, Creativity">
-
-</div>
-
-
-
-
-<div class="career-input-group">
-
-<label>
-💼 Experience
-</label>
-
-<input
-type="text"
-id="experience"
-class="career-input"
-placeholder="Example: Fresher, 2 Years">
-
-</div>
-
-
-
-
-<div class="career-input-group">
-
-<label>
-🌍 Country (Optional)
-</label>
-
-<input
-type="text"
-id="country"
-class="career-input"
-placeholder="Example: India, USA, Japan">
-
-</div>
-
-
-
-<button id="checkBtn" class="career-btn">
-
-🔍 Check Career Match
-
-</button>
-
-
-
-</div>
-
-<div id="result">
-
-</div>
-<!-- ==========================================
-FOOTER
-========================================== -->
-
+{% include 'partials/navbar.html' %}
+
+<section class="match-page reveal">
+    <div class="hero-badge">
+        <span></span>
+        AI CAREER MATCH ENGINE
+    </div>
+
+    <h1>Discover Your Perfect <span>Career Match</span></h1>
+    <p>Input your background, technical skills, and strengths to evaluate compatibility against your dream job role.</p>
+
+    <div class="career-match-card">
+        <div class="match-inputs-grid">
+            <div class="career-input-group">
+                <label for="career"><i class="fa-solid fa-bullseye"></i> Target Career Role</label>
+                <input type="text" id="career" class="career-input" placeholder="e.g. AI Engineer, Data Analyst, Cloud Architect">
+            </div>
+
+            <div class="career-input-group">
+                <label for="qualification"><i class="fa-solid fa-graduation-cap"></i> Highest Qualification</label>
+                <input type="text" id="qualification" class="career-input" placeholder="e.g. B.Tech Computer Science, MBA, BCA">
+            </div>
+
+            <div class="career-input-group">
+                <label for="skills"><i class="fa-solid fa-code"></i> Current Technical Skills</label>
+                <input type="text" id="skills" class="career-input" placeholder="e.g. Python, SQL, React, Machine Learning">
+            </div>
+
+            <div class="career-input-group">
+                <label for="strengths"><i class="fa-solid fa-bolt"></i> Personal Strengths</label>
+                <input type="text" id="strengths" class="career-input" placeholder="e.g. Problem Solving, Analytics, Leadership">
+            </div>
+
+            <div class="career-input-group">
+                <label for="experience"><i class="fa-solid fa-user-clock"></i> Experience Level</label>
+                <input type="text" id="experience" class="career-input" placeholder="e.g. Fresher, 1-2 Years, Senior">
+            </div>
+
+            <div class="career-input-group">
+                <label for="country"><i class="fa-solid fa-earth-americas"></i> Location / Country</label>
+                <input type="text" id="country" class="career-input" placeholder="e.g. India, USA, Germany, Remote">
+            </div>
+        </div>
+
+        <button id="checkBtn" class="career-btn" type="button">
+            <i class="fa-solid fa-magnifying-glass"></i> Calculate Career Match
+        </button>
+    </div>
+
+    <div id="result" class="match-results-container"></div>
 </section>
 
-<footer>
+{% include 'partials/footer.html' %}
 
-<h2>
-
-CareerVerse AI
-
-</h2>
-
-<p>
-
-Your Complete AI Career Development Platform
-
-</p>
-
-<div class="footer-links">
-
-<a href="/">Home</a>
-
-<a href="/generate">Roadmap</a>
-
-<a href="/ai-tools">AI Hub</a>
-
-<a href="/about">About</a>
-
-</div>
-
-<p class="copyright">
-
-© 2026 CareerVerse AI. All Rights Reserved.
-
-</p>
-
-</footer>
-
-<!-- ==========================================
-GLOBAL AI LOADER
-========================================== -->
-
-<div class="loader-overlay" id="loader">
-
-<div class="loader-box">
-
-<div class="loader-icon">
-
-🤖
-
-</div>
-
-<h2>
-
-CareerVerse AI
-
-</h2>
-
-<p id="loaderText">
-
-Finding your best career match...
-
-</p>
-
-<div class="loader-bar">
-
-<div class="loader-progress"></div>
-
-</div>
-
-</div>
-
-</div>
-
-<!-- ==========================================
-SCRIPTS
-========================================== -->
-
+<script src="{{ url_for('static', filename='js/ui-effects.js') }}"></script>
 <script src="{{ url_for('static', filename='js/career_match.js') }}"></script>
 
 </body>
-
 </html>

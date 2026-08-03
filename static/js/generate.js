@@ -17,9 +17,11 @@ generateBtn.addEventListener("click", async () => {
 
     const career = careerInput.value.trim();
     const country = countryInput.value.trim();
+    const duration = document.getElementById("duration").value.trim();
+
     if (!career) {
-        alert("Please enter a career.");
-        return;
+    alert("Please enter a career.");
+    return;
     }
 
     // Loading Screen
@@ -67,7 +69,11 @@ const loadingInterval = setInterval(() => {
     }
 
 },800);
+
     try {
+        console.log("Career:", career);
+        console.log("Country:", country);
+        console.log("Duration:", duration);
 
         const response = await fetch("/roadmap", {
 
@@ -78,8 +84,9 @@ const loadingInterval = setInterval(() => {
             },
 
             body: JSON.stringify({
-                career: career,
-                country: country 
+            career: career,
+            country: country,
+             duration: duration
             })
 
         });
