@@ -25,165 +25,109 @@
 {% include 'partials/navbar.html' %}
 
 
-<!-- ================= HERO SECTION ================= -->
-<section class="hero reveal">
-    <div class="hero-content">
-        <div class="hero-badge">
-            <span></span>
-            YOUR AI CAREER COMPANION
-        </div>
-
-        <h1>
-            Don't Just Choose a Career.<br>
-            <span>Build One with AI.</span>
-        </h1>
-
-        <p>
-            CareerVerse AI turns career confusion into clear, actionable plans.
-            Discover your path, master high-impact skills, evaluate salaries, and navigate your professional journey with confidence.
-        </p>
-
-
-
-        <!-- Live Instant AI Navigator Bar -->
-        <div class="hero-search-nav">
-            <div class="search-nav-inner">
-                <i class="fa-solid fa-wand-magic-sparkles search-icon"></i>
-                <input type="text" id="heroQuickSearch" placeholder="Type any career or skill (e.g. AI Engineer, Python, Cloud)...">
-                <button type="button" id="heroQuickSearchBtn" class="search-nav-btn">
-                    <span>Analyze Path</span>
-                    <i class="fa-solid fa-arrow-right"></i>
-                </button>
+<!-- ================= BRAND NEW HERO SECTION ================= -->
+<section class="hero">
+    <div class="hero-container">
+        <!-- Left Hero Content -->
+        <div class="hero-left">
+            <div class="hero-badge">
+                <span class="pulse-dot"></span>
+                <span>⚡ NEXT-GEN AI CAREER PLATFORM · 100% FREE</span>
             </div>
-            <div class="search-suggestions">
-                <span>Try:</span>
-                <button type="button" class="suggest-tag">⚡ AI Engineer</button>
-                <button type="button" class="suggest-tag">💻 Full Stack</button>
-                <button type="button" class="suggest-tag">📊 Data Analyst</button>
-                <button type="button" class="suggest-tag">🛡️ Cybersecurity</button>
+
+            <h1 class="hero-title">
+                Architect Your Career.<br>
+                <span>Powered by Real-Time AI.</span>
+            </h1>
+
+            <p class="hero-subtitle">
+                Turn career confusion into an executive strategy. CareerVerse AI synthesizes market demand, skill roadmaps, 3-tier salary bands, and downloadable PDF plans across 195+ countries.
+            </p>
+
+            <!-- Action CTAs & Trust Badges -->
+            <div class="hero-actions">
+                <a href="/generate" class="main-btn"><i class="fa-solid fa-wand-magic-sparkles"></i> Open AI Generator</a>
+                <a href="/ai-tools" class="secondary-btn"><i class="fa-solid fa-layer-group"></i> Explore 9 AI Tools</a>
+            </div>
+
+            <div class="hero-trust-bar">
+                <div class="trust-item"><i class="fa-solid fa-bolt"></i> <span>Instant AI Synthesis</span></div>
+                <div class="trust-item"><i class="fa-solid fa-file-pdf"></i> <span>Executive PDF Reports</span></div>
+                <div class="trust-item"><i class="fa-solid fa-earth-americas"></i> <span>195+ Countries Data</span></div>
             </div>
         </div>
 
-        <div class="hero-trust-tags">
-            <span><i class="fa-solid fa-shield-halved"></i> 100% Free Access</span>
-            <span><i class="fa-solid fa-bolt"></i> Instant Gemini AI Guidance</span>
-            <span><i class="fa-solid fa-chart-line"></i> Data-Backed Insights</span>
-        </div>
-    </div>
-
-    <!-- Hero Interactive AI Career Simulator Widget -->
-    <div class="hero-visual">
-        <div class="hero-simulator-card">
-            <div class="simulator-topbar">
-                <div class="window-dots">
-                    <span class="dot red"></span>
-                    <span class="dot yellow"></span>
-                    <span class="dot green"></span>
+        <!-- Right Hero Live Intelligence Preview Card -->
+        <div class="hero-right">
+            <div class="hero-dashboard-card">
+                <div class="dash-topbar">
+                    <div class="window-controls">
+                        <span class="dot red"></span>
+                        <span class="dot yellow"></span>
+                        <span class="dot green"></span>
+                    </div>
+                    <div class="live-status-pill">
+                        <span class="pulse-dot"></span> LIVE CAREER ENGINE
+                    </div>
                 </div>
-                <div class="live-status">
-                    <span class="pulse-dot"></span> LIVE AI SIMULATOR
-                </div>
-            </div>
 
-            <!-- Role Selector Pills -->
-            <div class="simulator-roles">
-                <button class="sim-role-pill active" data-role="ai"><i class="fa-solid fa-bolt"></i> AI Engineer</button>
-                <button class="sim-role-pill" data-role="dev"><i class="fa-solid fa-code"></i> Full Stack</button>
-                <button class="sim-role-pill" data-role="data"><i class="fa-solid fa-chart-pie"></i> Data Scientist</button>
-                <button class="sim-role-pill" data-role="cyber"><i class="fa-solid fa-shield-halved"></i> Cyber Security</button>
-            </div>
-
-            <!-- Simulator Main Header -->
-            <div class="sim-header">
-                <div class="sim-role-info">
+                <div class="dash-header">
+                    <span class="dash-tag">SIMULATED CAREER PATHWAY</span>
                     <h3 id="simRoleTitle">AI & Machine Learning Engineer</h3>
-                    <p id="simRoleSubtext">High-demand specialization in RAG, GenAI & LLM Ops</p>
                 </div>
-                <div class="sim-match-badge" id="simMatchBadge">
-                    <i class="fa-solid fa-fire"></i> 98% Match
-                </div>
-            </div>
 
-            <!-- Animated Progress Bar -->
-            <div class="sim-progress-box">
-                <div class="sim-progress-label">
-                    <span>Career Readiness Index</span>
-                    <strong id="simProgressValue">78%</strong>
-                </div>
-                <div class="sim-progress-track">
-                    <div class="sim-progress-fill" id="simProgressFill" style="width: 78%;"></div>
-                </div>
-            </div>
-
-            <!-- Milestone Steps -->
-            <div class="sim-steps" id="simStepsContainer">
-                <div class="sim-step-item completed">
-                    <div class="sim-step-badge"><i class="fa-solid fa-check"></i></div>
-                    <div class="sim-step-details">
-                        <strong>Phase 1: Python, Math & Data Structures</strong>
-                        <small>Completed • NumPy, Pandas, SQL & OOP</small>
+                <div class="dash-stats-grid">
+                    <div class="dash-stat-box">
+                        <small>Global Hiring Demand</small>
+                        <strong id="simMatchBadge"><i class="fa-solid fa-arrow-trend-up"></i> +38% High Growth</strong>
+                    </div>
+                    <div class="dash-stat-box">
+                        <small>Compensation Band</small>
+                        <strong id="simSalaryBreakdown">Fresher: ₹6.5L | Senior: ₹32L</strong>
                     </div>
                 </div>
-                <div class="sim-step-item active">
-                    <div class="sim-step-badge"><i class="fa-solid fa-spinner fa-spin"></i></div>
-                    <div class="sim-step-details">
-                        <strong>Phase 2: RAG, LangChain & Embeddings</strong>
-                        <small>In Progress • Vector DBs & Fine-Tuning</small>
-                    </div>
-                </div>
-                <div class="sim-step-item upcoming">
-                    <div class="sim-step-badge"><i class="fa-solid fa-lock"></i></div>
-                    <div class="sim-step-details">
-                        <strong>Phase 3: Production MLOps & Deployment</strong>
-                        <small>Next Up • Docker, FastAPI, GCP & Triton</small>
-                    </div>
-                </div>
-            </div>
 
-            <!-- Live Metrics Footer -->
-            <div class="sim-metrics">
-                <div class="sim-metric-item">
-                    <small>Market Demand</small>
-                    <strong id="simDemand"><i class="fa-solid fa-arrow-trend-up"></i> Very High</strong>
+                <div class="dash-milestones-card">
+                    <div class="milestone-card-top">
+                        <i class="fa-solid fa-route"></i> <span>Step-by-Step Learning Sequence</span>
+                    </div>
+                    <p id="simMilestones">Python & Math → Neural Networks → Cloud MLOps</p>
                 </div>
-                <div class="sim-metric-item">
-                    <small>Est. Salary Range</small>
-                    <strong id="simSalary">₹14L - ₹32L / yr</strong>
-                </div>
-            </div>
 
-            <a href="/generate" class="sim-cta-btn" id="simCtaBtn">
-                <span>Simulate My Roadmap</span> <i class="fa-solid fa-arrow-right"></i>
-            </a>
+                <a href="/generate?role=AI+Engineer" class="dash-cta-btn" id="simCtaBtn">
+                    <span>Generate AI Roadmap For This Path</span>
+                    <i class="fa-solid fa-arrow-right"></i>
+                </a>
+            </div>
         </div>
     </div>
 </section>
 
 
-<!-- ================= METRICS BAR ================= -->
+<!-- ================= PLATFORM HIGHLIGHTS BAR ================= -->
 <section class="metrics-bar reveal">
     <div class="metric-card">
-        <div class="metric-icon"><i class="fa-solid fa-layer-group"></i></div>
-        <div class="metric-number" data-count="9" data-suffix=" AI Tools">0</div>
-        <div class="metric-label">All-in-One Career Suite</div>
+        <div class="metric-icon"><i class="fa-solid fa-file-pdf"></i></div>
+        <h3 class="highlight-title">Executive PDF Roadmaps</h3>
+        <p class="highlight-desc">Instant 4-phase learning milestones with downloadable PDF reports.</p>
     </div>
 
     <div class="metric-card">
-        <div class="metric-icon"><i class="fa-solid fa-earth-americas"></i></div>
-        <div class="metric-number" data-count="195" data-suffix="+">0</div>
-        <div class="metric-label">Countries Supported</div>
+        <div class="metric-icon"><i class="fa-solid fa-masks-theater"></i></div>
+        <h3 class="highlight-title">Unfiltered Reality Checks</h3>
+        <p class="highlight-desc">Honest day-in-the-life facts, stress indices, and difficulty scores.</p>
+    </div>
+
+    <div class="metric-card">
+        <div class="metric-icon"><i class="fa-solid fa-chart-pie"></i></div>
+        <h3 class="highlight-title">6-Chart Analytics Engine</h3>
+        <p class="highlight-desc">Dynamic Chart.js analytics for hiring demand, skills, and automation risk.</p>
     </div>
 
     <div class="metric-card">
         <div class="metric-icon"><i class="fa-solid fa-sack-dollar"></i></div>
-        <div class="metric-number" data-count="3" data-suffix=" Salary Tiers">0</div>
-        <div class="metric-label">Fresher, Mid & Senior</div>
-    </div>
-
-    <div class="metric-card">
-        <div class="metric-icon"><i class="fa-solid fa-brain"></i></div>
-        <div class="metric-number" data-count="100" data-suffix="% Free">0</div>
-        <div class="metric-label">Powered by Gemini AI</div>
+        <h3 class="highlight-title">3-Tier Salary Breakdown</h3>
+        <p class="highlight-desc">Accurate compensation benchmarks for Entry, Mid, and Senior levels.</p>
     </div>
 </section>
 

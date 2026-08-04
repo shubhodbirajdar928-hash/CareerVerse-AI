@@ -395,6 +395,119 @@
     color: var(--accent);
 }
 
+/* ==========================================
+   Executive Timeline & Card Polish
+   ========================================== */
+.pathway-container {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding-left: 12px;
+    margin-top: 16px;
+}
+
+.pathway-container::before {
+    content: "";
+    position: absolute;
+    top: 24px;
+    bottom: 24px;
+    left: 28px;
+    width: 3px;
+    background: linear-gradient(180deg, var(--accent) 0%, #eab308 50%, rgba(250, 204, 21, 0.1) 100%);
+    border-radius: 4px;
+    z-index: 1;
+}
+
+.pathway-step {
+    position: relative;
+    display: flex;
+    align-items: flex-start;
+    gap: 18px;
+    z-index: 2;
+}
+
+.step-badge {
+    min-width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    background: #141414;
+    border: 2px solid var(--accent);
+    color: var(--accent);
+    font-weight: 700;
+    font-size: 0.92rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 0 14px rgba(250, 204, 21, 0.35);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.pathway-step:hover .step-badge {
+    transform: scale(1.15);
+    box-shadow: 0 0 20px rgba(250, 204, 21, 0.6);
+}
+
+.step-content {
+    flex: 1;
+    background: rgba(20, 20, 20, 0.7);
+    backdrop-filter: blur(8px);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 14px 20px;
+    transition: border-color 0.3s ease, transform 0.3s ease;
+}
+
+.pathway-step:hover .step-content {
+    border-color: var(--border-hover);
+    transform: translateX(4px);
+}
+
+.step-title {
+    display: inline-block;
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    color: var(--accent);
+    margin-bottom: 4px;
+}
+
+.step-desc {
+    color: var(--text-primary);
+    font-size: 0.98rem;
+    font-weight: 600;
+    margin: 0;
+}
+
+/* Strategic AI Advice Cards */
+.advice-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 16px;
+}
+
+.advice-card-item {
+    background: rgba(250, 204, 21, 0.03);
+    border: 1px solid rgba(250, 204, 21, 0.15);
+    border-left: 4px solid var(--accent);
+    padding: 14px 18px;
+    border-radius: 10px;
+    color: var(--text-primary);
+    font-size: 0.94rem;
+    line-height: 1.6;
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+}
+
+.advice-card-item i {
+    color: var(--accent);
+    font-size: 1.1rem;
+    margin-top: 2px;
+}
+
 @media (max-width: 900px) {
     .summary-grid { grid-template-columns: repeat(2, 1fr); }
     .chart-grid, .list-grid, .form-grid { grid-template-columns: 1fr; }
