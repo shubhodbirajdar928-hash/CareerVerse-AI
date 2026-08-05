@@ -612,31 +612,66 @@ Conversation:
 
      return handle_gemini_error(e)
     
+GLOBAL_CURRENCY_DB = {
+    # Asia & South Asia
+    "india": ("₹", "L / yr", "₹6.5L - ₹10.0L / yr", "₹14.0L - ₹22.0L / yr", "₹25.0L - ₹48.0L / yr"),
+    "japan": ("¥", "M / yr", "¥4.5M - ¥6.2M / yr", "¥7.0M - ¥10.5M / yr", "¥12.0M - ¥18.0M / yr"),
+    "south korea": ("₩", "M / yr", "₩38M - ₩55M / yr", "₩65M - ₩95M / yr", "₩110M - ₩175M / yr"),
+    "korea": ("₩", "M / yr", "₩38M - ₩55M / yr", "₩65M - ₩95M / yr", "₩110M - ₩175M / yr"),
+    "china": ("¥", "k / yr", "¥120k - ¥180k / yr", "¥220k - ¥350k / yr", "¥400k - ¥650k / yr"),
+    "taiwan": ("NT$", "k / yr", "NT$650k - NT$950k / yr", "NT$1.2M - NT$1.8M / yr", "NT$2.2M - NT$3.5M / yr"),
+    "hong kong": ("HK$", "k / yr", "HK$220k - HK$320k / yr", "HK$380k - HK$580k / yr", "HK$680k - HK$1.1M / yr"),
+    "singapore": ("S$", "k / yr", "S$48k - S$68k / yr", "S$72k - S$108k / yr", "S$115k - S$180k / yr"),
+    "malaysia": ("RM ", "/ mo", "RM 4,500 - RM 7,000 / mo", "RM 8,500 - RM 14,000 / mo", "RM 16,000 - RM 28,000 / mo"),
+    "thailand": ("฿", "/ mo", "฿35,000 - ฿55,000 / mo", "฿65,000 - ฿105,000 / mo", "฿120,000 - ฿210,000 / mo"),
+    "indonesia": ("Rp ", "/ mo", "Rp 8,000,000 - Rp 14,000,000 / mo", "Rp 16,000,000 - Rp 28,000,000 / mo", "Rp 32,000,000 - Rp 55,000,000 / mo"),
+    "vietnam": ("₫", "/ mo", "₫15,000,000 - ₫25,000,000 / mo", "₫30,000,000 - ₫50,000,000 / mo", "₫60,000,000 - ₫110,000,000 / mo"),
+    "philippines": ("₱", "/ mo", "₱30,000 - ₱50,000 / mo", "₱60,000 - ₱95,000 / mo", "₱110,000 - ₱180,000 / mo"),
+    "pakistan": ("PKR ", "/ mo", "PKR 85,000 - PKR 140,000 / mo", "PKR 160,000 - PKR 280,000 / mo", "PKR 320,000 - PKR 550,000 / mo"),
+    "bangladesh": ("BDT ", "/ mo", "BDT 35,000 - BDT 60,000 / mo", "BDT 70,000 - BDT 120,000 / mo", "BDT 140,000 - BDT 250,000 / mo"),
+    "sri lanka": ("LKR ", "/ mo", "LKR 75,000 - LKR 125,000 / mo", "LKR 140,000 - LKR 240,000 / mo", "LKR 280,000 - LKR 480,000 / mo"),
+
+    # Americas & Caribbean
+    "united states": ("$", "k / yr", "$70k - $95k / yr", "$120k - $160k / yr", "$180k - $270k / yr"),
+    "usa": ("$", "k / yr", "$70k - $95k / yr", "$120k - $160k / yr", "$180k - $270k / yr"),
+    "canada": ("CA$", "k / yr", "CA$55k - CA$75k / yr", "CA$80k - CA$115k / yr", "CA$125k - CA$185k / yr"),
+    "mexico": ("MEX$", "/ mo", "MEX$ 18,000 - MEX$ 32,000 / mo", "MEX$ 38,000 - MEX$ 65,000 / mo", "MEX$ 75,000 - MEX$ 130,000 / mo"),
+    "brazil": ("R$", "/ mo", "R$ 5,500 - R$ 9,000 / mo", "R$ 11,000 - R$ 18,000 / mo", "R$ 22,000 - R$ 38,000 / mo"),
+    "argentina": ("ARS$", "/ mo", "ARS$ 650,000 - ARS$ 1,100,000 / mo", "ARS$ 1,300,000 - ARS$ 2,200,000 / mo", "ARS$ 2,500,000 - ARS$ 4,500,000 / mo"),
+    "chile": ("CLP$", "/ mo", "CLP$ 950,000 - CLP$ 1,600,000 / mo", "CLP$ 1,800,000 - CLP$ 3,000,000 / mo", "CLP$ 3,500,000 - CLP$ 6,000,000 / mo"),
+
+    # Europe & UK
+    "united kingdom": ("£", "k / yr", "£32,000 - £48,000 / yr", "£52,000 - £80,000 / yr", "£85,000 - £140,000 / yr"),
+    "uk": ("£", "k / yr", "£32,000 - £48,000 / yr", "£52,000 - £80,000 / yr", "£85,000 - £140,000 / yr"),
+    "germany": ("€", "k / yr", "€42,000 - €58,000 / yr", "€62,000 - €88,000 / yr", "€95,000 - €150,000 / yr"),
+    "france": ("€", "k / yr", "€40,000 - €55,000 / yr", "€58,000 - €82,000 / yr", "€90,000 - €140,000 / yr"),
+    "netherlands": ("€", "k / yr", "€45,000 - €62,000 / yr", "€65,000 - €92,000 / yr", "€98,000 - €155,000 / yr"),
+    "switzerland": ("CHF ", "k / yr", "CHF 75,000 - CHF 95,000 / yr", "CHF 105,000 - CHF 140,000 / yr", "CHF 150,000 - CHF 220,000 / yr"),
+
+    # Middle East & Africa
+    "united arab emirates": ("AED ", "/ mo", "AED 12,000 - AED 18,000 / mo", "AED 22,000 - AED 35,000 / mo", "AED 40,000 - AED 65,000 / mo"),
+    "uae": ("AED ", "/ mo", "AED 12,000 - AED 18,000 / mo", "AED 22,000 - AED 35,000 / mo", "AED 40,000 - AED 65,000 / mo"),
+    "dubai": ("AED ", "/ mo", "AED 12,000 - AED 18,000 / mo", "AED 22,000 - AED 35,000 / mo", "AED 40,000 - AED 65,000 / mo"),
+    "saudi arabia": ("SAR ", "/ mo", "SAR 10,000 - SAR 16,000 / mo", "SAR 18,000 - SAR 28,000 / mo", "SAR 32,000 - SAR 55,000 / mo"),
+    "qatar": ("QAR ", "/ mo", "QAR 11,000 - QAR 17,000 / mo", "QAR 20,000 - QAR 32,000 / mo", "QAR 38,000 - QAR 60,000 / mo"),
+    "south africa": ("R ", "/ mo", "R 22,000 - R 38,000 / mo", "R 42,000 - R 68,000 / mo", "R 75,000 - R 130,000 / mo"),
+    "nigeria": ("₦", "/ mo", "₦ 350,000 - ₦ 600,000 / mo", "₦ 700,000 - ₦ 1,200,000 / mo", "₦ 1,500,000 - ₦ 2,800,000 / mo"),
+    "kenya": ("KSh ", "/ mo", "KSh 85,000 - KSh 140,000 / mo", "KSh 160,000 - KSh 260,000 / mo", "KSh 300,000 - KSh 520,000 / mo"),
+
+    # Oceania
+    "australia": ("A$", "k / yr", "A$65,000 - A$88,000 / yr", "A$92,000 - A$130,000 / yr", "A$140,000 - A$210,000 / yr"),
+    "new zealand": ("NZ$", "k / yr", "NZ$60,000 - NZ$82,000 / yr", "NZ$85,000 - NZ$120,000 / yr", "NZ$130,000 - NZ$190,000 / yr")
+}
+
 def format_multi_currency_salary(country, base_usd_fresher="$70k - $95k / yr", base_usd_mid="$120k - $160k / yr", base_usd_senior="$180k - $270k / yr"):
     c_low = (country or "").lower().strip()
     
-    if "india" in c_low:
-        return "₹6.5L - ₹10.0L / yr (Fresher) -> ₹14.0L - ₹22.0L / yr (Mid) -> ₹25.0L - ₹48.0L / yr (Senior)"
-    elif any(k in c_low for k in ["uk", "united kingdom", "london", "england", "scotland"]):
-        return "£32,000 - £48,000 / yr (Fresher) -> £52,000 - £80,000 / yr (Mid) -> £85,000 - £140,000 / yr (Senior)"
-    elif any(k in c_low for k in ["germany", "france", "netherlands", "spain", "italy", "europe", "sweden", "ireland"]):
-        return "€42,000 - €58,000 / yr (Fresher) -> €62,000 - €88,000 / yr (Mid) -> €95,000 - €150,000 / yr (Senior)"
-    elif "canada" in c_low:
-        return "CA$55,000 - CA$75,000 / yr (Fresher) -> CA$80,000 - CA$115,000 / yr (Mid) -> CA$125,000 - CA$185,000 / yr (Senior)"
-    elif "australia" in c_low:
-        return "A$65,000 - A$88,000 / yr (Fresher) -> A$92,000 - A$130,000 / yr (Mid) -> A$140,000 - A$210,000 / yr (Senior)"
-    elif any(k in c_low for k in ["uae", "dubai", "abu dhabi"]):
-        return "AED 12,000 - AED 18,000 / mo (Fresher) -> AED 22,000 - AED 35,000 / mo (Mid) -> AED 40,000 - AED 65,000 / mo (Senior)"
-    elif any(k in c_low for k in ["saudi", "riyadh"]):
-        return "SAR 10,000 - SAR 16,000 / mo (Fresher) -> SAR 18,000 - SAR 28,000 / mo (Mid) -> SAR 32,000 - SAR 55,000 / mo (Senior)"
-    elif "singapore" in c_low:
-        return "S$48,000 - S$68,000 / yr (Fresher) -> S$72,000 - S$108,000 / yr (Mid) -> S$115,000 - S$180,000 / yr (Senior)"
-    elif "japan" in c_low:
-        return "¥4,200,000 - ¥6,000,000 / yr (Fresher) -> ¥6,500,000 - ¥9,500,000 / yr (Mid) -> ¥10,500,000 - ¥16,000,000 / yr (Senior)"
-    elif "switzerland" in c_low:
-        return "CHF 75,000 - CHF 95,000 / yr (Fresher) -> CHF 105,000 - CHF 140,000 / yr (Mid) -> CHF 150,000 - CHF 220,000 / yr (Senior)"
-    else:
-        return f"{base_usd_fresher} (Fresher) -> {base_usd_mid} (Mid) -> {base_usd_senior} (Senior)"
+    for key, (symbol, unit, f_val, m_val, s_val) in GLOBAL_CURRENCY_DB.items():
+        if key in c_low:
+            return f"{f_val} (Fresher) -> {m_val} (Mid) -> {s_val} (Senior)"
+
+    c_name = country.title() if country else "Target Country"
+    return f"{c_name}: {base_usd_fresher} (Fresher) -> {base_usd_mid} (Mid) -> {base_usd_senior} (Senior)"
 
 # =====================================================
 # Fallback Roadmap Generator
