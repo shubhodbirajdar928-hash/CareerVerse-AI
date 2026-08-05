@@ -119,18 +119,18 @@ chat_history = []
 # =====================================================
 
 def clean_json(text):
-
+    if not text:
+        return "{}"
     text = text.strip()
-
+    match = re.search(r'\{.*\}', text, re.DOTALL)
+    if match:
+        return match.group(0).strip()
     if text.startswith("```json"):
         text = text.replace("```json", "", 1)
-
     if text.startswith("```"):
         text = text.replace("```", "", 1)
-
     if text.endswith("```"):
         text = text[:-3]
-
     return text.strip()
 
 
@@ -816,6 +816,48 @@ def get_fallback_roadmap(career, country, months=6):
         hotspots = [{"city": "New Delhi / Gurugram", "demand": "Very High", "reason": "IndiGo & Air India headquarters & training simulators."}, {"city": "Dubai / UAE", "demand": "Very High", "reason": "Emirates global international long-haul aviation hub."}, {"city": "Dallas / USA", "demand": "High", "reason": "Major US airline pilot bases & flight academies."}, {"city": "Singapore", "demand": "High", "reason": "Singapore Airlines & Asia-Pacific aviation hub."}, {"city": "Mumbai", "demand": "High", "reason": "Major international airport & commercial flight crews."}]
         trend_skills = ["Glass Cockpit Avionics (G1000)", "Predictive Turbulence Navigation", "Sustainable Aviation Fuel Protocols", "Advanced CRM", "EFB Digital Flight Planning"]
         daily_plan = ["Monday: 2 hrs Aerodynamics & Flight Physics Study", "Tuesday: 2 hrs Navigation & Flight Planning Practice", "Wednesday: 2 hrs Aviation Meteorology & Weather Analysis", "Thursday: 2 hrs Flight Radio Telephony (RTR) Practice", "Friday: 2 hrs Instrument Flight Rules (IFR) Procedure Review", "Saturday: 3 hrs Flight Simulator Practice & Logbook Review", "Sunday: 1 hr Flight Safety & Emergency Protocol Review"]
+    elif any(w in c_low for w in ["data scientist", "data science", "machine learning", "ai engineer", "data analyst"]):
+        edu = "Bachelor's / Master's Degree in Computer Science, Statistics, Mathematics or Data Science Portfolio"
+        sal_ind_f, sal_ind_m, sal_ind_s = "₹8.0L - ₹14.0L / yr", "₹18.0L - ₹32.0L / yr", "₹35.0L - ₹65.0L / yr"
+        sal_cnt_f, sal_cnt_m, sal_cnt_s = "$85k - $125k / yr", "$140k - $195k / yr", "$210k - $340k / yr"
+        roles = ["Junior Data Analyst / Data Scientist", "Senior Data Scientist", "Lead AI / ML Engineer", "Principal Data Architect", "Head of Data Science / VP of AI"]
+        sk_b = ["Python Programming (Pandas & NumPy)", "SQL & Relational Database Querying", "Exploratory Data Analysis (EDA)", "Applied Probability & Statistics", "Data Visualization (Matplotlib/Seaborn)"]
+        sk_i = ["Scikit-Learn & Supervised Machine Learning", "Feature Engineering & Data Cleaning", "Deep Learning (PyTorch / TensorFlow)", "Big Query & Cloud Data Warehousing", "FastAPI / Model Deployment"]
+        sk_a = ["Large Language Models (LLMs) & Fine-Tuning", "MLOps & Automated Pipeline Deployment (MLflow)", "Distributed Computing (PySpark)", "Recommendation Systems & Vector DBs", "A/B Testing & Causal Inference"]
+        yt = [{"name": "StatQuest with Josh Starmer", "url": "https://www.youtube.com/@statquest"}, {"name": "3Blue1Brown", "url": "https://www.youtube.com/@3blue1brown"}, {"name": "Andrej Karpathy", "url": "https://www.youtube.com/@AndrejKarpathy"}, {"name": "Krish Naik", "url": "https://www.youtube.com/@krishnaik06"}, {"name": "Kaggle Official", "url": "https://www.youtube.com/@Kaggle"}]
+        courses = [{"name": "Coursera Deep Learning Specialization by Andrew Ng", "url": "https://www.coursera.org"}, {"name": "Fast.ai Practical Deep Learning for Coders", "url": "https://www.fast.ai"}, {"name": "Udacity Data Scientist Nanodegree", "url": "https://www.udacity.com"}, {"name": "Kaggle Micro-Courses", "url": "https://www.kaggle.com/learn"}, {"name": "edX Professional Certificate in Data Science", "url": "https://www.edx.org"}]
+        docs = [{"name": "Scikit-Learn Official User Guide", "url": "https://scikit-learn.org"}, {"name": "PyTorch Documentation & Tutorials", "url": "https://pytorch.org"}, {"name": "Pandas Data Analysis Library Docs", "url": "https://pandas.pydata.org"}, {"name": "TensorFlow Core Guide", "url": "https://www.tensorflow.org"}, {"name": "Hugging Face Transformers Docs", "url": "https://huggingface.co/docs"}]
+        books = [{"name": "Designing Data-Intensive Applications by Martin Kleppmann", "url": "https://amazon.com"}, {"name": "Hands-On Machine Learning with Scikit-Learn, Keras, and TensorFlow by Aurélien Géron", "url": "https://amazon.com"}, {"name": "Python for Data Analysis by Wes McKinney", "url": "https://amazon.com"}, {"name": "Deep Learning by Ian Goodfellow & Yoshua Bengio", "url": "https://amazon.com"}, {"name": "Pattern Recognition and Machine Learning by Christopher Bishop", "url": "https://amazon.com"}]
+        projs_b = ["Exploratory Data Analysis on Real-World Dataset", "Customer Churn Prediction Model using Logistic Regression", "Housing Price Regression Pipeline", "Interactive Streamlit Data Dashboard", "SQL Database Data Cleaning & ETL Script"]
+        projs_i = ["Image Classification System with PyTorch CNN", "Sentiment Analysis NLP API with FastAPI", "End-to-End MLOps Pipeline with MLflow & Docker", "Customer Segmentation Clustering Model", "BigQuery Real-Time Analytics Pipeline"]
+        projs_a = ["RAG (Retrieval-Augmented Generation) AI Assistant with Vector DB", "Fine-Tuned LLaMA/Mistral Model for Domain Tasks", "Recommendation Engine with Graph Neural Networks", "Real-Time Fraud Detection System on Streaming Data", "Enterprise AI Model Governance & Drift Monitor"]
+        certs = ["AWS Certified Machine Learning - Specialty", "TensorFlow Developer Certificate", "Google Professional Machine Learning Engineer", "Databricks Certified Data Scientist", "Microsoft Certified: Azure AI Engineer Associate"]
+        tools = ["Python & Jupyter Notebooks", "PyTorch / TensorFlow", "SQL (Snowflake / BigQuery / PostgreSQL)", "Git & Docker", "MLflow & FastAPI"]
+        top_orgs = ["Google DeepMind", "OpenAI", "Microsoft AI", "Meta AI Research", "Amazon Web Services"]
+        hotspots = [{"city": "San Francisco / Silicon Valley", "demand": "Very High", "reason": "Global AI & LLM research headquarters & top tech companies."}, {"city": "Bengaluru / India", "demand": "Very High", "reason": "India's premier AI/ML engineering hub & R&D centers."}, {"city": "Seattle / Remote", "demand": "High", "reason": "Amazon AI & Microsoft Research headquarters."}, {"city": "London / UK", "demand": "High", "reason": "DeepMind HQs & European AI innovation hubs."}, {"city": "New York", "demand": "High", "reason": "Wall Street quantitative finance & AI analytics."}]
+        trend_skills = ["LLM Fine-Tuning & Prompt Engineering", "Vector Databases (Pinecone/Chroma)", "MLOps & Automated Pipelines", "Generative AI Systems", "Causal ML & A/B Testing"]
+        daily_plan = ["Monday: 2 hrs Linear Algebra & Statistical Probability", "Tuesday: 2 hrs Python Data Cleaning & Feature Engineering", "Wednesday: 2 hrs ML Model Training & Hyperparameter Tuning", "Thursday: 2 hrs Deep Learning & PyTorch Model Building", "Friday: 2 hrs MLOps Pipeline Deployment & Dockerization", "Saturday: 3 hrs Kaggle Competition & Portfolio Project", "Sunday: 1 hr AI Research Paper Reading"]
+    elif any(w in c_low for w in ["software engineer", "developer", "full stack", "backend", "frontend", "coder", "programmer"]):
+        edu = "Bachelor's Degree in Computer Science, Software Engineering or Self-Taught Full-Stack Portfolio"
+        sal_ind_f, sal_ind_m, sal_ind_s = "₹7.0L - ₹12.0L / yr", "₹16.0L - ₹28.0L / yr", "₹32.0L - ₹55.0L / yr"
+        sal_cnt_f, sal_cnt_m, sal_cnt_s = "$80k - $115k / yr", "$135k - $185k / yr", "$195k - $320k / yr"
+        roles = ["Junior Software Engineer", "Software Development Engineer (SDE-2)", "Senior Software Engineer", "Staff / Principal Software Architect", "VP of Engineering / CTO"]
+        sk_b = ["Data Structures & Algorithms (DSA)", "Object-Oriented Programming (OOP)", "Git & Version Control", "Relational Databases (PostgreSQL/MySQL)", "HTTP / REST API Fundamentals"]
+        sk_i = ["Full-Stack Frameworks (React / Node.js / Python / Java)", "System Design & Microservices Architecture", "Docker Containerization & CI/CD", "NoSQL Databases (MongoDB / Redis)", "Unit Testing & Test-Driven Development (TDD)"]
+        sk_a = ["Distributed Systems & High Availability", "Cloud Architecture (AWS / GCP / Azure)", "Kafka Event-Driven Architecture", "Security & OAuth2 / OpenID Authentication", "Performance Profiling & Database Index Tuning"]
+        yt = [{"name": "FreeCodeCamp", "url": "https://www.youtube.com/@freecodecamp"}, {"name": "Fireship", "url": "https://www.youtube.com/@Fireship"}, {"name": "Traversy Media", "url": "https://www.youtube.com/@TraversyMedia"}, {"name": "Web Dev Simplified", "url": "https://www.youtube.com/@WebDevSimplified"}, {"name": "NeetCode", "url": "https://www.youtube.com/@NeetCode"}]
+        courses = [{"name": "Coursera Computer Science Specialization", "url": "https://www.coursera.org"}, {"name": "Full Stack Open by University of Helsinki", "url": "https://fullstackopen.com"}, {"name": "Udemy Complete Web Development Bootcamp", "url": "https://www.udemy.com"}, {"name": "Frontend Masters Professional Engineering", "url": "https://frontendmasters.com"}, {"name": "edX CS50 Introduction to Computer Science", "url": "https://cs50.harvard.edu"}]
+        docs = [{"name": "MDN Web Docs", "url": "https://developer.mozilla.org"}, {"name": "React Official Documentation", "url": "https://react.dev"}, {"name": "Node.js API Reference", "url": "https://nodejs.org/docs"}, {"name": "PostgreSQL Documentation", "url": "https://www.postgresql.org/docs"}, {"name": "Docker Official Guide", "url": "https://docs.docker.com"}]
+        books = [{"name": "Clean Code: A Handbook of Agile Software Craftsmanship by Robert C. Martin", "url": "https://amazon.com"}, {"name": "System Design Interview by Alex Xu", "url": "https://amazon.com"}, {"name": "Designing Data-Intensive Applications by Martin Kleppmann", "url": "https://amazon.com"}, {"name": "The Pragmatic Programmer by Andrew Hunt", "url": "https://amazon.com"}, {"name": "Cracking the Coding Interview by Gayle Laakmann McDowell", "url": "https://amazon.com"}]
+        projs_b = ["Full-Stack Task Manager App with Auth & Database", "RESTful API Backend with PostgreSQL", "Responsive E-Commerce Product Catalog", "Weather Forecast Web App with External API", "CLI Developer Utility Tool"]
+        projs_i = ["Real-Time Chat Application with WebSockets", "Microservices Architecture E-Commerce System", "Dockerized CI/CD Deployment Pipeline on AWS", "Distributed Caching Engine with Redis", "OAuth2 Authentication & User Management Microservice"]
+        projs_a = ["High-Throughput Distributed Message Queue Engine", "Cloud-Native Serverless Application Architecture", "Low-Latency Video Streaming Platform", "Distributed Database Sharding Manager", "Enterprise API Gateway & Rate Limiter"]
+        certs = ["AWS Certified Developer - Associate", "Certified Kubernetes Application Developer (CKAD)", "Meta Front-End / Back-End Developer Professional Cert", "Oracle Certified Professional Java SE", "Google Associate Cloud Engineer"]
+        tools = ["VS Code / JetBrains IDEs", "Git & GitHub", "Docker & Kubernetes", "Postman / Insomnia", "PostgreSQL & Redis"]
+        top_orgs = ["Google", "Microsoft", "Amazon", "Apple", "Meta"]
+        hotspots = [{"city": "San Francisco / Silicon Valley", "demand": "Very High", "reason": "Global software engineering capital."}, {"city": "Bengaluru / India", "demand": "Very High", "reason": "India's premier tech hub & software development centers."}, {"city": "Seattle / USA", "demand": "High", "reason": "Amazon, Microsoft & cloud engineering HQs."}, {"city": "Hyderabad / India", "demand": "High", "reason": "Major global software R&D centers."}, {"city": "London / UK", "demand": "High", "reason": "European technology capital & fintech startups."}]
+        trend_skills = ["Microservices & System Design", "Docker & Kubernetes Containerization", "AWS & Cloud-Native Development", "TypeScript & React / Next.js", "AI Code Assistants (Copilot)"]
+        daily_plan = ["Monday: 2 hrs Data Structures & Algorithms Practice (LeetCode)", "Tuesday: 2 hrs Backend API Development & Database Schema", "Wednesday: 2 hrs Frontend UI Component Building", "Thursday: 2 hrs Docker Containerization & System Integration", "Friday: 2 hrs Unit Testing & Code Refactoring", "Saturday: 3 hrs Full-Stack Project Building", "Sunday: 1 hr System Design Architecture Study"]
     elif any(w in c_low for w in ["farmer", "agronomist", "botanist", "agriculture", "crop"]):
         edu = "B.Sc / M.Sc in Agricultural Science, Agronomy, Horticulture or Hands-On Farming Practice"
         sal_ind_f, sal_ind_m, sal_ind_s = "₹3.5L - ₹6.5L / yr", "₹8.0L - ₹14.0L / yr", "₹18.0L - ₹32.0L / yr"
