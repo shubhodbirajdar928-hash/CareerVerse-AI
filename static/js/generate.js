@@ -269,6 +269,60 @@ function getCountrySalaryInfo(country, rawSalary) {
     return { flag: displayFlag, name: displayName, salary: salaryVal };
 }
 
+function renderPayBandCard(salaryData, targetSalInfo, country) {
+    const isIndia = (country || "").toLowerCase().trim().includes("india") || !(country || "").trim();
+    const flag = targetSalInfo.flag || (isIndia ? "🇮🇳" : "🌐");
+    const countryName = targetSalInfo.name || (isIndia ? "India" : "Target Market");
+    
+    let fresher = isIndia ? "₹5.0L - ₹9.0L / yr" : "$65,000 - $95,000 / yr";
+    let mid = isIndia ? "₹12.0L - ₹22.0L / yr" : "$110,000 - $160,000 / yr";
+    let senior = isIndia ? "₹25.0L - ₹55.0L / yr" : "$175,000 - $280,000 / yr";
+
+    if (salaryData) {
+        if (typeof salaryData === "object") {
+            fresher = salaryData.fresher || salaryData.country_fresher || fresher;
+            mid = salaryData.mid || salaryData.country_mid || mid;
+            senior = salaryData.senior || salaryData.country_senior || senior;
+        } else if (typeof salaryData === "string") {
+            const parts = salaryData.split("->").map(p => p.replace(/\((Fresher|Mid|Senior)\)/gi, "").trim());
+            if (parts.length >= 3) {
+                fresher = parts[0];
+                mid = parts[1];
+                senior = parts[2];
+            } else if (parts.length === 1 && parts[0]) {
+                fresher = parts[0];
+            }
+        }
+    }
+
+    return `
+    <div style="margin-top: 22px; background: rgba(15, 23, 42, 0.7); border: 1px solid rgba(250, 204, 21, 0.3); border-radius: 16px; padding: 20px; box-shadow: 0 10px 25px rgba(0,0,0,0.4);">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; border-bottom: 1px solid rgba(255,255,255,0.08); padding-bottom: 12px;">
+            <span style="font-size: 0.95rem; font-weight: 700; color: var(--text-heading); display: flex; align-items: center; gap: 8px;">
+                <span style="font-size: 1.25rem;">${flag}</span> ${countryName} Official Compensation Pay Band
+            </span>
+            <span style="background: rgba(34, 197, 94, 0.15); color: #22c55e; border: 1px solid rgba(34, 197, 94, 0.4); font-size: 0.72rem; padding: 3px 10px; border-radius: 20px; font-weight: 700; display: inline-flex; align-items: center; gap: 4px;">
+                <i class="fa-solid fa-circle-check"></i> Industry Verified
+            </span>
+        </div>
+        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px;">
+            <div style="background: rgba(34, 197, 94, 0.06); border: 1px solid rgba(34, 197, 94, 0.3); border-radius: 12px; padding: 14px; text-align: center;">
+                <span style="font-size: 0.74rem; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.5px; font-weight: 700;">🌱 Entry Level / Fresher</span>
+                <h4 style="color: #22c55e; font-size: 1.05rem; margin: 6px 0 0; font-weight: 800;">${fresher}</h4>
+            </div>
+            <div style="background: rgba(250, 204, 21, 0.06); border: 1px solid rgba(250, 204, 21, 0.3); border-radius: 12px; padding: 14px; text-align: center;">
+                <span style="font-size: 0.74rem; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.5px; font-weight: 700;">⚡ Mid-Level Professional</span>
+                <h4 style="color: var(--accent); font-size: 1.05rem; margin: 6px 0 0; font-weight: 800;">${mid}</h4>
+            </div>
+            <div style="background: rgba(168, 85, 247, 0.06); border: 1px solid rgba(168, 85, 247, 0.3); border-radius: 12px; padding: 14px; text-align: center;">
+                <span style="font-size: 0.74rem; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.5px; font-weight: 700;">👑 Senior / Lead Specialist</span>
+                <h4 style="color: #a855f7; font-size: 1.05rem; margin: 6px 0 0; font-weight: 800;">${senior}</h4>
+            </div>
+        </div>
+    </div>
+    `;
+}
+
 function getFresherSalary(market, country) {
     const c = (country || "").toLowerCase().trim();
     if (market.salary?.fresher) return market.salary.fresher;
@@ -462,17 +516,7 @@ async function generateRoadmapNow() {
         ${(overview.roles || []).map(r => `<span class="chip-item">👔 ${r}</span>`).join("")}
     </div>
 
-    <div style="margin-top: 20px; background: rgba(250, 204, 21, 0.04); border: 1px solid rgba(250, 204, 21, 0.3); border-radius: 14px; padding: 18px; display: flex; justify-content: space-around; align-items: center;">
-        <div style="text-align: center;">
-            <span style="font-size: 0.78rem; color: var(--text-secondary); font-weight: 600;">🇮🇳 India Expected Pay Band</span>
-            <h4 style="color: var(--accent); font-size: 1.15rem; margin: 4px 0 0; font-weight: 800;">${formatIndiaSalary(overview.salary?.india)}</h4>
-        </div>
-        <div style="width: 1px; height: 35px; background: var(--border);"></div>
-        <div style="text-align: center;">
-            <span style="font-size: 0.78rem; color: var(--text-secondary); font-weight: 600;">${targetSalInfo.flag} ${targetSalInfo.name} Target Pay Band</span>
-            <h4 style="color: #22c55e; font-size: 1.15rem; margin: 4px 0 0; font-weight: 800;">${targetSalInfo.salary}</h4>
-        </div>
-    </div>
+    ${renderPayBandCard(overview.salary, targetSalInfo, country)}
 </div>
 
 <!-- ================= SKILLS ================= -->

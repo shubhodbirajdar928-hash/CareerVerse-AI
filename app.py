@@ -992,32 +992,83 @@ def get_fallback_roadmap(career, country, months=6):
         "Advanced Methodologies & System Architecture",
         "Real-World Case Studies & Performance Optimization",
         "Enterprise Governance, Security & Quality Standards",
-        "Leadership, Strategic Portfolio & Career Transition",
-        "Advanced Specialization & Domain Innovation",
-        "Cross-Functional Scaling & Global Operations",
-        "Executive Leadership & Strategic Management",
-        "Mastery Level Capstone & Industry Disruption",
-        "Global Advisory & Senior Consultancy Practice",
-        "Executive Boardroom Strategy & Future Governance"
+        "Leadership, Strategic Portfolio & Career Transition"
     ]
+
+    # Specialized Monthly Blueprints per Sector
+    mb_map = {
+        "software": [
+            ("Programming Fundamentals & Data Structures (DSA)", ["Variables, Loops & Control Structures", "Arrays, Linked Lists, Stacks & Queues", "Object-Oriented Programming (OOP)", "Big-O Time Complexity Analysis", "Git Version Control & Repository Setup"], "CLI Data Structure & Algorithm Suite", "Solve 50+ LeetCode easy/medium problems and establish git workflow."),
+            ("Relational Databases & Backend API Architecture", ["PostgreSQL Schema Design & Normalization", "Complex SQL Queries & Index Optimization", "HTTP Protocol & RESTful API Architecture", "Node.js / Express or Python FastAPI Fundamentals", "CRUD API Endpoints & Postman Testing"], "RESTful Task Management API with PostgreSQL", "Deploy a production-ready REST API connected to a relational database."),
+            ("Modern Frontend Engineering & State Management", ["JavaScript ES6+ & TypeScript Essentials", "React.js Component Architecture & JSX", "Hooks (useState, useEffect, useMemo)", "State Management & Context API", "Responsive CSS & Glassmorphism UI"], "Interactive React / TypeScript Web Dashboard", "Build and publish a responsive frontend application consuming REST APIs."),
+            ("Full-Stack Integration & Authentication", ["Full-Stack Integration (Frontend + API)", "JWT & OAuth2 Authentication Security", "Database ORM (Prisma / SQLAlchemy)", "Form Validation & Error Handling", "User Session & Role-Based Authorization"], "Full-Stack E-Commerce Platform with Authentication", "Deploy a secure full-stack application with user authentication and roles."),
+            ("DevOps, Docker & Cloud Architecture", ["Docker Containerization & Docker Compose", "CI/CD Pipelines (GitHub Actions)", "AWS EC2, S3 & Cloudflare Setup", "System Design & Load Balancing", "Redis Caching & Database Index Tuning"], "Dockerized CI/CD Deployment Pipeline on AWS", "Containerize full-stack app and automate cloud deployment via CI/CD."),
+            ("Capstone Project & Technical Interview Prep", ["System Design Architecture (Scalability & Microservices)", "Advanced DSA (Trees, Graphs, Dynamic Programming)", "Production Logging & Monitoring", "Resume & Portfolio Optimization", "Mock System Design & Coding Interviews"], "High-Throughput Microservices Capstone Engine", "Pass technical coding interviews and secure senior engineering offers.")
+        ],
+        "data": [
+            ("Python for Data Science & SQL Querying", ["Python Data Types, Functions & OOP", "NumPy Numerical Computing", "Pandas DataFrames & Manipulation", "SQL Data Extraction & Aggregation", "Matplotlib & Seaborn Data Visualization"], "Exploratory Data Analysis (EDA) Report on Real-World Dataset", "Master data manipulation and produce publication-ready EDA reports."),
+            ("Applied Statistics & Exploratory Data Analysis", ["Probability Distributions & Hypothesis Testing", "A/B Testing & Significance Metrics", "Feature Engineering & Data Cleaning", "Handling Missing Values & Outliers", "Correlation & Dimensionality Reduction (PCA)"], "Customer Churn Prediction & Statistical Audit", "Build feature engineering pipelines and statistical hypothesis tests."),
+            ("Supervised & Unsupervised Machine Learning", ["Linear & Logistic Regression", "Decision Trees & Random Forests", "Gradient Boosting (XGBoost / LightGBM)", "K-Means Clustering & Segmentation", "Scikit-Learn Model Evaluation Metrics"], "Predictive ML Housing Price Model with XGBoost", "Train, evaluate, and tune machine learning models with Scikit-Learn."),
+            ("Deep Learning & Neural Networks (PyTorch)", ["Artificial Neural Networks (ANN) Principles", "PyTorch Tensors & Autograd Mechanics", "Convolutional Neural Networks (CNN) for Images", "Recurrent Neural Networks (RNN) & LSTMs", "Model Training, Overfitting & Dropout"], "Image Classification Computer Vision Engine in PyTorch", "Design, train, and validate deep neural network models."),
+            ("Large Language Models (LLMs) & MLOps Pipelines", ["Transformers & Hugging Face Ecosystem", "RAG (Retrieval-Augmented Generation) Architecture", "Vector Databases (Pinecone / ChromaDB)", "FastAPI Model Serving & Endpoints", "MLflow Model Registry & Tracking"], "RAG AI Assistant API with Vector DB & FastAPI", "Deploy generative AI APIs with automated MLOps tracking."),
+            ("Production MLOps Capstone & Interview Mastery", ["Distributed Computing with PySpark", "Model Monitoring & Drift Detection", "Cloud Data Warehousing (BigQuery / Snowflake)", "Data Science Resume & Portfolio Prep", "Kaggle Competition & Mock Technical Rounds"], "End-to-End Enterprise MLOps Pipeline Capstone", "Publish capstone project and clear senior Data Scientist interviews.")
+        ],
+        "bmc": [
+            ("Mumbai Municipal Corporation Act (MMC Act 1888) & Legal Powers", ["MMC Act 1888 Key Sections & Statutory Powers", "Municipal Governance Hierarchy & Standing Committees", "Ward Level Administration & Public Grievance Rules", "Civic Rights & Municipal Duties Framework", "Marathi Language Terms in Municipal Administration"], "BMC Ward Level Governance & Legal Powers Summary Audit", "Master the constitutional and legal framework of Brihanmumbai Municipal Corporation."),
+            ("Civil Infrastructure, Water Supply & Sewerage Operations", ["Bhandup Water Treatment Complex Mechanics", "Vaitarna & Middle Vaitarna Dam Supply Lines", "Suburban Sewerage Network & Pumping Stations", "Stormwater Drainage & Flood Mitigation (BRIMSTOWAD)", "Solid Waste Management (SWM) & Landfill Tech"], "BMC Water Supply Flow & Stormwater Drainage Audit", "Understand Mumbai's water supply, sewerage, and flood control infrastructure."),
+            ("Development Control & Promotion Regulations (DCPR 2034)", ["DCPR 2034 Regulations & Zoning Laws", "Floor Space Index (FSI) & TDR Calculations", "Building Proposal Department (BP Dept) Guidelines", "Fire Safety & Structural Stability Standards", "Environmental Clearance & Coastal Regulation Zone (CRZ)"], "DCPR 2034 Building Plan FSI & Zoning Audit Report", "Master Mumbai development control rules and plan scrutiny procedures."),
+            ("BMC e-Tendering, AutoDCR & Public Procurement", ["BMC e-Tendering Portal & Tender Document Scrutiny", "Mahatenders & E-Procurement Protocols", "AutoDCR Online Building Plan Approval System", "SAP Municipal Resource Planning (MRP)", "Quality Control & Concreting Audit Standards"], "BMC e-Tender Scrutiny & AutoDCR Scrutiny Checklist", "Execute public procurement, e-tendering, and digital plan approvals."),
+            ("Disaster Management & Emergency Operations (1916 Control Room)", ["BMC Disaster Management Cell Protocols", "1916 Control Room Emergency Telemetry", "Monsoon Preparedness & Pothole Repair Systems", "Disaster Relief & Inter-Agency Coordination", "Fire Safety & Building Collapse Protocols"], "Monsoon Flood Preparedness & Emergency Relief Masterplan", "Design emergency response plans for monsoon floods and civic crises."),
+            ("BMC Selection Exam Solved Papers & Mock Practice", ["Previous Year BMC Sub-Engineer / AE Question Papers", "General Knowledge & Maharashtra Current Affairs", "Mental Ability & Logical Reasoning Practice", "Technical Civil / Mechanical Engineering Revision", "Mock Test Performance Analysis & Final Review"], "BMC Direct Recruitment Exam Solved Practice Portfolio", "Pass the BMC / MPSC selection examination with top rank.")
+        ]
+    }
+
+    # Select Sector Monthly Blueprint
+    selected_bp = None
+    if any(w in c_low for w in ["software", "developer", "full stack", "backend", "frontend", "coder", "programmer"]):
+        selected_bp = mb_map["software"]
+        sal_ind_f, sal_ind_m, sal_ind_s = "₹7.0L - ₹12.0L / yr", "₹16.0L - ₹28.0L / yr", "₹32.0L - ₹55.0L / yr"
+        sal_cnt_f, sal_cnt_m, sal_cnt_s = "$80,000 - $115,000 / yr", "$135,000 - $185,000 / yr", "$195,000 - $320,000 / yr"
+    elif any(w in c_low for w in ["data scientist", "data science", "machine learning", "ai engineer", "data analyst"]):
+        selected_bp = mb_map["data"]
+        sal_ind_f, sal_ind_m, sal_ind_s = "₹8.0L - ₹14.0L / yr", "₹18.0L - ₹32.0L / yr", "₹35.0L - ₹65.0L / yr"
+        sal_cnt_f, sal_cnt_m, sal_cnt_s = "$85,000 - $125,000 / yr", "$140,000 - $195,000 / yr", "$210,000 - $340,000 / yr"
+    elif any(w in c_low for w in ["brihanmumbai", "bmc", "mcgm", "municipal", "civic"]):
+        selected_bp = mb_map["bmc"]
+        sal_ind_f, sal_ind_m, sal_ind_s = "₹6.0L - ₹9.5L / yr", "₹12.0L - ₹18.0L / yr", "₹22.0L - ₹38.0L / yr"
+        sal_cnt_f, sal_cnt_m, sal_cnt_s = "$60,000 - $85,000 / yr", "$95,000 - $130,000 / yr", "$150,000 - $210,000 / yr"
 
     roadmap_months = []
     for m in range(1, months + 1):
-        p_idx = (m - 1) % len(phase_titles)
-        p_name = phase_titles[p_idx]
-        roadmap_months.append({
-            "month": f"Month {m}",
-            "title": f"Phase {m}: {p_name}",
-            "topics": [
-                f"Core {c_title} Domain Knowledge & Operational Mechanics",
-                f"Industry Best Practices & Standard Tooling for {c_title}",
-                f"Workflow Automation, Quality Assurance & Data Metrics",
-                f"Cross-Functional Collaboration & Field Case Studies",
-                f"Regulatory Compliance, Safety & Professional Ethics"
-            ],
-            "project": f"Real-World {c_title} Milestone Project #{m}: {p_name}",
-            "goal": f"Deliver a fully functional {c_title} milestone demonstrating practical expertise in {p_name}."
-        })
+        if selected_bp and m <= len(selected_bp):
+            m_title, m_topics, m_proj, m_goal = selected_bp[m - 1]
+            roadmap_months.append({
+                "month": f"Month {m}",
+                "title": f"Phase {m}: {m_title}",
+                "topics": m_topics,
+                "project": m_proj,
+                "goal": m_goal
+            })
+        else:
+            p_idx = (m - 1) % len(phase_titles)
+            p_name = phase_titles[p_idx]
+            roadmap_months.append({
+                "month": f"Month {m}",
+                "title": f"Phase {m}: {p_name}",
+                "topics": [
+                    f"Core {c_title} Domain Knowledge & Operational Mechanics",
+                    f"Industry Best Practices & Standard Tooling for {c_title}",
+                    f"Workflow Automation, Quality Assurance & Data Metrics",
+                    f"Cross-Functional Collaboration & Field Case Studies",
+                    f"Regulatory Compliance, Safety & Professional Ethics"
+                ],
+                "project": f"Real-World {c_title} Milestone Project #{m}: {p_name}",
+                "goal": f"Deliver a fully functional {c_title} milestone demonstrating practical expertise in {p_name}."
+            })
+
+    target_f = sal_ind_f if is_india else sal_cnt_f
+    target_m = sal_ind_m if is_india else sal_cnt_m
+    target_s = sal_ind_s if is_india else sal_cnt_s
 
     return {
         "success": True,
@@ -1029,8 +1080,14 @@ def get_fallback_roadmap(career, country, months=6):
             "roles": roles,
             "education": edu,
             "salary": {
+                "fresher": sal_ind_f,
+                "mid": sal_ind_m,
+                "senior": sal_ind_s,
+                "country_fresher": target_f,
+                "country_mid": target_m,
+                "country_senior": target_s,
                 "india": f"{sal_ind_f} (Fresher) -> {sal_ind_m} (Mid) -> {sal_ind_s} (Senior)",
-                "country": format_multi_currency_salary(country, sal_cnt_f, sal_cnt_m, sal_cnt_s)
+                "country": f"{target_f} (Fresher) -> {target_m} (Mid) -> {target_s} (Senior)"
             },
             "future_scope": f"Strong multi-year demand with high career trajectory across global hiring markets."
         },
