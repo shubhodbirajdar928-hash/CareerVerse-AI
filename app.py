@@ -963,78 +963,110 @@ Return ONLY valid JSON matching this exact structure:
     }},
     "future_scope": "5-year growth trajectory, AI impact, and job market outlook."
   }},
-  "skills": {{
-    "beginner": ["Skill 1", "Skill 2", "Skill 3", "Skill 4"],
-    "intermediate": ["Skill 1", "Skill 2", "Skill 3", "Skill 4"],
-    "advanced": ["Skill 1", "Skill 2", "Skill 3", "Skill 4"]
-  }},
+  "skills": {
+    "beginner": ["Skill 1", "Skill 2", "Skill 3", "Skill 4", "Skill 5"],
+    "intermediate": ["Skill 1", "Skill 2", "Skill 3", "Skill 4", "Skill 5"],
+    "advanced": ["Skill 1", "Skill 2", "Skill 3", "Skill 4", "Skill 5"]
+  },
   "roadmap": [
-    {{
+    {
       "month": "Month 1",
       "title": "Phase 1: Core Technical Foundations",
-      "topics": ["Specific Tech Topic 1", "Specific Tech Topic 2", "Specific Tech Topic 3", "Specific Tech Topic 4"],
+      "topics": ["Topic 1", "Topic 2", "Topic 3", "Topic 4", "Topic 5"],
       "project": "Real-world Hands-On Project Name & Description",
       "goal": "Clear technical milestone for Month 1."
-    }}
+    }
   ],
-  "resources": {{
+  "resources": {
     "youtube": [
-      {{"name": "FreeCodeCamp / Channel Name", "url": "https://www.youtube.com/@freecodecamp"}},
-      {{"name": "Traversy Media / Core Channel", "url": "https://www.youtube.com/@TraversyMedia"}}
+      {"name": "Verified Channel 1", "url": "https://www.youtube.com/@channel1"},
+      {"name": "Verified Channel 2", "url": "https://www.youtube.com/@channel2"},
+      {"name": "Verified Channel 3", "url": "https://www.youtube.com/@channel3"},
+      {"name": "Verified Channel 4", "url": "https://www.youtube.com/@channel4"},
+      {"name": "Verified Channel 5", "url": "https://www.youtube.com/@channel5"}
     ],
     "courses": [
-      {{"name": "Coursera / Udemy Specialized Course", "url": "https://www.coursera.org"}},
-      {{"name": "Professional Certification Bootcamp", "url": "https://www.udemy.com"}}
+      {"name": "Course 1", "url": "https://www.coursera.org"},
+      {"name": "Course 2", "url": "https://www.udemy.com"},
+      {"name": "Course 3", "url": "https://www.edx.org"},
+      {"name": "Course 4", "url": "https://nptel.ac.in"},
+      {"name": "Course 5", "url": "https://swayam.gov.in"}
     ],
     "documentation": [
-      {{"name": "Official Tech Documentation", "url": "https://developer.mozilla.org"}}
+      {"name": "Doc Portal 1", "url": "https://developer.mozilla.org"},
+      {"name": "Doc Portal 2", "url": "https://docs.official.org"},
+      {"name": "Doc Portal 3", "url": "https://standards.iso.org"},
+      {"name": "Doc Portal 4", "url": "https://nist.gov"},
+      {"name": "Doc Portal 5", "url": "https://ieee.org"}
     ],
     "books": [
-      {{"name": "Must-Read Industry Handbook", "url": "https://amazon.com"}}
+      {"name": "Handbook 1", "url": "https://amazon.com"},
+      {"name": "Handbook 2", "url": "https://amazon.com"},
+      {"name": "Handbook 3", "url": "https://amazon.com"},
+      {"name": "Handbook 4", "url": "https://amazon.com"},
+      {"name": "Handbook 5", "url": "https://amazon.com"}
     ]
-  }},
-  "projects": {{
-    "beginner": ["Beginner Project 1", "Beginner Project 2"],
-    "intermediate": ["Intermediate Project 1", "Intermediate Project 2"],
-    "advanced": ["Production Enterprise Project 1", "Enterprise Project 2"]
-  }},
-  "certifications": ["Industry Cert 1", "Industry Cert 2", "Industry Cert 3"],
+  },
+  "projects": {
+    "beginner": ["Beginner Project 1", "Beginner Project 2", "Beginner Project 3", "Beginner Project 4", "Beginner Project 5"],
+    "intermediate": ["Intermediate Project 1", "Intermediate Project 2", "Intermediate Project 3", "Intermediate Project 4", "Intermediate Project 5"],
+    "advanced": ["Enterprise Project 1", "Enterprise Project 2", "Enterprise Project 3", "Enterprise Project 4", "Enterprise Project 5"]
+  },
+  "certifications": ["Cert 1", "Cert 2", "Cert 3", "Cert 4", "Cert 5"],
   "tools": ["Tool 1", "Tool 2", "Tool 3", "Tool 4", "Tool 5"],
   "interview_preparation": [
-    "Core Technical Question & Concept 1",
-    "System Design / Practical Scenario 2",
-    "Behavioral & Problem Solving Strategy 3"
+    "Core Concept & Technical Scenario Question 1",
+    "System Design & Architecture Scenario Question 2",
+    "Behavioral & Decision Making Strategy Question 3",
+    "Regulatory, Compliance & Safety Scenario Question 4",
+    "Practical Problem Solving & Trade-off Scenario Question 5"
   ],
-  "portfolio_tips": ["Portfolio Tip 1", "Portfolio Tip 2", "Portfolio Tip 3"],
-  "ai_tips": ["AI Tool Integration Tip 1", "AI Tool Integration Tip 2"],
-  "market": {{
-    "job_demand": {{"text": "Extremely High demand with rapid growth.", "percentage": 88}},
-    "difficulty": {{"text": "Moderate to High learning curve requiring dedicated practice.", "percentage": 75}},
-    "growth": {{"text": "Multi-year compound annual growth rate of +22%.", "percentage": 90}},
-    "learning_time": {{"text": "6 months of consistent 15 hrs/week study.", "percentage": 80}},
-    "salary": {{
+  "portfolio_tips": [
+    "Portfolio Showcase Tip 1",
+    "Portfolio Showcase Tip 2",
+    "Portfolio Showcase Tip 3",
+    "Portfolio Showcase Tip 4",
+    "Portfolio Showcase Tip 5"
+  ],
+  "ai_tips": [
+    "AI Tool Integration Strategy 1",
+    "AI Tool Integration Strategy 2",
+    "AI Tool Integration Strategy 3",
+    "AI Tool Integration Strategy 4",
+    "AI Tool Integration Strategy 5"
+  ],
+  "market": {
+    "job_demand": {"text": "Extremely High demand with rapid growth.", "percentage": 88},
+    "difficulty": {"text": "Moderate to High learning curve requiring dedicated practice.", "percentage": 75},
+    "growth": {"text": "Multi-year compound annual growth rate of +22%.", "percentage": 90},
+    "learning_time": {"text": "6 months of consistent 15 hrs/week study.", "percentage": 80},
+    "salary": {
       "fresher": "₹6.5L - ₹10.0L / yr",
       "mid": "₹14.0L - ₹22.0L / yr",
       "senior": "₹25.0L - ₹45.0L / yr"
-    }},
-    "top_organizations": ["Top Company 1", "Top Company 2", "Top Company 3", "Top Company 4", "Top Company 5"],
+    },
+    "top_organizations": ["Org 1", "Org 2", "Org 3", "Org 4", "Org 5"],
     "hiring_hotspots": [
-      {{"city": "Bangalore", "demand": "Very High", "reason": "Major Tech Hub & Startup Ecosystem"}},
-      {{"city": "San Francisco / Remote", "demand": "High", "reason": "Global Product Headquarters"}}
+      {"city": "City 1", "demand": "Very High", "reason": "Major Tech & Business Hub"},
+      {"city": "City 2", "demand": "High", "reason": "Global Corporate Headquarters"},
+      {"city": "City 3", "demand": "High", "reason": "R&D & Innovation Center"},
+      {"city": "City 4", "demand": "High", "reason": "Regional Financial Capital"},
+      {"city": "City 5", "demand": "Moderate-High", "reason": "Specialty Industry Cluster"}
     ],
-    "trending_skills": ["Trending Skill 1", "Trending Skill 2", "Trending Skill 3"],
+    "trending_skills": ["Trending Skill 1", "Trending Skill 2", "Trending Skill 3", "Trending Skill 4", "Trending Skill 5"],
     "daily_plan": [
-      "Monday: Theory & Core Concepts (2 hrs)",
-      "Tuesday-Thursday: Hands-On Coding & Building (3 hrs)",
-      "Friday: Code Review, Refactoring & Testing (2 hrs)",
-      "Weekend: Project Deployment & Open Source (4 hrs)"
+      "Monday: 2 hrs Core Principles & Industry Fundamentals",
+      "Tuesday: 2 hrs Practical Tooling & Hands-on Practice",
+      "Wednesday: 2 hrs Case Studies & System Architecture",
+      "Thursday: 2 hrs Portfolio & Project Execution",
+      "Friday: 2 hrs Quality Audit & Process Refactoring"
     ]
-  }}
+  }
 }}
 
 Rules:
+- MANDATE: EVERY SINGLE ARRAY FIELD (roles, skills.beginner, skills.intermediate, skills.advanced, roadmap.topics, resources.youtube, resources.courses, resources.documentation, resources.books, projects.beginner, projects.intermediate, projects.advanced, certifications, tools, interview_preparation, portfolio_tips, ai_tips, market.top_organizations, market.hiring_hotspots, market.trending_skills, market.daily_plan) MUST CONTAIN AT LEAST 5 ACCURATE, ROLE-SPECIFIC ITEMS. Never output fewer than 5 items per list.
 - CRITICAL DOMAIN MANDATE: Tailor ALL books, courses, YouTube channels, daily plans, tools, certifications, and projects specifically for "{career}". Never assume programming or software engineering if the role is a non-tech career (e.g. Doctor, Lawyer, Police Officer, IAS, Farmer, Pilot, Teacher, Chef, Mechanical/Civil Engineer, Architect, etc.).
-- CRITICAL MANDATE: EVERY list field (roles, skills.beginner, skills.intermediate, skills.advanced, resources.youtube, resources.courses, resources.documentation, resources.books, projects.beginner, projects.intermediate, projects.advanced, certifications, tools, interview_preparation, portfolio_tips, ai_tips, market.top_organizations, market.hiring_hotspots, market.trending_skills, market.daily_plan) MUST contain EXACTLY TOP 5 accurate, role-specific items.
 - Generate exactly {months} objects in the roadmap array.
 - Return ONLY valid JSON. No markdown fences.
 """
