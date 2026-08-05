@@ -221,36 +221,52 @@ function formatIndiaSalary(rawSal, fallback = "₹6.5L - ₹18.0L / yr") {
     return fallback;
 }
 
-function getCountryFlagLabel(country) {
-    const c = (country || "").toLowerCase().trim();
-    if (c.includes("india")) return "🇮🇳 India";
-    if (c.includes("uk") || c.includes("united kingdom") || c.includes("england")) return "🇬🇧 UK";
-    if (c.includes("germany")) return "🇩🇪 Germany";
-    if (c.includes("france")) return "🇫🇷 France";
-    if (c.includes("canada")) return "🇨🇦 Canada";
-    if (c.includes("australia")) return "🇦🇺 Australia";
-    if (c.includes("uae") || c.includes("dubai")) return "🇦🇪 UAE / Dubai";
-    if (c.includes("singapore")) return "🇸🇬 Singapore";
-    if (c.includes("japan")) return "🇯🇵 Japan";
-    return "🇺🇸 USA / Global";
-}
+const COUNTRY_CONFIG_MAP = {
+    "india": { flag: "🇮🇳", name: "India", symbol: "₹", defaultSal: "₹6.5L - ₹22.0L / yr" },
+    "united states": { flag: "🇺🇸", name: "USA", symbol: "$", defaultSal: "$70,000 - $160,000 / yr" },
+    "usa": { flag: "🇺🇸", name: "USA", symbol: "$", defaultSal: "$70,000 - $160,000 / yr" },
+    "us": { flag: "🇺🇸", name: "USA", symbol: "$", defaultSal: "$70,000 - $160,000 / yr" },
+    "united kingdom": { flag: "🇬🇧", name: "UK", symbol: "£", defaultSal: "£32,000 - £85,000 / yr" },
+    "uk": { flag: "🇬🇧", name: "UK", symbol: "£", defaultSal: "£32,000 - £85,000 / yr" },
+    "germany": { flag: "🇩🇪", name: "Germany", symbol: "€", defaultSal: "€42,000 - €95,000 / yr" },
+    "france": { flag: "🇫🇷", name: "France", symbol: "€", defaultSal: "€40,000 - €90,000 / yr" },
+    "netherlands": { flag: "🇳🇱", name: "Netherlands", symbol: "€", defaultSal: "€45,000 - €98,000 / yr" },
+    "spain": { flag: "🇪🇸", name: "Spain", symbol: "€", defaultSal: "€35,000 - €75,000 / yr" },
+    "italy": { flag: "🇮🇹", name: "Italy", symbol: "€", defaultSal: "€32,000 - €70,000 / yr" },
+    "canada": { flag: "🇨🇦", name: "Canada", symbol: "CA$", defaultSal: "CA$55,000 - CA$125,000 / yr" },
+    "australia": { flag: "🇦🇺", name: "Australia", symbol: "A$", defaultSal: "A$65,000 - A$140,000 / yr" },
+    "uae": { flag: "🇦🇪", name: "UAE / Dubai", symbol: "AED", defaultSal: "AED 12,000 - AED 35,000 / mo" },
+    "dubai": { flag: "🇦🇪", name: "Dubai", symbol: "AED", defaultSal: "AED 12,000 - AED 35,000 / mo" },
+    "saudi arabia": { flag: "🇸🇦", name: "Saudi Arabia", symbol: "SAR", defaultSal: "SAR 10,000 - SAR 28,000 / mo" },
+    "singapore": { flag: "🇸🇬", name: "Singapore", symbol: "S$", defaultSal: "S$48,000 - S$115,000 / yr" },
+    "japan": { flag: "🇯🇵", name: "Japan", symbol: "¥", defaultSal: "¥4,500,000 - ¥10,500,000 / yr" },
+    "south korea": { flag: "🇰🇷", name: "South Korea", symbol: "₩", defaultSal: "₩38,000,000 - ₩95,000,000 / yr" },
+    "switzerland": { flag: "🇨🇭", name: "Switzerland", symbol: "CHF", defaultSal: "CHF 75,000 - CHF 150,000 / yr" },
+    "brazil": { flag: "🇧🇷", name: "Brazil", symbol: "R$", defaultSal: "R$ 5,500 - R$ 18,000 / mo" },
+    "mexico": { flag: "🇲🇽", name: "Mexico", symbol: "MEX$", defaultSal: "MEX$ 18,000 - MEX$ 65,000 / mo" },
+    "south africa": { flag: "🇿🇦", name: "South Africa", symbol: "R", defaultSal: "R 22,000 - R 68,000 / mo" },
+    "nigeria": { flag: "🇳🇬", name: "Nigeria", symbol: "₦", defaultSal: "₦ 350,000 - ₦ 1,200,000 / mo" },
+    "pakistan": { flag: "🇵🇰", name: "Pakistan", symbol: "PKR", defaultSal: "PKR 85,000 - PKR 280,000 / mo" }
+};
 
-function formatCountrySalary(rawSal, country, fallback = "$85,000 - $160,000 / yr") {
-    const c = (country || "").toLowerCase().trim();
-    if (c.includes("india")) {
-        return formatIndiaSalary(rawSal, "₹6.5L - ₹18.0L / yr");
+function getCountrySalaryInfo(country, rawSalary) {
+    const cLow = (country || "").toLowerCase().trim();
+    for (const [key, cfg] of Object.entries(COUNTRY_CONFIG_MAP)) {
+        if (cLow.includes(key)) {
+            if (rawSalary && (rawSalary.includes(cfg.symbol) || rawSalary.includes(cfg.name))) {
+                return { flag: cfg.flag, name: cfg.name, salary: rawSalary };
+            }
+            return { flag: cfg.flag, name: cfg.name, salary: cfg.defaultSal };
+        }
     }
-    if (rawSal && (rawSal.includes("$") || rawSal.includes("£") || rawSal.includes("€") || rawSal.includes("AED") || rawSal.includes("¥"))) {
-        return rawSal;
-    }
-    if (c.includes("uk") || c.includes("united kingdom")) return "£45,000 - £85,000 / yr";
-    if (c.includes("germany") || c.includes("france") || c.includes("europe")) return "€50,000 - €95,000 / yr";
-    if (c.includes("canada")) return "CA$75,000 - CA$135,000 / yr";
-    if (c.includes("australia")) return "AU$80,000 - AU$145,000 / yr";
-    if (c.includes("uae") || c.includes("dubai")) return "AED 120,000 - 240,000 / yr";
-    if (c.includes("singapore")) return "SG$65,000 - SG$130,000 / yr";
-    if (c.includes("japan")) return "¥5,500,000 - ¥11,000,000 / yr";
-    return fallback;
+
+    const displayName = country ? country.trim() : "USA / Global";
+    const displayFlag = country ? "🌐" : "🇺🇸";
+    const salaryVal = (rawSalary && (rawSalary.includes("$") || rawSalary.includes("€") || rawSalary.includes("£") || rawSalary.includes("₹"))) 
+        ? rawSalary 
+        : "$70,000 - $160,000 / yr";
+
+    return { flag: displayFlag, name: displayName, salary: salaryVal };
 }
 
 function getFresherSalary(market, country) {
@@ -395,7 +411,7 @@ async function generateRoadmapNow() {
         const interview = data.interview_preparation || [];
         const portfolio = data.portfolio_tips || [];
         const aiTips = data.ai_tips || [];
-        const market = data.market || {};
+        const targetSalInfo = getCountrySalaryInfo(country, overview.salary?.country || overview.salary?.usa);
 
         // -----------------------------
         // Start HTML
@@ -441,8 +457,8 @@ async function generateRoadmapNow() {
         </div>
         <div style="width: 1px; height: 35px; background: var(--border);"></div>
         <div style="text-align: center;">
-            <span style="font-size: 0.78rem; color: var(--text-secondary); font-weight: 600;">${getCountryFlagLabel(country)} Target Pay Band</span>
-            <h4 style="color: #22c55e; font-size: 1.15rem; margin: 4px 0 0; font-weight: 800;">${formatCountrySalary(overview.salary?.country || overview.salary?.usa, country)}</h4>
+            <span style="font-size: 0.78rem; color: var(--text-secondary); font-weight: 600;">${targetSalInfo.flag} ${targetSalInfo.name} Target Pay Band</span>
+            <h4 style="color: #22c55e; font-size: 1.15rem; margin: 4px 0 0; font-weight: 800;">${targetSalInfo.salary}</h4>
         </div>
     </div>
 </div>
