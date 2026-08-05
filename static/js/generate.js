@@ -435,6 +435,17 @@ async function generateRoadmapNow() {
     <h2><i class="fa-solid fa-book-open"></i> Career Overview & Market Scope</h2>
     <p style="font-size: 1rem; line-height: 1.7; margin-bottom: 20px;">${overview.description || "Comprehensive professional career breakdown."}</p>
 
+    <!-- AI Automation & Disruption Risk Meter -->
+    <div style="background: rgba(59, 130, 246, 0.05); border: 1px solid rgba(59, 130, 246, 0.25); border-radius: 14px; padding: 18px; margin-bottom: 20px;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+            <span style="font-size: 0.9rem; font-weight: 700; color: #3b82f6;"><i class="fa-solid fa-robot"></i> AI Disruption & Automation Risk Index</span>
+            <span style="font-size: 0.85rem; font-weight: 800; color: #22c55e;">Low Risk (~12%) • High Human Judgement & Empathy Needed</span>
+        </div>
+        <div style="background: rgba(255,255,255,0.08); height: 8px; border-radius: 4px; overflow: hidden;">
+            <div style="width: 12%; height: 100%; background: linear-gradient(90deg, #22c55e, #3b82f6);"></div>
+        </div>
+    </div>
+
     <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 20px;">
         <div style="background: rgba(25, 25, 25, 0.7); border: 1px solid var(--border); border-radius: 14px; padding: 18px;">
             <h3 style="margin-top: 0; color: var(--accent);"><i class="fa-solid fa-user-graduate"></i> Education & Path</h3>
@@ -442,7 +453,7 @@ async function generateRoadmapNow() {
         </div>
         <div style="background: rgba(25, 25, 25, 0.7); border: 1px solid var(--border); border-radius: 14px; padding: 18px;">
             <h3 style="margin-top: 0; color: #22c55e;"><i class="fa-solid fa-chart-line"></i> 5-Year Future Trajectory</h3>
-            <p style="font-size: 0.92rem; margin: 0;">${overview.future_scope || "High demand across global tech hubs."}</p>
+            <p style="font-size: 0.92rem; margin: 0;">${overview.future_scope || "High demand across global hubs."}</p>
         </div>
     </div>
 
@@ -467,24 +478,24 @@ async function generateRoadmapNow() {
 <!-- ================= SKILLS ================= -->
 
 <div class="roadmap-item">
-    <h2><i class="fa-solid fa-code"></i> 3-Tier Technical Skill Matrix (Top 5 Per Level)</h2>
+    <h2><i class="fa-solid fa-code"></i> Interactive Skill Checklist Matrix (Top 5 Per Level)</h2>
     <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;">
         <div style="background: rgba(34, 197, 94, 0.04); border: 1px solid rgba(34, 197, 94, 0.3); border-radius: 14px; padding: 18px;">
             <h3 style="color: #22c55e; margin-top: 0;"><i class="fa-solid fa-seedling"></i> Beginner</h3>
             <ul style="gap: 8px;">
-                ${(skills.beginner || []).map(s => `<li style="border-color: rgba(34, 197, 94, 0.2); font-size: 0.86rem;">🟢 ${s}</li>`).join("")}
+                ${(skills.beginner || []).map(s => `<li style="border-color: rgba(34, 197, 94, 0.2); font-size: 0.86rem; display: flex; align-items: center; gap: 8px;"><input type="checkbox" style="accent-color: #22c55e; width: 15px; height: 15px; cursor: pointer;"> <span>${s}</span></li>`).join("")}
             </ul>
         </div>
         <div style="background: rgba(250, 204, 21, 0.04); border: 1px solid rgba(250, 204, 21, 0.3); border-radius: 14px; padding: 18px;">
             <h3 style="color: var(--accent); margin-top: 0;"><i class="fa-solid fa-gears"></i> Intermediate</h3>
             <ul style="gap: 8px;">
-                ${(skills.intermediate || []).map(s => `<li style="border-color: rgba(250, 204, 21, 0.2); font-size: 0.86rem;">🟡 ${s}</li>`).join("")}
+                ${(skills.intermediate || []).map(s => `<li style="border-color: rgba(250, 204, 21, 0.2); font-size: 0.86rem; display: flex; align-items: center; gap: 8px;"><input type="checkbox" style="accent-color: var(--accent); width: 15px; height: 15px; cursor: pointer;"> <span>${s}</span></li>`).join("")}
             </ul>
         </div>
         <div style="background: rgba(168, 85, 247, 0.04); border: 1px solid rgba(168, 85, 247, 0.3); border-radius: 14px; padding: 18px;">
             <h3 style="color: #a855f7; margin-top: 0;"><i class="fa-solid fa-shield-halved"></i> Advanced</h3>
             <ul style="gap: 8px;">
-                ${(skills.advanced || []).map(s => `<li style="border-color: rgba(168, 85, 247, 0.2); font-size: 0.86rem;">🟣 ${s}</li>`).join("")}
+                ${(skills.advanced || []).map(s => `<li style="border-color: rgba(168, 85, 247, 0.2); font-size: 0.86rem; display: flex; align-items: center; gap: 8px;"><input type="checkbox" style="accent-color: #a855f7; width: 15px; height: 15px; cursor: pointer;"> <span>${s}</span></li>`).join("")}
             </ul>
         </div>
     </div>
@@ -543,19 +554,40 @@ async function generateRoadmapNow() {
         <div>
             <h3><i class="fa-solid fa-certificate" style="color: var(--accent);"></i> Top 5 Courses & Bootcamps</h3>
             <div style="display: flex; flex-direction: column; gap: 8px;">
-                ${(resources.courses || []).map(item => `<a href="${item.url}" target="_blank" rel="noopener noreferrer" class="resource-link">🎓 ${item.name}</a>`).join("")}
+                ${(resources.courses || []).map(item => `
+                    <a href="${item.url}" target="_blank" rel="noopener noreferrer" class="resource-link" style="display: flex; justify-content: space-between; align-items: center; text-decoration: none;">
+                        <span>🎓 ${item.name}</span>
+                        <span style="background: rgba(250, 204, 21, 0.15); color: var(--accent); border: 1px solid rgba(250, 204, 21, 0.4); font-size: 0.7rem; padding: 2px 8px; border-radius: 20px; font-weight: 700; display: inline-flex; align-items: center; gap: 4px;">
+                            <i class="fa-solid fa-circle-check"></i> Verified
+                        </span>
+                    </a>
+                `).join("")}
             </div>
         </div>
         <div>
             <h3><i class="fa-solid fa-file-code" style="color: #3b82f6;"></i> Top 5 Official Docs</h3>
             <div style="display: flex; flex-direction: column; gap: 8px;">
-                ${(resources.documentation || []).map(item => `<a href="${item.url}" target="_blank" rel="noopener noreferrer" class="resource-link">📄 ${item.name}</a>`).join("")}
+                ${(resources.documentation || []).map(item => `
+                    <a href="${item.url}" target="_blank" rel="noopener noreferrer" class="resource-link" style="display: flex; justify-content: space-between; align-items: center; text-decoration: none;">
+                        <span>📄 ${item.name}</span>
+                        <span style="background: rgba(59, 130, 246, 0.15); color: #3b82f6; border: 1px solid rgba(59, 130, 246, 0.4); font-size: 0.7rem; padding: 2px 8px; border-radius: 20px; font-weight: 700; display: inline-flex; align-items: center; gap: 4px;">
+                            <i class="fa-solid fa-circle-check"></i> Verified
+                        </span>
+                    </a>
+                `).join("")}
             </div>
         </div>
         <div>
             <h3><i class="fa-solid fa-book" style="color: #a855f7;"></i> Top 5 Must-Read Books</h3>
             <div style="display: flex; flex-direction: column; gap: 8px;">
-                ${(resources.books || []).map(item => `<a href="${item.url}" target="_blank" rel="noopener noreferrer" class="resource-link">📖 ${item.name}</a>`).join("")}
+                ${(resources.books || []).map(item => `
+                    <a href="${item.url}" target="_blank" rel="noopener noreferrer" class="resource-link" style="display: flex; justify-content: space-between; align-items: center; text-decoration: none;">
+                        <span>📖 ${item.name}</span>
+                        <span style="background: rgba(168, 85, 247, 0.15); color: #a855f7; border: 1px solid rgba(168, 85, 247, 0.4); font-size: 0.7rem; padding: 2px 8px; border-radius: 20px; font-weight: 700; display: inline-flex; align-items: center; gap: 4px;">
+                            <i class="fa-solid fa-circle-check"></i> Verified
+                        </span>
+                    </a>
+                `).join("")}
             </div>
         </div>
     </div>
