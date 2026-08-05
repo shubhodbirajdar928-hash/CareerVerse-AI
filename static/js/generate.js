@@ -410,6 +410,7 @@ async function generateRoadmapNow() {
         const tools = data.tools || [];
         const interview = data.interview_preparation || [];
         const portfolio = data.portfolio_tips || [];
+        const aiTips = data.ai_tips || [];
         const market = data.market || {};
         const targetSalInfo = getCountrySalaryInfo(country, overview.salary?.country || overview.salary?.usa);
 
