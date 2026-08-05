@@ -138,7 +138,21 @@ def failure(message, code=500):
         "error": message
     }), code
 
-VALID_ACRONYMS = {"ai", "ml", "ui", "ux", "hr", "pr", "it", "qa", "seo", "sre", "cto", "ceo", "cfo", "vp", "dba", "erp", "crm", "bi", "ar", "vr", "3d", "2d", "5g", "cad", "gis", "pm", "dev", "ops", "sec", "mlops", "devops", "secops", "web3", "web2", "ios", "nlp", "llm", "genai", "ar/vr", "ui/ux", "ai/ml", "c++", "c#", ".net"}
+VALID_ACRONYMS = {
+    "ai", "ml", "ui", "ux", "hr", "pr", "it", "qa", "seo", "sre", "cto", "ceo", "cfo", "vp", "dba", "erp", "crm", "bi", "ar", "vr", "3d", "2d", "5g", "cad", "gis", "pm", "dev", "ops", "sec", "mlops", "devops", "secops", "web3", "web2", "ios", "nlp", "llm", "genai", "ar/vr", "ui/ux", "ai/ml", "c++", "c#", ".net",
+    # Medical & Health Acronyms
+    "mbbs", "bds", "bams", "bhms", "bpt", "mch", "dnb", "bums", "brms", "md", "ms", "frcs", "mrcp", "mrcs", "pharmd", "gnm", "anm",
+    # Law & Judicial Acronyms
+    "llb", "llm", "bcl", "aibe", "clat",
+    # Civil Services, Defense & Public Acronyms
+    "ias", "ips", "ifs", "irs", "upsc", "nda", "cds", "afcat", "ssc", "psc", "gpsc", "mpsc", "uppsc", "bpsc",
+    # Aviation Acronyms
+    "cpl", "atpl", "ppl", "dgca", "faa",
+    # Business, Finance & Accounting Acronyms
+    "ca", "cfa", "cpa", "cfp", "cma", "acca", "cs", "frm",
+    # Higher Education Degrees
+    "btech", "mtech", "bca", "mca", "bba", "mba", "bsc", "msc", "phd", "bed", "med", "bdes", "mdes", "barch", "march"
+}
 
 QWERTY_PATTERNS = [
     "qwertyuiop", "poiuytrewq", "asdfghjkl", "lkjhgfdsa", "zxcvbnm", "mnbvcxz",
