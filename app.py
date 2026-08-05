@@ -607,11 +607,118 @@ Conversation:
 # =====================================================
 
 def get_fallback_roadmap(career, country, months=6):
-    c_title = career.title() if career else "Career Professional"
+    c_title = career.strip().title() if career else "Professional"
+    c_low = career.lower() if career else ""
     is_india = "india" in (country or "").lower()
-    sal_india = "₹6.5L - ₹18L / yr"
-    sal_usa = "$85k - $160k / yr"
-    
+
+    # Sector Classification
+    if any(w in c_low for w in ["doctor", "surgeon", "physician", "dentist", "nurse", "medical", "pharmacist"]):
+        edu = "MBBS / MD / BDS / Nursing Degree + Clinical Internship & Medical Council Registration"
+        sal_ind_f, sal_ind_m, sal_ind_s = "₹6.0L - ₹10.0L / yr", "₹15.0L - ₹28.0L / yr", "₹35.0L - ₹75.0L / yr"
+        sal_cnt_f, sal_cnt_m, sal_cnt_s = "$75k - $110k / yr", "dollar150k - $240k / yr", "$280k - $450k / yr"
+        roles = [f"Resident {c_title}", f"Junior Consultant {c_title}", f"Senior Consultant {c_title}", f"Head of Clinical Department", f"Medical Director"]
+        sk_b = ["Human Anatomy & Physiology", "Medical Terminology", "Vital Signs & Triage", "First Aid & CPR", "Patient Empathy"]
+        sk_i = ["Clinical Pharmacology", "Pathology & Diagnostics", "EMR/EHR Systems (Epic/Cerner)", "Emergency Resuscitation", "Surgical Hygiene"]
+        sk_a = ["Advanced Surgical Protocols", "Critical ICU Management", "Complex Differential Diagnosis", "Clinical Research & Publishing", "Hospital Governance"]
+        yt = [{"name": "Osmosis by Elseveir", "url": "https://www.youtube.com/@osmosis"}, {"name": "Ninja Nerd - Medicine", "url": "https://www.youtube.com/@NinjaNerdOfficial"}, {"name": "Doctor Mike", "url": "https://www.youtube.com/@DoctorMike"}, {"name": "Armando Hasudungan", "url": "https://www.youtube.com/@armandohasudungan"}, {"name": "Khan Academy Medicine", "url": "https://www.youtube.com/@khanacademy"}]
+        courses = [{"name": "Harvard Medical School Online", "url": "https://online-learning.harvard.edu"}, {"name": "Coursera Clinical Medicine", "url": "https://www.coursera.org"}, {"name": "Stanford Health & Medicine", "url": "https://online.stanford.edu"}, {"name": "edX Anatomy & Physiology", "url": "https://www.edx.org"}, {"name": "Lecturio Medical Education", "url": "https://www.lecturio.com"}]
+        docs = [{"name": "WHO Clinical Guidelines", "url": "https://www.who.int"}, {"name": "PubMed Central Literature", "url": "https://pmc.ncbi.nlm.nih.gov"}, {"name": "UpToDate Clinical Decision Support", "url": "https://www.uptodate.com"}, {"name": "CDC Health Protocols", "url": "https://www.cdc.gov"}, {"name": "ICMR Guidelines", "url": "https://www.icmr.gov.in"}]
+        books = [{"name": "Harrison's Principles of Internal Medicine", "url": "https://amazon.com"}, {"name": "Gray's Anatomy for Students", "url": "https://amazon.com"}, {"name": "Robbins & Cotran Pathologic Basis of Disease", "url": "https://amazon.com"}, {"name": "Katzung Basic & Clinical Pharmacology", "url": "https://amazon.com"}, {"name": "Oxford Handbook of Clinical Medicine", "url": "https://amazon.com"}]
+        projs_b = ["Patient Case Logbook Analysis", "Vital Signs Monitoring Study", "Pharmacology Dosage Calculation Chart", "First Aid Emergency Plan", "Basic Clinical Hygiene Audit"]
+        projs_i = ["Diagnostic Case Study Portfolio", "EHR Clinical Workflow Design", "Hospital Ward Infection Control Audit", "Pharmacovigilance Adverse Event Study", "Emergency ICU Triage Simulation"]
+        projs_a = ["Clinical Research Trial Design", "Complex Surgical Case Study Publication", "Hospital Departmental EMR System Upgrade", "Public Health Epidemic Response Protocol", "Medical Ethics Case Review"]
+        certs = ["ACLS & BLS Certification", "Medical Board Registration / USMLE", "NEET PG / PLAB Specialist License", "Certified Electronic Health Record Specialist", "Critical Care Medicine Diploma"]
+        tools = ["Diagnostic Stethoscope & Otoscope", "Epic / Cerner EMR Systems", "Medical Pulse Oximeter & ECG", "Surgical Instrument Set", "UpToDate Clinical Database"]
+        top_orgs = ["Mayo Clinic", "AIIMS New Delhi", "Johns Hopkins Hospital", "NHS UK", "Apollo Hospitals"]
+        hotspots = [{"city": "Delhi NCR", "demand": "Very High", "reason": "National premier medical institutes & super-specialty hospitals."}, {"city": "Boston / USA", "demand": "High", "reason": "Global hub for clinical research & Harvard teaching hospitals."}, {"city": "Mumbai", "demand": "High", "reason": "Leading private hospital networks & medical research hubs."}, {"city": "London / UK", "demand": "High", "reason": "NHS tertiary referral centers & medical universities."}, {"city": "Bengaluru", "demand": "Moderate-High", "reason": "Growing health-tech & multi-specialty hospital infrastructure."}]
+        trend_skills = ["Robotic Surgery Protocols", "Digital EMR Data Analysis", "Telemedicine Consultation", "Precision Diagnostics", "Genomic Medicine"]
+        daily_plan = ["Monday: 2 hrs Anatomy & Pathophysiology Deep Dive", "Tuesday: 2 hrs Clinical Case Study Analysis", "Wednesday: 2 hrs Pharmacology & Drug Interaction Review", "Thursday: 2 hrs EMR Documentation & Patient Simulation", "Friday: 2 hrs Clinical Rotations & Case Reviews", "Saturday: 3 hrs Diagnostic Rounds & Journal Review", "Sunday: 1 hr Weekly Medical Knowledge Assessment"]
+    elif any(w in c_low for w in ["ias", "ips", "upsc", "police", "army", "navy", "air force", "nda", "civil servant", "government"]):
+        edu = "Bachelor's Degree in any discipline + UPSC / State Public Service / SSB Selection Board Qualification"
+        sal_ind_f, sal_ind_m, sal_ind_s = "₹7.0L - ₹11.0L / yr", "₹14.0L - ₹22.0L / yr", "₹25.0L - ₹40.0L / yr"
+        sal_cnt_f, sal_cnt_m, sal_cnt_s = "$65k - $95k / yr", "$100k - $140k / yr", "$160k - $220k / yr"
+        roles = [f"Assistant Magistrate / Probationary Officer", f"Sub-Divisional Magistrate / SP", f"District Collector / DIG", f"Joint Secretary / Inspector General", f"Chief Secretary / Director General of Police"]
+        sk_b = ["Indian Polity & Constitution", "Indian History & Culture", "Geography & Environment", "Basic General Mental Ability", "Ethics & Integrity"]
+        sk_i = ["Public Administration & Governance", "Economic & Social Development", "Internal Security & Disaster Management", "District Legal Frameworks", "Policy Drafting"]
+        sk_a = ["International Relations & Strategy", "Cabinet-Level Policy Formulation", "Crisis Management & Law Enforcement", "Inter-Departmental Coordination", "Public Audit & Budgeting"]
+        yt = [{"name": "StudyIQ IAS", "url": "https://www.youtube.com/@StudyIQEducation"}, {"name": "Unacademy UPSC", "url": "https://www.youtube.com/@UnacademyUPSC"}, {"name": "Vision IAS", "url": "https://www.youtube.com/@VisionIASdelhi"}, {"name": "Drishti IAS", "url": "https://www.youtube.com/@DrishtiIASvideos"}, {"name": "Sansad TV Official", "url": "https://www.youtube.com/@SansadTV"}]
+        courses = [{"name": "Swayam Public Administration", "url": "https://swayam.gov.in"}, {"name": "NPTEL Governance & Policy", "url": "https://nptel.ac.in"}, {"name": "Coursera Global Public Policy", "url": "https://www.coursera.org"}, {"name": "IGNOU Public Governance", "url": "http://www.ignou.ac.in"}, {"name": "EdX International Relations", "url": "https://www.edx.org"}]
+        docs = [{"name": "Constitution of India Portal", "url": "https://legislative.gov.in"}, {"name": "PIB (Press Information Bureau)", "url": "https://pib.gov.in"}, {"name": "NITI Aayog Official Reports", "url": "https://www.niti.gov.in"}, {"name": "Economic Survey of India", "url": "https://www.indiabudget.gov.in"}, {"name": "State Gazette Portal", "url": "https://egazette.gov.in"}]
+        books = [{"name": "Indian Polity by M. Laxmikanth", "url": "https://amazon.com"}, {"name": "India's Struggle for Independence by Bipan Chandra", "url": "https://amazon.com"}, {"name": "Certificate Physical Geography by GC Leong", "url": "https://amazon.com"}, {"name": "Ethics, Integrity and Aptitude by Subba Rao", "url": "https://amazon.com"}, {"name": "Indian Economy by Ramesh Singh", "url": "https://amazon.com"}]
+        projs_b = ["District Socio-Economic Profile Study", "Constitutional Rights Summary Report", "Local Sanitation Policy Review", "Basic Disaster Response Plan", "Public Grievance Redressal Audit"]
+        projs_i = ["Urban Smart City Infrastructure Policy", "Rural Employment Scheme Implementation Audit", "District Crime Trend Analysis & Mitigation", "Environmental Impact Assessment", "Public Distribution System Optimization"]
+        projs_a = ["State-Level Disaster Resilience Framework", "National E-Governance Policy Architecture", "Border Security & Inter-Agency Coordination Plan", "Fiscal Policy Reform Memorandum", "Cabinet Briefing Note"]
+        certs = ["UPSC Civil Services Examination (CSE)", "State Public Service Commission (PSC)", "SSB Service Selection Board Clearance", "LBSNAA Officer Training Certification", "National Disaster Management Cert"]
+        tools = ["e-Office Govt Workflow Portal", "GIS Geo-Spatial Mapping", "Crime & Criminal Tracking (CCTNS)", "Public Financial Management (PFMS)", "National Data & Analytics Platform"]
+        top_orgs = ["Government of India", "State Civil Services Bureau", "Ministry of Home Affairs", "Indian Armed Forces", "NITI Aayog"]
+        hotspots = [{"city": "New Delhi", "demand": "Very High", "reason": "Central Secretariat, Union Ministries & UPSC Headquarters."}, {"city": "State Capitals (Mumbai/Bengaluru/Lucknow)", "demand": "High", "reason": "State Secretariats, Police HQs & District Collectorates."}, {"city": "District HQs Nationwide", "demand": "High", "reason": "Field administration, public safety & revenue governance."}, {"city": "Dehradun / Mussoorie", "demand": "Moderate-High", "reason": "National Civil Services Academy & Defense Training Hubs."}, {"city": "Washington D.C. / UN HQs", "demand": "Moderate", "reason": "Diplomatic missions & international civil services."}]
+        trend_skills = ["E-Governance Architecture", "Data-Driven Public Policy", "Disaster Resilience Planning", "Public Financial Transparency", "Crisis Leadership"]
+        daily_plan = ["Monday: 2 hrs Indian Polity & Constitutional Law", "Tuesday: 2 hrs Current Affairs & PIB News Analysis", "Wednesday: 2 hrs Economic Policy & Budget Analysis", "Thursday: 2 hrs Ethics & Case Studies Practice", "Friday: 2 hrs Answer Writing & Essay Preparation", "Saturday: 3 hrs Mock Test & Revision", "Sunday: 1 hr Weekly Performance Review"]
+    elif any(w in c_low for w in ["lawyer", "advocate", "judge", "legal", "solicitor", "paralegal"]):
+        edu = "LLB / LLM (Bachelor / Master of Laws) + Bar Council Enrolment & All India Bar Examination (AIBE)"
+        sal_ind_f, sal_ind_m, sal_ind_s = "₹5.0L - ₹9.0L / yr", "₹12.0L - ₹22.0L / yr", "₹30.0L - ₹65.0L / yr"
+        sal_cnt_f, sal_cnt_m, sal_cnt_s = "$70k - $100k / yr", "$140k - $210k / yr", "$250k - $400k / yr"
+        roles = [f"Junior Associate Lawyer", f"Senior Associate Advocate", f"Partner / Corporate Counsel", f"Additional District Judge", f"Senior Counsel / Magistrate"]
+        sk_b = ["Constitutional & Criminal Law", "Contract & Property Law", "Legal Research & Citation", "Case Brief Writing", "Courtroom Etiquette"]
+        sk_i = ["Corporate & Commercial Law", "Civil & Criminal Trial Procedure", "Legal Drafting & Conveyancing", "Intellectual Property Rights", "Arbitration & Mediation"]
+        sk_a = ["Appellate Advocacy & Special Leave Petitions", "Cross-Border Mergers & Acquisitions Law", "Regulatory Compliance Architecture", "Constitutional Bench Litigation", "Judicial Decision Making"]
+        yt = [{"name": "LegalEagle", "url": "https://www.youtube.com/@LegalEagle"}, {"name": "Bar & Bench Official", "url": "https://www.youtube.com/@barandbench"}, {"name": "LiveLaw India", "url": "https://www.youtube.com/@LiveLawIndia"}, {"name": "Finology Legal", "url": "https://www.youtube.com/@FinologyLegal"}, {"name": "Harvard Law School", "url": "https://www.youtube.com/@harvardlaw"}]
+        courses = [{"name": "Coursera Contract Law", "url": "https://www.coursera.org"}, {"name": "edX International Law", "url": "https://www.edx.org"}, {"name": "Swayam Indian Legal System", "url": "https://swayam.gov.in"}, {"name": "NPTEL Legal Studies", "url": "https://nptel.ac.in"}, {"name": "LawSikho Executive Diploma", "url": "https://lawsikho.com"}]
+        docs = [{"name": "India Code Portal", "url": "https://www.indiacode.nic.in"}, {"name": "Supreme Court Judgments Portal", "url": "https://main.sci.gov.in"}, {"name": "Law Commission Reports", "url": "https://lawcommissionofindia.nic.in"}, {"name": "Bar Council of India", "url": "http://www.barcouncilofindia.org"}, {"name": "Manupatra Legal Research", "url": "https://www.manupatrafast.in"}]
+        books = [{"name": "Introduction to Constitution of India by D.D. Basu", "url": "https://amazon.com"}, {"name": "Law of Contract by Avtar Singh", "url": "https://amazon.com"}, {"name": "Black's Law Dictionary", "url": "https://amazon.com"}, {"name": "Ratanlal & Dhirajlal Indian Penal Code", "url": "https://amazon.com"}, {"name": "Garner's Modern Legal Usage", "url": "https://amazon.com"}]
+        projs_b = ["Moot Court Argument Draft", "Basic Commercial Contract Review", "Legal Case Summary Analysis", "Client Interview Consultation Record", "Legal Notice Template Creation"]
+        projs_i = ["Corporate NDA & Shareholders Agreement Draft", "Criminal Appeal Case File Preparation", "Pro-Bono Legal Aid Case Brief", "Arbitration Proceedings Strategy Memorandum", "IPR Patent Infringement Audit"]
+        projs_a = ["Supreme Court Special Leave Petition Draft", "Cross-Border M&A Legal Due Diligence", "Constitutional Law Amicus Curiae Brief", "Corporate Environmental Compliance Plan", "Judicial Review Commentary"]
+        certs = ["All India Bar Examination (AIBE) Certificate", "Certified Corporate Legal Counsel", "Post Graduate Diploma in Cyber Law", "Certified Arbitrator & Mediator", "IPR Specialist Certification"]
+        tools = ["SCC Online / Manupatra", "Westlaw / LexisNexis", "Legal Contract Lifecycle Management (CLM)", "e-Courts Filing Portal", "Grammarly Legal Editor"]
+        top_orgs = ["Supreme Court of India", "AZB & Partners", "Cyril Amarchand Mangaldas", "Trilegal", "Khaitan & Co"]
+        hotspots = [{"city": "New Delhi", "demand": "Very High", "reason": "Supreme Court, Delhi High Court & major law firm HQs."}, {"city": "Mumbai", "demand": "High", "reason": "Financial capital, Bombay High Court & corporate law practices."}, {"city": "London / UK", "demand": "High", "reason": "Global commercial arbitration & International law firms."}, {"city": "New York / USA", "demand": "High", "reason": "Corporate M&A law & Federal Court litigation."}, {"city": "Bengaluru", "demand": "Moderate-High", "reason": "Tech startup legal compliance, IP law & High Court."}]
+        trend_skills = ["Tech & AI Legal Compliance", "Cross-Border Arbitration", "Data Privacy & GDPR Law", "IP & Patent Prosecution", "ESG & Environmental Law"]
+        daily_plan = ["Monday: 2 hrs Constitutional & Contract Law Study", "Tuesday: 2 hrs Legal Drafting & Case Analysis", "Wednesday: 2 hrs Court Procedure & Precedents Review", "Thursday: 2 hrs Client Consultation & Contract Review", "Friday: 2 hrs Moot Court & Advocacy Practice", "Saturday: 3 hrs Legal Research & Citation Study", "Sunday: 1 hr Weekly Legal Case Digest"]
+    elif any(w in c_low for w in ["farmer", "agronomist", "botanist", "agriculture", "crop"]):
+        edu = "B.Sc / M.Sc in Agricultural Science, Agronomy, Horticulture or Hands-On Farming Practice"
+        sal_ind_f, sal_ind_m, sal_ind_s = "₹3.5L - ₹6.5L / yr", "₹8.0L - ₹14.0L / yr", "₹18.0L - ₹32.0L / yr"
+        sal_cnt_f, sal_cnt_m, sal_cnt_s = "$45k - $65k / yr", "$80k - $120k / yr", "$140k - $220k / yr"
+        roles = [f"Assistant Agronomist", f"Farm Operations Manager", f"Senior Agricultural Specialist", f"Agri-Business Director", f"Principal Soil & Crop Consultant"]
+        sk_b = ["Soil Chemistry & Fertility", "Crop Rotation & Seasons", "Basic Irrigation Techniques", "Organic Farming Principles", "Farm Machinery Operation"]
+        sk_i = ["Precision Agriculture & Drones", "Pest & Weed Management", "Agri-Market Pricing & Economics", "Hydroponics & Greenhouse Tech", "Water Conservation & Harvesting"]
+        sk_a = ["Climate-Resilient Crop Breeding", "Large-Scale Agri-Supply Chain Tech", "Soil Microbiome Restoration", "Agricultural Export Compliance", "Agri-Fintech & Futures Trading"]
+        yt = [{"name": "Krishi Darshan Official", "url": "https://www.youtube.com/@DoordarshanKisan"}, {"name": "Farming Leader", "url": "https://www.youtube.com/@FarmingLeader"}, {"name": "Discover Agriculture", "url": "https://www.youtube.com/@DiscoverAgriculture"}, {"name": "Cornell Small Farms", "url": "https://www.youtube.com/@CornellSmallFarms"}, {"name": "Agronomy TV", "url": "https://www.youtube.com/@AgronomyTV"}]
+        courses = [{"name": "NPTEL Agriculture & Food Engineering", "url": "https://nptel.ac.in"}, {"name": "Swayam Organic Farming", "url": "https://swayam.gov.in"}, {"name": "Coursera Sustainable Agriculture", "url": "https://www.coursera.org"}, {"name": "edX Sustainable Food Systems", "url": "https://www.edx.org"}, {"name": "Wageningen University Agriculture", "url": "https://www.wur.nl"}]
+        docs = [{"name": "ICAR Research Guidelines", "url": "https://icar.org.in"}, {"name": "Agmarknet Price Portal", "url": "https://agmarknet.gov.in"}, {"name": "FAO Agriculture Standards", "url": "https://www.fao.org"}, {"name": "Ministry of Agriculture India", "url": "https://agricoop.nic.in"}, {"name": "Kisan Call Centre Portal", "url": "https://dge.gov.in"}]
+        books = [{"name": "Principles of Agronomy by Yellamanda Reddy", "url": "https://amazon.com"}, {"name": "Introductory Soil Science by D.K. Das", "url": "https://amazon.com"}, {"name": "Plant Breeding Principles by B.D. Singh", "url": "https://amazon.com"}, {"name": "Agricultural Economics by Subba Reddy", "url": "https://amazon.com"}, {"name": "The One-Straw Revolution by Masanobu Fukuoka", "url": "https://amazon.com"}]
+        projs_b = ["Soil pH & Nutrient Testing Report", "Seasonal Crop Rotation Plan", "Basic Drip Irrigation Blueprint", "Organic Compost Preparation Study", "Farm Tool Maintenance Logbook"]
+        projs_i = ["Drone-Based Crop Health Survey", "Hydroponic Vertical Farm Setup", "Integrated Pest Management Plan", "Farm-to-Market Supply Chain Model", "Water Harvesting Reservoir Design"]
+        projs_a = ["Climate-Resilient Smart Agriculture Plan", "State-Level Agri-Cooperative Business Plan", "Biological Soil Restoration Trial", "Organic Export Compliance Portfolio", "Agri-Tech IoT Sensor Network"]
+        certs = ["Certified Organic Farming Specialist", "Agricultural Drone Pilot License", "Soil Testing & Nutrient Management Cert", "Good Agricultural Practices (GAP) Cert", "Certified Crop Adviser (CCA)"]
+        tools = ["Agricultural Drones & Multispectral Cameras", "Smart Drip Irrigation Telemetry", "Soil pH & NPK Testers", "Kisan Suvidha & Agmarknet Apps", "Tractor & Precision Seeder Tech"]
+        top_orgs = ["ICAR (Indian Council of Agricultural Research)", "NABARD", "Mahindra Agri Business", "Syngenta India", "John Deere"]
+        hotspots = [{"city": "Punjab & Haryana", "demand": "Very High", "reason": "Leading agricultural belt with high mechanized farming."}, {"city": "Wageningen / Netherlands", "demand": "Very High", "reason": "Global capital for high-tech greenhouse & agritech innovation."}, {"city": "Iowa / USA", "demand": "High", "reason": "Major corn & soybean precision agriculture hub."}, {"city": "Maharashtra", "demand": "High", "reason": "Pioneer in commercial horticulture & sugarcane farming."}, {"city": "Andhra Pradesh", "demand": "High", "reason": "Natural farming & aqua-agri export centers."}]
+        trend_skills = ["Precision Drones & Satellite Mapping", "Hydroponics & Aeroponics", "Soil Microbiome Tech", "Agri-Market Analytics", "Climate-Resilient Farming"]
+        daily_plan = ["Monday: 2 hrs Soil Science & Nutrient Management", "Tuesday: 2 hrs Crop Pest & Disease Diagnosis", "Wednesday: 2 hrs Precision Irrigation & Drone Mapping", "Thursday: 2 hrs Agri-Market Price & Economics Study", "Friday: 2 hrs Practical Field Demonstration & Work", "Saturday: 3 hrs Farm Tool Maintenance & Field Survey", "Sunday: 1 hr Weekly Crop Growth Review"]
+    else:
+        # Tech, Engineering, Business, General Professions
+        sal_ind_f, sal_ind_m, sal_ind_s = "₹6.5L - ₹10.0L / yr", "₹14.0L - ₹22.0L / yr", "₹25.0L - ₹48.0L / yr"
+        sal_cnt_f, sal_cnt_m, sal_cnt_s = "$70k - $95k / yr", "$120k - $160k / yr", "$180k - $270k / yr"
+        edu = f"Bachelor's Degree in {c_title} or related field + Professional Portfolio & Industry Credentials"
+        roles = [f"Junior {c_title}", f"Senior {c_title}", f"Lead {c_title} Specialist", f"Principal {c_title} Consultant", f"Director of {c_title}"]
+        sk_b = [f"Basic {c_title} Concepts", "Industry Fundamentals", "Problem Solving", "Core Tool Setup", "Team Collaboration"]
+        sk_i = [f"Advanced {c_title} Architecture", "Workflow Automation", "Quality Assurance", "Data & Metrics Analysis", "Project Execution"]
+        sk_a = ["Strategic Leadership", "Enterprise Scale Management", "Compliance & Security", "Innovation Architecture", "Executive Decision Making"]
+        yt = [{"name": "FreeCodeCamp / Core Channel", "url": "https://www.youtube.com/@freecodecamp"}, {"name": "TED Talks & Industry Insights", "url": "https://www.youtube.com/@TED"}, {"name": "CrashCourse Professional", "url": "https://www.youtube.com/@crashcourse"}, {"name": "Harvard Business Review", "url": "https://www.youtube.com/@harvardbusinessreview"}, {"name": "MIT OpenCourseWare", "url": "https://www.youtube.com/@mitocw"}]
+        courses = [{"name": "Coursera Professional Specialization", "url": "https://www.coursera.org"}, {"name": "edX Professional Certificate", "url": "https://www.edx.org"}, {"name": "Udemy Masterclass Bootcamp", "url": "https://www.udemy.com"}, {"name": "LinkedIn Learning Executive Track", "url": "https://www.linkedin.com/learning"}, {"name": "Pluralsight Advanced Learning", "url": "https://www.pluralsight.com"}]
+        docs = [{"name": f"Official {c_title} Industry Standards", "url": "https://developer.mozilla.org"}, {"name": "ISO International Standards", "url": "https://www.iso.org"}, {"name": "IEEE Xplore Digital Library", "url": "https://ieeexplore.ieee.org"}, {"name": "NIST Framework Guidelines", "url": "https://www.nist.gov"}, {"name": "Harvard Business Case Studies", "url": "https://hbr.org"}]
+        books = [{"name": f"The Master Guide to {c_title}", "url": "https://amazon.com"}, {"name": "Designing High-Performance Systems", "url": "https://amazon.com"}, {"name": "The Lean Professional", "url": "https://amazon.com"}, {"name": "Execution: The Discipline of Getting Things Done", "url": "https://amazon.com"}, {"name": "Principles for Success by Ray Dalio", "url": "https://amazon.com"}]
+        projs_b = [f"Basic {c_title} Foundational Project", "Operational Workflow Audit", "Interactive Utility Tool", "Data Analysis Dashboard", "Basic Portfolio Showcase"]
+        projs_i = [f"Full-Scale {c_title} Implementation", "Cross-Functional Team Project", "Automated Process Optimization System", "Quality Assurance & Compliance Audit", "Integrated Service Solution"]
+        projs_a = [f"Enterprise Distributed {c_title} Strategy", "High-Throughput Analytics Engine", "Global Operational Architecture", "AI-Powered Automation Framework", "Executive Strategic Roadmap"]
+        certs = [f"Certified {c_title} Professional", f"PMI Project Management Professional (PMP)", f"Google Professional Certification", f"Six Sigma Black Belt Certification", f"International Executive Certificate"]
+        tools = [f"Git & Version Control", f"Industry Analytics Tools", f"VS Code / JetBrains", f"Postman / API Suites", f"Docker & Cloud Suites"]
+        top_orgs = ["Google", "Microsoft", "Amazon", "Tata Group", "Reliance Industries"]
+        hotspots = [{"city": "Bengaluru" if is_india else "San Francisco", "demand": "Very High", "reason": "Global hub for technology, innovation & enterprise hiring."}, {"city": "Mumbai" if is_india else "New York", "demand": "High", "reason": "Commercial capital & corporate headquarters hub."}, {"city": "Hyderabad" if is_india else "Austin", "demand": "High", "reason": "Rapidly expanding technology & R&D centers."}, {"city": "Pune" if is_india else "Seattle", "demand": "Moderate-High", "reason": "Strong engineering, manufacturing & product development base."}, {"city": "Delhi NCR" if is_india else "London", "demand": "High", "reason": "Corporate headquarters, policy making & consulting hub."}]
+        trend_skills = [f"Advanced {c_title} Automation", "AI & Data Analytics Integration", "Cloud-Native Systems", "Agile Project Delivery", "Strategic Leadership"]
+        daily_plan = ["Monday: 2 hrs Core Principles & Industry Theory", "Tuesday: 2 hrs Practical Hands-On Tool Practice", "Wednesday: 2 hrs Case Studies & System Architecture", "Thursday: 2 hrs Building Portfolio Project Components", "Friday: 2 hrs Quality Audit & Process Refactoring", "Saturday: 3 hrs End-to-End Project Integration", "Sunday: 1 hr Weekly Performance Review"]
+
     roadmap_months = []
     for m in range(1, months + 1):
         roadmap_months.append({
@@ -619,12 +726,12 @@ def get_fallback_roadmap(career, country, months=6):
             "title": f"Phase {m}: Core Skill Mastery & Real-World Execution",
             "topics": [
                 f"Fundamental & Advanced Principles of {c_title}",
-                f"Industry Best Practices & System Design for {c_title}",
+                f"Industry Best Practices & Standard Protocols for {c_title}",
                 f"Tooling, Workflow Automation & Performance Tuning",
-                f"Collaborative Development & Code Reviews",
-                f"Security, Quality Assurance & Deployment Standards"
+                f"Collaborative Execution & Quality Audits",
+                f"Security, Compliance & Professional Standards"
             ],
-            "project": f"Production-grade {c_title} Portfolio Project #{m}",
+            "project": f"Production-Grade {c_title} Portfolio Project #{m}",
             "goal": f"Master core competencies and deliver a functional project milestone."
         })
 
@@ -634,119 +741,69 @@ def get_fallback_roadmap(career, country, months=6):
         "country": country,
         "duration": f"{months} months",
         "overview": {
-            "description": f"Comprehensive career development path for becoming a top-tier {c_title}. This roadmap covers foundational knowledge, hands-on project creation, and production deployment.",
-            "roles": [
-                f"Junior {c_title}",
-                f"Senior {c_title}",
-                f"Lead {c_title} Specialist",
-                f"Principal {c_title} Consultant",
-                f"Director of {c_title} Engineering"
-            ],
-            "education": f"Bachelor's Degree in Computer Science, STEM, or relevant industry certifications & practical portfolio experience.",
+            "description": f"Comprehensive, professional career development path for becoming an elite {c_title}. This roadmap covers foundational knowledge, practical field execution, and senior leadership.",
+            "roles": roles,
+            "education": edu,
             "salary": {
-                "india": sal_india,
-                "usa": sal_usa
+                "india": f"{sal_ind_f} (Fresher) -> {sal_ind_m} (Mid) -> {sal_ind_s} (Senior)",
+                "country": f"{sal_cnt_f} (Fresher) -> {sal_cnt_m} (Mid) -> {sal_cnt_s} (Senior)"
             },
-            "future_scope": f"High demand with strong multi-year compound annual growth across global tech markets."
+            "future_scope": f"Strong multi-year demand with high career trajectory across global hiring markets."
         },
         "skills": {
-            "beginner": [f"Basic {c_title} Concepts", "Core Tools & Environment Setup", "Git & Version Control", "Command Line & Workflows", "Problem Solving"],
-            "intermediate": [f"Advanced {c_title} Architecture", "API Integration & Systems", "Testing & Debugging", "Database Management", "Performance Optimization"],
-            "advanced": [f"Enterprise Architecture", "Production Scaling & MLOps/DevOps", "Security Hardening", "System Reliability", "Strategic Leadership"]
+            "beginner": sk_b,
+            "intermediate": sk_i,
+            "advanced": sk_a
         },
         "roadmap": roadmap_months,
         "resources": {
-            "youtube": [
-                {"name": f"FreeCodeCamp - {c_title} Full Course", "url": "https://www.youtube.com/@freecodecamp"},
-                {"name": f"Traversy Media - {c_title} Crash Course", "url": "https://www.youtube.com/@TraversyMedia"},
-                {"name": f"Fireship - {c_title} in 100 Seconds & Deep Dive", "url": "https://www.youtube.com/@Fireship"},
-                {"name": f"Web Dev Simplified - {c_title} Projects", "url": "https://www.youtube.com/@WebDevSimplified"},
-                {"name": f"Hussein Nasser - Software Architecture & {c_title}", "url": "https://www.youtube.com/@HusseinNasser"}
-            ],
-            "courses": [
-                {"name": f"Coursera - Specialized {c_title} Professional Certificate", "url": "https://www.coursera.org"},
-                {"name": "Udemy - Complete Masterclass Bootcamp", "url": "https://www.udemy.com"},
-                {"name": "edX - MicroMasters Program in Systems & Architecture", "url": "https://www.edx.org"},
-                {"name": "Pluralsight - Advanced Engineering Learning Path", "url": "https://www.pluralsight.com"},
-                {"name": "LinkedIn Learning - Executive Career Track", "url": "https://www.linkedin.com/learning"}
-            ],
-            "documentation": [
-                {"name": f"Official {c_title} Developer Documentation", "url": "https://developer.mozilla.org"},
-                {"name": "AWS Architecture Center & Best Practices", "url": "https://aws.amazon.com/architecture"},
-                {"name": "Google Cloud Architecture Framework", "url": "https://cloud.google.com/architecture"},
-                {"name": "Docker & Kubernetes Production Guides", "url": "https://docs.docker.com"},
-                {"name": "System Design Primer & RFC Standards", "url": "https://github.com/donnemartin/system-design-primer"}
-            ],
-            "books": [
-                {"name": f"The Pragmatic Programmer for {c_title}", "url": "https://amazon.com"},
-                {"name": "Clean Code & Systems Architecture", "url": "https://amazon.com"},
-                {"name": "Designing Data-Intensive Applications", "url": "https://amazon.com"},
-                {"name": f"Enterprise {c_title} Design Patterns", "url": "https://amazon.com"},
-                {"name": "Refactoring & High Performance Systems", "url": "https://amazon.com"}
-            ]
+            "youtube": yt,
+            "courses": courses,
+            "documentation": docs,
+            "books": books
         },
         "projects": {
-            "beginner": [f"Personal {c_title} Portfolio Website", f"Interactive Command Line Utility", f"Basic Data Analysis & Visualization Suite", f"Task Management REST API", f"Weather Dashboard App"],
-            "intermediate": [f"Full-Stack {c_title} Web Service", f"RESTful API & Database Integration", f"Automated CI/CD Pipeline Deployment", f"Authentication & Authorization Service", f"Real-Time Chat & Notification System"],
-            "advanced": [f"Enterprise Distributed System", f"High-Throughput Analytics Engine", f"Production Real-Time Dashboard", f"AI-Powered Automation Pipeline", f"Microservices Cloud Architecture"]
+            "beginner": projs_b,
+            "intermediate": projs_i,
+            "advanced": projs_a
         },
-        "certifications": [
-            f"AWS Certified Solutions Architect",
-            f"Google Cloud Professional {c_title}",
-            f"Meta Professional Certification",
-            f"Certified System Security Professional",
-            f"Red Hat Certified Engineer"
-        ],
-        "tools": [f"Git & GitHub", f"Docker & Kubernetes", f"VS Code / JetBrains", f"Postman & Insomnia", f"Linux & Bash"],
+        "certifications": certs,
+        "tools": tools,
         "interview_preparation": [
-            f"Master core Data Structures & System Design algorithms.",
-            f"Prepare STAR-method behavioral stories for complex team projects.",
-            f"Practice live coding exercises and architecture whiteboard challenges.",
-            f"Review domain-specific security, concurrency, and API questions.",
-            f"Conduct mock interviews focusing on trade-offs and design choices."
+            f"Master core domain principles and case study scenarios for {c_title}.",
+            f"Prepare STAR-method behavioral stories highlighting leadership & problem solving.",
+            f"Practice domain-specific practical challenges and mock technical interviews.",
+            f"Review safety, compliance, and regulatory protocols relevant to {c_title}.",
+            f"Conduct mock interviews focusing on trade-offs and decision making."
         ],
         "portfolio_tips": [
-            f"Host live functional demos on Vercel, Netlify, or AWS.",
-            f"Maintain clean GitHub commit history with well-documented README files.",
-            f"Highlight real-world problem solving and performance metrics in project descriptions.",
-            f"Include architectural diagrams and API specs in your documentation.",
-            f"Record short video walkthroughs demonstrating key project features."
+            f"Showcase live functional projects and detailed case studies online.",
+            f"Maintain clear documentation and step-by-step problem-solving write-ups.",
+            f"Highlight measurable real-world outcomes and performance metrics.",
+            f"Include architectural blueprints, diagrams, or process flowcharts.",
+            f"Record short video demonstrations explaining key project highlights."
         ],
         "ai_tips": [
-            f"Use Gemini AI & ChatGPT to accelerate code refactoring and test case generation.",
-            f"Leverage AI code assistants (GitHub Copilot, Cursor) for boilerplate automation.",
-            f"Prompt AI to explain complex algorithmic trade-offs and edge cases.",
-            f"Automate documentation drafting and changelog summaries using AI.",
-            f"Stay updated on emerging LLM frameworks and AI integration patterns."
+            f"Use AI tools (Gemini / ChatGPT) to research complex industry case studies for {c_title}.",
+            f"Leverage AI assistance for drafting documentation, reports, and communication.",
+            f"Prompt AI to test your knowledge with mock interview questions.",
+            f"Automate routine administrative and analysis tasks using AI workflows.",
+            f"Stay updated on emerging AI trends transforming the {c_title} field."
         ],
         "market": {
-            "job_demand": {"text": "Extremely High demand with rapid growth across global hiring hubs.", "percentage": 92},
-            "difficulty": {"text": "Moderate to High difficulty requiring dedicated structured practice.", "percentage": 75},
-            "growth": {"text": "Projected 25%+ annual market growth over the next 5 years.", "percentage": 88},
+            "job_demand": {"text": f"Extremely High demand with rapid growth across top hiring hubs for {c_title}.", "percentage": 90},
+            "difficulty": {"text": "Moderate to High learning curve requiring dedicated practice.", "percentage": 75},
+            "growth": {"text": "Projected 20%+ annual growth over the next 5 years.", "percentage": 88},
             "learning_time": {"text": f"Estimated {months} months of consistent 15-20 hrs/week study.", "percentage": 80},
             "salary": {
-                "fresher": f"{'₹4.5L - ₹8L / yr' if is_india else '$65k - $85k / yr'}",
-                "mid": f"{'₹12L - ₹20L / yr' if is_india else '$110k - $145k / yr'}",
-                "senior": f"{'₹24L - ₹45L / yr' if is_india else '$160k - $240k / yr'}"
+                "fresher": sal_ind_f if is_india else sal_cnt_f,
+                "mid": sal_ind_m if is_india else sal_cnt_m,
+                "senior": sal_ind_s if is_india else sal_cnt_s
             },
-            "top_organizations": ["Google", "Microsoft", "Amazon", "Meta", "Apple"],
-            "hiring_hotspots": [
-                {"city": "Bengaluru" if is_india else "San Francisco", "demand": "High Demand", "reason": "Major global technology and startup ecosystem hub."},
-                {"city": "Hyderabad" if is_india else "New York", "demand": "High Demand", "reason": "Rapidly expanding enterprise engineering centers."},
-                {"city": "Pune" if is_india else "Seattle", "demand": "Moderate-High", "reason": "Strong concentration of cloud & product engineering R&D."},
-                {"city": "Gurugram" if is_india else "Austin", "demand": "High Demand", "reason": "Thriving fintech, AI, and corporate headquarters presence."},
-                {"city": "Mumbai" if is_india else "Boston", "demand": "Moderate-High", "reason": "Leading hub for enterprise tech, consulting, and finance."}
-            ],
-            "trending_skills": [f"{c_title} Architecture", "Cloud Native (AWS/GCP)", "Docker & Microservices", "CI/CD & MLOps", "GenAI & API Design"],
-            "daily_plan": [
-                "Monday: 2 hrs Core Theory & Concept Deep Dive",
-                "Tuesday: 2 hrs Hands-on Coding & Problem Solving",
-                "Wednesday: 2 hrs System Design & Tool Mastery",
-                "Thursday: 2 hrs Building Portfolio Project Components",
-                "Friday: 2 hrs Testing, Code Refactoring & Git Commits",
-                "Saturday: 3 hrs End-to-End Integration & Open Source Review",
-                "Sunday: 1 hr Weekly Progress Review & Goal Setting"
-            ]
+            "top_organizations": top_orgs,
+            "hiring_hotspots": hotspots,
+            "trending_skills": trend_skills,
+            "daily_plan": daily_plan
         }
     }
 
@@ -881,6 +938,7 @@ Return ONLY valid JSON matching this exact structure:
 }}
 
 Rules:
+- CRITICAL DOMAIN MANDATE: Tailor ALL books, courses, YouTube channels, daily plans, tools, certifications, and projects specifically for "{career}". Never assume programming or software engineering if the role is a non-tech career (e.g. Doctor, Lawyer, Police Officer, IAS, Farmer, Pilot, Teacher, Chef, Mechanical/Civil Engineer, Architect, etc.).
 - CRITICAL MANDATE: EVERY list field (roles, skills.beginner, skills.intermediate, skills.advanced, resources.youtube, resources.courses, resources.documentation, resources.books, projects.beginner, projects.intermediate, projects.advanced, certifications, tools, interview_preparation, portfolio_tips, ai_tips, market.top_organizations, market.hiring_hotspots, market.trending_skills, market.daily_plan) MUST contain EXACTLY TOP 5 accurate, role-specific items.
 - Generate exactly {months} objects in the roadmap array.
 - Return ONLY valid JSON. No markdown fences.
