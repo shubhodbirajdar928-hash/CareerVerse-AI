@@ -1148,6 +1148,14 @@ def get_fallback_roadmap(career, country, months=6):
         }
     }
 
+def has_generic_placeholders(data_obj):
+    try:
+        text_str = json.dumps(data_obj)
+        patterns = ["Channel 1", "Course 1", "Handbook 1", "Tool 1", "Topic 1", "Project 1", "Skill 1", "Cert 1", "City 1", "Org 1"]
+        return any(p in text_str for p in patterns)
+    except Exception:
+        return False
+
 # =====================================================
 # Generate Roadmap Endpoint
 # =====================================================
@@ -1189,7 +1197,7 @@ Preferred Country: {country}
 Roadmap Duration: {duration} ({months} Months)
 
 CRITICAL ACCURACY RULES:
-1. Provide DEEP, ROLE-SPECIFIC technical topics, tools, hands-on projects, and real-world salary ranges. Do NOT use generic placeholders like "Topic 1" or "Learn basics".
+1. Provide DEEP, SPECIFIC, ACCURATE technical topics, real-world tools, authentic books, exact YouTube channels, and genuine certifications for "{career}". NEVER output generic strings like "Channel 1", "Course 1", "Tool 1", "Topic 1", or "Project 1".
 2. For each month ({months} months total), specify 4-5 exact technologies or skills to learn, 1 real-world portfolio project to build, and 1 clear milestone goal.
 3. For salaries, ALWAYS provide India salary in Indian Rupees (e.g. "₹8.0L - ₹18.0L / yr") and Target Country salary in that country's official local currency (e.g. "$90,000 - $165,000 / yr" for USA, "£45,000 - £85,000 / yr" for UK, "€50,000 - €95,000 / yr" for Germany/Europe, "CA$75,000 - CA$135,000 / yr" for Canada).
 
@@ -1201,105 +1209,92 @@ Return ONLY valid JSON matching this exact structure:
   "duration": "{duration}",
   "overview": {{
     "description": "Comprehensive professional breakdown of {career} in modern industry.",
-    "roles": ["Junior Role", "Mid-Level Role", "Senior Role", "Lead Specialist", "Director / Architect"],
+    "roles": ["Junior Title", "Mid-Level Title", "Senior Title", "Lead Specialist Title", "Executive / Director Title"],
     "education": "Required degrees, certifications, or self-taught paths.",
     "salary": {{
-      "india": "₹8.0L - ₹18.0L / yr",
-      "country": "$90,000 - $165,000 / yr"
+      "fresher": "₹6.0L - ₹10.0L / yr",
+      "mid": "₹14.0L - ₹25.0L / yr",
+      "senior": "₹28.0L - ₹55.0L / yr",
+      "country_fresher": "$70,000 - $100,000 / yr",
+      "country_mid": "$120,000 - $170,000 / yr",
+      "country_senior": "$180,000 - $280,000 / yr",
+      "india": "₹6.0L - ₹10.0L / yr (Fresher) -> ₹14.0L - ₹25.0L / yr (Mid) -> ₹28.0L - ₹55.0L / yr (Senior)",
+      "country": "$70,000 - $100,000 / yr (Fresher) -> $120,000 - $170,000 / yr (Mid) -> $180,000 - $280,000 / yr (Senior)"
     }},
     "future_scope": "5-year growth trajectory, AI impact, and job market outlook."
   }},
-  "skills": {
-    "beginner": ["Skill 1", "Skill 2", "Skill 3", "Skill 4", "Skill 5"],
-    "intermediate": ["Skill 1", "Skill 2", "Skill 3", "Skill 4", "Skill 5"],
-    "advanced": ["Skill 1", "Skill 2", "Skill 3", "Skill 4", "Skill 5"]
-  },
+  "skills": {{
+    "beginner": ["Skill A", "Skill B", "Skill C", "Skill D", "Skill E"],
+    "intermediate": ["Skill F", "Skill G", "Skill H", "Skill I", "Skill J"],
+    "advanced": ["Skill K", "Skill L", "Skill M", "Skill N", "Skill O"]
+  }},
   "roadmap": [
-    {
+    {{
       "month": "Month 1",
-      "title": "Phase 1: Core Technical Foundations",
-      "topics": ["Topic 1", "Topic 2", "Topic 3", "Topic 4", "Topic 5"],
-      "project": "Real-world Hands-On Project Name & Description",
+      "title": "Phase 1: Specific Core Technical Milestone",
+      "topics": ["Topic A", "Topic B", "Topic C", "Topic D", "Topic E"],
+      "project": "Hands-On Project Name & Description",
       "goal": "Clear technical milestone for Month 1."
-    }
+    }}
   ],
-  "resources": {
+  "resources": {{
     "youtube": [
-      {"name": "Verified Channel 1", "url": "https://www.youtube.com/@channel1"},
-      {"name": "Verified Channel 2", "url": "https://www.youtube.com/@channel2"},
-      {"name": "Verified Channel 3", "url": "https://www.youtube.com/@channel3"},
-      {"name": "Verified Channel 4", "url": "https://www.youtube.com/@channel4"},
-      {"name": "Verified Channel 5", "url": "https://www.youtube.com/@channel5"}
+      {{"name": "Real Verified Channel", "url": "https://www.youtube.com/@channel"}}
     ],
     "courses": [
-      {"name": "Course 1", "url": "https://www.coursera.org"},
-      {"name": "Course 2", "url": "https://www.udemy.com"},
-      {"name": "Course 3", "url": "https://www.edx.org"},
-      {"name": "Course 4", "url": "https://nptel.ac.in"},
-      {"name": "Course 5", "url": "https://swayam.gov.in"}
+      {{"name": "Real Course Name", "url": "https://www.coursera.org"}}
     ],
     "documentation": [
-      {"name": "Doc Portal 1", "url": "https://developer.mozilla.org"},
-      {"name": "Doc Portal 2", "url": "https://docs.official.org"},
-      {"name": "Doc Portal 3", "url": "https://standards.iso.org"},
-      {"name": "Doc Portal 4", "url": "https://nist.gov"},
-      {"name": "Doc Portal 5", "url": "https://ieee.org"}
+      {{"name": "Real Official Docs", "url": "https://developer.mozilla.org"}}
     ],
     "books": [
-      {"name": "Handbook 1", "url": "https://amazon.com"},
-      {"name": "Handbook 2", "url": "https://amazon.com"},
-      {"name": "Handbook 3", "url": "https://amazon.com"},
-      {"name": "Handbook 4", "url": "https://amazon.com"},
-      {"name": "Handbook 5", "url": "https://amazon.com"}
+      {{"name": "Real Book Title", "url": "https://amazon.com"}}
     ]
-  },
-  "projects": {
-    "beginner": ["Beginner Project 1", "Beginner Project 2", "Beginner Project 3", "Beginner Project 4", "Beginner Project 5"],
-    "intermediate": ["Intermediate Project 1", "Intermediate Project 2", "Intermediate Project 3", "Intermediate Project 4", "Intermediate Project 5"],
-    "advanced": ["Enterprise Project 1", "Enterprise Project 2", "Enterprise Project 3", "Enterprise Project 4", "Enterprise Project 5"]
-  },
-  "certifications": ["Cert 1", "Cert 2", "Cert 3", "Cert 4", "Cert 5"],
-  "tools": ["Tool 1", "Tool 2", "Tool 3", "Tool 4", "Tool 5"],
+  }},
+  "projects": {{
+    "beginner": ["Project A", "Project B", "Project C", "Project D", "Project E"],
+    "intermediate": ["Project F", "Project G", "Project H", "Project I", "Project J"],
+    "advanced": ["Project K", "Project L", "Project M", "Project N", "Project O"]
+  }},
+  "certifications": ["Certification A", "Certification B", "Certification C", "Certification D", "Certification E"],
+  "tools": ["Tool A", "Tool B", "Tool C", "Tool D", "Tool E"],
   "interview_preparation": [
-    "Core Concept & Technical Scenario Question 1",
-    "System Design & Architecture Scenario Question 2",
-    "Behavioral & Decision Making Strategy Question 3",
-    "Regulatory, Compliance & Safety Scenario Question 4",
-    "Practical Problem Solving & Trade-off Scenario Question 5"
+    "Core Concept & Technical Question A",
+    "Architecture & Scenario Question B",
+    "Behavioral & Decision Strategy Question C",
+    "Regulatory & Compliance Question D",
+    "Practical Problem Solving Question E"
   ],
   "portfolio_tips": [
-    "Portfolio Showcase Tip 1",
-    "Portfolio Showcase Tip 2",
-    "Portfolio Showcase Tip 3",
-    "Portfolio Showcase Tip 4",
-    "Portfolio Showcase Tip 5"
+    "Portfolio Action A",
+    "Portfolio Action B",
+    "Portfolio Action C",
+    "Portfolio Action D",
+    "Portfolio Action E"
   ],
   "ai_tips": [
-    "AI Tool Integration Strategy 1",
-    "AI Tool Integration Strategy 2",
-    "AI Tool Integration Strategy 3",
-    "AI Tool Integration Strategy 4",
-    "AI Tool Integration Strategy 5"
+    "AI Tool Strategy A",
+    "AI Tool Strategy B",
+    "AI Tool Strategy C",
+    "AI Tool Strategy D",
+    "AI Tool Strategy E"
   ],
-  "market": {
-    "job_demand": {"text": "Extremely High demand with rapid growth.", "percentage": 88},
-    "difficulty": {"text": "Moderate to High learning curve requiring dedicated practice.", "percentage": 75},
-    "growth": {"text": "Multi-year compound annual growth rate of +22%.", "percentage": 90},
-    "learning_time": {"text": "6 months of consistent 15 hrs/week study.", "percentage": 80},
-    "salary": {
-      "fresher": "₹6.5L - ₹10.0L / yr",
-      "mid": "₹14.0L - ₹22.0L / yr",
-      "senior": "₹25.0L - ₹45.0L / yr"
-    },
-    "top_organizations": ["Org 1", "Org 2", "Org 3", "Org 4", "Org 5"],
+  "market": {{
+    "job_demand": {{"text": "Extremely High demand with rapid growth.", "percentage": 88}},
+    "difficulty": {{"text": "Moderate to High learning curve requiring dedicated practice.", "percentage": 75}},
+    "growth": {{"text": "Multi-year compound annual growth rate of +22%.", "percentage": 90}},
+    "learning_time": {{"text": "6 months of consistent 15 hrs/week study.", "percentage": 80}},
+    "salary": {{
+      "fresher": "₹6.0L - ₹10.0L / yr",
+      "mid": "₹14.0L - ₹25.0L / yr",
+      "senior": "₹28.0L - ₹55.0L / yr"
+    }},
+    "top_organizations": ["Company A", "Company B", "Company C", "Company D", "Company E"],
     "hiring_hotspots": [
-      {"city": "City 1", "demand": "Very High", "reason": "Major Tech & Business Hub"},
-      {"city": "City 2", "demand": "High", "reason": "Global Corporate Headquarters"},
-      {"city": "City 3", "demand": "High", "reason": "R&D & Innovation Center"},
-      {"city": "City 4", "demand": "High", "reason": "Regional Financial Capital"},
-      {"city": "City 5", "demand": "Moderate-High", "reason": "Specialty Industry Cluster"}
+      {{"city": "City A", "demand": "Very High", "reason": "Major Industry Hub"}},
+      {{"city": "City B", "demand": "High", "reason": "Global Corporate Headquarters"}}
     ],
-    "trending_skills": ["Trending Skill 1", "Trending Skill 2", "Trending Skill 3", "Trending Skill 4", "Trending Skill 5"],
+    "trending_skills": ["Trending Skill A", "Trending Skill B", "Trending Skill C", "Trending Skill D", "Trending Skill E"],
     "daily_plan": [
       "Monday: 2 hrs Core Principles & Industry Fundamentals",
       "Tuesday: 2 hrs Practical Tooling & Hands-on Practice",
@@ -1307,7 +1302,7 @@ Return ONLY valid JSON matching this exact structure:
       "Thursday: 2 hrs Portfolio & Project Execution",
       "Friday: 2 hrs Quality Audit & Process Refactoring"
     ]
-  }
+  }}
 }}
 
 Rules:
