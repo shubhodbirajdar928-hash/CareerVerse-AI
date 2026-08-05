@@ -93,6 +93,13 @@ def generate_with_fallback(prompt):
 
 app = Flask(__name__)
 
+@app.after_request
+def add_no_cache_headers(response):
+    response.headers["Cache-Control"] = "no-cache, no-store, must-revalidate, max-age=0"
+    response.headers["Pragma"] = "no-cache"
+    response.headers["Expires"] = "0"
+    return response
+
 UPLOAD_FOLDER = "uploads"
 
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
