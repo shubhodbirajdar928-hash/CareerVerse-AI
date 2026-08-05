@@ -537,25 +537,39 @@ async function generateRoadmapNow() {
     </div>
 </div>
 
-<!-- ================= PROJECTS ================= -->
+<!-- ================= PROJECTS / PRACTICAL MILESTONES ================= -->
 
-<div class="roadmap-item">
-    <h2><i class="fa-solid fa-laptop-code"></i> Real-World Portfolio Projects (Top 5 Per Tier)</h2>
-    <div style="display: flex; flex-direction: column; gap: 16px;">
-        <div>
-            <h3 style="color: #22c55e;"><i class="fa-solid fa-cubes"></i> Beginner Projects</h3>
-            <ul>${(projects.beginner || []).map(p => `<li>🟢 ${p}</li>`).join("")}</ul>
-        </div>
-        <div>
-            <h3 style="color: var(--accent);"><i class="fa-solid fa-network-wired"></i> Intermediate Projects</h3>
-            <ul>${(projects.intermediate || []).map(p => `<li>🟡 ${p}</li>`).join("")}</ul>
-        </div>
-        <div>
-            <h3 style="color: #a855f7;"><i class="fa-solid fa-server"></i> Advanced Enterprise Projects</h3>
-            <ul>${(projects.advanced || []).map(p => `<li>🟣 ${p}</li>`).join("")}</ul>
+${(() => {
+    const isTechRole = /developer|engineer|coder|programmer|software|web|fullstack|frontend|backend|cloud|data|ai|ml|cybersecurity|devops|qa|sysadmin|blockchain/i.test(data.career_title || "");
+    const projectSectionTitle = isTechRole ? "Real-World Technical Projects" : "Practical Milestones & Domain Case Studies";
+    const projectIcon = isTechRole ? "fa-laptop-code" : "fa-briefcase";
+    const beginnerLabel = isTechRole ? "Beginner Projects" : "Beginner Practicums & Case Logs";
+    const intermediateLabel = isTechRole ? "Intermediate Projects" : "Intermediate Field Assignments";
+    const advancedLabel = isTechRole ? "Advanced Enterprise Projects" : "Advanced Clinical & Strategic Case Studies";
+    const beginnerIcon = isTechRole ? "fa-cubes" : "fa-seedling";
+    const intermediateIcon = isTechRole ? "fa-network-wired" : "fa-diagram-project";
+    const advancedIcon = isTechRole ? "fa-server" : "fa-award";
+
+    return `
+    <div class="roadmap-item">
+        <h2><i class="fa-solid ${projectIcon}"></i> ${projectSectionTitle} (Top 5 Per Tier)</h2>
+        <div style="display: flex; flex-direction: column; gap: 16px;">
+            <div>
+                <h3 style="color: #22c55e;"><i class="fa-solid ${beginnerIcon}"></i> ${beginnerLabel}</h3>
+                <ul>${(projects.beginner || []).map(p => `<li>🟢 ${p}</li>`).join("")}</ul>
+            </div>
+            <div>
+                <h3 style="color: var(--accent);"><i class="fa-solid ${intermediateIcon}"></i> ${intermediateLabel}</h3>
+                <ul>${(projects.intermediate || []).map(p => `<li>🟡 ${p}</li>`).join("")}</ul>
+            </div>
+            <div>
+                <h3 style="color: #a855f7;"><i class="fa-solid ${advancedIcon}"></i> ${advancedLabel}</h3>
+                <ul>${(projects.advanced || []).map(p => `<li>🟣 ${p}</li>`).join("")}</ul>
+            </div>
         </div>
     </div>
-</div>
+    `;
+})()}
 
 <!-- ================= CERTIFICATIONS & TOOLS ================= -->
 
