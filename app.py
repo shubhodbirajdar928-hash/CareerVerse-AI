@@ -612,9 +612,31 @@ Conversation:
 
      return handle_gemini_error(e)
     
-    # =====================================================
-# AI Roadmap API
-# =====================================================
+def format_multi_currency_salary(country, base_usd_fresher="$70k - $95k / yr", base_usd_mid="$120k - $160k / yr", base_usd_senior="$180k - $270k / yr"):
+    c_low = (country or "").lower().strip()
+    
+    if "india" in c_low:
+        return "₹6.5L - ₹10.0L / yr (Fresher) -> ₹14.0L - ₹22.0L / yr (Mid) -> ₹25.0L - ₹48.0L / yr (Senior)"
+    elif any(k in c_low for k in ["uk", "united kingdom", "london", "england", "scotland"]):
+        return "£32,000 - £48,000 / yr (Fresher) -> £52,000 - £80,000 / yr (Mid) -> £85,000 - £140,000 / yr (Senior)"
+    elif any(k in c_low for k in ["germany", "france", "netherlands", "spain", "italy", "europe", "sweden", "ireland"]):
+        return "€42,000 - €58,000 / yr (Fresher) -> €62,000 - €88,000 / yr (Mid) -> €95,000 - €150,000 / yr (Senior)"
+    elif "canada" in c_low:
+        return "CA$55,000 - CA$75,000 / yr (Fresher) -> CA$80,000 - CA$115,000 / yr (Mid) -> CA$125,000 - CA$185,000 / yr (Senior)"
+    elif "australia" in c_low:
+        return "A$65,000 - A$88,000 / yr (Fresher) -> A$92,000 - A$130,000 / yr (Mid) -> A$140,000 - A$210,000 / yr (Senior)"
+    elif any(k in c_low for k in ["uae", "dubai", "abu dhabi"]):
+        return "AED 12,000 - AED 18,000 / mo (Fresher) -> AED 22,000 - AED 35,000 / mo (Mid) -> AED 40,000 - AED 65,000 / mo (Senior)"
+    elif any(k in c_low for k in ["saudi", "riyadh"]):
+        return "SAR 10,000 - SAR 16,000 / mo (Fresher) -> SAR 18,000 - SAR 28,000 / mo (Mid) -> SAR 32,000 - SAR 55,000 / mo (Senior)"
+    elif "singapore" in c_low:
+        return "S$48,000 - S$68,000 / yr (Fresher) -> S$72,000 - S$108,000 / yr (Mid) -> S$115,000 - S$180,000 / yr (Senior)"
+    elif "japan" in c_low:
+        return "¥4,200,000 - ¥6,000,000 / yr (Fresher) -> ¥6,500,000 - ¥9,500,000 / yr (Mid) -> ¥10,500,000 - ¥16,000,000 / yr (Senior)"
+    elif "switzerland" in c_low:
+        return "CHF 75,000 - CHF 95,000 / yr (Fresher) -> CHF 105,000 - CHF 140,000 / yr (Mid) -> CHF 150,000 - CHF 220,000 / yr (Senior)"
+    else:
+        return f"{base_usd_fresher} (Fresher) -> {base_usd_mid} (Mid) -> {base_usd_senior} (Senior)"
 
 # =====================================================
 # Fallback Roadmap Generator
@@ -629,7 +651,7 @@ def get_fallback_roadmap(career, country, months=6):
     if any(w in c_low for w in ["doctor", "surgeon", "physician", "dentist", "nurse", "medical", "pharmacist"]):
         edu = "MBBS / MD / BDS / Nursing Degree + Clinical Internship & Medical Council Registration"
         sal_ind_f, sal_ind_m, sal_ind_s = "₹6.0L - ₹10.0L / yr", "₹15.0L - ₹28.0L / yr", "₹35.0L - ₹75.0L / yr"
-        sal_cnt_f, sal_cnt_m, sal_cnt_s = "$75k - $110k / yr", "dollar150k - $240k / yr", "$280k - $450k / yr"
+        sal_cnt_f, sal_cnt_m, sal_cnt_s = "$75k - $110k / yr", "$150k - $240k / yr", "$280k - $450k / yr"
         roles = [f"Resident {c_title}", f"Junior Consultant {c_title}", f"Senior Consultant {c_title}", f"Head of Clinical Department", f"Medical Director"]
         sk_b = ["Human Anatomy & Physiology", "Medical Terminology", "Vital Signs & Triage", "First Aid & CPR", "Patient Empathy"]
         sk_i = ["Clinical Pharmacology", "Pathology & Diagnostics", "EMR/EHR Systems (Epic/Cerner)", "Emergency Resuscitation", "Surgical Hygiene"]
@@ -760,7 +782,7 @@ def get_fallback_roadmap(career, country, months=6):
             "education": edu,
             "salary": {
                 "india": f"{sal_ind_f} (Fresher) -> {sal_ind_m} (Mid) -> {sal_ind_s} (Senior)",
-                "country": f"{sal_cnt_f} (Fresher) -> {sal_cnt_m} (Mid) -> {sal_cnt_s} (Senior)"
+                "country": format_multi_currency_salary(country, sal_cnt_f, sal_cnt_m, sal_cnt_s)
             },
             "future_scope": f"Strong multi-year demand with high career trajectory across global hiring markets."
         },
