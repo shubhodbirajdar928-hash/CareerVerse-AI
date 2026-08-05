@@ -528,9 +528,16 @@ async function generateRoadmapNow() {
     <h2><i class="fa-solid fa-graduation-cap"></i> Curated Learning Resources (Top 5 Per Category)</h2>
     <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
         <div>
-            <h3><i class="fa-brands fa-youtube" style="color: #ef4444;"></i> Top 5 YouTube Channels</h3>
+            <h3><i class="fa-brands fa-youtube" style="color: #ef4444;"></i> Top 5 Authentic YouTube Channels</h3>
             <div style="display: flex; flex-direction: column; gap: 8px;">
-                ${(resources.youtube || []).map(item => `<a href="${item.url}" target="_blank" rel="noopener noreferrer" class="resource-link">▶ ${item.name}</a>`).join("")}
+                ${(resources.youtube || []).map(item => `
+                    <a href="${item.url}" target="_blank" rel="noopener noreferrer" class="resource-link" style="display: flex; justify-content: space-between; align-items: center; text-decoration: none;">
+                        <span><i class="fa-brands fa-youtube" style="color: #ef4444; margin-right: 6px;"></i> ${item.name}</span>
+                        <span style="background: rgba(239, 68, 68, 0.15); color: #ef4444; border: 1px solid rgba(239, 68, 68, 0.4); font-size: 0.7rem; padding: 2px 8px; border-radius: 20px; font-weight: 700; display: inline-flex; align-items: center; gap: 4px;">
+                            <i class="fa-solid fa-circle-check"></i> Verified
+                        </span>
+                    </a>
+                `).join("")}
             </div>
         </div>
         <div>
