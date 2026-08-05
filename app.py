@@ -790,20 +790,37 @@ def get_fallback_roadmap(career, country, months=6):
         trend_skills = [f"Advanced {c_title} Automation", "AI & Data Analytics Integration", "Cloud-Native Systems", "Agile Project Delivery", "Strategic Leadership"]
         daily_plan = ["Monday: 2 hrs Core Principles & Industry Theory", "Tuesday: 2 hrs Practical Hands-On Tool Practice", "Wednesday: 2 hrs Case Studies & System Architecture", "Thursday: 2 hrs Building Portfolio Project Components", "Friday: 2 hrs Quality Audit & Process Refactoring", "Saturday: 3 hrs End-to-End Project Integration", "Sunday: 1 hr Weekly Performance Review"]
 
+    phase_titles = [
+        "Foundational Principles & Core Domain Mechanics",
+        "Applied Workflows, Tooling & Practical Execution",
+        "Advanced Methodologies & System Architecture",
+        "Real-World Case Studies & Performance Optimization",
+        "Enterprise Governance, Security & Quality Standards",
+        "Leadership, Strategic Portfolio & Career Transition",
+        "Advanced Specialization & Domain Innovation",
+        "Cross-Functional Scaling & Global Operations",
+        "Executive Leadership & Strategic Management",
+        "Mastery Level Capstone & Industry Disruption",
+        "Global Advisory & Senior Consultancy Practice",
+        "Executive Boardroom Strategy & Future Governance"
+    ]
+
     roadmap_months = []
     for m in range(1, months + 1):
+        p_idx = (m - 1) % len(phase_titles)
+        p_name = phase_titles[p_idx]
         roadmap_months.append({
             "month": f"Month {m}",
-            "title": f"Phase {m}: Core Skill Mastery & Real-World Execution",
+            "title": f"Phase {m}: {p_name}",
             "topics": [
-                f"Fundamental & Advanced Principles of {c_title}",
-                f"Industry Best Practices & Standard Protocols for {c_title}",
-                f"Tooling, Workflow Automation & Performance Tuning",
-                f"Collaborative Execution & Quality Audits",
-                f"Security, Compliance & Professional Standards"
+                f"Core {c_title} Domain Knowledge & Operational Mechanics",
+                f"Industry Best Practices & Standard Tooling for {c_title}",
+                f"Workflow Automation, Quality Assurance & Data Metrics",
+                f"Cross-Functional Collaboration & Field Case Studies",
+                f"Regulatory Compliance, Safety & Professional Ethics"
             ],
-            "project": f"Production-Grade {c_title} Portfolio Project #{m}",
-            "goal": f"Master core competencies and deliver a functional project milestone."
+            "project": f"Real-World {c_title} Milestone Project #{m}: {p_name}",
+            "goal": f"Deliver a fully functional {c_title} milestone demonstrating practical expertise in {p_name}."
         })
 
     return {
