@@ -786,23 +786,36 @@ ${(() => {
         </div>
     </div>
 
-    <h3 style="margin-top: 10px;"><i class="fa-solid fa-handshake-simple"></i> Offer & Negotiation Strategy Blueprint</h3>
-    <div style="background: rgba(250, 204, 21, 0.04); border: 1px solid rgba(250, 204, 21, 0.25); border-radius: 14px; padding: 18px; margin-bottom: 24px;">
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
-            <div style="display: flex; gap: 12px; align-items: start;">
-                <div style="background: rgba(250, 204, 21, 0.15); color: var(--accent); width: 32px; height: 32px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-weight: 800; flex-shrink: 0;">1</div>
-                <div>
-                    <strong style="font-size: 0.9rem; color: var(--text-heading); display: block;">Anchor Upper-Quartile Market Rates</strong>
-                    <span style="font-size: 0.82rem; color: var(--text-secondary); line-height: 1.4; display: block;">Never reveal your current base. Benchmark against verified ${country || 'global'} pay bands and request top-tier base compensation.</span>
-                </div>
+    <h3 style="margin-top: 10px;"><i class="fa-solid fa-chart-line"></i> Fast-Track Career Leveling & Promotion Roadmap</h3>
+    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 24px;">
+        <div style="background: rgba(34, 197, 94, 0.04); border: 1px solid rgba(34, 197, 94, 0.3); border-radius: 14px; padding: 18px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                <span style="font-size: 0.78rem; color: #22c55e; font-weight: 800; text-transform: uppercase;">🟢 Level 1: Junior (0 - 2 Yrs)</span>
+                <span style="font-size: 0.7rem; background: rgba(34, 197, 94, 0.15); color: #22c55e; padding: 2px 8px; border-radius: 12px; font-weight: 700;">Execution</span>
             </div>
-            <div style="display: flex; gap: 12px; align-items: start;">
-                <div style="background: rgba(34, 197, 94, 0.15); color: #22c55e; width: 32px; height: 32px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-weight: 800; flex-shrink: 0;">2</div>
-                <div>
-                    <strong style="font-size: 0.9rem; color: var(--text-heading); display: block;">Negotiate Performance & Equity Perks</strong>
-                    <span style="font-size: 0.82rem; color: var(--text-secondary); line-height: 1.4; display: block;">If base pay is capped by rigid company bands, negotiate joining bonuses, RSUs/equity, or accelerated 6-month performance reviews.</span>
-                </div>
+            <strong style="color: var(--text-heading); font-size: 0.92rem; display: block; margin-bottom: 6px;">Task Reliability & Core Skills</strong>
+            <p style="font-size: 0.8rem; color: var(--text-secondary); margin: 0 0 10px; line-height: 1.4;">Deliver assigned deliverables on time with zero hand-holding and maintain clean documentation.</p>
+            <div style="font-size: 0.75rem; color: #22c55e; font-weight: 700;">🎯 Promotion Trigger: <span style="color: var(--text-primary); font-weight: 400;">&lt;5% rework rate &amp; proactive daily updates.</span></div>
+        </div>
+
+        <div style="background: rgba(250, 204, 21, 0.04); border: 1px solid rgba(250, 204, 21, 0.3); border-radius: 14px; padding: 18px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                <span style="font-size: 0.78rem; color: var(--accent); font-weight: 800; text-transform: uppercase;">🟡 Level 2: Mid-Level (2 - 5 Yrs)</span>
+                <span style="font-size: 0.7rem; background: rgba(250, 204, 21, 0.15); color: var(--accent); padding: 2px 8px; border-radius: 12px; font-weight: 700;">Ownership</span>
             </div>
+            <strong style="color: var(--text-heading); font-size: 0.92rem; display: block; margin-bottom: 6px;">End-to-End System Design</strong>
+            <p style="font-size: 0.8rem; color: var(--text-secondary); margin: 0 0 10px; line-height: 1.4;">Own complex module features, lead technical reviews, and mentor junior team members.</p>
+            <div style="font-size: 0.75rem; color: var(--accent); font-weight: 700;">🎯 Promotion Trigger: <span style="color: var(--text-primary); font-weight: 400;">Leading 2+ major projects boosting team efficiency.</span></div>
+        </div>
+
+        <div style="background: rgba(168, 85, 247, 0.04); border: 1px solid rgba(168, 85, 247, 0.3); border-radius: 14px; padding: 18px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                <span style="font-size: 0.78rem; color: #a855f7; font-weight: 800; text-transform: uppercase;">🟣 Level 3: Senior / Lead (5+ Yrs)</span>
+                <span style="font-size: 0.7rem; background: rgba(168, 85, 247, 0.15); color: #a855f7; padding: 2px 8px; border-radius: 12px; font-weight: 700;">Strategy</span>
+            </div>
+            <strong style="color: var(--text-heading); font-size: 0.92rem; display: block; margin-bottom: 6px;">Enterprise Strategy &amp; Architecture</strong>
+            <p style="font-size: 0.8rem; color: var(--text-secondary); margin: 0 0 10px; line-height: 1.4;">Architect long-term technology roadmaps, resolve critical bottlenecks, and align goals with business ROI.</p>
+            <div style="font-size: 0.75rem; color: #a855f7; font-weight: 700;">🎯 Promotion Trigger: <span style="color: var(--text-primary); font-weight: 400;">Driving strategic ROI &amp; shaping organizational standards.</span></div>
         </div>
     </div>
 
