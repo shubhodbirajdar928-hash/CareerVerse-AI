@@ -537,8 +537,6 @@ async function generateRoadmapNow() {
     <div class="chip-grid">
         ${(overview.roles || []).map(r => `<span class="chip-item">👔 ${r}</span>`).join("")}
     </div>
-
-    ${renderPayBandCard(overview.salary, targetSalInfo, country)}
 </div>
 
 <!-- ================= SKILLS ================= -->
