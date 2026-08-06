@@ -267,24 +267,13 @@
 
 /* COMPARISON METRIC BARS */
 
-.comparison-summary {
-    background: var(--bg-card);
-    border: 1px solid var(--border);
-    border-radius: var(--radius-xl);
-    padding: 36px;
-    margin-bottom: 40px;
-    text-align: left;
-}
-
-.comparison-summary h2 {
-    color: var(--accent);
-    font-size: 1.4rem;
-    margin-bottom: 24px;
-}
-
-.compare-metric, .bar-row {
+.comparison-summary, .compare-metric, .bar-row, .fill {
     display: none !important;
-}
+    visibility: hidden !important;
+    opacity: 0 !important;
+    height: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
 }
 
 /* WINNER BOX */
