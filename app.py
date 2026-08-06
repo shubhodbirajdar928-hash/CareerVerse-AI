@@ -255,44 +255,6 @@ def validate_career_input(career):
     if is_qwerty_mashing(c_clean):
         return False, f"⚠️ Invalid Career Role: '{c_raw}' appears to be keyboard mashing. Please enter a valid job role (e.g. 'Software Engineer')."
 
-    # Extract words
-    words = re.findall(r'[a-z0-9\+\#]+', c_clean)
-    std_vowels = set("aeiouy")
-    
-    # Common professional role suffixes
-    ROLE_SUFFIXES = (
-        "ist", "er", "or", "ant", "ent", "ian", "ive", "ic", "eer", "man", "woman",
-        "worker", "smith", "wright", "path", "grapher", "logist", "nomist", "metrician", "tech", "master",
-        "keeper", "guard", "attendant", "clerk", "rep", "representative", "handler",
-        "setter", "fitter", "turner", "molder", "caster", "welder", "cutter", "grinder",
-        "polisher", "cleaner", "driver", "runner", "helper", "packer", "sorter", "checker",
-        "loader", "feeder", "tender", "repairer", "installer", "maintainer", "servicer",
-        "technician", "specialist", "analyst", "engineer", "developer", "designer",
-        "manager", "director", "architect", "scientist", "assistant", "operator",
-        "inspector", "supervisor", "executive", "builder", "trader", "broker",
-        "evaluator", "practitioner", "counselor", "instructor", "teacher", "professor",
-        "trainer", "coach", "pilot", "chef", "baker", "maker"
-    )
-
-    for word in words:
-        if word in VALID_ACRONYMS or re.match(r'^\d+[a-z]?$', word):
-            continue
-
-        # Word >= 3 chars with 0 standard vowels
-        if len(word) >= 3 and not any(char in std_vowels for char in word):
-            return False, f"⚠️ Invalid Career Role: '{c_raw}' contains unrecognized word patterns. Please check your spelling."
-
-        # 5+ consecutive consonants (allow known exceptions)
-        if re.search(r'[bcdfghjklmnpqrstvwxz]{5,}', word) and "blockchain" not in word and "architect" not in word and "strength" not in word:
-            return False, f"⚠️ Invalid Career Role: '{c_raw}' contains invalid character combinations."
-
-        # 4+ repeating characters
-        if re.search(r'(.)\1{3,}', word):
-            return False, f"⚠️ Invalid Career Role: '{c_raw}' contains invalid repeating characters."
-
-    if not words:
-        return False, f"⚠️ Invalid Career Role: '{c_raw}' is an unrecognized job title. Please enter a real career role."
-
     return True, c_raw.title()
 
 REAL_WORLD_COUNTRIES = {
