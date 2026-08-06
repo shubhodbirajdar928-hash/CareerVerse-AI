@@ -1124,11 +1124,10 @@ function generatePDFReport() {
 
     doc.autoTable({
         startY: y,
-        head: [['Education & Path', `Expected Pay (${pdfTargetLoc})`, 'International Benchmark (USD)', 'Future Scope']],
+        head: [['Education & Path', `Expected Pay (${pdfTargetLoc})`, 'Future Scope']],
         body: [[
             sanitize(overview.education || "Bachelor's / STEM"),
             pdfTargetSalaryStr,
-            pdfIntlSalaryStr,
             sanitize(overview.future_scope || "High Demand")
         ]],
         styles: { fontSize: 8.5, cellPadding: 4 },
