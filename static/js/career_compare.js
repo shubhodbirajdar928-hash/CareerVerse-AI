@@ -402,6 +402,35 @@ function createCareerCard(career, isPrimary, countryTarget) {
 
     const showIndiaExamNote = isIndiaExam && countryTarget && !['india', 'in', 'bharat'].includes(countryTarget.toLowerCase().trim());
 
+    // Calculate Proper Opportunity Fit Rating & Reality Label
+    const fitScore = parseInt(career.overall_score) || (isIndiaExam ? 82 : 88);
+    let fitTierLabel = "";
+    let fitColor = "#22c55e";
+    let fitBadgeBg = "rgba(34, 197, 94, 0.12)";
+    let fitBorder = "rgba(34, 197, 94, 0.35)";
+
+    if (isIndiaExam) {
+        fitTierLabel = "🎯 High Administrative Impact / Selection Rate (<1%)";
+        fitColor = "#f97316";
+        fitBadgeBg = "rgba(249, 115, 22, 0.12)";
+        fitBorder = "rgba(249, 115, 22, 0.35)";
+    } else if (fitScore >= 90) {
+        fitTierLabel = "⭐ Exceptional Opportunity & Rapid Hiring Growth";
+        fitColor = "#22c55e";
+        fitBadgeBg = "rgba(34, 197, 94, 0.12)";
+        fitBorder = "rgba(34, 197, 94, 0.35)";
+    } else if (fitScore >= 80) {
+        fitTierLabel = "🔥 Strong Career Alignment & High Industry Demand";
+        fitColor = "#3b82f6";
+        fitBadgeBg = "rgba(59, 130, 246, 0.12)";
+        fitBorder = "rgba(59, 130, 246, 0.35)";
+    } else {
+        fitTierLabel = "⚡ High Preparation Barrier & Specialized Niche Market";
+        fitColor = "#facc15";
+        fitBadgeBg = "rgba(250, 204, 21, 0.12)";
+        fitBorder = "rgba(250, 204, 21, 0.35)";
+    }
+
     return `
         <div class="compare-card" style="border: 1px solid ${borderColor}; box-shadow: 0 10px 30px rgba(0,0,0,0.4); border-radius: 18px; padding: 24px;">
             
@@ -427,7 +456,7 @@ function createCareerCard(career, isPrimary, countryTarget) {
                 ${showIndiaExamNote ? `
                 <div style="background: rgba(249, 115, 22, 0.08); border: 1px solid rgba(249, 115, 22, 0.35); border-radius: 10px; padding: 10px; margin-bottom: 12px;">
                     <span style="font-size: 0.78rem; color: #f97316; font-weight: 700; display: flex; align-items: center; gap: 6px; line-height: 1.4;">
-                        <i class="fa-solid fa-circle-info"></i> Official Salary Compensation is in Indian Rupees (₹) under the 7th Pay Commission. UPSC is an Indian Government exam and is not conducted in ${countryTarget}.
+                        <i class="fa-solid fa-circle-info"></i> ${career.name || 'This exam'} is an Indian entrance/government exam and is not conducted in ${countryTarget}. Official salary compensation is rendered in Indian Rupees (₹).
                     </span>
                 </div>
                 ` : ''}
@@ -448,25 +477,37 @@ function createCareerCard(career, isPrimary, countryTarget) {
                 </div>
             </div>
 
-            <!-- Opportunity Score & Market Indicators -->
+            <!-- Opportunity Fit Index & Market Indicators -->
             <div style="background: rgba(0,0,0,0.35); border: 1px solid var(--border); border-radius: 14px; padding: 18px;">
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
-                    <span style="font-size: 0.85rem; font-weight: 800; color: var(--text-heading);">🚀 Opportunity Fit Index</span>
-                    <span style="font-size: 1.4rem; font-weight: 900; color: ${accentColor};">${career.overall_score || 85}/100</span>
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                    <div>
+                        <span style="font-size: 0.88rem; font-weight: 800; color: var(--text-heading); display: block;">🚀 Opportunity Fit Index</span>
+                        <span style="font-size: 0.72rem; color: var(--text-muted); font-weight: 600;">Evaluated against Market Openings, Security & Barrier to Entry</span>
+                    </div>
+                    <div style="text-align: right;">
+                        <span style="font-size: 1.5rem; font-weight: 900; color: ${fitColor}; display: block;">${fitScore}/100</span>
+                    </div>
+                </div>
+
+                <div style="background: ${fitBadgeBg}; border: 1px solid ${fitBorder}; border-radius: 10px; padding: 8px 12px; margin-bottom: 12px;">
+                    <span style="font-size: 0.76rem; font-weight: 700; color: ${fitColor}; display: flex; align-items: center; gap: 6px;">
+                        ${fitTierLabel}
+                    </span>
                 </div>
 
                 <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
                     <div style="background: rgba(255,255,255,0.03); border: 1px solid var(--border); border-radius: 10px; padding: 10px;">
-                        <span style="font-size: 0.7rem; color: var(--text-muted); font-weight: 700; display: block;">🔥 JOB DEMAND</span>
+                        <span style="font-size: 0.7rem; color: var(--text-muted); font-weight: 700; display: block; text-transform: uppercase;">🔥 JOB DEMAND TIER</span>
                         <strong style="color: #22c55e; font-size: 0.86rem;">${demandRating}</strong>
                     </div>
                     <div style="background: rgba(255,255,255,0.03); border: 1px solid var(--border); border-radius: 10px; padding: 10px;">
-                        <span style="font-size: 0.7rem; color: var(--text-muted); font-weight: 700; display: block;">🚀 FUTURE GROWTH</span>
+                        <span style="font-size: 0.7rem; color: var(--text-muted); font-weight: 700; display: block; text-transform: uppercase;">🚀 5-YR SECTOR OUTLOOK</span>
                         <strong style="color: #3b82f6; font-size: 0.86rem;">${growthOutlook}</strong>
                     </div>
                 </div>
-                <div style="margin-top: 10px; font-size: 0.78rem; color: var(--text-secondary);">
-                    ⏳ <strong>Preparation Curve:</strong> ${learningTime}
+
+                <div style="margin-top: 10px; font-size: 0.78rem; color: var(--text-secondary); background: rgba(255,255,255,0.02); border-radius: 8px; padding: 8px 12px; border: 1px solid var(--border);">
+                    ⏳ <strong>Preparation & Entry Curve:</strong> ${learningTime}
                 </div>
             </div>
 
