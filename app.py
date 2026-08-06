@@ -2469,6 +2469,7 @@ Format:
 }}
 
 Rules:
+- STRICT FACT-CHECKED MARKET STATISTICS MANDATE: All salary ranges, reality scores, competition levels, and technical difficulty scores MUST be 100% accurate, realistic, and grounded in real-world market benchmarks (Glassdoor, Payscale, Levels.fyi, NASSCOM, BLS) for {country} and {career}.
 - reality_score between 0-100.
 - technical_difficulty between 0-100.
 - competition_level between 0-100.
@@ -2476,7 +2477,7 @@ Rules:
 - daily_work exactly 5 points.
 - hidden_truths exactly 5 points.
 - not_for_you exactly 3 points.
-- fresher_salary, mid_salary, senior_salary must be non-empty salary ranges for {country}.
+- fresher_salary, mid_salary, senior_salary must be accurate, non-empty salary ranges for {country} with local currency.
 - Return only JSON.
 """
 
