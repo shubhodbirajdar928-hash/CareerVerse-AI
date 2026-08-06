@@ -798,6 +798,61 @@ ${(() => {
         </div>
     </div>
 
+    <!-- AI Disruption & Automation Risk Index Card -->
+    ${(() => {
+        const c = (data.career || career || "").toLowerCase();
+        let percent = 20;
+        let status = "Low Risk (~20%) • High Human Judgement Needed";
+        let color = "#22c55e";
+        let gradient = "linear-gradient(90deg, #22c55e, #3b82f6)";
+        let reason = "High human judgement, domain expertise, and strategic decision-making prevent automated AI replacement.";
+
+        if (c.includes("doctor") || c.includes("surgeon") || c.includes("physician") || c.includes("medical") || c.includes("nurse") || c.includes("neet")) {
+            percent = 12;
+            status = "Low Risk (~12%) • High Human Judgement & Empathy Needed";
+            color = "#22c55e";
+            gradient = "linear-gradient(90deg, #22c55e, #3b82f6)";
+            reason = "Zero AI Disruption Risk: Human empathy, physical diagnostics, and surgical precision remain 100% human-driven.";
+        } else if (c.includes("civil") || c.includes("construction") || c.includes("mechanical") || c.includes("textile") || c.includes("garment")) {
+            percent = 15;
+            status = "Low Risk (~15%) • High Physical & Field Execution Needed";
+            color = "#22c55e";
+            gradient = "linear-gradient(90deg, #22c55e, #3b82f6)";
+            reason = "On-site physical engineering, safety audits, and material testing cannot be automated by AI software.";
+        } else if (c.includes("ai") || c.includes("ml") || c.includes("devops") || c.includes("cloud") || c.includes("security") || c.includes("cyber")) {
+            percent = 22;
+            status = "Low Risk (~22%) • AI Co-Pilot Integrator Role";
+            color = "#3b82f6";
+            gradient = "linear-gradient(90deg, #3b82f6, #a855f7)";
+            reason = "Engineers in this role leverage AI co-pilots to automate routine code, elevating specialists into strategic system architects.";
+        } else if (c.includes("finance") || c.includes("accountant") || c.includes("analyst") || c.includes("lawyer")) {
+            percent = 28;
+            status = "Moderate Risk (~28%) • High Analytical Judgement Required";
+            color = "#eab308";
+            gradient = "linear-gradient(90deg, #3b82f6, #eab308)";
+            reason = "AI speeds up data parsing, but complex risk auditing, courtroom advocacy, and strategic investments require human accountability.";
+        }
+
+        return `
+        <div style="background: rgba(15, 23, 42, 0.85); border: 1px solid rgba(59, 130, 246, 0.35); border-radius: 16px; padding: 20px; margin-top: 18px; margin-bottom: 18px; box-shadow: 0 10px 25px rgba(0,0,0,0.4);">
+            <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; margin-bottom: 12px;">
+                <span style="font-size: 0.95rem; font-weight: 800; color: #3b82f6; display: flex; align-items: center; gap: 8px;">
+                    <i class="fa-solid fa-robot" style="font-size: 1.15rem; color: #3b82f6;"></i> AI Disruption & Automation Risk Index
+                </span>
+                <span style="font-size: 0.86rem; font-weight: 800; color: ${color}; display: flex; align-items: center; gap: 6px;">
+                    ${status}
+                </span>
+            </div>
+            <div style="background: rgba(255, 255, 255, 0.08); height: 10px; border-radius: 6px; overflow: hidden; margin-bottom: 10px;">
+                <div style="width: ${percent}%; height: 100%; background: ${gradient}; border-radius: 6px; transition: width 1s ease-in-out;"></div>
+            </div>
+            <p style="font-size: 0.82rem; color: var(--text-secondary); margin: 0; line-height: 1.4;">
+                <i class="fa-solid fa-shield-halved" style="color: ${color}; margin-right: 6px;"></i> ${reason}
+            </p>
+        </div>
+        `;
+    })()}
+
     <!-- Official Country Salary Pay Band Card -->
     ${renderPayBandCard(overview.salary || market.salary, targetSalInfo, country)}
 
