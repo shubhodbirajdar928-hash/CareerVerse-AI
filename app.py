@@ -5,7 +5,7 @@ import pdfplumber
 
 from dotenv import load_dotenv
 from google import genai
-from flask import Flask, render_template, request, jsonify
+from flask import Flask, render_template, request, jsonify, session
 from datetime import datetime
 import re
 
@@ -88,10 +88,11 @@ def generate_with_fallback(prompt):
 
 
 # =====================================================
-# Flask Configuration
+# Flask Configuration & Secret Key
 # =====================================================
 
 app = Flask(__name__)
+app.secret_key = os.getenv("SECRET_KEY", "careerverse_secure_session_secret_key_2026")
 
 @app.after_request
 def add_no_cache_headers(response):
@@ -105,13 +106,6 @@ UPLOAD_FOLDER = "uploads"
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 
 app.config["UPLOAD_FOLDER"] = UPLOAD_FOLDER
-
-
-# =====================================================
-# Global Chat Memory
-# =====================================================
-
-chat_history = []
 
 
 # =====================================================
@@ -524,43 +518,42 @@ def salary_predictor():
 
 
 # =====================================================
-# Clear Chat
+# Clear Chat (Per-User Session)
 # =====================================================
 
 @app.route("/clear-chat", methods=["POST"])
 def clear_chat():
-
-    global chat_history
-
-    chat_history.clear()
-
+    session["chat_history"] = []
+    session.modified = True
     return jsonify({
         "success": True
     })
+
 # =====================================================
-# AI Career Chat API
+# AI Career Chat API (Per-User Isolated Session Memory)
 # =====================================================
 
 @app.route("/career-chat-api", methods=["POST"])
 def career_chat_api():
-
-    global chat_history
-
     try:
-
-        data = request.get_json()
-
+        data = request.get_json() or {}
         question = data.get("question", "").strip()
 
-        if question == "":
+        if not question:
             return failure("Please enter a question.", 400)
 
-        chat_history.append({
+        # Retrieve isolated per-user chat history from Flask session
+        history = session.get("chat_history", [])
+        if not isinstance(history, list):
+            history = []
+
+        history.append({
             "role": "user",
             "text": question
         })
 
-        chat_history = chat_history[-10:]
+        # Keep last 10 messages for context efficiency
+        history = history[-10:]
 
         prompt = """
 You are CareerVerse AI.
@@ -593,33 +586,29 @@ Always give practical advice.
 Conversation:
 
 """
-        for msg in chat_history:
-
+        for msg in history:
             prompt += f"{msg['role']}: {msg['text']}\n"
 
         prompt += "\nAssistant:"
 
         answer = generate_with_fallback(prompt)
 
-        chat_history.append({
-
+        history.append({
             "role": "assistant",
-
             "text": answer
-
         })
 
+        # Save updated history back to Flask session
+        session["chat_history"] = history
+        session.modified = True
+
         return success({
-
             "answer": answer
-
         })
 
     except Exception as e:
-
-     traceback.print_exc()
-
-     return handle_gemini_error(e)
+        traceback.print_exc()
+        return handle_gemini_error(e)
     
 GLOBAL_CURRENCY_DB = {
     # Asia & South Asia
