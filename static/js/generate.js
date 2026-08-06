@@ -798,107 +798,87 @@ ${(() => {
         </div>
     </div>
 
-    <!-- AI Disruption & Automation Risk Index Card (Authentic & Screenshot Matched) -->
+    <!-- Global Mobility & Relocation Readiness Index -->
     ${(() => {
-        const c = (data.career || career || "").toLowerCase();
-        let percent = 18;
-        let status = "Low Risk (~18%) • High Human Judgement & Strategy Needed";
-        let color = "#22c55e";
-        let gradient = "linear-gradient(90deg, #22c55e, #3b82f6)";
-        let score = "92 / 100";
-        let superpowers = ["Strategic Leadership", "Stakeholder Alignment", "Ethical Accountability"];
-        let aiSynergy = "Uses AI co-pilots for automated data parsing & routine synthesis.";
-        let insight = "Strategic leadership, real-time crisis resolution, and human trust prevent automated AI replacement.";
+        const cLow = (country || "").toLowerCase().trim();
+        const careerTitle = data.career || career || "Professional";
+        
+        let visaName = "Standard Work Permit / Skilled Visa";
+        let visaDetails = "Requires official job offer & corporate sponsorship from licensed employer.";
+        let languageReq = "English (Professional Working)";
+        let languageDetails = "International business language standard across major corporate hubs.";
+        let score = "90 / 100";
 
-        if (c.includes("doctor") || c.includes("surgeon") || c.includes("physician") || c.includes("medical") || c.includes("nurse") || c.includes("neet") || c.includes("mbbs")) {
-            percent = 12;
-            status = "Low Risk (~12%) • High Human Judgement & Empathy Needed";
-            color = "#22c55e";
-            gradient = "linear-gradient(90deg, #22c55e, #3b82f6)";
-            score = "98 / 100";
-            superpowers = ["Bedside Empathy & Patient Trust", "Tactile Surgical Precision", "Complex Clinical Triage"];
-            aiSynergy = "AI assists in early diagnostic radiology scans, accelerating clinical decision-making.";
-            insight = "Zero AI Disruption Risk: Physical patient care, emergency surgery, and human empathy remain 100% human-driven.";
-        } else if (c.includes("civil") || c.includes("construction") || c.includes("mechanical") || c.includes("textile") || c.includes("garment") || c.includes("chemical")) {
-            percent = 15;
-            status = "Low Risk (~15%) • High Physical & Field Execution Needed";
-            color = "#22c55e";
-            gradient = "linear-gradient(90deg, #22c55e, #3b82f6)";
+        if (cLow.includes("japan")) {
+            visaName = "HSP Visa / Engineer Work Status";
+            visaDetails = "Fast-track 1-3 year permanent residency for Highly Skilled Professionals.";
+            languageReq = "Japanese JLPT N3 / N2 (Target)";
+            languageDetails = "English used in multinational tech; JLPT N3 unlocks 5x more local roles.";
+            score = "92 / 100";
+        } else if (cLow.includes("germany") || cLow.includes("europe") || cLow.includes("eu")) {
+            visaName = "EU Blue Card / Opportunity Card";
+            visaDetails = "Fast-track residence permit with minimum salary threshold requirements.";
+            languageReq = "German B1/B2 (Recommended)";
+            languageDetails = "Tech hubs (Berlin/Munich) operate in English; B1 accelerates permanent PR.";
             score = "95 / 100";
-            superpowers = ["On-Site Field Operations", "Material Testing & Quality Audits", "Physical Safety Supervision"];
-            aiSynergy = "AI assists in CAD generative design optimization and structural stress simulations.";
-            insight = "Physical field engineering, structural inspections, and factory floor management cannot be replaced by AI software.";
-        } else if (c.includes("ai") || c.includes("ml") || c.includes("devops") || c.includes("cloud") || c.includes("security") || c.includes("cyber") || c.includes("sre")) {
-            percent = 22;
-            status = "Low Risk (~22%) • AI Co-Pilot Integrator Role";
-            color = "#3b82f6";
-            gradient = "linear-gradient(90deg, #3b82f6, #a855f7)";
+        } else if (cLow.includes("usa") || cLow.includes("united states") || cLow.includes("america")) {
+            visaName = "H-1B / O-1 / L-1 Intracompany";
+            visaDetails = "Cap-subject lottery or specialized talent visa; STEM OPT extension for graduates.";
+            languageReq = "Native / Fluent English";
+            languageDetails = "Full professional fluency required for technical interviews & client presentation.";
             score = "94 / 100";
-            superpowers = ["System Architecture Design", "Cyber Incident Response", "Cross-Platform Infrastructure Orchestration"];
-            aiSynergy = "Engineers leverage AI coding assistants to automate boilerplate code and focus on high-level architecture.";
-            insight = "Engineers in this domain control and build AI infrastructure, transforming specialists into high-value strategists.";
-        } else if (c.includes("finance") || c.includes("accountant") || c.includes("analyst") || c.includes("banking") || c.includes("cfa")) {
-            percent = 28;
-            status = "Moderate Risk (~28%) • High Analytical Judgement Required";
-            color = "#eab308";
-            gradient = "linear-gradient(90deg, #3b82f6, #eab308)";
-            score = "88 / 100";
-            superpowers = ["Investment Negotiation", "Regulatory & Forensic Auditing", "Client Portfolio Advisory"];
-            aiSynergy = "AI automates spreadsheet parsing, allowing analysts to deliver higher-tier strategic investment advice.";
-            insight = "Routine data entry is automated, but multi-million dollar investment decisions require human fiduciary accountability.";
+        } else if (cLow.includes("uk") || cLow.includes("united kingdom")) {
+            visaName = "Skilled Worker Visa (SWV)";
+            visaDetails = "Point-based immigration system requiring licensed sponsor & salary threshold.";
+            languageReq = "IELTS / B2 English Certified";
+            languageDetails = "Standard UKVI English proficiency certification required for visa application.";
+            score = "93 / 100";
+        } else if (cLow.includes("uae") || cLow.includes("dubai") || cLow.includes("saudi")) {
+            visaName = "Golden Visa / Tax-Free Work Permit";
+            visaDetails = "10-year residency for top talent & executive specialists; 0% personal income tax.";
+            languageReq = "English (Arabic Advantage)";
+            languageDetails = "Corporate business operates entirely in English; Arabic is a strong local asset.";
+            score = "96 / 100";
+        } else if (cLow.includes("india")) {
+            visaName = "Domestic Prime Market";
+            visaDetails = "Seamless national mobility across major Tier-1 technology & corporate hubs.";
+            languageReq = "English & Regional Fluency";
+            languageDetails = "English is the standard corporate medium across Indian enterprise hubs.";
+            score = "98 / 100";
         }
+
+        const countryName = targetSalInfo?.name || (country ? country.trim() : "Target Market");
 
         return `
         <div style="background: rgba(15, 23, 42, 0.85); border: 1px solid rgba(59, 130, 246, 0.35); border-radius: 18px; padding: 22px; margin-top: 20px; margin-bottom: 20px; box-shadow: 0 12px 30px rgba(0,0,0,0.45); backdrop-filter: blur(10px);">
-            
-            <!-- Header & Screenshot Match -->
-            <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 12px; margin-bottom: 14px;">
-                <div style="font-size: 1.02rem; font-weight: 800; color: #3b82f6; display: flex; align-items: center; gap: 10px; line-height: 1.3;">
-                    <span style="font-size: 1.35rem; background: rgba(59, 130, 246, 0.15); width: 38px; height: 38px; border-radius: 10px; display: inline-flex; align-items: center; justify-content: center; border: 1px solid rgba(59, 130, 246, 0.3);">🤖</span>
-                    <div>
-                        <div>AI Disruption &</div>
-                        <div>Automation Risk Index</div>
-                    </div>
-                </div>
-                <div style="font-size: 0.88rem; font-weight: 800; color: ${color}; background: rgba(34, 197, 94, 0.08); padding: 6px 14px; border-radius: 20px; border: 1px solid ${color}40; display: inline-flex; align-items: center; gap: 6px;">
-                    <span style="width: 8px; height: 8px; border-radius: 50%; background: ${color}; display: inline-block;"></span>
-                    ${status}
-                </div>
+            <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; margin-bottom: 16px; border-bottom: 1px solid rgba(255,255,255,0.08); padding-bottom: 12px;">
+                <span style="font-size: 1.02rem; font-weight: 800; color: var(--text-heading); display: flex; align-items: center; gap: 10px;">
+                    <span style="font-size: 1.3rem;">🌐</span> Global Mobility & Relocation Readiness Index (${countryName})
+                </span>
+                <span style="background: rgba(59, 130, 246, 0.15); color: #60a5fa; border: 1px solid rgba(59, 130, 246, 0.4); font-size: 0.78rem; padding: 4px 12px; border-radius: 20px; font-weight: 800;">
+                    <i class="fa-solid fa-plane-departure"></i> International Hiring Active
+                </span>
             </div>
 
-            <!-- Progress Bar Track -->
-            <div style="background: rgba(255, 255, 255, 0.08); height: 10px; border-radius: 8px; overflow: hidden; margin-bottom: 18px; box-shadow: inset 0 2px 4px rgba(0,0,0,0.5);">
-                <div style="width: ${percent}%; height: 100%; background: ${gradient}; border-radius: 8px; transition: width 1.2s cubic-bezier(0.4, 0, 0.2, 1);"></div>
-            </div>
+            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px;">
+                <div style="background: rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.06); border-radius: 14px; padding: 16px;">
+                    <span style="font-size: 0.72rem; color: #3b82f6; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px;">📜 Visa & Work Authorization</span>
+                    <h4 style="color: var(--text-heading); font-size: 0.92rem; margin: 6px 0 4px; font-weight: 800;">${visaName}</h4>
+                    <p style="font-size: 0.76rem; color: var(--text-secondary); margin: 0; line-height: 1.35;">${visaDetails}</p>
+                </div>
 
-            <!-- 3-Pillar Authentic Human Advantage Breakdown -->
-            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; background: rgba(0, 0, 0, 0.25); padding: 14px; border-radius: 12px; border: 1px solid rgba(255, 255, 255, 0.06);">
-                <div>
-                    <span style="font-size: 0.72rem; color: #22c55e; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px; display: block; margin-bottom: 6px;">
-                        🛡️ Irreplaceable Human Traits
-                    </span>
-                    <div style="display: flex; flex-wrap: wrap; gap: 4px;">
-                        ${superpowers.map(s => `<span style="font-size: 0.72rem; background: rgba(34, 197, 94, 0.12); color: #86efac; border: 1px solid rgba(34, 197, 94, 0.3); padding: 2px 8px; border-radius: 6px; font-weight: 600;">${s}</span>`).join('')}
-                    </div>
+                <div style="background: rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.06); border-radius: 14px; padding: 16px;">
+                    <span style="font-size: 0.72rem; color: #22c55e; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px;">🗣️ Language & Cultural Prep</span>
+                    <h4 style="color: #22c55e; font-size: 0.92rem; margin: 6px 0 4px; font-weight: 800;">${languageReq}</h4>
+                    <p style="font-size: 0.76rem; color: var(--text-secondary); margin: 0; line-height: 1.35;">${languageDetails}</p>
                 </div>
-                <div>
-                    <span style="font-size: 0.72rem; color: #3b82f6; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px; display: block; margin-bottom: 6px;">
-                        ⚡ AI Co-Pilot Synergy
-                    </span>
-                    <p style="font-size: 0.76rem; color: var(--text-secondary); margin: 0; line-height: 1.35;">${aiSynergy}</p>
-                </div>
-                <div>
-                    <span style="font-size: 0.72rem; color: #a855f7; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px; display: block; margin-bottom: 6px;">
-                        💎 2026+ Future-Proof Score
-                    </span>
-                    <span style="font-size: 1.05rem; font-weight: 900; color: #d8b4fe;">${score}</span>
-                    <span style="font-size: 0.72rem; color: var(--text-muted); display: block;">High Career Longevity</span>
+
+                <div style="background: rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.06); border-radius: 14px; padding: 16px;">
+                    <span style="font-size: 0.72rem; color: #a855f7; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px;">💎 Global Mobility Score</span>
+                    <h4 style="color: #d8b4fe; font-size: 1.1rem; margin: 4px 0 2px; font-weight: 900;">${score}</h4>
+                    <p style="font-size: 0.76rem; color: var(--text-secondary); margin: 0; line-height: 1.35;">High international transferability for ${careerTitle}.</p>
                 </div>
             </div>
-
-            <p style="font-size: 0.81rem; color: var(--text-secondary); margin: 12px 0 0; line-height: 1.45; display: flex; align-items: center; gap: 8px;">
-                <i class="fa-solid fa-shield-halved" style="color: ${color}; font-size: 0.95rem;"></i> ${insight}
-            </p>
         </div>
         `;
     })()}
