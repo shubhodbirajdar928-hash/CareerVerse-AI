@@ -518,6 +518,25 @@ async function generateRoadmapNow() {
         </div>
     </div>
 
+    <!-- Past, Present & Future Timeline Reason Card -->
+    <div style="background: rgba(250, 204, 21, 0.03); border: 1px solid rgba(250, 204, 21, 0.25); border-radius: 16px; padding: 20px; margin-bottom: 20px;">
+        <h3 style="margin-top: 0; color: var(--accent); font-size: 1rem; margin-bottom: 14px;"><i class="fa-solid fa-hourglass-half"></i> Past, Present & Future Macro Market Evolution</h3>
+        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px;">
+            <div style="background: rgba(59, 130, 246, 0.05); border: 1px solid rgba(59, 130, 246, 0.25); border-radius: 12px; padding: 14px;">
+                <span style="font-size: 0.75rem; color: #3b82f6; font-weight: 800; text-transform: uppercase; display: block; margin-bottom: 4px;">📜 PAST (10-Yr Evolution)</span>
+                <p style="font-size: 0.82rem; color: var(--text-secondary); margin: 0; line-height: 1.4;">${(overview.macro_evolution?.past || `Historically, ${data.career || career} relied on manual execution, legacy tools, and localized workflows with minimal automation.`)}</p>
+            </div>
+            <div style="background: rgba(250, 204, 21, 0.05); border: 1px solid rgba(250, 204, 21, 0.25); border-radius: 12px; padding: 14px;">
+                <span style="font-size: 0.75rem; color: var(--accent); font-weight: 800; text-transform: uppercase; display: block; margin-bottom: 4px;">⚡ PRESENT (Current Realities)</span>
+                <p style="font-size: 0.82rem; color: var(--text-secondary); margin: 0; line-height: 1.4;">${(overview.macro_evolution?.present || `Currently in high demand driven by digital transformation, modern tech stacks, and cloud integration across global hiring hubs.`)}</p>
+            </div>
+            <div style="background: rgba(34, 197, 94, 0.05); border: 1px solid rgba(34, 197, 94, 0.25); border-radius: 12px; padding: 14px;">
+                <span style="font-size: 0.75rem; color: #22c55e; font-weight: 800; text-transform: uppercase; display: block; margin-bottom: 4px;">🚀 FUTURE (5-10 Yr Scope)</span>
+                <p style="font-size: 0.82rem; color: var(--text-secondary); margin: 0; line-height: 1.4;">${(overview.macro_evolution?.future || `Over the next decade, AI co-pilots will eliminate routine work, elevating specialists into strategic decision-makers with top-tier earning potential.`)}</p>
+            </div>
+        </div>
+    </div>
+
     <h3><i class="fa-solid fa-layer-group"></i> Top 5 Career Progression Roles</h3>
     <div class="chip-grid">
         ${(overview.roles || []).map(r => `<span class="chip-item">👔 ${r}</span>`).join("")}

@@ -1292,7 +1292,12 @@ def get_fallback_roadmap(career, country, months=6):
                 "india": f"{sal_ind_f} (Fresher) -> {sal_ind_m} (Mid) -> {sal_ind_s} (Senior)",
                 "country": f"{target_f} (Fresher) -> {target_m} (Mid) -> {target_s} (Senior)"
             },
-            "future_scope": f"Strong multi-year demand with high career trajectory across global hiring markets."
+            "future_scope": f"Strong multi-year demand with high career trajectory across global hiring markets.",
+            "macro_evolution": {
+                "past": f"Historically, {c_title} roles relied on manual execution, legacy tools, and localized workflows with minimal automated tooling.",
+                "present": f"Currently, {c_title} is in high demand driven by rapid digital transformation, modern tech stacks, and cloud infrastructure.",
+                "future": f"Over the next 5-10 years, AI co-pilots and automation will eliminate repetitive work, elevating {c_title} specialists into high-value strategic decision makers."
+            }
         },
         "skills": {
             "beginner": sk_b,
@@ -1424,7 +1429,12 @@ Return ONLY valid JSON matching this exact structure:
       "india": "₹6.0L - ₹10.0L / yr (Fresher) -> ₹14.0L - ₹25.0L / yr (Mid) -> ₹28.0L - ₹55.0L / yr (Senior)",
       "country": "$70,000 - $100,000 / yr (Fresher) -> $120,000 - $170,000 / yr (Mid) -> $180,000 - $280,000 / yr (Senior)"
     }},
-    "future_scope": "5-year growth trajectory, AI impact, and job market outlook."
+    "future_scope": "5-year growth trajectory, AI impact, and job market outlook.",
+    "macro_evolution": {{
+      "past": "Reasoning on how this career operated 10 years ago (manual processes, legacy tooling, foundational skills).",
+      "present": "Reasoning on why this career is in high demand right now (digital transformation, modern frameworks, global skill needs).",
+      "future": "Reasoning on why this career will thrive over the next 5-10 years (AI co-pilots, high human judgment, strategic growth)."
+    }}
   }},
   "skills": {{
     "beginner": ["Skill A", "Skill B", "Skill C", "Skill D", "Skill E"],
