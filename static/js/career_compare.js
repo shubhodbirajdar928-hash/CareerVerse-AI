@@ -134,6 +134,53 @@ country: country
             ${createCareerCard(data.career2, false, country)}
         </div>
 
+        <!-- UNFILTERED CAREER REALITY COMPARISON (EXPECTATION VS GROUND TRUTH) -->
+        <div style="background: rgba(239, 68, 68, 0.04); border: 1px solid rgba(239, 68, 68, 0.3); border-radius: 20px; padding: 28px; margin-bottom: 40px; box-shadow: 0 10px 30px rgba(0,0,0,0.4);">
+            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px; border-bottom: 1px solid rgba(255,255,255,0.08); padding-bottom: 14px;">
+                <div style="display: flex; align-items: center; gap: 12px;">
+                    <i class="fa-solid fa-eye" style="font-size: 1.4rem; color: #ef4444;"></i>
+                    <h2 style="margin: 0; font-size: 1.25rem; color: var(--text-heading); font-weight: 800;">
+                        The Unfiltered Career Reality: Social Myths vs Ground Truth
+                    </h2>
+                </div>
+                <span style="font-size: 0.75rem; background: rgba(239, 68, 68, 0.15); border: 1px solid rgba(239, 68, 68, 0.4); color: #ef4444; padding: 4px 12px; border-radius: 20px; font-weight: 700;">
+                    🔥 NO-FILTER TRUTH
+                </span>
+            </div>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                <!-- ROLE 1 REALITY BOX -->
+                <div style="background: rgba(0,0,0,0.4); border: 1px solid rgba(59, 130, 246, 0.4); border-radius: 16px; padding: 20px;">
+                    <span style="font-size: 0.76rem; color: #60a5fa; font-weight: 800; text-transform: uppercase; display: block; margin-bottom: 10px;">
+                        🚀 ${c1Name} Reality Check
+                    </span>
+                    <div style="background: rgba(255,255,255,0.03); border: 1px solid var(--border); border-radius: 10px; padding: 12px; margin-bottom: 10px;">
+                        <strong style="color: #60a5fa; font-size: 0.78rem; display: block; margin-bottom: 4px;">💭 Common Myth / Social Expectation:</strong>
+                        <p style="font-size: 0.84rem; color: var(--text-secondary); margin: 0; line-height: 1.5;">${c1.expectation || 'Instant high starting salary, total remote flexibility, and minimal initial overtime.'}</p>
+                    </div>
+                    <div style="background: rgba(239, 68, 68, 0.08); border: 1px solid rgba(239, 68, 68, 0.3); border-radius: 10px; padding: 12px;">
+                        <strong style="color: #ef4444; font-size: 0.78rem; display: block; margin-bottom: 4px;">🔥 Unfiltered Industry Ground Truth:</strong>
+                        <p style="font-size: 0.84rem; color: var(--text-heading); margin: 0; line-height: 1.5; font-weight: 500;">${c1.unfiltered_reality || 'Requires 3-4 years of intense initial preparation, entry-level hustle, tight deadlines, and continuous upskilling.'}</p>
+                    </div>
+                </div>
+
+                <!-- ROLE 2 REALITY BOX -->
+                <div style="background: rgba(0,0,0,0.4); border: 1px solid rgba(250, 204, 21, 0.4); border-radius: 16px; padding: 20px;">
+                    <span style="font-size: 0.76rem; color: #fde047; font-weight: 800; text-transform: uppercase; display: block; margin-bottom: 10px;">
+                        ⚡ ${c2Name} Reality Check
+                    </span>
+                    <div style="background: rgba(255,255,255,0.03); border: 1px solid var(--border); border-radius: 10px; padding: 12px; margin-bottom: 10px;">
+                        <strong style="color: #fde047; font-size: 0.78rem; display: block; margin-bottom: 4px;">💭 Common Myth / Social Expectation:</strong>
+                        <p style="font-size: 0.84rem; color: var(--text-secondary); margin: 0; line-height: 1.5;">${c2.expectation || 'Low entry barrier, quick promotions, and simple non-technical demands.'}</p>
+                    </div>
+                    <div style="background: rgba(239, 68, 68, 0.08); border: 1px solid rgba(239, 68, 68, 0.3); border-radius: 10px; padding: 12px;">
+                        <strong style="color: #ef4444; font-size: 0.78rem; display: block; margin-bottom: 4px;">🔥 Unfiltered Industry Ground Truth:</strong>
+                        <p style="font-size: 0.84rem; color: var(--text-heading); margin: 0; line-height: 1.5; font-weight: 500;">${c2.unfiltered_reality || 'Requires high domain accountability, handling complex stakeholder demands, and building proven domain projects.'}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <!-- HEAD-TO-HEAD DECISION MATRIX TABLE -->
         <div style="background: var(--bg-card); border: 1px solid var(--border); border-radius: 20px; padding: 32px; margin-bottom: 40px;">
             <div style="margin-bottom: 24px; border-bottom: 1px solid rgba(255,255,255,0.08); padding-bottom: 14px;">
