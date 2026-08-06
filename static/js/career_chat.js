@@ -77,12 +77,45 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
+    // Robust Cross-Browser & Cross-Protocol Copy Helper (Supports HTTP, HTTPS, & Mobile)
+    function copyToClipboard(textToCopy) {
+        if (!textToCopy) return Promise.reject("Nothing to copy");
+        if (navigator.clipboard && window.isSecureContext) {
+            return navigator.clipboard.writeText(textToCopy);
+        } else {
+            return new Promise((resolve, reject) => {
+                try {
+                    const textArea = document.createElement("textarea");
+                    textArea.value = textToCopy;
+                    textArea.style.position = "fixed";
+                    textArea.style.left = "-999999px";
+                    textArea.style.top = "-999999px";
+                    document.body.appendChild(textArea);
+                    textArea.focus();
+                    textArea.select();
+                    const successful = document.execCommand("copy");
+                    document.body.removeChild(textArea);
+                    if (successful) {
+                        resolve();
+                    } else {
+                        reject(new Error("execCommand copy failed"));
+                    }
+                } catch (err) {
+                    reject(err);
+                }
+            });
+        }
+    }
+
     // Copy Session Transcript
     if (copyChatBtn) {
         copyChatBtn.addEventListener("click", () => {
             const text = chatBox.innerText;
-            navigator.clipboard.writeText(text).then(() => {
+            copyToClipboard(text).then(() => {
                 alert("Conversation transcript copied to clipboard!");
+            }).catch(err => {
+                console.error("Copy failed:", err);
+                alert("Could not copy transcript automatically. Please select text manually.");
             });
         });
     }
@@ -214,8 +247,14 @@ document.addEventListener("DOMContentLoaded", () => {
         const copyBtn = msgRow.querySelector(".copy-msg-btn");
         if (copyBtn) {
             copyBtn.addEventListener("click", function () {
-                navigator.clipboard.writeText(rawText).then(() => {
+                copyToClipboard(rawText).then(() => {
                     this.innerHTML = `<i class="fa-solid fa-check" style="color:#22c55e"></i> Copied!`;
+                    setTimeout(() => {
+                        this.innerHTML = `<i class="fa-regular fa-copy"></i> Copy`;
+                    }, 2000);
+                }).catch(err => {
+                    console.error("Copy failed:", err);
+                    this.innerHTML = `<i class="fa-solid fa-triangle-exclamation" style="color:#ef4444"></i> Failed`;
                     setTimeout(() => {
                         this.innerHTML = `<i class="fa-regular fa-copy"></i> Copy`;
                     }, 2000);
