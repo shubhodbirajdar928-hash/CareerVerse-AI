@@ -762,19 +762,47 @@ ${(() => {
         </div>
     </div>
 
-    <h3 style="margin-top: 10px;"><i class="fa-solid fa-sack-dollar"></i> Career Salary Progression Breakdown</h3>
-    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 24px;">
-        <div style="background: rgba(34, 197, 94, 0.05); border: 1px solid rgba(34, 197, 94, 0.3); border-radius: 14px; padding: 18px; text-align: center;">
-            <span style="font-size: 0.78rem; color: #22c55e; font-weight: 700; text-transform: uppercase;">👨‍💻 Fresher (0 - 2 Yrs)</span>
-            <h4 style="color: var(--text-heading); font-size: 1.1rem; margin: 6px 0 0; font-weight: 800;">${getFresherSalary(market, country)}</h4>
+    <h3 style="margin-top: 10px;"><i class="fa-solid fa-clock"></i> Day-in-the-Life & Daily Duty Workflow</h3>
+    <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-bottom: 24px;">
+        <div style="background: rgba(59, 130, 246, 0.05); border: 1px solid rgba(59, 130, 246, 0.3); border-radius: 14px; padding: 16px;">
+            <div style="font-size: 0.75rem; color: #3b82f6; font-weight: 800; text-transform: uppercase; margin-bottom: 4px;">🌅 09:00 AM - 10:30 AM</div>
+            <strong style="color: var(--text-heading); font-size: 0.92rem; display: block; margin-bottom: 4px;">Morning Alignment & Standup</strong>
+            <p style="font-size: 0.8rem; color: var(--text-secondary); margin: 0; line-height: 1.4;">Sync with cross-functional teams, triage daily priorities, and review critical operational deliverables.</p>
         </div>
-        <div style="background: rgba(250, 204, 21, 0.05); border: 1px solid rgba(250, 204, 21, 0.3); border-radius: 14px; padding: 18px; text-align: center;">
-            <span style="font-size: 0.78rem; color: var(--accent); font-weight: 700; text-transform: uppercase;">🚀 Mid-Level (2 - 5 Yrs)</span>
-            <h4 style="color: var(--text-heading); font-size: 1.1rem; margin: 6px 0 0; font-weight: 800;">${getMidSalary(market, country)}</h4>
+        <div style="background: rgba(34, 197, 94, 0.05); border: 1px solid rgba(34, 197, 94, 0.3); border-radius: 14px; padding: 16px;">
+            <div style="font-size: 0.75rem; color: #22c55e; font-weight: 800; text-transform: uppercase; margin-bottom: 4px;">🧠 10:30 AM - 01:30 PM</div>
+            <strong style="color: var(--text-heading); font-size: 0.92rem; display: block; margin-bottom: 4px;">Deep Focus Execution</strong>
+            <p style="font-size: 0.8rem; color: var(--text-secondary); margin: 0; line-height: 1.4;">Uninterrupted high-value problem solving, technical/strategic execution, and core milestone building.</p>
         </div>
-        <div style="background: rgba(168, 85, 247, 0.05); border: 1px solid rgba(168, 85, 247, 0.3); border-radius: 14px; padding: 18px; text-align: center;">
-            <span style="font-size: 0.78rem; color: #a855f7; font-weight: 700; text-transform: uppercase;">🏆 Experienced (5+ Yrs)</span>
-            <h4 style="color: var(--text-heading); font-size: 1.1rem; margin: 6px 0 0; font-weight: 800;">${getSeniorSalary(market, country)}</h4>
+        <div style="background: rgba(250, 204, 21, 0.05); border: 1px solid rgba(250, 204, 21, 0.3); border-radius: 14px; padding: 16px;">
+            <div style="font-size: 0.75rem; color: var(--accent); font-weight: 800; text-transform: uppercase; margin-bottom: 4px;">🤝 02:30 PM - 04:30 PM</div>
+            <strong style="color: var(--text-heading); font-size: 0.92rem; display: block; margin-bottom: 4px;">Collaboration & Review</strong>
+            <p style="font-size: 0.8rem; color: var(--text-secondary); margin: 0; line-height: 1.4;">Stakeholder feedback loops, peer reviews, technical architecture sessions, and mentoring junior peers.</p>
+        </div>
+        <div style="background: rgba(168, 85, 247, 0.05); border: 1px solid rgba(168, 85, 247, 0.3); border-radius: 14px; padding: 16px;">
+            <div style="font-size: 0.75rem; color: #a855f7; font-weight: 800; text-transform: uppercase; margin-bottom: 4px;">🚀 04:30 PM - 06:00 PM</div>
+            <strong style="color: var(--text-heading); font-size: 0.92rem; display: block; margin-bottom: 4px;">Quality Audit & Learning</strong>
+            <p style="font-size: 0.8rem; color: var(--text-secondary); margin: 0; line-height: 1.4;">Testing & validating day's work, updating task boards, and spending 30 mins exploring cutting-edge AI tools.</p>
+        </div>
+    </div>
+
+    <h3 style="margin-top: 10px;"><i class="fa-solid fa-handshake-simple"></i> Offer & Negotiation Strategy Blueprint</h3>
+    <div style="background: rgba(250, 204, 21, 0.04); border: 1px solid rgba(250, 204, 21, 0.25); border-radius: 14px; padding: 18px; margin-bottom: 24px;">
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+            <div style="display: flex; gap: 12px; align-items: start;">
+                <div style="background: rgba(250, 204, 21, 0.15); color: var(--accent); width: 32px; height: 32px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-weight: 800; flex-shrink: 0;">1</div>
+                <div>
+                    <strong style="font-size: 0.9rem; color: var(--text-heading); display: block;">Anchor Upper-Quartile Market Rates</strong>
+                    <span style="font-size: 0.82rem; color: var(--text-secondary); line-height: 1.4; display: block;">Never reveal your current base. Benchmark against verified ${country || 'global'} pay bands and request top-tier base compensation.</span>
+                </div>
+            </div>
+            <div style="display: flex; gap: 12px; align-items: start;">
+                <div style="background: rgba(34, 197, 94, 0.15); color: #22c55e; width: 32px; height: 32px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-weight: 800; flex-shrink: 0;">2</div>
+                <div>
+                    <strong style="font-size: 0.9rem; color: var(--text-heading); display: block;">Negotiate Performance & Equity Perks</strong>
+                    <span style="font-size: 0.82rem; color: var(--text-secondary); line-height: 1.4; display: block;">If base pay is capped by rigid company bands, negotiate joining bonuses, RSUs/equity, or accelerated 6-month performance reviews.</span>
+                </div>
+            </div>
         </div>
     </div>
 
