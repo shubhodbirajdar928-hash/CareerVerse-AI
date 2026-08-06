@@ -446,9 +446,6 @@ function createCareerCard(career, isPrimary, countryTarget) {
                     <span style="font-size: 0.82rem; font-weight: 800; color: ${accentColor}; display: flex; align-items: center; gap: 6px;">
                         <i class="fa-solid fa-coins"></i> ${countryName} Local Pay Bands
                     </span>
-                    <span style="font-size: 0.72rem; color: #22c55e; background: rgba(34, 197, 94, 0.15); border: 1px solid rgba(34, 197, 94, 0.4); padding: 2px 8px; border-radius: 12px; font-weight: 700;">
-                        ✓ Industry Verified
-                    </span>
                 </div>
                 
                 <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; text-align: center;">

@@ -209,10 +209,7 @@ realityBtn.onclick = async function() {
                         <div class="reality-card salary-reality-card" style="border: 1px solid rgba(250, 204, 21, 0.35);">
                             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; border-bottom: 1px solid rgba(255,255,255,0.08); padding-bottom: 10px;">
                                 <span style="font-size: 0.98rem; font-weight: 800; color: var(--text-heading); display: flex; align-items: center; gap: 8px;">
-                                    <span style="font-size: 1.2rem;">${countryFlag}</span> ${countryName} Verified Earning Scope
-                                </span>
-                                <span style="background: rgba(34, 197, 94, 0.15); color: #22c55e; border: 1px solid rgba(34, 197, 94, 0.4); font-size: 0.7rem; padding: 2px 8px; border-radius: 14px; font-weight: 700;">
-                                    <i class="fa-solid fa-circle-check"></i> Verified
+                                    <span style="font-size: 1.2rem;">${countryFlag}</span> ${countryName} Earning Scope
                                 </span>
                             </div>
                             <p class="salary-overview-text" style="color: var(--text-secondary); font-size: 0.86rem; margin-bottom: 16px; line-height: 1.4;">${data.salary_reality || `Realistic compensation progression for ${data.career || career} in ${countryName}.`}</p>

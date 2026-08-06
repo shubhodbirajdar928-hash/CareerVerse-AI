@@ -320,9 +320,6 @@ function renderPayBandCard(salaryData, targetSalInfo, country) {
             <span style="font-size: 0.95rem; font-weight: 700; color: var(--text-heading); display: flex; align-items: center; gap: 8px;">
                 <span style="font-size: 1.25rem;">${flag}</span> ${countryName} Official Compensation Pay Band
             </span>
-            <span style="background: rgba(34, 197, 94, 0.15); color: #22c55e; border: 1px solid rgba(34, 197, 94, 0.4); font-size: 0.72rem; padding: 3px 10px; border-radius: 20px; font-weight: 700; display: inline-flex; align-items: center; gap: 4px;">
-                <i class="fa-solid fa-circle-check"></i> Industry Verified
-            </span>
         </div>
         <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px;">
             <div style="background: rgba(34, 197, 94, 0.06); border: 1px solid rgba(34, 197, 94, 0.3); border-radius: 12px; padding: 14px; text-align: center;">
