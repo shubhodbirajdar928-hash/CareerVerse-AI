@@ -270,9 +270,10 @@ function getCountrySalaryInfo(country, rawSalary) {
 }
 
 function renderPayBandCard(salaryData, targetSalInfo, country) {
-    const isIndia = (country || "").toLowerCase().trim().includes("india") || !(country || "").trim();
+    const cLow = (country || "").toLowerCase().trim();
+    const isIndia = cLow.includes("india") || !cLow;
     const flag = targetSalInfo.flag || (isIndia ? "🇮🇳" : "🌐");
-    const countryName = targetSalInfo.name || (isIndia ? "India" : "Target Market");
+    const countryName = targetSalInfo.name || (country ? country.trim() : "Target Market");
     
     let fresher = isIndia ? "₹5.0L - ₹9.0L / yr" : "$65,000 - $95,000 / yr";
     let mid = isIndia ? "₹12.0L - ₹22.0L / yr" : "$110,000 - $160,000 / yr";
@@ -280,9 +281,15 @@ function renderPayBandCard(salaryData, targetSalInfo, country) {
 
     if (salaryData) {
         if (typeof salaryData === "object") {
-            fresher = salaryData.fresher || salaryData.country_fresher || fresher;
-            mid = salaryData.mid || salaryData.country_mid || mid;
-            senior = salaryData.senior || salaryData.country_senior || senior;
+            if (isIndia) {
+                fresher = salaryData.india_fresher || salaryData.fresher || fresher;
+                mid = salaryData.india_mid || salaryData.mid || mid;
+                senior = salaryData.india_senior || salaryData.senior || senior;
+            } else {
+                fresher = salaryData.country_fresher || salaryData.fresher || fresher;
+                mid = salaryData.country_mid || salaryData.mid || mid;
+                senior = salaryData.country_senior || salaryData.senior || senior;
+            }
         } else if (typeof salaryData === "string") {
             const parts = salaryData.split("->").map(p => p.replace(/\((Fresher|Mid|Senior)\)/gi, "").trim());
             if (parts.length >= 3) {
