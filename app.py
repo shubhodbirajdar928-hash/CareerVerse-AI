@@ -696,84 +696,137 @@ def format_multi_currency_salary(country, base_usd_fresher="$70k - $95k / yr", b
 def get_career_salary_benchmark(career, country):
     c_low = (career or "").lower().strip()
     c_cntry = (country or "").lower().strip()
-    is_india = "india" in c_cntry or not c_cntry or c_cntry == "global"
 
-    # 1. AI / ML / Data Science / Deep Learning / LLM
+    # 1. AI / ML / Data Science / LLM
     if any(x in c_low for x in ["ai", "ml", "machine learning", "deep learning", "nlp", "llm", "data scientist", "data science"]):
-        if is_india:
-            return {"fresher": "₹8.0L - ₹16.0L / yr", "mid": "₹18.0L - ₹36.0L / yr", "senior": "₹40.0L - ₹90.0L+ / yr"}
-        else:
-            return {"fresher": "$95,000 - $145,000 / yr", "mid": "$155,000 - $230,000 / yr", "senior": "$240,000 - $420,000+ / yr"}
+        inr_f, inr_m, inr_s = "₹8.0L - ₹16.0L / yr", "₹18.0L - ₹36.0L / yr", "₹40.0L - ₹90.0L+ / yr"
+        usd_f, usd_m, usd_s = "$95,000 - $145,000 / yr", "$155,000 - $230,000 / yr", "$240,000 - $420,000+ / yr"
+        cny_f, cny_m, cny_s = "¥120,000 - ¥220,000 / yr", "¥240,000 - ¥400,000 / yr", "¥450,000 - ¥850,000+ / yr"
+        gbp_f, gbp_m, gbp_s = "£55,000 - £85,000 / yr", "£90,000 - £145,000 / yr", "£150,000 - £260,000+ / yr"
+        eur_f, eur_m, eur_s = "€60,000 - €95,000 / yr", "€100,000 - €155,000 / yr", "€160,000 - €280,000+ / yr"
 
-    # 2. DevOps / Cloud / SRE / Cyber Security / System Architect
+    # 2. DevOps / Cloud / SRE / Cyber Security
     elif any(x in c_low for x in ["devops", "cloud", "sre", "site reliability", "cyber", "security", "sysadmin", "system architect"]):
-        if is_india:
-            return {"fresher": "₹6.5L - ₹12.5L / yr", "mid": "₹15.0L - ₹28.0L / yr", "senior": "₹32.0L - ₹65.0L+ / yr"}
-        else:
-            return {"fresher": "$85,000 - $125,000 / yr", "mid": "$135,000 - $185,000 / yr", "senior": "$190,000 - $310,000+ / yr"}
+        inr_f, inr_m, inr_s = "₹6.5L - ₹12.5L / yr", "₹15.0L - ₹28.0L / yr", "₹32.0L - ₹65.0L+ / yr"
+        usd_f, usd_m, usd_s = "$85,000 - $125,000 / yr", "$135,000 - $185,000 / yr", "$190,000 - $310,000+ / yr"
+        cny_f, cny_m, cny_s = "¥100,000 - ¥180,000 / yr", "¥200,000 - ¥340,000 / yr", "¥380,000 - ¥650,000+ / yr"
+        gbp_f, gbp_m, gbp_s = "£48,000 - £75,000 / yr", "£80,000 - £120,000 / yr", "£130,000 - £210,000+ / yr"
+        eur_f, eur_m, eur_s = "€52,000 - €82,000 / yr", "€85,000 - €135,000 / yr", "€140,000 - €230,000+ / yr"
 
-    # 3. Chemical Scientist / Chemist / Chemistry / R&D Scientist
+    # 3. Textile Engineer / Garment / Fashion Tech / Materials
+    elif any(x in c_low for x in ["textile", "garment", "apparel", "fashion engineer", "fabric", "fiber"]):
+        inr_f, inr_m, inr_s = "₹3.5L - ₹6.5L / yr", "₹7.5L - ₹14.0L / yr", "₹16.0L - ₹30.0L / yr"
+        usd_f, usd_m, usd_s = "$60,000 - $85,000 / yr", "$90,000 - $135,000 / yr", "$140,000 - $210,000 / yr"
+        cny_f, cny_m, cny_s = "¥65,000 - ¥110,000 / yr", "¥120,000 - ¥200,000 / yr", "¥220,000 - ¥380,000 / yr"
+        gbp_f, gbp_m, gbp_s = "£32,000 - £48,000 / yr", "£52,000 - £78,000 / yr", "£82,000 - £130,000 / yr"
+        eur_f, eur_m, eur_s = "€36,000 - €54,000 / yr", "€58,000 - €88,000 / yr", "€92,000 - €145,000 / yr"
+
+    # 4. Chemical Scientist / Chemist / Chemistry
     elif any(x in c_low for x in ["chemical", "chemist", "chemistry", "lab scientist", "r&d scientist"]):
-        if is_india:
-            return {"fresher": "₹3.8L - ₹7.0L / yr", "mid": "₹8.5L - ₹16.0L / yr", "senior": "₹18.0L - ₹35.0L / yr"}
-        else:
-            return {"fresher": "$55,000 - $80,000 / yr", "mid": "$85,000 - $130,000 / yr", "senior": "$140,000 - $210,000 / yr"}
+        inr_f, inr_m, inr_s = "₹3.8L - ₹7.0L / yr", "₹8.5L - ₹16.0L / yr", "₹18.0L - ₹35.0L / yr"
+        usd_f, usd_m, usd_s = "$55,000 - $80,000 / yr", "$85,000 - $130,000 / yr", "$140,000 - $210,000 / yr"
+        cny_f, cny_m, cny_s = "¥70,000 - ¥120,000 / yr", "¥130,000 - ¥220,000 / yr", "¥240,000 - ¥400,000 / yr"
+        gbp_f, gbp_m, gbp_s = "£30,000 - £46,000 / yr", "£50,000 - £76,000 / yr", "£80,000 - £125,000 / yr"
+        eur_f, eur_m, eur_s = "€35,000 - €52,000 / yr", "€56,000 - €85,000 / yr", "€90,000 - €140,000 / yr"
 
-    # 4. Doctor / Medical Specialist / Physician / Surgeon / NEET / MBBS
+    # 5. Doctor / Medical Specialist / Surgeon / NEET / MBBS
     elif any(x in c_low for x in ["doctor", "surgeon", "physician", "dentist", "medical", "neet", "mbbs", "md", "ms"]):
-        if is_india:
-            return {"fresher": "₹6.5L - ₹12.0L / yr (Resident Intern)", "mid": "₹18.0L - ₹38.0L / yr (Medical Officer)", "senior": "₹45.0L - ₹1.5Cr+ / yr (Senior Consultant)"}
-        else:
-            return {"fresher": "$68,000 - $85,000 / yr (Resident)", "mid": "$220,000 - $320,000 / yr (Attending)", "senior": "$380,000 - $650,000+ / yr (Specialist)"}
+        inr_f, inr_m, inr_s = "₹6.5L - ₹12.0L / yr", "₹18.0L - ₹38.0L / yr", "₹45.0L - ₹1.5Cr+ / yr"
+        usd_f, usd_m, usd_s = "$68,000 - $85,000 / yr", "$220,000 - $320,000 / yr", "$380,000 - $650,000+ / yr"
+        cny_f, cny_m, cny_s = "¥110,000 - ¥180,000 / yr", "¥260,000 - ¥420,000 / yr", "¥500,000 - ¥1.2M+ / yr"
+        gbp_f, gbp_m, gbp_s = "£38,000 - £52,000 / yr", "£75,000 - £120,000 / yr", "£140,000 - £280,000+ / yr"
+        eur_f, eur_m, eur_s = "€42,000 - €58,000 / yr", "€85,000 - €135,000 / yr", "€150,000 - €300,000+ / yr"
 
-    # 5. Financial Analyst / Investment Banker / Finance Manager / Equity
+    # 6. Financial Analyst / Investment Banker / Finance
     elif any(x in c_low for x in ["financial", "finance", "investment banker", "equity", "cfa", "accounting", "chartered accountant"]):
-        if is_india:
-            return {"fresher": "₹7.0L - ₹14.0L / yr", "mid": "₹16.0L - ₹32.0L / yr", "senior": "₹35.0L - ₹90.0L+ / yr"}
-        else:
-            return {"fresher": "$85,000 - $130,000 / yr", "mid": "$140,000 - $210,000 / yr", "senior": "$220,000 - $450,000+ / yr"}
+        inr_f, inr_m, inr_s = "₹7.0L - ₹14.0L / yr", "₹16.0L - ₹32.0L / yr", "₹35.0L - ₹90.0L+ / yr"
+        usd_f, usd_m, usd_s = "$85,000 - $130,000 / yr", "$140,000 - $210,000 / yr", "$220,000 - $450,000+ / yr"
+        cny_f, cny_m, cny_s = "¥110,000 - ¥190,000 / yr", "¥210,000 - ¥360,000 / yr", "¥400,000 - ¥800,000+ / yr"
+        gbp_f, gbp_m, gbp_s = "£50,000 - £78,000 / yr", "£85,000 - £130,000 / yr", "£140,000 - £270,000+ / yr"
+        eur_f, eur_m, eur_s = "€55,000 - €85,000 / yr", "€92,000 - €142,000 / yr", "€150,000 - €290,000+ / yr"
 
-    # 6. Software / Web / Full Stack / Mobile Developer
-    elif any(x in c_low for x in ["software", "developer", "full stack", "frontend", "backend", "mobile", "ios", "android"]):
-        if is_india:
-            return {"fresher": "₹5.5L - ₹11.0L / yr", "mid": "₹13.0L - ₹24.0L / yr", "senior": "₹28.0L - ₹52.0L+ / yr"}
-        else:
-            return {"fresher": "$80,000 - $115,000 / yr", "mid": "$125,000 - $175,000 / yr", "senior": "$180,000 - $280,000+ / yr"}
+    # 7. Mechanical / Civil / Core Engineering
+    elif any(x in c_low for x in ["mechanical", "civil", "electrical", "structural", "autocad"]):
+        inr_f, inr_m, inr_s = "₹3.6L - ₹6.5L / yr", "₹8.0L - ₹15.0L / yr", "₹18.0L - ₹35.0L / yr"
+        usd_f, usd_m, usd_s = "$65,000 - $88,000 / yr", "$95,000 - $140,000 / yr", "$145,000 - $220,000 / yr"
+        cny_f, cny_m, cny_s = "¥70,000 - ¥115,000 / yr", "¥125,000 - ¥210,000 / yr", "¥220,000 - ¥380,000 / yr"
+        gbp_f, gbp_m, gbp_s = "£34,000 - £48,000 / yr", "£52,000 - £76,000 / yr", "£80,000 - £125,000 / yr"
+        eur_f, eur_m, eur_s = "€42,000 - €60,000 / yr", "€65,000 - €95,000 / yr", "€100,000 - €155,000 / yr"
 
-    # 7. Management / MBA / Product Manager / Consultant
-    elif any(x in c_low for x in ["mba", "product manager", "management", "consultant", "business analyst"]):
-        if is_india:
-            return {"fresher": "₹8.5L - ₹18.0L / yr", "mid": "₹20.0L - ₹38.0L / yr", "senior": "₹45.0L - ₹1.1Cr+ / yr"}
-        else:
-            return {"fresher": "$95,000 - $145,000 / yr", "mid": "$155,000 - $230,000 / yr", "senior": "$240,000 - $420,000+ / yr"}
-
-    # 8. Civil / Mechanical / Electrical Core Engineer
-    elif any(x in c_low for x in ["civil", "mechanical", "electrical", "structural", "autocad"]):
-        if is_india:
-            return {"fresher": "₹3.6L - ₹6.5L / yr", "mid": "₹8.0L - ₹15.0L / yr", "senior": "₹18.0L - ₹35.0L / yr"}
-        else:
-            return {"fresher": "$65,000 - $88,000 / yr", "mid": "$95,000 - $140,000 / yr", "senior": "$145,000 - $220,000 / yr"}
-
-    # 9. Law / Lawyer / Legal / Advocate
-    elif any(x in c_low for x in ["lawyer", "advocate", "legal", "solicitor", "llb"]):
-        if is_india:
-            return {"fresher": "₹4.5L - ₹9.0L / yr", "mid": "₹12.0L - ₹25.0L / yr", "senior": "₹30.0L - ₹75.0L+ / yr"}
-        else:
-            return {"fresher": "$75,000 - $125,000 / yr", "mid": "$145,000 - $230,000 / yr", "senior": "$250,000 - $500,000+ / yr"}
-
-    # 10. Civil Services / IAS / IPS / Police / UPSC
-    elif any(x in c_low for x in ["ias", "ips", "upsc", "police", "civil servant"]):
-        if is_india:
-            return {"fresher": "₹7.0L - ₹11.0L / yr (SDM/Probationary)", "mid": "₹14.0L - ₹22.0L / yr (Collector/DIG)", "senior": "₹25.0L - ₹40.0L / yr (Secretary/DGP)"}
-        else:
-            return {"fresher": "$60,000 - $85,000 / yr", "mid": "$95,000 - $135,000 / yr", "senior": "$150,000 - $220,000 / yr"}
-
-    # 11. Generic Default (Carefully benchmarked)
+    # Default / Other
     else:
-        if is_india:
-            return {"fresher": "₹4.5L - ₹8.5L / yr", "mid": "₹10.0L - ₹20.0L / yr", "senior": "₹22.0L - ₹45.0L / yr"}
-        else:
-            return {"fresher": "$60,000 - $90,000 / yr", "mid": "$95,000 - $145,000 / yr", "senior": "$150,000 - $240,000 / yr"}
+        inr_f, inr_m, inr_s = "₹4.5L - ₹8.5L / yr", "₹10.0L - ₹20.0L / yr", "₹22.0L - ₹45.0L / yr"
+        usd_f, usd_m, usd_s = "$60,000 - $90,000 / yr", "$95,000 - $145,000 / yr", "$150,000 - $240,000 / yr"
+        cny_f, cny_m, cny_s = "¥70,000 - ¥120,000 / yr", "¥130,000 - ¥220,000 / yr", "¥230,000 - ¥400,000 / yr"
+        gbp_f, gbp_m, gbp_s = "£35,000 - £55,000 / yr", "£60,000 - £90,000 / yr", "£95,000 - £150,000 / yr"
+        eur_f, eur_m, eur_s = "€40,000 - €62,000 / yr", "€68,000 - €100,000 / yr", "€105,000 - €165,000 / yr"
+
+    # Return based on requested country
+    if any(k in c_cntry for k in ["china", "chinese"]):
+        return {"fresher": cny_f, "mid": cny_m, "senior": cny_s}
+    elif any(k in c_cntry for k in ["uk", "united kingdom", "england", "london", "britain"]):
+        return {"fresher": gbp_f, "mid": gbp_m, "senior": gbp_s}
+    elif any(k in c_cntry for k in ["germany", "france", "italy", "spain", "netherlands", "europe", "eu"]):
+        return {"fresher": eur_f, "mid": eur_m, "senior": eur_s}
+    elif any(k in c_cntry for k in ["india"]):
+        return {"fresher": inr_f, "mid": inr_m, "senior": inr_s}
+    else:
+        return {"fresher": usd_f, "mid": usd_m, "senior": usd_s}
+
+
+def create_normalized_salary_object(career, country):
+    c_cntry = (country or "Global").strip().title()
+    c_low = c_cntry.lower()
+
+    symbol = "$"
+    code = "USD"
+    if any(k in c_low for k in ["china", "chinese"]):
+        symbol = "¥"
+        code = "CNY"
+    elif any(k in c_low for k in ["india"]):
+        symbol = "₹"
+        code = "INR"
+    elif any(k in c_low for k in ["uk", "united kingdom", "england", "britain"]):
+        symbol = "£"
+        code = "GBP"
+    elif any(k in c_low for k in ["germany", "france", "italy", "spain", "europe", "eu"]):
+        symbol = "€"
+        code = "EUR"
+    elif any(k in c_low for k in ["canada"]):
+        symbol = "CA$"
+        code = "CAD"
+    elif any(k in c_low for k in ["australia"]):
+        symbol = "A$"
+        code = "AUD"
+    elif any(k in c_low for k in ["uae", "dubai", "emirates"]):
+        symbol = "AED"
+        code = "AED"
+    elif any(k in c_low for k in ["japan"]):
+        symbol = "¥"
+        code = "JPY"
+    elif any(k in c_low for k in ["singapore"]):
+        symbol = "S$"
+        code = "SGD"
+
+    target_bench = get_career_salary_benchmark(career, c_cntry)
+    intl_bench = get_career_salary_benchmark(career, "USA")
+
+    target_formatted = f"{target_bench['fresher']} (Fresher) -> {target_bench['mid']} (Mid) -> {target_bench['senior']} (Senior)"
+    intl_formatted = f"{intl_bench['fresher']} (Fresher) -> {intl_bench['mid']} (Mid) -> {intl_bench['senior']} (Senior)"
+
+    return {
+        "target_location": c_cntry,
+        "currency_symbol": symbol,
+        "currency_code": code,
+        "fresher": target_bench["fresher"],
+        "mid": target_bench["mid"],
+        "senior": target_bench["senior"],
+        "formatted_range": target_formatted,
+        "international_usd_fresher": intl_bench["fresher"],
+        "international_usd_mid": intl_bench["mid"],
+        "international_usd_senior": intl_bench["senior"],
+        "international_usd_range": intl_formatted
+    }
 
 # =====================================================
 # Fallback Roadmap Generator
@@ -1356,9 +1409,7 @@ def get_fallback_roadmap(career, country, months=6):
 
     cnt_f, cnt_m, cnt_s = get_country_salary_tuple(country, sal_cnt_f, sal_cnt_m, sal_cnt_s)
 
-    target_f = sal_ind_f if is_india else cnt_f
-    target_m = sal_ind_m if is_india else cnt_m
-    target_s = sal_ind_s if is_india else cnt_s
+    norm_sal = create_normalized_salary_object(career, country)
 
     return {
         "success": True,
@@ -1369,19 +1420,7 @@ def get_fallback_roadmap(career, country, months=6):
             "description": f"Comprehensive, professional career development path for becoming an elite {c_title}. This roadmap covers foundational knowledge, practical field execution, and senior leadership.",
             "roles": roles,
             "education": edu,
-            "salary": {
-                "fresher": target_f,
-                "mid": target_m,
-                "senior": target_s,
-                "country_fresher": target_f,
-                "country_mid": target_m,
-                "country_senior": target_s,
-                "india_fresher": sal_ind_f,
-                "india_mid": sal_ind_m,
-                "india_senior": sal_ind_s,
-                "india": f"{sal_ind_f} (Fresher) -> {sal_ind_m} (Mid) -> {sal_ind_s} (Senior)",
-                "country": f"{target_f} (Fresher) -> {target_m} (Mid) -> {target_s} (Senior)"
-            },
+            "salary": norm_sal,
             "future_scope": f"Strong multi-year demand with high career trajectory across global hiring markets.",
             "macro_evolution": {
                 "past": f"Historically, {c_title} roles relied on manual execution, legacy tools, and localized workflows with minimal automated tooling.",
@@ -1624,6 +1663,16 @@ Rules & Anti-Hallucination Mandates:
             roadmap_data = json.loads(text)
             if "error" in roadmap_data and roadmap_data.get("error"):
                 return failure(roadmap_data["error"], 400)
+
+            # Enforce single shared normalized salary object across both overview & market
+            norm_sal = create_normalized_salary_object(career, country)
+            if "overview" not in roadmap_data or not isinstance(roadmap_data["overview"], dict):
+                roadmap_data["overview"] = {}
+            if "market" not in roadmap_data or not isinstance(roadmap_data["market"], dict):
+                roadmap_data["market"] = {}
+
+            roadmap_data["overview"]["salary"] = norm_sal
+            roadmap_data["market"]["salary"] = norm_sal
             return success(roadmap_data)
         except Exception as api_err:
             print(f"Roadmap generation error for '{career}': {api_err}")

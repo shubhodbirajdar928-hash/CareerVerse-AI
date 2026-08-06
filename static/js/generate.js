@@ -1103,13 +1103,34 @@ function generatePDFReport() {
     doc.text(descLines, margin, y);
     y += descLines.length * 4.5 + 4;
 
+    const salaryObj = overview.salary || data.market?.salary || {};
+    const pdfTargetLoc = sanitize(salaryObj.target_location || data.country || 'Target Location');
+
+    let pdfTargetSalaryStr = "";
+    if (salaryObj.formatted_range) {
+        pdfTargetSalaryStr = sanitize(salaryObj.formatted_range);
+    } else if (salaryObj.fresher && salaryObj.fresher !== "Data unavailable") {
+        pdfTargetSalaryStr = sanitize(`${salaryObj.fresher} (Fresher) -> ${salaryObj.mid} (Mid) -> ${salaryObj.senior} (Senior)`);
+    } else {
+        pdfTargetSalaryStr = "Data unavailable";
+    }
+
+    let pdfIntlSalaryStr = "";
+    if (salaryObj.international_usd_range) {
+        pdfIntlSalaryStr = sanitize(salaryObj.international_usd_range);
+    } else if (salaryObj.international_usd_fresher && salaryObj.international_usd_fresher !== "Data unavailable") {
+        pdfIntlSalaryStr = sanitize(`${salaryObj.international_usd_fresher} (Fresher) -> ${salaryObj.international_usd_mid} (Mid) -> ${salaryObj.international_usd_senior} (Senior)`);
+    } else {
+        pdfIntlSalaryStr = "Data unavailable";
+    }
+
     doc.autoTable({
         startY: y,
-        head: [['Education & Path', 'Expected Pay (India)', 'Expected Pay (USA / Global)', 'Future Scope']],
+        head: [['Education & Path', `Expected Pay (${pdfTargetLoc})`, 'International Benchmark (USD)', 'Future Scope']],
         body: [[
             sanitize(overview.education || "Bachelor's / STEM"),
-            sanitize(overview.salary?.india || "INR 8L - 18L / yr"),
-            sanitize(overview.salary?.usa || "$90k - 165k / yr"),
+            pdfTargetSalaryStr,
+            pdfIntlSalaryStr,
             sanitize(overview.future_scope || "High Demand")
         ]],
         styles: { fontSize: 8.5, cellPadding: 4 },
