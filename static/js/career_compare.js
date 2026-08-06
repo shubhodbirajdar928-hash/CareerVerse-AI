@@ -362,7 +362,16 @@ function createCareerCard(career, isPrimary, countryTarget) {
     const accentBg = isPrimary ? "rgba(59, 130, 246, 0.08)" : "rgba(250, 204, 21, 0.08)";
     const borderColor = isPrimary ? "rgba(59, 130, 246, 0.45)" : "rgba(250, 204, 21, 0.45)";
     const badgeLabel = isPrimary ? "🚀 PRIMARY ROLE 1" : "⚡ COMPARISON ROLE 2";
-    const badgeColor = isPrimary ? "#60a5fa" : "#fde047";
+    const cLow = (career.name || "").toLowerCase();
+    const isIndiaExam = ["upsc", "ias", "ips", "ssc", "gate", "nda", "mpsc", "bpsc", "uppsc", "ras", "jee", "neet", "ifs", "irs", "ies"].some(term => cLow.includes(term));
+    const isUsaExam = ["usmle", "nclex", "bar exam", "sat", "act"].some(term => cLow.includes(term));
+
+    let nationBadge = "";
+    if (isIndiaExam) {
+        nationBadge = `<span style="font-size: 0.72rem; font-weight: 800; background: rgba(249, 115, 22, 0.15); border: 1px solid rgba(249, 115, 22, 0.4); color: #f97316; padding: 4px 10px; border-radius: 20px; text-transform: uppercase;">🇮🇳 National Indian Exam</span>`;
+    } else if (isUsaExam) {
+        nationBadge = `<span style="font-size: 0.72rem; font-weight: 800; background: rgba(59, 130, 246, 0.15); border: 1px solid rgba(59, 130, 246, 0.4); color: #60a5fa; padding: 4px 10px; border-radius: 20px; text-transform: uppercase;">🇺🇸 US National Credential</span>`;
+    }
 
     const salaryBench = career.salary_benchmark || {};
     const fresherPay = salaryBench.fresher || "Data unavailable";
@@ -386,6 +395,8 @@ function createCareerCard(career, isPrimary, countryTarget) {
         return `<span style="font-size: 0.76rem; background: rgba(255,255,255,0.05); border: 1px solid var(--border); padding: 4px 10px; border-radius: 6px; color: var(--text-secondary); font-weight: 600;">🏙️ ${cityName} (${city.demand || 'High'})</span>`;
     }).join(" ");
 
+    const showIndiaExamNote = isIndiaExam && countryTarget && !['india', 'in', 'bharat'].includes(countryTarget.toLowerCase().trim());
+
     return `
         <div class="compare-card" style="border: 1px solid ${borderColor}; box-shadow: 0 10px 30px rgba(0,0,0,0.4); border-radius: 18px; padding: 24px;">
             
@@ -394,8 +405,9 @@ function createCareerCard(career, isPrimary, countryTarget) {
                 <span style="font-size: 0.72rem; font-weight: 800; color: ${badgeColor}; letter-spacing: 1.2px; text-transform: uppercase; display: block; margin-bottom: 6px;">
                     ${badgeLabel}
                 </span>
-                <h2 style="color: var(--text-heading); font-size: 1.45rem; margin: 0; font-weight: 800;">
-                    ${career.name || "Career Role"}
+                <h2 style="color: var(--text-heading); font-size: 1.45rem; margin: 0; font-weight: 800; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px;">
+                    <span>${career.name || "Career Role"}</span>
+                    ${nationBadge}
                 </h2>
             </div>
 
@@ -403,9 +415,17 @@ function createCareerCard(career, isPrimary, countryTarget) {
             <div style="background: rgba(0,0,0,0.35); border: 1px solid var(--border); border-radius: 14px; padding: 18px;">
                 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; border-bottom: 1px solid rgba(255,255,255,0.08); padding-bottom: 8px;">
                     <span style="font-size: 0.82rem; font-weight: 800; color: ${accentColor}; display: flex; align-items: center; gap: 6px;">
-                        <i class="fa-solid fa-coins"></i> ${countryName} Salary Ranges
+                        <i class="fa-solid fa-coins"></i> ${countryName} Pay Bands
                     </span>
                 </div>
+
+                ${showIndiaExamNote ? `
+                <div style="background: rgba(249, 115, 22, 0.08); border: 1px solid rgba(249, 115, 22, 0.35); border-radius: 10px; padding: 10px; margin-bottom: 12px;">
+                    <span style="font-size: 0.78rem; color: #f97316; font-weight: 700; display: flex; align-items: center; gap: 6px; line-height: 1.4;">
+                        <i class="fa-solid fa-circle-info"></i> Official Salary Compensation is in Indian Rupees (₹) under the 7th Pay Commission. UPSC is an Indian Government exam and is not conducted in ${countryTarget}.
+                    </span>
+                </div>
+                ` : ''}
                 
                 <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; text-align: center;">
                     <div style="background: rgba(34, 197, 94, 0.06); border: 1px solid rgba(34, 197, 94, 0.25); border-radius: 10px; padding: 10px;">
