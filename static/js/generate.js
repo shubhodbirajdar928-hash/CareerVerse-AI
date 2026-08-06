@@ -508,16 +508,6 @@ async function generateRoadmapNow() {
     <h2><i class="fa-solid fa-book-open"></i> Career Overview & Market Scope</h2>
     <p style="font-size: 1rem; line-height: 1.7; margin-bottom: 20px;">${overview.description || "Comprehensive professional career breakdown."}</p>
 
-    <!-- AI Automation & Disruption Risk Meter -->
-    <div style="background: rgba(59, 130, 246, 0.05); border: 1px solid rgba(59, 130, 246, 0.25); border-radius: 14px; padding: 18px; margin-bottom: 20px;">
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
-            <span style="font-size: 0.9rem; font-weight: 700; color: #3b82f6;"><i class="fa-solid fa-robot"></i> AI Disruption & Automation Risk Index</span>
-            <span style="font-size: 0.85rem; font-weight: 800; color: #22c55e;">Low Risk (~12%) • High Human Judgement & Empathy Needed</span>
-        </div>
-        <div style="background: rgba(255,255,255,0.08); height: 8px; border-radius: 4px; overflow: hidden;">
-            <div style="width: 12%; height: 100%; background: linear-gradient(90deg, #22c55e, #3b82f6);"></div>
-        </div>
-    </div>
 
     <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 20px;">
         <div style="background: rgba(25, 25, 25, 0.7); border: 1px solid var(--border); border-radius: 14px; padding: 18px;">
