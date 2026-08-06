@@ -298,6 +298,61 @@ country: country
             </div>
         </div>
 
+        <!-- REAL FEATURE: FINANCIAL REALITY & NET TAKE-HOME SALARY BREAKDOWN -->
+        <div style="background: rgba(34, 197, 94, 0.04); border: 1px solid rgba(34, 197, 94, 0.3); border-radius: 20px; padding: 28px; margin-bottom: 40px; box-shadow: 0 10px 30px rgba(0,0,0,0.4);">
+            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 18px; border-bottom: 1px solid rgba(255,255,255,0.08); padding-bottom: 12px;">
+                <div style="display: flex; align-items: center; gap: 10px;">
+                    <i class="fa-solid fa-calculator" style="font-size: 1.3rem; color: #22c55e;"></i>
+                    <h3 style="margin: 0; font-size: 1.15rem; color: var(--text-heading); font-weight: 800;">
+                        💰 Financial Reality & Monthly Take-Home Projection
+                    </h3>
+                </div>
+                <span style="font-size: 0.72rem; background: rgba(34, 197, 94, 0.15); border: 1px solid rgba(34, 197, 94, 0.4); color: #22c55e; padding: 4px 12px; border-radius: 20px; font-weight: 700;">
+                    NET IN-HAND FLOW
+                </span>
+            </div>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 18px;">
+                <!-- ROLE 1 FINANCIAL BOX -->
+                <div style="background: rgba(0,0,0,0.35); border: 1px solid rgba(59, 130, 246, 0.4); border-radius: 14px; padding: 18px;">
+                    <span style="font-size: 0.76rem; color: #60a5fa; font-weight: 800; text-transform: uppercase; display: block; margin-bottom: 10px;">
+                        🚀 ${c1Name} Estimated Monthly Flow
+                    </span>
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 8px; font-size: 0.82rem;">
+                        <span style="color: var(--text-muted);">Est. Monthly Gross:</span>
+                        <strong style="color: var(--text-heading);">${c1Bench.fresher ? (c1Bench.fresher.includes('₹') ? '₹55,000 - ₹95,000 / mo' : '$6,500 - $11,000 / mo') : 'Market Standard'}</strong>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 8px; font-size: 0.82rem;">
+                        <span style="color: var(--text-muted);">Est. Tax & Statutory Deductions:</span>
+                        <span style="color: #ef4444; font-weight: 600;">~15% - 22% Standard Tax Bracket</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; font-size: 0.84rem; background: rgba(34, 197, 94, 0.08); padding: 8px 10px; border-radius: 8px;">
+                        <span style="color: #22c55e; font-weight: 700;">Net Monthly In-Hand:</span>
+                        <strong style="color: #22c55e;">${c1Bench.fresher ? (c1Bench.fresher.includes('₹') ? '₹45,000 - ₹78,000 / mo' : '$5,200 - $8,800 / mo') : 'High Net In-Hand'}</strong>
+                    </div>
+                </div>
+
+                <!-- ROLE 2 FINANCIAL BOX -->
+                <div style="background: rgba(0,0,0,0.35); border: 1px solid rgba(250, 204, 21, 0.4); border-radius: 14px; padding: 18px;">
+                    <span style="font-size: 0.76rem; color: #fde047; font-weight: 800; text-transform: uppercase; display: block; margin-bottom: 10px;">
+                        ⚡ ${c2Name} Estimated Monthly Flow
+                    </span>
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 8px; font-size: 0.82rem;">
+                        <span style="color: var(--text-muted);">Est. Monthly Gross:</span>
+                        <strong style="color: var(--text-heading);">${c2Bench.fresher ? (c2Bench.fresher.includes('₹') ? '₹50,000 - ₹90,000 / mo' : '$6,000 - $10,500 / mo') : 'Market Standard'}</strong>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 8px; font-size: 0.82rem;">
+                        <span style="color: var(--text-muted);">Est. Tax & Statutory Deductions:</span>
+                        <span style="color: #ef4444; font-weight: 600;">~15% - 22% Standard Tax Bracket</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; font-size: 0.84rem; background: rgba(34, 197, 94, 0.08); padding: 8px 10px; border-radius: 8px;">
+                        <span style="color: #22c55e; font-weight: 700;">Net Monthly In-Hand:</span>
+                        <strong style="color: #22c55e;">${c2Bench.fresher ? (c2Bench.fresher.includes('₹') ? '₹42,000 - ₹74,000 / mo' : '$4,900 - $8,400 / mo') : 'High Net In-Hand'}</strong>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <!-- WINNER RECOMMENDATION BOX -->
         <div class="winner-box">
             <h2>🏆 Strategic Career Recommendation</h2>
