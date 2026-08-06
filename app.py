@@ -799,14 +799,27 @@ def get_career_salary_benchmark(career, country):
     return {"fresher": f_str, "mid": m_str, "senior": s_str}
 
 
-def create_normalized_salary_object(career, country):
-    c_low = (career or "").lower().strip()
-    india_exams = ["upsc", "ias", "ips", "ssc", "gate", "nda", "cds", "mhcer", "mhcet", "mht cet", "mhtcet", "kcet", "k-cet", "keam", "eamcet", "wbjee", "ojee", "gujcet", "mpsc", "bpsc", "uppsc", "ras", "jee", "neet", "ifs", "irs", "ies", "cat", "clat", "ibps", "sbi po", "cgl", "chsl"]
-    
-    country_clean = country.title() if country else "India"
-    is_india_exam = any(term in c_low.split() or term == c_low or term in c_low for term in india_exams)
+INDIAN_EXAM_REGEX = re.compile(
+    r'(\b(upsc|ias|ips|ifs|irs|ies|ssc|gate|nda|cds|afcat|inet|mpsc|bpsc|uppsc|ras|gpsc|kpsc|opsc|ppsc|hpsc|cgpsc|tnpsc|tspsc|appsc|wbcs|jkpsc|mppsc|jee|neet|cat|clat|nift|nid|ibps|sbi|rbi|nabard|epfo|rrb|isro|drdo|barc|hal|bel|gail|ntpc|cgl|chsl|mts|cpo|mhcer|mhcet|kcet|keam|eamcet|wbjee|ojee|gujcet|upcee|assammed|jkcet|hp-cet|upcemet|mp-pat|bihar-cet|uksee)\b)|(.*cet$)|(.*psc$)|(.*eamcet$)',
+    re.IGNORECASE
+)
 
-    if is_india_exam and country_clean.lower() not in ["india", "in", "bharat"]:
+def is_indian_exam(career_text):
+    if not career_text:
+        return False
+    c_clean = str(career_text).lower().strip()
+    if INDIAN_EXAM_REGEX.search(c_clean):
+        return True
+    words = c_clean.split()
+    for w in words:
+        if w.endswith("cet") or w.endswith("psc") or w.endswith("eamcet") or w.endswith("jee"):
+            return True
+    return False
+
+def create_normalized_salary_object(career, country):
+    country_clean = country.title() if country else "India"
+    
+    if is_indian_exam(career) and country_clean.lower() not in ["india", "in", "bharat"]:
         c_name = f"India (Native {career.upper()} Structure)"
         code = "INR"
         symbol = "₹"

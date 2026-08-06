@@ -362,9 +362,14 @@ function createCareerCard(career, isPrimary, countryTarget) {
     const accentBg = isPrimary ? "rgba(59, 130, 246, 0.08)" : "rgba(250, 204, 21, 0.08)";
     const borderColor = isPrimary ? "rgba(59, 130, 246, 0.45)" : "rgba(250, 204, 21, 0.45)";
     const badgeLabel = isPrimary ? "🚀 PRIMARY ROLE 1" : "⚡ COMPARISON ROLE 2";
-    const cLow = (career.name || "").toLowerCase();
-    const isIndiaExam = ["upsc", "ias", "ips", "ssc", "gate", "nda", "cds", "mhcer", "mhcet", "mht cet", "mhtcet", "kcet", "k-cet", "keam", "eamcet", "wbjee", "ojee", "gujcet", "mpsc", "bpsc", "uppsc", "ras", "jee", "neet", "ifs", "irs", "ies", "cat", "clat", "ibps", "sbi po", "cgl", "chsl"].some(term => cLow.includes(term));
-    const isUsaExam = ["usmle", "nclex", "bar exam", "sat", "act"].some(term => cLow.includes(term));
+    const isIndiaExam = (function(name) {
+        if (!name) return false;
+        const n = name.toLowerCase().trim();
+        if (n.endsWith("cet") || n.endsWith("psc") || n.endsWith("eamcet") || n.endsWith("jee") || n.endsWith("neet")) return true;
+        const terms = ["upsc", "ias", "ips", "ifs", "irs", "ies", "ssc", "gate", "nda", "cds", "afcat", "ibps", "sbi", "rbi", "nabard", "epfo", "rrb", "isro", "drdo", "barc", "cat", "clat", "nift", "nid", "cgl", "chsl", "mts", "cpo", "mhcer", "mhcet", "kcet", "keam", "wbjee", "ojee", "gujcet", "mpsc", "bpsc", "uppsc", "ras", "jee", "neet"];
+        return terms.some(t => n.includes(t) || n.split(/\s+/).includes(t));
+    })(career.name);
+    const isUsaExam = ["usmle", "nclex", "bar exam", "sat", "act"].some(term => (career.name || "").toLowerCase().includes(term));
 
     let nationBadge = "";
     if (isIndiaExam) {
