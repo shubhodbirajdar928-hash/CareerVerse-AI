@@ -762,7 +762,7 @@ ${(() => {
                 <div style="background: rgba(255,255,255,0.08); height: 6px; border-radius: 3px; overflow: hidden; margin-bottom: 8px;">
                     <div style="width:${market.job_demand?.percentage || 88}%; height: 100%; background: linear-gradient(90deg, #22c55e, #10b981);"></div>
                 </div>
-                <p style="font-size: 0.78rem; color: var(--text-secondary); margin: 0; line-height: 1.3;">${market.job_demand?.text || "High market hiring demand"}</p>
+                <p style="font-size: 0.78rem; color: var(--text-secondary); margin: 0; line-height: 1.35;">${market.job_demand?.text || `Extremely high market demand driven by global enterprise adoption and talent shortage in ${country || 'this field'}.`}</p>
             </div>
 
             <div style="background: rgba(250, 204, 21, 0.05); border: 1px solid rgba(250, 204, 21, 0.3); border-radius: 14px; padding: 16px;">
@@ -773,7 +773,7 @@ ${(() => {
                 <div style="background: rgba(255,255,255,0.08); height: 6px; border-radius: 3px; overflow: hidden; margin-bottom: 8px;">
                     <div style="width:${market.difficulty?.percentage || 75}%; height: 100%; background: linear-gradient(90deg, #f59e0b, #fac515);"></div>
                 </div>
-                <p style="font-size: 0.78rem; color: var(--text-secondary); margin: 0; line-height: 1.3;">${market.difficulty?.text || "Moderate-High difficulty"}</p>
+                <p style="font-size: 0.78rem; color: var(--text-secondary); margin: 0; line-height: 1.35;">${market.difficulty?.text || "Moderate-to-high learning curve requiring hands-on mastery of core frameworks & tools."}</p>
             </div>
 
             <div style="background: rgba(59, 130, 246, 0.05); border: 1px solid rgba(59, 130, 246, 0.3); border-radius: 14px; padding: 16px;">
@@ -784,7 +784,7 @@ ${(() => {
                 <div style="background: rgba(255,255,255,0.08); height: 6px; border-radius: 3px; overflow: hidden; margin-bottom: 8px;">
                     <div style="width:${market.growth?.percentage || 90}%; height: 100%; background: linear-gradient(90deg, #3b82f6, #60a5fa);"></div>
                 </div>
-                <p style="font-size: 0.78rem; color: var(--text-secondary); margin: 0; line-height: 1.3;">${market.growth?.text || "Strong annual market growth"}</p>
+                <p style="font-size: 0.78rem; color: var(--text-secondary); margin: 0; line-height: 1.35;">${market.growth?.text || "Multi-year compound annual growth (+20%+ CAGR) powered by digital transformation."}</p>
             </div>
 
             <div style="background: rgba(168, 85, 247, 0.05); border: 1px solid rgba(168, 85, 247, 0.3); border-radius: 14px; padding: 16px;">
@@ -795,10 +795,13 @@ ${(() => {
                 <div style="background: rgba(255,255,255,0.08); height: 6px; border-radius: 3px; overflow: hidden; margin-bottom: 8px;">
                     <div style="width:${market.learning_time?.percentage || 80}%; height: 100%; background: linear-gradient(90deg, #a855f7, #c084fc);"></div>
                 </div>
-                <p style="font-size: 0.78rem; color: var(--text-secondary); margin: 0; line-height: 1.3;">${market.learning_time?.text || "15 hrs/week study"}</p>
+                <p style="font-size: 0.78rem; color: var(--text-secondary); margin: 0; line-height: 1.35;">${market.learning_time?.text || "Estimated 15-20 hours/week of structured practice over 6 months to reach job readiness."}</p>
             </div>
         </div>
     </div>
+
+    <!-- Official Country Salary Pay Band Card -->
+    ${renderPayBandCard(overview.salary || market.salary, targetSalInfo, country)}
 
     <h3 style="margin-top: 10px;"><i class="fa-solid fa-clock"></i> Day-in-the-Life & Daily Duty Workflow</h3>
     <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-bottom: 24px;">
