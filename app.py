@@ -801,17 +801,16 @@ def get_career_salary_benchmark(career, country):
 
 def create_normalized_salary_object(career, country):
     c_low = (career or "").lower().strip()
-    india_exams = ["upsc", "ias", "ips", "ssc", "gate", "nda", "mpsc", "bpsc", "uppsc", "ras", "jee", "neet", "ifs", "irs", "ies"]
+    india_exams = ["upsc", "ias", "ips", "ssc", "gate", "nda", "cds", "mhcer", "mhcet", "mht cet", "mhtcet", "kcet", "k-cet", "keam", "eamcet", "wbjee", "ojee", "gujcet", "mpsc", "bpsc", "uppsc", "ras", "jee", "neet", "ifs", "irs", "ies", "cat", "clat", "ibps", "sbi po", "cgl", "chsl"]
     
-    if any(term in c_low.split() or term == c_low for term in india_exams):
-        c_name = "India (Official UPSC 7th Pay Commission)"
+    country_clean = country.title() if country else "India"
+    is_india_exam = any(term in c_low.split() or term == c_low or term in c_low for term in india_exams)
+
+    if is_india_exam and country_clean.lower() not in ["india", "in", "bharat"]:
+        c_name = f"India (Native {career.upper()} Structure)"
         code = "INR"
         symbol = "₹"
-        bench = {
-            "fresher": "₹7.0L - ₹12.0L / yr",
-            "mid": "₹14.0L - ₹22.0L / yr",
-            "senior": "₹24.0L - ₹45.0L+ / yr"
-        }
+        bench = get_career_salary_benchmark(career, "India")
     else:
         c_name, code, symbol = get_country_currency_info(country)
         bench = get_career_salary_benchmark(career, country)
@@ -2188,7 +2187,7 @@ def generate_fallback_compare(career1, career2, country="India"):
         "recommendation": f"If you seek strong career stability, high sector growth, and high impact opportunities, pursuing a career in {winner_name} is highly recommended. However, if your personal passion aligns with {loser_name}, both fields offer excellent professional development."
     }
 
-INDIA_SPECIFIC_TERMS = ["upsc", "ias", "ips", "ssc", "gate", "nda", "mpsc", "bpsc", "uppsc", "ras", "jee", "neet", "ifs", "irs", "ies"]
+INDIA_SPECIFIC_TERMS = ["upsc", "ias", "ips", "ssc", "gate", "nda", "cds", "mhcer", "mhcet", "mht cet", "mhtcet", "kcet", "k-cet", "keam", "eamcet", "wbjee", "ojee", "gujcet", "mpsc", "bpsc", "uppsc", "ras", "jee", "neet", "ifs", "irs", "ies", "cat", "clat", "ibps", "sbi po", "cgl", "chsl"]
 USA_SPECIFIC_TERMS = ["usmle", "nclex", "bar exam", "sat", "act"]
 UK_SPECIFIC_TERMS = ["plab", "gmc"]
 
@@ -2200,11 +2199,11 @@ def check_region_mismatch(c1, c2, country):
     warnings = []
     for c_term, c_name in [(c1_lower, c1), (c2_lower, c2)]:
         # Check India specific exams
-        if any(term in c_term.split() or term == c_term for term in INDIA_SPECIFIC_TERMS):
+        if any(term in c_term.split() or term == c_term or term in c_term for term in INDIA_SPECIFIC_TERMS):
             if country_lower and country_lower not in ["india", "in", "bharat"]:
-                warnings.append(f"⚠️ <strong>Region-Specific Career Alert for {c_name.upper()}:</strong> {c_name.upper()} is an official national examination/service conducted exclusively in <strong>India</strong> for Indian public administration. It is not conducted as a civil service exam in <strong>{country.title()}</strong>. The equivalent career path in {country.title()} is the Federal/National Civil Service or Foreign Service.")
+                warnings.append(f"⚠️ <strong>Region-Specific Career Alert for {c_name.upper()}:</strong> {c_name.upper()} is an official state/national entrance examination conducted in <strong>India</strong> (e.g. Maharashtra MHT-CET, Karnataka KCET, UPSC, JEE, NEET). It does not exist as an exam in <strong>{country.title()}</strong>. The salary compensation for {c_name.upper()} is displayed in <strong>Indian Rupees (₹)</strong>, while global career roles are shown in local {country.title()} currency.")
         # Check USA specific exams
-        elif any(term in c_term.split() or term == c_term for term in USA_SPECIFIC_TERMS):
+        elif any(term in c_term.split() or term == c_term or term in c_term for term in USA_SPECIFIC_TERMS):
             if country_lower and country_lower not in ["usa", "united states", "us", "america"]:
                 warnings.append(f"⚠️ <strong>Region-Specific Career Alert for {c_name.upper()}:</strong> {c_name.upper()} is a US-specific national credential/exam conducted in the <strong>United States</strong>. It is not an official examination in <strong>{country.title()}</strong>.")
     
