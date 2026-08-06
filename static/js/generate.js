@@ -1001,7 +1001,7 @@ function generatePDFReport() {
     doc.setFontSize(9.5);
     doc.setFont("helvetica", "normal");
     doc.setTextColor(...MUTED);
-    const locText = `Target Region: ${sanitize(data.country || 'India')} | Timeline: ${sanitize(data.duration || '6 Months')}`;
+    const locText = `Target Location / Region: ${sanitize(data.country || 'Global / India')}`;
     doc.text(locText, margin, y);
     y += 10;
 
