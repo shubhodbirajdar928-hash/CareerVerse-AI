@@ -115,244 +115,185 @@ country: country
 
 
         result.innerHTML = `
-
-
-
         <div class="compare-grid">
             ${createCareerCard(data.career1, true, country)}
             ${createCareerCard(data.career2, false, country)}
         </div>
 
-
-<div class="comparison-summary">
-
-
-<h2>
-📊 AI Career Comparison
-</h2>
-
-
-
-<div class="compare-metric">
-
-
-<h3>
-💰 Salary Potential
-</h3>
-
-
-<div class="bar-row">
-
-<span>
-${data.career1.name}
-</span>
-
-<div class="bar">
-
-<div class="fill"
-style="width:${data.career1.salary_score}%">
-
-</div>
-
-</div>
-
-
-<b>
-${data.career1.salary_score}
-</b>
-
-
-</div>
-
-
-
-<div class="bar-row">
-
-<span>
-${data.career2.name}
-</span>
-
-<div class="bar">
-
-<div class="fill"
-style="width:${data.career2.salary_score}%">
-
-</div>
-
-</div>
-
-
-<b>
-${data.career2.salary_score}
-</b>
-
-
-</div>
-
-
-</div>
-
-
-
-
-
-<div class="compare-metric">
-
-
-<h3>
-📈 Industry Demand
-</h3>
-
-
-<div class="bar-row">
-
-<span>
-${data.career1.name}
-</span>
-
-<div class="bar">
-
-<div class="fill"
-style="width:${data.career1.demand_score}%">
-
-</div>
-
-</div>
-
-<b>
-${data.career1.demand_score}
-</b>
-
-</div>
-
-
-
-<div class="bar-row">
-
-<span>
-${data.career2.name}
-</span>
-
-<div class="bar">
-
-<div class="fill"
-style="width:${data.career2.demand_score}%">
-
-</div>
-
-</div>
-
-<b>
-${data.career2.demand_score}
-</b>
-
-</div>
-
-
-</div>
-
-
-
-
-
-<div class="compare-metric">
-
-
-<h3>
-🚀 Future Growth
-</h3>
-
-
-<div class="bar-row">
-
-<span>
-${data.career1.name}
-</span>
-
-<div class="bar">
-
-<div class="fill"
-style="width:${data.career1.growth_score}%">
-
-</div>
-
-</div>
-
-<b>
-${data.career1.growth_score}
-</b>
-
-</div>
-
-
-
-<div class="bar-row">
-
-<span>
-${data.career2.name}
-</span>
-
-<div class="bar">
-
-<div class="fill"
-style="width:${data.career2.growth_score}%">
-
-</div>
-
-</div>
-
-<b>
-${data.career2.growth_score}
-</b>
-
-</div>
-
-
-</div>
-
-
-</div>
-
-
+        <!-- COMPARISON METRICS DASHBOARD -->
+        <div class="comparison-summary" style="background: var(--bg-card); border: 1px solid var(--border); border-radius: 20px; padding: 32px; margin-bottom: 40px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 28px; border-bottom: 1px solid rgba(255,255,255,0.08); padding-bottom: 14px;">
+                <div>
+                    <h2 style="color: var(--accent); font-size: 1.5rem; margin: 0 0 6px 0; font-weight: 800; display: flex; align-items: center; gap: 10px;">
+                        📊 Career Comparison Metrics & Performance
+                    </h2>
+                    <p style="margin: 0; color: var(--text-secondary); font-size: 0.88rem;">
+                        Comparative analysis for ${c1Name} vs ${c2Name} in ${country || 'Target Market'}.
+                    </p>
+                </div>
+            </div>
+
+            <!-- DUAL COLOR COMPARISON BARS -->
+            <div class="compare-metric" style="margin-bottom: 24px;">
+                <h3 style="color: var(--text-heading); font-size: 0.98rem; font-weight: 700; margin-bottom: 14px; display: flex; align-items: center; gap: 8px;">
+                    💰 Salary & Earning Capacity
+                </h3>
+                <div class="bar-row" style="margin-bottom: 12px;">
+                    <span style="color: #60a5fa; font-weight: 700;">🚀 ${c1Name}</span>
+                    <div class="bar">
+                        <div class="fill" style="width:${c1.salary_score || 85}%; background: linear-gradient(90deg, #3b82f6, #60a5fa);"></div>
+                    </div>
+                    <b style="color: #60a5fa;">${c1.salary_score || 85}/100</b>
+                </div>
+                <div class="bar-row">
+                    <span style="color: #fde047; font-weight: 700;">⚡ ${c2Name}</span>
+                    <div class="bar">
+                        <div class="fill" style="width:${c2.salary_score || 80}%; background: linear-gradient(90deg, #facc15, #fde047);"></div>
+                    </div>
+                    <b style="color: #fde047;">${c2.salary_score || 80}/100</b>
+                </div>
+            </div>
+
+            <div class="compare-metric" style="margin-bottom: 24px;">
+                <h3 style="color: var(--text-heading); font-size: 0.98rem; font-weight: 700; margin-bottom: 14px; display: flex; align-items: center; gap: 8px;">
+                    📈 Market Demand & Hiring Activity
+                </h3>
+                <div class="bar-row" style="margin-bottom: 12px;">
+                    <span style="color: #60a5fa; font-weight: 700;">🚀 ${c1Name}</span>
+                    <div class="bar">
+                        <div class="fill" style="width:${c1.demand_score || 80}%; background: linear-gradient(90deg, #3b82f6, #60a5fa);"></div>
+                    </div>
+                    <b style="color: #60a5fa;">${c1.demand_score || 80}/100</b>
+                </div>
+                <div class="bar-row">
+                    <span style="color: #fde047; font-weight: 700;">⚡ ${c2Name}</span>
+                    <div class="bar">
+                        <div class="fill" style="width:${c2.demand_score || 75}%; background: linear-gradient(90deg, #facc15, #fde047);"></div>
+                    </div>
+                    <b style="color: #fde047;">${c2.demand_score || 75}/100</b>
+                </div>
+            </div>
+
+            <div class="compare-metric" style="margin-bottom: 24px;">
+                <h3 style="color: var(--text-heading); font-size: 0.98rem; font-weight: 700; margin-bottom: 14px; display: flex; align-items: center; gap: 8px;">
+                    🚀 5-Year Industry Growth Outlook
+                </h3>
+                <div class="bar-row" style="margin-bottom: 12px;">
+                    <span style="color: #60a5fa; font-weight: 700;">🚀 ${c1Name}</span>
+                    <div class="bar">
+                        <div class="fill" style="width:${c1.growth_score || 85}%; background: linear-gradient(90deg, #3b82f6, #60a5fa);"></div>
+                    </div>
+                    <b style="color: #60a5fa;">${c1.growth_score || 85}/100</b>
+                </div>
+                <div class="bar-row">
+                    <span style="color: #fde047; font-weight: 700;">⚡ ${c2Name}</span>
+                    <div class="bar">
+                        <div class="fill" style="width:${c2.growth_score || 80}%; background: linear-gradient(90deg, #facc15, #fde047);"></div>
+                    </div>
+                    <b style="color: #fde047;">${c2.growth_score || 80}/100</b>
+                </div>
+            </div>
+        </div>
+
+        <!-- NEW FEATURE: HEAD-TO-HEAD FEATURE COMPARISON MATRIX -->
+        <div style="background: var(--bg-card); border: 1px solid var(--border); border-radius: 20px; padding: 32px; margin-bottom: 40px;">
+            <h3 style="color: var(--text-heading); font-size: 1.25rem; font-weight: 800; margin: 0 0 20px 0; display: flex; align-items: center; gap: 10px;">
+                ⚔️ Head-to-Head Feature Comparison Matrix
+            </h3>
+            
+            <div style="overflow-x: auto;">
+                <table style="width: 100%; border-collapse: collapse; text-align: left; font-size: 0.88rem;">
+                    <thead>
+                        <tr style="background: rgba(255,255,255,0.04); border-bottom: 1px solid var(--border);">
+                            <th style="padding: 14px; color: var(--text-muted); font-weight: 700; width: 25%;">Decision Dimension</th>
+                            <th style="padding: 14px; color: #60a5fa; font-weight: 800; width: 37.5%;">🚀 ${c1Name}</th>
+                            <th style="padding: 14px; color: #fde047; font-weight: 800; width: 37.5%;">⚡ ${c2Name}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr style="border-bottom: 1px solid rgba(255,255,255,0.05);">
+                            <td style="padding: 14px; color: var(--text-heading); font-weight: 700;">🌱 Entry Level Pay</td>
+                            <td style="padding: 14px; color: #22c55e; font-weight: 700;">${c1Bench.fresher || 'Market Rate'}</td>
+                            <td style="padding: 14px; color: #22c55e; font-weight: 700;">${c2Bench.fresher || 'Market Rate'}</td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid rgba(255,255,255,0.05);">
+                            <td style="padding: 14px; color: var(--text-heading); font-weight: 700;">⚡ Mid Level Pay</td>
+                            <td style="padding: 14px; color: var(--accent); font-weight: 700;">${c1Bench.mid || 'Market Rate'}</td>
+                            <td style="padding: 14px; color: var(--accent); font-weight: 700;">${c2Bench.mid || 'Market Rate'}</td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid rgba(255,255,255,0.05);">
+                            <td style="padding: 14px; color: var(--text-heading); font-weight: 700;">👑 Senior Lead Pay</td>
+                            <td style="padding: 14px; color: #a855f7; font-weight: 700;">${c1Bench.senior || 'Market Rate'}</td>
+                            <td style="padding: 14px; color: #a855f7; font-weight: 700;">${c2Bench.senior || 'Market Rate'}</td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid rgba(255,255,255,0.05);">
+                            <td style="padding: 14px; color: var(--text-heading); font-weight: 700;">🔥 Market Job Demand</td>
+                            <td style="padding: 14px; color: var(--text-secondary);">${c1.demand || (c1.demand_score > 85 ? 'Very High' : 'High')}</td>
+                            <td style="padding: 14px; color: var(--text-secondary);">${c2.demand || (c2.demand_score > 85 ? 'Very High' : 'High')}</td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid rgba(255,255,255,0.05);">
+                            <td style="padding: 14px; color: var(--text-heading); font-weight: 700;">⏳ Preparation Time</td>
+                            <td style="padding: 14px; color: var(--text-secondary);">${c1.learning_time || '3-4 Years'}</td>
+                            <td style="padding: 14px; color: var(--text-secondary);">${c2.learning_time || '3-4 Years'}</td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid rgba(255,255,255,0.05);">
+                            <td style="padding: 14px; color: var(--text-heading); font-weight: 700;">🏢 Top Employers</td>
+                            <td style="padding: 14px; color: var(--text-secondary);">${c1Orgs}</td>
+                            <td style="padding: 14px; color: var(--text-secondary);">${c2Orgs}</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 14px; color: var(--text-heading); font-weight: 700;">🏙️ Primary Hiring Cities</td>
+                            <td style="padding: 14px; color: var(--text-secondary);">${c1Cities}</td>
+                            <td style="padding: 14px; color: var(--text-secondary);">${c2Cities}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- NEW FEATURE: CAREER SWITCHABILITY & TRANSITION ROADMAP -->
+        <div style="background: rgba(15, 23, 42, 0.8); border: 1px solid rgba(59, 130, 246, 0.3); border-radius: 20px; padding: 28px; margin-bottom: 40px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px;">
+                <h3 style="color: #60a5fa; font-size: 1.15rem; font-weight: 800; margin: 0; display: flex; align-items: center; gap: 8px;">
+                    🔄 Cross-Role Transition & Skill Switchability
+                </h3>
+                <span style="font-size: 0.72rem; color: #3b82f6; background: rgba(59, 130, 246, 0.15); border: 1px solid rgba(59, 130, 246, 0.4); padding: 4px 12px; border-radius: 20px; font-weight: 700;">
+                    Flexibility Analysis
+                </span>
+            </div>
+            <p style="color: var(--text-secondary); font-size: 0.88rem; line-height: 1.6; margin-bottom: 16px;">
+                Transitioning between <strong>${c1Name}</strong> and <strong>${c2Name}</strong> involves shared foundational expertise with target skill bridges.
+            </p>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px;">
+                <div style="background: rgba(255,255,255,0.03); border: 1px solid var(--border); border-radius: 12px; padding: 14px;">
+                    <strong style="color: #60a5fa; font-size: 0.84rem; display: block; margin-bottom: 6px;">⚡ Transferable Core Skills</strong>
+                    <span style="font-size: 0.8rem; color: var(--text-secondary); display: block; line-height: 1.5;">
+                        Analytical Thinking, Problem Solving, Core Domain Knowledge, Technical Documentation
+                    </span>
+                </div>
+                <div style="background: rgba(255,255,255,0.03); border: 1px solid var(--border); border-radius: 12px; padding: 14px;">
+                    <strong style="color: var(--accent); font-size: 0.84rem; display: block; margin-bottom: 6px;">🎯 Specialized Bridge Training</strong>
+                    <span style="font-size: 0.8rem; color: var(--text-secondary); display: block; line-height: 1.5;">
+                        6-12 Months Targeted Upskilling & Applied Portfolio Development
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <!-- WINNER RECOMMENDATION BOX -->
         <div class="winner-box">
-
-
-<h2>🏆 AI Career Recommendation</h2>
-
-
-<h1>${data.winner}</h1>
-
-
-<div class="winner-content">
-
-
-<h3>Why AI selected this?</h3>
-
-<p>
-${data.reason}
-</p>
-
-
-<h3>Career Advice</h3>
-
-<p>
-${data.recommendation}
-</p>
-
-
-</div>
-
-
-<div class="decision-badge">
-
-✨ Best Career Choice Based On Future Growth
-
-</div>
-
-
-</div>
-
-
+            <h2>🏆 AI Career Recommendation</h2>
+            <h1>${data.winner}</h1>
+            <div class="winner-content">
+                <h3>Why AI selected this?</h3>
+                <p>${data.reason}</p>
+                <h3>Strategic Advice</h3>
+                <p>${data.recommendation}</p>
+            </div>
+            <div class="decision-badge">
+                ✨ Best Career Choice Based On Growth & Earning Capacity
+            </div>
+        </div>
         `;
 
 
