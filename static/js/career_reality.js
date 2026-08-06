@@ -71,7 +71,21 @@ realityBtn.onclick = async function() {
             return;
         }
 
-        const isIndia = (country || "India").toLowerCase().includes("india") || (data.salary_reality || "").includes("₹");
+        const cLow = (country || "").toLowerCase().trim();
+        let countryFlag = "🌐";
+        let countryName = country ? country.trim() : "Global";
+
+        if (cLow.includes("india")) { countryFlag = "🇮🇳"; countryName = "India"; }
+        else if (cLow.includes("usa") || cLow.includes("united states") || cLow.includes("us")) { countryFlag = "🇺🇸"; countryName = "USA"; }
+        else if (cLow.includes("uk") || cLow.includes("united kingdom")) { countryFlag = "🇬🇧"; countryName = "UK"; }
+        else if (cLow.includes("germany")) { countryFlag = "🇩🇪"; countryName = "Germany"; }
+        else if (cLow.includes("france")) { countryFlag = "🇫🇷"; countryName = "France"; }
+        else if (cLow.includes("canada")) { countryFlag = "🇨🇦"; countryName = "Canada"; }
+        else if (cLow.includes("australia")) { countryFlag = "🇦🇺"; countryName = "Australia"; }
+        else if (cLow.includes("uae") || cLow.includes("dubai")) { countryFlag = "🇦🇪"; countryName = "UAE / Dubai"; }
+        else if (cLow.includes("japan")) { countryFlag = "🇯🇵"; countryName = "Japan"; }
+
+        const isIndia = cLow.includes("india") || (data.salary_reality || "").includes("₹");
         const fresherSal = data.fresher_salary && data.fresher_salary !== "--" ? data.fresher_salary : (isIndia ? "₹5.0L - ₹9.0L / yr" : "$65,000 - $90,000 / yr");
         const midSal = data.mid_salary && data.mid_salary !== "--" ? data.mid_salary : (isIndia ? "₹12.0L - ₹22.0L / yr" : "$110,000 - $155,000 / yr");
         const seniorSal = data.senior_salary && data.senior_salary !== "--" ? data.senior_salary : (isIndia ? "₹25.0L - ₹48.0L / yr" : "$165,000 - $250,000 / yr");
@@ -82,12 +96,12 @@ realityBtn.onclick = async function() {
 
         let html = `
             <div class="reality-dashboard-wrapper">
-                <!-- HERO SCORE METER -->
-                <div class="reality-card reality-score-card">
+                <!-- HERO SCORE METER CARD -->
+                <div class="reality-card reality-score-card" style="margin-bottom: 24px;">
                     <div class="score-header">
                         <div>
                             <span class="reality-badge-pill"><i class="fa-solid fa-gauge-high"></i> CAREER REALITY VERDICT</span>
-                            <h2>${data.career || career} <span style="font-size: 0.95rem; color: var(--text-secondary); font-weight: 500;">(${country || 'Global'})</span></h2>
+                            <h2>${data.career || career} <span style="font-size: 0.95rem; color: var(--text-secondary); font-weight: 500;">(${countryName})</span></h2>
                             <p class="score-status-text">${data.reality_status || 'Realistic Industry Profile & Assessment'}</p>
                         </div>
                         <div class="score-circle-display">
@@ -118,9 +132,10 @@ realityBtn.onclick = async function() {
                             <span class="m-label"><i class="fa-solid fa-heart-pulse"></i> Stress & Burnout Risk</span>
                             <strong class="m-val stress-val">${data.stress_level || 'Moderate to High Risk'}</strong>
                         </div>
+                    </div>
                 </div>
 
-                <!-- UNFILTERED REALITY COMPARISON SPOTLIGHT CARD -->
+                <!-- UNFILTERED REALITY COMPARISON SPOTLIGHT CARD (STANDALONE BOX) -->
                 <div class="reality-card" style="background: rgba(239, 68, 68, 0.04); border: 1px solid rgba(239, 68, 68, 0.3); border-radius: 16px; padding: 22px; margin-bottom: 24px; box-shadow: 0 10px 30px rgba(0,0,0,0.4);">
                     <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 16px; border-bottom: 1px solid rgba(255,255,255,0.08); padding-bottom: 12px;">
                         <i class="fa-solid fa-eye" style="font-size: 1.3rem; color: #ef4444;"></i>
@@ -190,23 +205,41 @@ realityBtn.onclick = async function() {
 
                     <!-- RIGHT COLUMN -->
                     <div class="reality-col">
-                        <!-- SALARY BREAKDOWN -->
-                        <div class="reality-card salary-reality-card">
-                            <h2><i class="fa-solid fa-sack-dollar"></i> Compensation & Salary Realities</h2>
-                            <p class="salary-overview-text" style="color: var(--text-secondary); font-size: 0.88rem; margin-bottom: 16px;">${data.salary_reality || 'Realistic compensation tiers based on experience and region.'}</p>
+                        <!-- SALARY BREAKDOWN CARD (UPGRADED ACCURATE STACKED TIERS) -->
+                        <div class="reality-card salary-reality-card" style="border: 1px solid rgba(250, 204, 21, 0.35);">
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; border-bottom: 1px solid rgba(255,255,255,0.08); padding-bottom: 10px;">
+                                <span style="font-size: 0.98rem; font-weight: 800; color: var(--text-heading); display: flex; align-items: center; gap: 8px;">
+                                    <span style="font-size: 1.2rem;">${countryFlag}</span> ${countryName} Verified Earning Scope
+                                </span>
+                                <span style="background: rgba(34, 197, 94, 0.15); color: #22c55e; border: 1px solid rgba(34, 197, 94, 0.4); font-size: 0.7rem; padding: 2px 8px; border-radius: 14px; font-weight: 700;">
+                                    <i class="fa-solid fa-circle-check"></i> Verified
+                                </span>
+                            </div>
+                            <p class="salary-overview-text" style="color: var(--text-secondary); font-size: 0.86rem; margin-bottom: 16px; line-height: 1.4;">${data.salary_reality || `Realistic compensation progression for ${data.career || career} in ${countryName}.`}</p>
                             
-                            <div class="reality-salary-tiers">
-                                <div class="r-tier-box fresher">
-                                    <small>🌱 Entry Level (0-2 Yrs)</small>
-                                    <h4>${fresherSal}</h4>
+                            <div style="display: flex; flex-direction: column; gap: 10px;">
+                                <div style="background: rgba(34, 197, 94, 0.06); border: 1px solid rgba(34, 197, 94, 0.3); border-radius: 12px; padding: 12px 16px; display: flex; justify-content: space-between; align-items: center;">
+                                    <div>
+                                        <span style="font-size: 0.72rem; color: #22c55e; font-weight: 800; text-transform: uppercase;">🌱 Entry Level (0-2 Yrs)</span>
+                                        <small style="display: block; font-size: 0.75rem; color: var(--text-secondary);">Junior / Resident / Intern</small>
+                                    </div>
+                                    <h4 style="color: #22c55e; font-size: 1.05rem; margin: 0; font-weight: 900;">${fresherSal}</h4>
                                 </div>
-                                <div class="r-tier-box mid">
-                                    <small>⚡ Mid Level (3-6 Yrs)</small>
-                                    <h4>${midSal}</h4>
+
+                                <div style="background: rgba(250, 204, 21, 0.06); border: 1px solid rgba(250, 204, 21, 0.3); border-radius: 12px; padding: 12px 16px; display: flex; justify-content: space-between; align-items: center;">
+                                    <div>
+                                        <span style="font-size: 0.72rem; color: var(--accent); font-weight: 800; text-transform: uppercase;">⚡ Mid Level (3-6 Yrs)</span>
+                                        <small style="display: block; font-size: 0.75rem; color: var(--text-secondary);">Experienced Practitioner</small>
+                                    </div>
+                                    <h4 style="color: var(--accent); font-size: 1.05rem; margin: 0; font-weight: 900;">${midSal}</h4>
                                 </div>
-                                <div class="r-tier-box senior">
-                                    <small>🏆 Experienced (7+ Yrs)</small>
-                                    <h4>${seniorSal}</h4>
+
+                                <div style="background: rgba(168, 85, 247, 0.06); border: 1px solid rgba(168, 85, 247, 0.3); border-radius: 12px; padding: 12px 16px; display: flex; justify-content: space-between; align-items: center;">
+                                    <div>
+                                        <span style="font-size: 0.72rem; color: #a855f7; font-weight: 800; text-transform: uppercase;">🏆 Senior / Lead (7+ Yrs)</span>
+                                        <small style="display: block; font-size: 0.75rem; color: var(--text-secondary);">Lead Consultant / Director</small>
+                                    </div>
+                                    <h4 style="color: #a855f7; font-size: 1.05rem; margin: 0; font-weight: 900;">${seniorSal}</h4>
                                 </div>
                             </div>
                         </div>
