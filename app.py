@@ -2348,6 +2348,11 @@ def get_fallback_career_reality(career, country):
                 "You struggle with high-pressure environments, long hospital shifts, or emergency calls.",
                 "You prefer purely solitary desk jobs without direct patient interactions."
             ],
+            "expectation_vs_reality": {
+                "expectation": "Immediate high earnings, relaxed hospital shifts, and low competitive pressure.",
+                "unfiltered_reality": "Requires 5-8+ years of relentless study (NEET/MBBS/MD), managing intense 24-36 hour residency shifts, and high emotional resilience.",
+                "success_key": "Master clinical fundamentals, develop high stress tolerance, and commit to long-term patient care dedication."
+            },
             "industry_reality": "The medical profession is globally recession-proof with 100% long-term job security and immense societal impact.",
             "ai_verdict": "Zero AI Disruption Risk: Human empathy, physical diagnostics, and surgical precision remain 100% human-driven."
         }
@@ -2388,6 +2393,11 @@ def get_fallback_career_reality(career, country):
             "You dislike adapting to shifting industry tools and requirements.",
             "You expect immediate high rewards without initial dedicated practice."
         ],
+        "expectation_vs_reality": {
+            "expectation": "Immediate high salary, minimal overtime, and effortless job stability from Day 1.",
+            "unfiltered_reality": f"Initial 3-5 years require high grit, continuous self-study, managing tight deadlines, and proving value before reaching top pay.",
+            "success_key": "Build a strong portfolio of work, maintain emotional stamina under pressure, and commit to 100% continuous upskilling."
+        },
         "industry_reality": f"The {c_title} industry is rapidly evolving with high long-term career growth, rewarding dedicated practitioners with high impact and competitive compensation.",
         "ai_verdict": f"{c_title} remains a top-tier career choice with strong long-term market sustainability."
     }

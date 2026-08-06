@@ -118,6 +118,30 @@ realityBtn.onclick = async function() {
                             <span class="m-label"><i class="fa-solid fa-heart-pulse"></i> Stress & Burnout Risk</span>
                             <strong class="m-val stress-val">${data.stress_level || 'Moderate to High Risk'}</strong>
                         </div>
+                </div>
+
+                <!-- UNFILTERED REALITY COMPARISON SPOTLIGHT CARD -->
+                <div class="reality-card" style="background: rgba(239, 68, 68, 0.04); border: 1px solid rgba(239, 68, 68, 0.3); border-radius: 16px; padding: 22px; margin-bottom: 24px; box-shadow: 0 10px 30px rgba(0,0,0,0.4);">
+                    <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 16px; border-bottom: 1px solid rgba(255,255,255,0.08); padding-bottom: 12px;">
+                        <i class="fa-solid fa-eye" style="font-size: 1.3rem; color: #ef4444;"></i>
+                        <h2 style="margin: 0; font-size: 1.15rem; color: var(--text-heading);">The Proper Unfiltered Reality: Expectation vs. Ground Truth</h2>
+                    </div>
+                    
+                    <div style="display: grid; grid-template-columns: 1fr 1.2fr 1fr; gap: 16px;">
+                        <div style="background: rgba(59, 130, 246, 0.06); border: 1px solid rgba(59, 130, 246, 0.3); border-radius: 14px; padding: 16px;">
+                            <div style="font-size: 0.75rem; color: #3b82f6; font-weight: 800; text-transform: uppercase; margin-bottom: 6px;">💭 Social Expectation (The Myth)</div>
+                            <p style="font-size: 0.85rem; color: var(--text-secondary); margin: 0; line-height: 1.5;">${(data.expectation_vs_reality?.expectation || "High starting income, minimal overtime, and immediate effortless career stability.")}</p>
+                        </div>
+
+                        <div style="background: rgba(239, 68, 68, 0.06); border: 1px solid rgba(239, 68, 68, 0.35); border-radius: 14px; padding: 16px;">
+                            <div style="font-size: 0.75rem; color: #ef4444; font-weight: 800; text-transform: uppercase; margin-bottom: 6px;">🔥 Unfiltered Ground Reality (The Truth)</div>
+                            <p style="font-size: 0.85rem; color: var(--text-heading); margin: 0; line-height: 1.5; font-weight: 500;">${(data.expectation_vs_reality?.unfiltered_reality || "Requires 3-5+ years of intense initial preparation, long working shifts, high stress resilience, and continuous skill updates to reach top-tier compensation.")}</p>
+                        </div>
+
+                        <div style="background: rgba(34, 197, 94, 0.06); border: 1px solid rgba(34, 197, 94, 0.3); border-radius: 14px; padding: 16px;">
+                            <div style="font-size: 0.75rem; color: #22c55e; font-weight: 800; text-transform: uppercase; margin-bottom: 6px;">🎯 Key to Survival & Success</div>
+                            <p style="font-size: 0.85rem; color: var(--text-secondary); margin: 0; line-height: 1.5;">${(data.expectation_vs_reality?.success_key || "Build verifiable proof of work, develop emotional stamina under pressure, and commit to 100% continuous upskilling.")}</p>
+                        </div>
                     </div>
                 </div>
 
