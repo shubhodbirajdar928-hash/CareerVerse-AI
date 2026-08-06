@@ -693,139 +693,137 @@ def format_multi_currency_salary(country, base_usd_fresher="$70k - $95k / yr", b
 # Career-Specific Salary Benchmarking Engine
 # =====================================================
 
+# =====================================================
+# Universal Country Currency Benchmarking Engine
+# =====================================================
+
+def get_country_currency_info(country):
+    c_clean = (country or "Global").strip()
+
+    # Direct case-insensitive search in COUNTRY_CURRENCY json
+    for k, v in COUNTRY_CURRENCY.items():
+        if k.lower() == c_clean.lower():
+            parts = v.split()
+            code = parts[0] if len(parts) > 0 else "USD"
+            symbol = parts[1] if len(parts) > 1 else "$"
+            return k, code, symbol
+
+    # Substring search
+    for k, v in COUNTRY_CURRENCY.items():
+        if k.lower() in c_clean.lower() or c_clean.lower() in k.lower():
+            parts = v.split()
+            code = parts[0] if len(parts) > 0 else "USD"
+            symbol = parts[1] if len(parts) > 1 else "$"
+            return k, code, symbol
+
+    # Specific country name overrides
+    c_low = c_clean.lower()
+    if "india" in c_low:
+        return "India", "INR", "₹"
+    elif "china" in c_low:
+        return "China", "CNY", "¥"
+    elif "japan" in c_low:
+        return "Japan", "JPY", "¥"
+    elif "uk" in c_low or "united kingdom" in c_low or "england" in c_low:
+        return "United Kingdom", "GBP", "£"
+    elif "germany" in c_low or "france" in c_low or "europe" in c_low or "eu" in c_low:
+        return c_clean.title(), "EUR", "€"
+    elif "usa" in c_low or "united states" in c_low or "america" in c_low:
+        return "United States", "USD", "$"
+
+    return c_clean.title(), "USD", "$"
+
+
 def get_career_salary_benchmark(career, country):
     c_low = (career or "").lower().strip()
-    c_cntry = (country or "").lower().strip()
+    country_name, code, symbol = get_country_currency_info(country)
 
-    # 1. AI / ML / Data Science / LLM
+    # Base USD Career Ranges (Fresher, Mid, Senior)
     if any(x in c_low for x in ["ai", "ml", "machine learning", "deep learning", "nlp", "llm", "data scientist", "data science"]):
-        inr_f, inr_m, inr_s = "₹8.0L - ₹16.0L / yr", "₹18.0L - ₹36.0L / yr", "₹40.0L - ₹90.0L+ / yr"
-        usd_f, usd_m, usd_s = "$95,000 - $145,000 / yr", "$155,000 - $230,000 / yr", "$240,000 - $420,000+ / yr"
-        cny_f, cny_m, cny_s = "¥120,000 - ¥220,000 / yr", "¥240,000 - ¥400,000 / yr", "¥450,000 - ¥850,000+ / yr"
-        gbp_f, gbp_m, gbp_s = "£55,000 - £85,000 / yr", "£90,000 - £145,000 / yr", "£150,000 - £260,000+ / yr"
-        eur_f, eur_m, eur_s = "€60,000 - €95,000 / yr", "€100,000 - €155,000 / yr", "€160,000 - €280,000+ / yr"
-
-    # 2. DevOps / Cloud / SRE / Cyber Security
+        f_usd, m_usd, s_usd = (95000, 145000), (155000, 230000), (240000, 420000)
     elif any(x in c_low for x in ["devops", "cloud", "sre", "site reliability", "cyber", "security", "sysadmin", "system architect"]):
-        inr_f, inr_m, inr_s = "₹6.5L - ₹12.5L / yr", "₹15.0L - ₹28.0L / yr", "₹32.0L - ₹65.0L+ / yr"
-        usd_f, usd_m, usd_s = "$85,000 - $125,000 / yr", "$135,000 - $185,000 / yr", "$190,000 - $310,000+ / yr"
-        cny_f, cny_m, cny_s = "¥100,000 - ¥180,000 / yr", "¥200,000 - ¥340,000 / yr", "¥380,000 - ¥650,000+ / yr"
-        gbp_f, gbp_m, gbp_s = "£48,000 - £75,000 / yr", "£80,000 - £120,000 / yr", "£130,000 - £210,000+ / yr"
-        eur_f, eur_m, eur_s = "€52,000 - €82,000 / yr", "€85,000 - €135,000 / yr", "€140,000 - €230,000+ / yr"
-
-    # 3. Textile Engineer / Garment / Fashion Tech / Materials
+        f_usd, m_usd, s_usd = (85000, 125000), (135000, 185000), (190000, 310000)
     elif any(x in c_low for x in ["textile", "garment", "apparel", "fashion engineer", "fabric", "fiber"]):
-        inr_f, inr_m, inr_s = "₹3.5L - ₹6.5L / yr", "₹7.5L - ₹14.0L / yr", "₹16.0L - ₹30.0L / yr"
-        usd_f, usd_m, usd_s = "$60,000 - $85,000 / yr", "$90,000 - $135,000 / yr", "$140,000 - $210,000 / yr"
-        cny_f, cny_m, cny_s = "¥65,000 - ¥110,000 / yr", "¥120,000 - ¥200,000 / yr", "¥220,000 - ¥380,000 / yr"
-        gbp_f, gbp_m, gbp_s = "£32,000 - £48,000 / yr", "£52,000 - £78,000 / yr", "£82,000 - £130,000 / yr"
-        eur_f, eur_m, eur_s = "€36,000 - €54,000 / yr", "€58,000 - €88,000 / yr", "€92,000 - €145,000 / yr"
-
-    # 4. Chemical Scientist / Chemist / Chemistry
+        f_usd, m_usd, s_usd = (60000, 85000), (90000, 135000), (140000, 210000)
     elif any(x in c_low for x in ["chemical", "chemist", "chemistry", "lab scientist", "r&d scientist"]):
-        inr_f, inr_m, inr_s = "₹3.8L - ₹7.0L / yr", "₹8.5L - ₹16.0L / yr", "₹18.0L - ₹35.0L / yr"
-        usd_f, usd_m, usd_s = "$55,000 - $80,000 / yr", "$85,000 - $130,000 / yr", "$140,000 - $210,000 / yr"
-        cny_f, cny_m, cny_s = "¥70,000 - ¥120,000 / yr", "¥130,000 - ¥220,000 / yr", "¥240,000 - ¥400,000 / yr"
-        gbp_f, gbp_m, gbp_s = "£30,000 - £46,000 / yr", "£50,000 - £76,000 / yr", "£80,000 - £125,000 / yr"
-        eur_f, eur_m, eur_s = "€35,000 - €52,000 / yr", "€56,000 - €85,000 / yr", "€90,000 - €140,000 / yr"
-
-    # 5. Doctor / Medical Specialist / Surgeon / NEET / MBBS
+        f_usd, m_usd, s_usd = (55000, 80000), (85000, 130000), (140000, 210000)
     elif any(x in c_low for x in ["doctor", "surgeon", "physician", "dentist", "medical", "neet", "mbbs", "md", "ms"]):
-        inr_f, inr_m, inr_s = "₹6.5L - ₹12.0L / yr", "₹18.0L - ₹38.0L / yr", "₹45.0L - ₹1.5Cr+ / yr"
-        usd_f, usd_m, usd_s = "$68,000 - $85,000 / yr", "$220,000 - $320,000 / yr", "$380,000 - $650,000+ / yr"
-        cny_f, cny_m, cny_s = "¥110,000 - ¥180,000 / yr", "¥260,000 - ¥420,000 / yr", "¥500,000 - ¥1.2M+ / yr"
-        gbp_f, gbp_m, gbp_s = "£38,000 - £52,000 / yr", "£75,000 - £120,000 / yr", "£140,000 - £280,000+ / yr"
-        eur_f, eur_m, eur_s = "€42,000 - €58,000 / yr", "€85,000 - €135,000 / yr", "€150,000 - €300,000+ / yr"
-
-    # 6. Financial Analyst / Investment Banker / Finance
+        f_usd, m_usd, s_usd = (68000, 85000), (220000, 320000), (380000, 650000)
     elif any(x in c_low for x in ["financial", "finance", "investment banker", "equity", "cfa", "accounting", "chartered accountant"]):
-        inr_f, inr_m, inr_s = "₹7.0L - ₹14.0L / yr", "₹16.0L - ₹32.0L / yr", "₹35.0L - ₹90.0L+ / yr"
-        usd_f, usd_m, usd_s = "$85,000 - $130,000 / yr", "$140,000 - $210,000 / yr", "$220,000 - $450,000+ / yr"
-        cny_f, cny_m, cny_s = "¥110,000 - ¥190,000 / yr", "¥210,000 - ¥360,000 / yr", "¥400,000 - ¥800,000+ / yr"
-        gbp_f, gbp_m, gbp_s = "£50,000 - £78,000 / yr", "£85,000 - £130,000 / yr", "£140,000 - £270,000+ / yr"
-        eur_f, eur_m, eur_s = "€55,000 - €85,000 / yr", "€92,000 - €142,000 / yr", "€150,000 - €290,000+ / yr"
-
-    # 7. Mechanical / Civil / Core Engineering
+        f_usd, m_usd, s_usd = (85000, 130000), (140000, 210000), (220000, 450000)
     elif any(x in c_low for x in ["mechanical", "civil", "electrical", "structural", "autocad"]):
-        inr_f, inr_m, inr_s = "₹3.6L - ₹6.5L / yr", "₹8.0L - ₹15.0L / yr", "₹18.0L - ₹35.0L / yr"
-        usd_f, usd_m, usd_s = "$65,000 - $88,000 / yr", "$95,000 - $140,000 / yr", "$145,000 - $220,000 / yr"
-        cny_f, cny_m, cny_s = "¥70,000 - ¥115,000 / yr", "¥125,000 - ¥210,000 / yr", "¥220,000 - ¥380,000 / yr"
-        gbp_f, gbp_m, gbp_s = "£34,000 - £48,000 / yr", "£52,000 - £76,000 / yr", "£80,000 - £125,000 / yr"
-        eur_f, eur_m, eur_s = "€42,000 - €60,000 / yr", "€65,000 - €95,000 / yr", "€100,000 - €155,000 / yr"
-
-    # Default / Other
+        f_usd, m_usd, s_usd = (65000, 88000), (95000, 140000), (145000, 220000)
     else:
-        inr_f, inr_m, inr_s = "₹4.5L - ₹8.5L / yr", "₹10.0L - ₹20.0L / yr", "₹22.0L - ₹45.0L / yr"
-        usd_f, usd_m, usd_s = "$60,000 - $90,000 / yr", "$95,000 - $145,000 / yr", "$150,000 - $240,000 / yr"
-        cny_f, cny_m, cny_s = "¥70,000 - ¥120,000 / yr", "¥130,000 - ¥220,000 / yr", "¥230,000 - ¥400,000 / yr"
-        gbp_f, gbp_m, gbp_s = "£35,000 - £55,000 / yr", "£60,000 - £90,000 / yr", "£95,000 - £150,000 / yr"
-        eur_f, eur_m, eur_s = "€40,000 - €62,000 / yr", "€68,000 - €100,000 / yr", "€105,000 - €165,000 / yr"
+        f_usd, m_usd, s_usd = (60000, 90000), (95000, 145000), (150000, 240000)
 
-    # Return based on requested country
-    if any(k in c_cntry for k in ["china", "chinese"]):
-        return {"fresher": cny_f, "mid": cny_m, "senior": cny_s}
-    elif any(k in c_cntry for k in ["uk", "united kingdom", "england", "london", "britain"]):
-        return {"fresher": gbp_f, "mid": gbp_m, "senior": gbp_s}
-    elif any(k in c_cntry for k in ["germany", "france", "italy", "spain", "netherlands", "europe", "eu"]):
-        return {"fresher": eur_f, "mid": eur_m, "senior": eur_s}
-    elif any(k in c_cntry for k in ["india"]):
-        return {"fresher": inr_f, "mid": inr_m, "senior": inr_s}
-    else:
-        return {"fresher": usd_f, "mid": usd_m, "senior": usd_s}
+    # Special formatting for India (Lakhs & Crores in ₹)
+    if code == "INR" or "india" in country_name.lower():
+        if any(x in c_low for x in ["ai", "ml", "machine learning", "deep learning", "data science"]):
+            return {"fresher": "₹8.0L - ₹16.0L / yr", "mid": "₹18.0L - ₹36.0L / yr", "senior": "₹40.0L - ₹90.0L+ / yr"}
+        elif any(x in c_low for x in ["devops", "cloud", "sre", "cyber"]):
+            return {"fresher": "₹6.5L - ₹12.5L / yr", "mid": "₹15.0L - ₹28.0L / yr", "senior": "₹32.0L - ₹65.0L+ / yr"}
+        elif any(x in c_low for x in ["textile", "garment", "apparel"]):
+            return {"fresher": "₹3.5L - ₹6.5L / yr", "mid": "₹7.5L - ₹14.0L / yr", "senior": "₹16.0L - ₹30.0L / yr"}
+        elif any(x in c_low for x in ["chemical", "chemist"]):
+            return {"fresher": "₹3.8L - ₹7.0L / yr", "mid": "₹8.5L - ₹16.0L / yr", "senior": "₹18.0L - ₹35.0L / yr"}
+        elif any(x in c_low for x in ["doctor", "surgeon", "physician", "medical", "neet"]):
+            return {"fresher": "₹6.5L - ₹12.0L / yr", "mid": "₹18.0L - ₹38.0L / yr", "senior": "₹45.0L - ₹1.5Cr+ / yr"}
+        elif any(x in c_low for x in ["finance", "financial"]):
+            return {"fresher": "₹7.0L - ₹14.0L / yr", "mid": "₹16.0L - ₹32.0L / yr", "senior": "₹35.0L - ₹90.0L+ / yr"}
+        else:
+            return {"fresher": "₹4.5L - ₹8.5L / yr", "mid": "₹10.0L - ₹20.0L / yr", "senior": "₹22.0L - ₹45.0L / yr"}
+
+    # Exchange Rate Multipliers relative to USD (approximate market parity)
+    RATES = {
+        "USD": 1.0, "EUR": 0.92, "GBP": 0.78, "CNY": 7.2, "JPY": 155.0,
+        "CAD": 1.36, "AUD": 1.50, "CHF": 0.90, "SGD": 1.35, "AED": 3.67,
+        "SAR": 3.75, "QAR": 3.64, "HKD": 7.8, "NZD": 1.64, "KRW": 1360.0,
+        "BRL": 5.15, "MXN": 16.8, "RUB": 92.0, "TRY": 32.5, "ZAR": 18.5,
+        "SEK": 10.8, "NOK": 10.9, "DKK": 6.9, "PLN": 3.95, "THB": 36.5,
+        "IDR": 16000.0, "MYR": 4.7, "PHP": 57.5, "VND": 25000.0, "PKR": 278.0,
+        "BDT": 117.0, "EGP": 47.5, "NGN": 1450.0, "KES": 130.0, "ARS": 880.0,
+        "AFN": 71.0, "ALL": 92.0, "DZD": 134.0, "AOA": 850.0, "AMD": 388.0,
+        "AZN": 1.70, "BHD": 0.38, "BYN": 3.25, "BOB": 6.9, "BWP": 13.6,
+        "CLP": 940.0, "COP": 3900.0, "CRC": 510.0, "CZK": 23.0, "DOP": 59.0,
+        "GEL": 2.70, "GHS": 14.5, "HNL": 24.7, "HUF": 360.0, "ISK": 138.0,
+        "IQD": 1310.0, "ILS": 3.70, "JMD": 156.0, "JOD": 0.71, "KZT": 445.0,
+        "KWD": 0.31, "LBP": 89500.0, "MAD": 10.0, "NPR": 133.0, "OMR": 0.38,
+        "PEN": 3.75, "RON": 4.60, "RSD": 108.0, "TWD": 32.5, "TZS": 2600.0,
+        "UGX": 3750.0, "UAH": 40.0, "UYU": 39.0, "UZS": 12600.0
+    }
+
+    rate = RATES.get(code, 1.0)
+
+    def fmt(val):
+        converted = val * rate
+        if converted >= 1000000:
+            return f"{symbol}{converted/1000000:.1f}M"
+        elif converted >= 1000:
+            return f"{symbol}{round(converted):,}"
+        else:
+            return f"{symbol}{round(converted)}"
+
+    f_str = f"{fmt(f_usd[0])} - {fmt(f_usd[1])} / yr"
+    m_str = f"{fmt(m_usd[0])} - {fmt(m_usd[1])} / yr"
+    s_str = f"{fmt(s_usd[0])} - {fmt(s_usd[1])} / yr"
+
+    return {"fresher": f_str, "mid": m_str, "senior": s_str}
 
 
 def create_normalized_salary_object(career, country):
-    c_cntry = (country or "Global").strip().title()
-    c_low = c_cntry.lower()
+    c_name, code, symbol = get_country_currency_info(country)
+    bench = get_career_salary_benchmark(career, country)
 
-    symbol = "$"
-    code = "USD"
-    if any(k in c_low for k in ["china", "chinese"]):
-        symbol = "¥"
-        code = "CNY"
-    elif any(k in c_low for k in ["india"]):
-        symbol = "₹"
-        code = "INR"
-    elif any(k in c_low for k in ["uk", "united kingdom", "england", "britain"]):
-        symbol = "£"
-        code = "GBP"
-    elif any(k in c_low for k in ["germany", "france", "italy", "spain", "europe", "eu"]):
-        symbol = "€"
-        code = "EUR"
-    elif any(k in c_low for k in ["canada"]):
-        symbol = "CA$"
-        code = "CAD"
-    elif any(k in c_low for k in ["australia"]):
-        symbol = "A$"
-        code = "AUD"
-    elif any(k in c_low for k in ["uae", "dubai", "emirates"]):
-        symbol = "AED"
-        code = "AED"
-    elif any(k in c_low for k in ["japan"]):
-        symbol = "¥"
-        code = "JPY"
-    elif any(k in c_low for k in ["singapore"]):
-        symbol = "S$"
-        code = "SGD"
-
-    target_bench = get_career_salary_benchmark(career, c_cntry)
-    intl_bench = get_career_salary_benchmark(career, "USA")
-
-    target_formatted = f"{target_bench['fresher']} (Fresher) -> {target_bench['mid']} (Mid) -> {target_bench['senior']} (Senior)"
-    intl_formatted = f"{intl_bench['fresher']} (Fresher) -> {intl_bench['mid']} (Mid) -> {intl_bench['senior']} (Senior)"
+    target_formatted = f"{bench['fresher']} (Fresher) -> {bench['mid']} (Mid) -> {bench['senior']} (Senior)"
 
     return {
-        "target_location": c_cntry,
+        "target_location": c_name,
         "currency_symbol": symbol,
         "currency_code": code,
-        "fresher": target_bench["fresher"],
-        "mid": target_bench["mid"],
-        "senior": target_bench["senior"],
-        "formatted_range": target_formatted,
-        "international_usd_fresher": intl_bench["fresher"],
-        "international_usd_mid": intl_bench["mid"],
-        "international_usd_senior": intl_bench["senior"],
-        "international_usd_range": intl_formatted
+        "fresher": bench["fresher"],
+        "mid": bench["mid"],
+        "senior": bench["senior"],
+        "formatted_range": target_formatted
     }
 
 # =====================================================
