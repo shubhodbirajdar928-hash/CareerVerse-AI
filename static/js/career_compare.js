@@ -120,78 +120,65 @@ country: country
             ${createCareerCard(data.career2, false, country)}
         </div>
 
-        <!-- COMPARISON METRICS DASHBOARD -->
+        <!-- REAL DATA COMPARISON SUMMARY DASHBOARD -->
         <div class="comparison-summary" style="background: var(--bg-card); border: 1px solid var(--border); border-radius: 20px; padding: 32px; margin-bottom: 40px;">
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 28px; border-bottom: 1px solid rgba(255,255,255,0.08); padding-bottom: 14px;">
-                <div>
-                    <h2 style="color: var(--accent); font-size: 1.5rem; margin: 0 0 6px 0; font-weight: 800; display: flex; align-items: center; gap: 10px;">
-                        📊 Career Comparison Metrics & Performance
-                    </h2>
-                    <p style="margin: 0; color: var(--text-secondary); font-size: 0.88rem;">
-                        Comparative analysis for ${c1Name} vs ${c2Name} in ${country || 'Target Market'}.
-                    </p>
-                </div>
+            <div style="margin-bottom: 24px; border-bottom: 1px solid rgba(255,255,255,0.08); padding-bottom: 14px;">
+                <h2 style="color: var(--accent); font-size: 1.5rem; margin: 0 0 6px 0; font-weight: 800; display: flex; align-items: center; gap: 10px;">
+                    📊 Real-World Career Comparison Metrics
+                </h2>
+                <p style="margin: 0; color: var(--text-secondary); font-size: 0.88rem;">
+                    Location-adjusted comparison for ${c1Name} vs ${c2Name} in ${country || 'Target Market'}.
+                </p>
             </div>
 
-            <!-- DUAL COLOR COMPARISON BARS -->
-            <div class="compare-metric" style="margin-bottom: 24px;">
-                <h3 style="color: var(--text-heading); font-size: 0.98rem; font-weight: 700; margin-bottom: 14px; display: flex; align-items: center; gap: 8px;">
-                    💰 Salary & Earning Capacity
-                </h3>
-                <div class="bar-row" style="margin-bottom: 12px;">
-                    <span style="color: #60a5fa; font-weight: 700;">🚀 ${c1Name}</span>
-                    <div class="bar">
-                        <div class="fill" style="width:${c1.salary_score || 85}%; background: linear-gradient(90deg, #3b82f6, #60a5fa);"></div>
+            <!-- REAL COMPARATIVE METRICS GRID -->
+            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 10px;">
+                
+                <!-- 1. Mid Salary -->
+                <div style="background: rgba(0,0,0,0.35); border: 1px solid var(--border); border-radius: 14px; padding: 18px;">
+                    <span style="font-size: 0.76rem; color: var(--text-muted); font-weight: 700; text-transform: uppercase; display: block; margin-bottom: 10px;">
+                        💰 Mid-Level Compensation
+                    </span>
+                    <div style="margin-bottom: 10px; padding-bottom: 8px; border-bottom: 1px solid rgba(255,255,255,0.05);">
+                        <span style="font-size: 0.76rem; color: #60a5fa; font-weight: 800; display: block;">🚀 ${c1Name}</span>
+                        <strong style="font-size: 1rem; color: #22c55e;">${c1Bench.mid || 'Market Rate'}</strong>
                     </div>
-                    <b style="color: #60a5fa;">${c1.salary_score || 85}/100</b>
-                </div>
-                <div class="bar-row">
-                    <span style="color: #fde047; font-weight: 700;">⚡ ${c2Name}</span>
-                    <div class="bar">
-                        <div class="fill" style="width:${c2.salary_score || 80}%; background: linear-gradient(90deg, #facc15, #fde047);"></div>
+                    <div>
+                        <span style="font-size: 0.76rem; color: #fde047; font-weight: 800; display: block;">⚡ ${c2Name}</span>
+                        <strong style="font-size: 1rem; color: #22c55e;">${c2Bench.mid || 'Market Rate'}</strong>
                     </div>
-                    <b style="color: #fde047;">${c2.salary_score || 80}/100</b>
                 </div>
-            </div>
 
-            <div class="compare-metric" style="margin-bottom: 24px;">
-                <h3 style="color: var(--text-heading); font-size: 0.98rem; font-weight: 700; margin-bottom: 14px; display: flex; align-items: center; gap: 8px;">
-                    📈 Market Demand & Hiring Activity
-                </h3>
-                <div class="bar-row" style="margin-bottom: 12px;">
-                    <span style="color: #60a5fa; font-weight: 700;">🚀 ${c1Name}</span>
-                    <div class="bar">
-                        <div class="fill" style="width:${c1.demand_score || 80}%; background: linear-gradient(90deg, #3b82f6, #60a5fa);"></div>
+                <!-- 2. Market Demand -->
+                <div style="background: rgba(0,0,0,0.35); border: 1px solid var(--border); border-radius: 14px; padding: 18px;">
+                    <span style="font-size: 0.76rem; color: var(--text-muted); font-weight: 700; text-transform: uppercase; display: block; margin-bottom: 10px;">
+                        🔥 Hiring Demand Rating
+                    </span>
+                    <div style="margin-bottom: 10px; padding-bottom: 8px; border-bottom: 1px solid rgba(255,255,255,0.05);">
+                        <span style="font-size: 0.76rem; color: #60a5fa; font-weight: 800; display: block;">🚀 ${c1Name}</span>
+                        <strong style="font-size: 0.95rem; color: var(--text-heading);">${c1.demand || 'High Demand'}</strong>
                     </div>
-                    <b style="color: #60a5fa;">${c1.demand_score || 80}/100</b>
-                </div>
-                <div class="bar-row">
-                    <span style="color: #fde047; font-weight: 700;">⚡ ${c2Name}</span>
-                    <div class="bar">
-                        <div class="fill" style="width:${c2.demand_score || 75}%; background: linear-gradient(90deg, #facc15, #fde047);"></div>
+                    <div>
+                        <span style="font-size: 0.76rem; color: #fde047; font-weight: 800; display: block;">⚡ ${c2Name}</span>
+                        <strong style="font-size: 0.95rem; color: var(--text-heading);">${c2.demand || 'High Demand'}</strong>
                     </div>
-                    <b style="color: #fde047;">${c2.demand_score || 75}/100</b>
                 </div>
-            </div>
 
-            <div class="compare-metric" style="margin-bottom: 24px;">
-                <h3 style="color: var(--text-heading); font-size: 0.98rem; font-weight: 700; margin-bottom: 14px; display: flex; align-items: center; gap: 8px;">
-                    🚀 5-Year Industry Growth Outlook
-                </h3>
-                <div class="bar-row" style="margin-bottom: 12px;">
-                    <span style="color: #60a5fa; font-weight: 700;">🚀 ${c1Name}</span>
-                    <div class="bar">
-                        <div class="fill" style="width:${c1.growth_score || 85}%; background: linear-gradient(90deg, #3b82f6, #60a5fa);"></div>
+                <!-- 3. Learning Curve -->
+                <div style="background: rgba(0,0,0,0.35); border: 1px solid var(--border); border-radius: 14px; padding: 18px;">
+                    <span style="font-size: 0.76rem; color: var(--text-muted); font-weight: 700; text-transform: uppercase; display: block; margin-bottom: 10px;">
+                        ⏳ Preparation Curve
+                    </span>
+                    <div style="margin-bottom: 10px; padding-bottom: 8px; border-bottom: 1px solid rgba(255,255,255,0.05);">
+                        <span style="font-size: 0.76rem; color: #60a5fa; font-weight: 800; display: block;">🚀 ${c1Name}</span>
+                        <strong style="font-size: 0.88rem; color: var(--text-secondary);">${c1.learning_time || '3-4 Years'}</strong>
                     </div>
-                    <b style="color: #60a5fa;">${c1.growth_score || 85}/100</b>
-                </div>
-                <div class="bar-row">
-                    <span style="color: #fde047; font-weight: 700;">⚡ ${c2Name}</span>
-                    <div class="bar">
-                        <div class="fill" style="width:${c2.growth_score || 80}%; background: linear-gradient(90deg, #facc15, #fde047);"></div>
+                    <div>
+                        <span style="font-size: 0.76rem; color: #fde047; font-weight: 800; display: block;">⚡ ${c2Name}</span>
+                        <strong style="font-size: 0.88rem; color: var(--text-secondary);">${c2.learning_time || '3-4 Years'}</strong>
                     </div>
-                    <b style="color: #fde047;">${c2.growth_score || 80}/100</b>
                 </div>
+
             </div>
         </div>
 
