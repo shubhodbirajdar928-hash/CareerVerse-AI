@@ -2040,39 +2040,66 @@ def generate_fallback_compare(career1, career2, country="India"):
     
     def get_role_data(name):
         n = name.lower()
-        if any(w in n for w in ["doctor", "surgeon", "physician", "dentist", "anesthesiologist", "medical", "nurse", "pharmacist"]):
+        if any(w in n for w in ["upsc", "ias", "ips", "ssc", "gate", "nda", "police", "government", "officer", "diplomat", "civil servant", "collector", "bureaucrat"]):
+            sal = "₹7 - ₹24 Lakhs / yr (7th Pay Commission + Allowances)" if country_clean == "India" else "$60,000 - $130,000 / yr"
+            orgs = ["Union Public Service Commission (UPSC)", "Ministry of External Affairs", "Cabinet Secretariat", "NITI Aayog", "State Administrative Services"]
+            score = 90
+            expectation = "High social prestige, lifetime job security, and official governance authority."
+            unfiltered_reality = "Extremely competitive selection (<0.1% pass rate), 2-3 years of intensive full-time preparation, frequent administrative postings, and high public accountability."
+        elif any(w in n for w in ["civil engineer", "structural engineer", "architect", "construction", "infrastructure"]):
+            sal = "₹5 - ₹18 Lakhs / yr" if country_clean == "India" else "$65,000 - $125,000 / yr"
+            orgs = ["Larsen & Toubro (L&T)", "Tata Projects", "CPWD / NHAI", "Bechtel", "AECOM"]
+            score = 83
+            expectation = "Designing iconic infrastructure, outdoor project freedom, and stable construction growth."
+            unfiltered_reality = "Challenging onsite field conditions, strict structural safety accountability, weather delays, and site relocation management."
+        elif any(w in n for w in ["doctor", "surgeon", "physician", "dentist", "anesthesiologist", "medical", "nurse", "pharmacist"]):
             sal = "₹12 - ₹35 Lakhs / yr" if country_clean == "India" else "$120,000 - $350,000 / yr"
             orgs = ["AIIMS / Major Govt Hospitals", "Apollo Hospitals", "Fortis Healthcare", "Max Healthcare", "Cipla & Sun Pharma"]
             score = 92
+            expectation = "High medical respect, high starting income, and immediate clinical authority."
+            unfiltered_reality = "Requires 5.5+ years MBBS + 3 years MD/MS residency, 60-80 hour work weeks during initial years, high emotional stamina, and lifelong clinical updates."
         elif any(w in n for w in ["farmer", "agronomist", "botanist", "agriculture", "soil", "crop", "farm"]):
             sal = "₹4 - ₹14 Lakhs / yr" if country_clean == "India" else "$45,000 - $95,000 / yr"
             orgs = ["ICAR Agricultural Institutes", "Ministry of Agriculture", "AgriTech Startups", "NABARD", "National Seeds Corporation"]
             score = 81
+            expectation = "Outdoor independence, working with nature, and organic sustainable farming."
+            unfiltered_reality = "High dependence on seasonal climate patterns, supply chain market fluctuations, capital intensive equipment, and physical labor."
         elif any(w in n for w in ["teacher", "professor", "lecturer", "educator", "tutor", "principal", "academic"]):
             sal = "₹4.5 - ₹16 Lakhs / yr" if country_clean == "India" else "$50,000 - $98,000 / yr"
             orgs = ["Central & State Universities", "NCERT / State School Boards", "IITs / NITs", "EdTech Enterprises", "International Academies"]
             score = 84
-        elif any(w in n for w in ["police", "ias", "ips", "government", "officer", "diplomat", "civil", "collector", "bureaucrat"]):
-            sal = "₹7 - ₹22 Lakhs / yr" if country_clean == "India" else "$60,000 - $130,000 / yr"
-            orgs = ["Union Public Service Commission (UPSC)", "Ministry of Home Affairs", "State Civil Services Commission", "Public Sector Undertakings (PSUs)", "United Nations Agencies"]
-            score = 88
+            expectation = "Structured working hours, long summer vacations, and high academic respect."
+            unfiltered_reality = "Heavy administrative grading workload, managing diverse student learning paces, and requirement of NET/PhD for university tenure."
         elif any(w in n for w in ["lawyer", "attorney", "advocate", "judge", "solicitor", "paralegal"]):
             sal = "₹6 - ₹28 Lakhs / yr" if country_clean == "India" else "$85,000 - $190,000 / yr"
             orgs = ["Supreme & High Courts", "Corporate Law Firms", "AZB & Partners", "Shardul Amarchand Mangaldas", "Corporate Legal Departments"]
             score = 89
+            expectation = "High courtroom drama, immediate high retainer fees, and rapid prestige."
+            unfiltered_reality = "Long hours reading case law, initial low junior clerkship stipends, building client networks from scratch, and high stress court deadlines."
         elif any(w in n for w in ["pilot", "captain", "aviation", "aeronautical", "flight"]):
             sal = "₹15 - ₹48 Lakhs / yr" if country_clean == "India" else "$95,000 - $240,000 / yr"
             orgs = ["Air India", "IndiGo Airlines", "Emirates", "Boeing & Airbus", "Directorate General of Civil Aviation"]
             score = 91
+            expectation = "Global luxury travel, high glamour, and high starting aviation pay."
+            unfiltered_reality = "High Commercial Pilot License (CPL) training cost (₹40-50L+), strict biannual medical checks, irregular sleep cycles, and jet lag."
         elif any(w in n for w in ["chef", "cook", "baker", "culinary", "hotel"]):
             sal = "₹4.5 - ₹18 Lakhs / yr" if country_clean == "India" else "$42,000 - $95,000 / yr"
             orgs = ["Taj Hotels & Resorts", "Oberoi Group", "Marriott International", "Michelin Star Restaurants", "Luxury Cruise Lines"]
             score = 82
+            expectation = "Creative food art, celebrity chef status, and culinary innovation."
+            unfiltered_reality = "12+ hour standing kitchen shifts, intense weekend & holiday pressure, high kitchen temperatures, and strict hygiene compliance."
         elif any(w in n for w in ["engineer", "developer", "software", "data", "ai", "cloud"]):
             sal = "₹7 - ₹30 Lakhs / yr" if country_clean == "India" else "$80,000 - $180,000 / yr"
             orgs = ["Google", "Microsoft", "TCS / Infosys", "Amazon", "NVIDIA"]
             score = 93
+            expectation = "High tech salaries, total remote flexibility, and rapid career growth."
+            unfiltered_reality = "Frequent technical interview rounds, screening algorithm tests, 40-50 hour screen time, and constant rapid technology updates."
         else:
+            sal = "₹5 - ₹18 Lakhs / yr" if country_clean == "India" else "$55,000 - $120,000 / yr"
+            orgs = ["Leading Industry Enterprises", "Multinational Corporations", "Public Sector Undertakings", "Growth Startups"]
+            score = 85
+            expectation = "Stable corporate career, steady promotions, and professional growth."
+            unfiltered_reality = "Requires continuous skill refinement, performance KPI tracking, and building verifiable domain proof of work."
             sal = "₹6 - ₹18 Lakhs / yr" if country_clean == "India" else "$60,000 - $130,000 / yr"
             orgs = ["Leading Industry Organizations", "Global Enterprise Corporations", "Specialized Research Institutes", "National Government Boards", "Top Sector Consultancies"]
             score = 85
@@ -2106,6 +2133,8 @@ def generate_fallback_compare(career1, career2, country="India"):
             "growth": "Strong 5-Year Outlook",
             "growth_score": min(100, max(65, score + 1)),
             "learning_time": "3 - 5 Years Degree / Professional Training",
+            "expectation": expectation,
+            "unfiltered_reality": unfiltered_reality,
             "personality_fit": [
                 f"Strong interest in {name} domain",
                 "Analytical & Problem Solving Mindset",
