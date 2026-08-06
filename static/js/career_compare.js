@@ -185,10 +185,25 @@ country: country
                             <td style="padding: 14px; color: var(--text-secondary);">${c1Orgs}</td>
                             <td style="padding: 14px; color: var(--text-secondary);">${c2Orgs}</td>
                         </tr>
-                        <tr>
+                        <tr style="border-bottom: 1px solid rgba(255,255,255,0.05);">
                             <td style="padding: 14px; color: var(--text-heading); font-weight: 700;">🏙️ Primary Hiring Cities</td>
                             <td style="padding: 14px; color: var(--text-secondary);">${c1Cities}</td>
                             <td style="padding: 14px; color: var(--text-secondary);">${c2Cities}</td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid rgba(255,255,255,0.05);">
+                            <td style="padding: 14px; color: var(--text-heading); font-weight: 700;">🛡️ AI Disruption Risk</td>
+                            <td style="padding: 14px; color: #60a5fa; font-weight: 600;">${c1.ai_automation_risk || 'Low (15-20%) — High System Oversight'}</td>
+                            <td style="padding: 14px; color: #fde047; font-weight: 600;">${c2.ai_automation_risk || 'Low (15-20%) — High System Oversight'}</td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid rgba(255,255,255,0.05);">
+                            <td style="padding: 14px; color: var(--text-heading); font-weight: 700;">⏰ Work Pace & Setting</td>
+                            <td style="padding: 14px; color: var(--text-secondary);">${c1.work_life_balance || '40-45 Hours/Week • Hybrid'}</td>
+                            <td style="padding: 14px; color: var(--text-secondary);">${c2.work_life_balance || '40-45 Hours/Week • Hybrid'}</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 14px; color: var(--text-heading); font-weight: 700;">🎓 Education ROI Horizon</td>
+                            <td style="padding: 14px; color: #22c55e; font-weight: 700;">${c1.education_roi_years || '1.5 - 2 Years Post Graduation'}</td>
+                            <td style="padding: 14px; color: #22c55e; font-weight: 700;">${c2.education_roi_years || '1.5 - 2 Years Post Graduation'}</td>
                         </tr>
                     </tbody>
                 </table>
@@ -368,6 +383,36 @@ function createCareerCard(career, isPrimary, countryTarget) {
                 </div>
                 <div style="margin-top: 10px; font-size: 0.78rem; color: var(--text-secondary);">
                     ⏳ <strong>Preparation Curve:</strong> ${learningTime}
+                </div>
+            </div>
+
+            <!-- AI Disruption Resilience & Reality Metrics -->
+            <div style="background: rgba(0,0,0,0.35); border: 1px solid var(--border); border-radius: 14px; padding: 18px;">
+                <h4 style="margin: 0 0 10px; font-size: 0.85rem; color: var(--text-heading); font-weight: 800; display: flex; align-items: center; gap: 8px;">
+                    🛡️ AI Automation Resilience & Work Reality
+                </h4>
+                
+                <div style="display: flex; flex-direction: column; gap: 8px;">
+                    <div style="background: rgba(59, 130, 246, 0.06); border: 1px solid rgba(59, 130, 246, 0.2); border-radius: 10px; padding: 10px;">
+                        <span style="font-size: 0.7rem; color: #60a5fa; font-weight: 800; text-transform: uppercase; display: block;">🛡️ AI Disruption Risk</span>
+                        <span style="font-size: 0.82rem; color: var(--text-primary); font-weight: 600; display: block; margin-top: 2px;">
+                            ${career.ai_automation_risk || 'Low (15-20%) — Requires High Creative & System Oversight'}
+                        </span>
+                    </div>
+
+                    <div style="background: rgba(250, 204, 21, 0.06); border: 1px solid rgba(250, 204, 21, 0.2); border-radius: 10px; padding: 10px;">
+                        <span style="font-size: 0.7rem; color: #fde047; font-weight: 800; text-transform: uppercase; display: block;">⏰ Work Environment & Pace</span>
+                        <span style="font-size: 0.82rem; color: var(--text-primary); font-weight: 600; display: block; margin-top: 2px;">
+                            ${career.work_life_balance || '40-45 Hours/Week • Hybrid Remote & Office'}
+                        </span>
+                    </div>
+
+                    <div style="background: rgba(34, 197, 94, 0.06); border: 1px solid rgba(34, 197, 94, 0.2); border-radius: 10px; padding: 10px;">
+                        <span style="font-size: 0.7rem; color: #22c55e; font-weight: 800; text-transform: uppercase; display: block;">🎓 Education ROI Horizon</span>
+                        <span style="font-size: 0.82rem; color: var(--text-primary); font-weight: 600; display: block; margin-top: 2px;">
+                            ${career.education_roi_years || '1.5 - 2 Years Post Graduation to Recover Costs'}
+                        </span>
+                    </div>
                 </div>
             </div>
 
