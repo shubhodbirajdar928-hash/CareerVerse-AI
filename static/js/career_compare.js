@@ -510,7 +510,7 @@ function createCareerCard(career, isPrimary, countryTarget) {
                 <div style="display: flex; flex-wrap: wrap; gap: 6px;">
                     ${orgs.length ? orgs.map(org => `
                         <span style="font-size: 0.76rem; background: rgba(255,255,255,0.05); border: 1px solid var(--border); padding: 4px 10px; border-radius: 6px; color: var(--text-secondary); font-weight: 600;">
-                            ✓ ${typeof org === 'object' ? (org.name || JSON.stringify(org)) : org}
+                            ${typeof org === 'object' ? (org.name || JSON.stringify(org)) : org}
                         </span>
                     `).join('') : '<span style="font-size: 0.78rem; color: var(--text-muted);">Major Industry Employers</span>'}
                 </div>

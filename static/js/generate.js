@@ -611,9 +611,6 @@ async function generateRoadmapNow() {
                 ${(resources.youtube || []).map(item => `
                     <a href="${item.url}" target="_blank" rel="noopener noreferrer" class="resource-link" style="display: flex; justify-content: space-between; align-items: center; text-decoration: none;">
                         <span><i class="fa-brands fa-youtube" style="color: #ef4444; margin-right: 6px;"></i> ${item.name}</span>
-                        <span style="background: rgba(239, 68, 68, 0.15); color: #ef4444; border: 1px solid rgba(239, 68, 68, 0.4); font-size: 0.7rem; padding: 2px 8px; border-radius: 20px; font-weight: 700; display: inline-flex; align-items: center; gap: 4px;">
-                            <i class="fa-solid fa-circle-check"></i> Verified
-                        </span>
                     </a>
                 `).join("")}
             </div>
@@ -624,9 +621,6 @@ async function generateRoadmapNow() {
                 ${(resources.courses || []).map(item => `
                     <a href="${item.url}" target="_blank" rel="noopener noreferrer" class="resource-link" style="display: flex; justify-content: space-between; align-items: center; text-decoration: none;">
                         <span>🎓 ${item.name}</span>
-                        <span style="background: rgba(250, 204, 21, 0.15); color: var(--accent); border: 1px solid rgba(250, 204, 21, 0.4); font-size: 0.7rem; padding: 2px 8px; border-radius: 20px; font-weight: 700; display: inline-flex; align-items: center; gap: 4px;">
-                            <i class="fa-solid fa-circle-check"></i> Verified
-                        </span>
                     </a>
                 `).join("")}
             </div>
@@ -637,9 +631,6 @@ async function generateRoadmapNow() {
                 ${(resources.documentation || []).map(item => `
                     <a href="${item.url}" target="_blank" rel="noopener noreferrer" class="resource-link" style="display: flex; justify-content: space-between; align-items: center; text-decoration: none;">
                         <span>📄 ${item.name}</span>
-                        <span style="background: rgba(59, 130, 246, 0.15); color: #3b82f6; border: 1px solid rgba(59, 130, 246, 0.4); font-size: 0.7rem; padding: 2px 8px; border-radius: 20px; font-weight: 700; display: inline-flex; align-items: center; gap: 4px;">
-                            <i class="fa-solid fa-circle-check"></i> Verified
-                        </span>
                     </a>
                 `).join("")}
             </div>
@@ -650,9 +641,6 @@ async function generateRoadmapNow() {
                 ${(resources.books || []).map(item => `
                     <a href="${item.url}" target="_blank" rel="noopener noreferrer" class="resource-link" style="display: flex; justify-content: space-between; align-items: center; text-decoration: none;">
                         <span>📖 ${item.name}</span>
-                        <span style="background: rgba(168, 85, 247, 0.15); color: #a855f7; border: 1px solid rgba(168, 85, 247, 0.4); font-size: 0.7rem; padding: 2px 8px; border-radius: 20px; font-weight: 700; display: inline-flex; align-items: center; gap: 4px;">
-                            <i class="fa-solid fa-circle-check"></i> Verified
-                        </span>
                     </a>
                 `).join("")}
             </div>
@@ -743,7 +731,6 @@ ${(() => {
         <div style="background: rgba(25, 25, 25, 0.7); border: 1px solid var(--border); border-radius: 16px; padding: 20px; box-shadow: 0 8px 24px rgba(0,0,0,0.4);">
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
                 <span style="font-size: 0.88rem; font-weight: 800; color: var(--text-heading);"><i class="fa-solid fa-chart-radar" style="color: var(--accent); margin-right: 6px;"></i> Market Ecosystem Radar</span>
-                <span style="font-size: 0.72rem; background: rgba(34, 197, 94, 0.15); color: #22c55e; border: 1px solid rgba(34, 197, 94, 0.4); padding: 2px 10px; border-radius: 12px; font-weight: 700; display: inline-flex; align-items: center; gap: 4px;"><i class="fa-solid fa-circle-check"></i> Fact-Checked Market Statistics</span>
             </div>
             <div style="height: 230px; position: relative;">
                 <canvas id="marketAnalyticsCanvas"></canvas>
