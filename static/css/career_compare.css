@@ -282,52 +282,9 @@
     margin-bottom: 24px;
 }
 
-.compare-metric {
-    margin-bottom: 24px;
+.compare-metric, .bar-row {
+    display: none !important;
 }
-
-.compare-metric h3 {
-    color: var(--text-heading);
-    font-size: 0.98rem;
-    margin-bottom: 14px;
-}
-
-.bar-row {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    margin-bottom: 10px;
-}
-
-.bar-row span {
-    width: 140px;
-    font-size: 0.85rem;
-    font-weight: 600;
-    color: var(--text-secondary);
-    flex-shrink: 0;
-}
-
-.bar-row .bar {
-    flex: 1;
-    height: 12px;
-    background: var(--bg-primary);
-    border-radius: 100px;
-    overflow: hidden;
-    border: 1px solid var(--border);
-}
-
-.bar-row .fill {
-    height: 100%;
-    background: var(--accent);
-    border-radius: 100px;
-    transition: width 1s ease;
-}
-
-.bar-row b {
-    width: 40px;
-    font-size: 0.85rem;
-    color: var(--accent);
-    text-align: right;
 }
 
 /* WINNER BOX */
