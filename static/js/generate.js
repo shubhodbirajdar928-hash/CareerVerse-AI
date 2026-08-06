@@ -723,42 +723,61 @@ ${(() => {
 <div class="roadmap-item">
     <h2><i class="fa-solid fa-chart-pie"></i> Market Intelligence & Hiring Ecosystem</h2>
     
-    <div class="analytics-grid" style="margin-bottom: 24px;">
-        <div class="analytics-card">
-            <h3>🔥 Job Demand</h3>
-            <div class="progress">
-                <div class="progress-fill" style="width:${market.job_demand?.percentage || 88}%">
-                    <span class="progress-text">${market.job_demand?.percentage || 88}%</span>
-                </div>
+    <div style="display: grid; grid-template-columns: 1.1fr 1fr; gap: 20px; margin-bottom: 24px; align-items: center;">
+        <div style="background: rgba(25, 25, 25, 0.7); border: 1px solid var(--border); border-radius: 16px; padding: 20px; box-shadow: 0 8px 24px rgba(0,0,0,0.4);">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                <span style="font-size: 0.88rem; font-weight: 800; color: var(--text-heading);"><i class="fa-solid fa-chart-radar" style="color: var(--accent); margin-right: 6px;"></i> Market Ecosystem Radar</span>
+                <span style="font-size: 0.72rem; background: rgba(250, 204, 21, 0.15); color: var(--accent); padding: 2px 8px; border-radius: 12px; font-weight: 700;">Live AI Data</span>
             </div>
-            <p>${market.job_demand?.text || "High market hiring demand"}</p>
+            <div style="height: 230px; position: relative;">
+                <canvas id="marketAnalyticsCanvas"></canvas>
+            </div>
         </div>
-        <div class="analytics-card">
-            <h3>🎯 Learning Curve</h3>
-            <div class="progress">
-                <div class="progress-fill" style="width:${market.difficulty?.percentage || 75}%">
-                    <span class="progress-text">${market.difficulty?.percentage || 75}%</span>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px;">
+            <div style="background: rgba(34, 197, 94, 0.05); border: 1px solid rgba(34, 197, 94, 0.3); border-radius: 14px; padding: 16px;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+                    <span style="font-size: 0.78rem; color: #22c55e; font-weight: 800;">🔥 JOB DEMAND</span>
+                    <span style="font-size: 0.9rem; font-weight: 900; color: #22c55e;">${market.job_demand?.percentage || 88}%</span>
                 </div>
-            </div>
-            <p>${market.difficulty?.text || "Moderate-High difficulty"}</p>
-        </div>
-        <div class="analytics-card">
-            <h3>🚀 5-Year Growth</h3>
-            <div class="progress">
-                <div class="progress-fill" style="width:${market.growth?.percentage || 90}%">
-                    <span class="progress-text">${market.growth?.percentage || 90}%</span>
+                <div style="background: rgba(255,255,255,0.08); height: 6px; border-radius: 3px; overflow: hidden; margin-bottom: 8px;">
+                    <div style="width:${market.job_demand?.percentage || 88}%; height: 100%; background: linear-gradient(90deg, #22c55e, #10b981);"></div>
                 </div>
+                <p style="font-size: 0.78rem; color: var(--text-secondary); margin: 0; line-height: 1.3;">${market.job_demand?.text || "High market hiring demand"}</p>
             </div>
-            <p>${market.growth?.text || "Strong annual market growth"}</p>
-        </div>
-        <div class="analytics-card">
-            <h3>📚 Time Commitment</h3>
-            <div class="progress">
-                <div class="progress-fill" style="width:${market.learning_time?.percentage || 80}%">
-                    <span class="progress-text">${market.learning_time?.percentage || 80}%</span>
+
+            <div style="background: rgba(250, 204, 21, 0.05); border: 1px solid rgba(250, 204, 21, 0.3); border-radius: 14px; padding: 16px;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+                    <span style="font-size: 0.78rem; color: var(--accent); font-weight: 800;">🎯 LEARNING CURVE</span>
+                    <span style="font-size: 0.9rem; font-weight: 900; color: var(--accent);">${market.difficulty?.percentage || 75}%</span>
                 </div>
+                <div style="background: rgba(255,255,255,0.08); height: 6px; border-radius: 3px; overflow: hidden; margin-bottom: 8px;">
+                    <div style="width:${market.difficulty?.percentage || 75}%; height: 100%; background: linear-gradient(90deg, #f59e0b, #fac515);"></div>
+                </div>
+                <p style="font-size: 0.78rem; color: var(--text-secondary); margin: 0; line-height: 1.3;">${market.difficulty?.text || "Moderate-High difficulty"}</p>
             </div>
-            <p>${market.learning_time?.text || "15 hrs/week study"}</p>
+
+            <div style="background: rgba(59, 130, 246, 0.05); border: 1px solid rgba(59, 130, 246, 0.3); border-radius: 14px; padding: 16px;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+                    <span style="font-size: 0.78rem; color: #3b82f6; font-weight: 800;">🚀 5-YR GROWTH</span>
+                    <span style="font-size: 0.9rem; font-weight: 900; color: #3b82f6;">${market.growth?.percentage || 90}%</span>
+                </div>
+                <div style="background: rgba(255,255,255,0.08); height: 6px; border-radius: 3px; overflow: hidden; margin-bottom: 8px;">
+                    <div style="width:${market.growth?.percentage || 90}%; height: 100%; background: linear-gradient(90deg, #3b82f6, #60a5fa);"></div>
+                </div>
+                <p style="font-size: 0.78rem; color: var(--text-secondary); margin: 0; line-height: 1.3;">${market.growth?.text || "Strong annual market growth"}</p>
+            </div>
+
+            <div style="background: rgba(168, 85, 247, 0.05); border: 1px solid rgba(168, 85, 247, 0.3); border-radius: 14px; padding: 16px;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+                    <span style="font-size: 0.78rem; color: #a855f7; font-weight: 800;">📚 TIME COMMITMENT</span>
+                    <span style="font-size: 0.9rem; font-weight: 900; color: #a855f7;">${market.learning_time?.percentage || 80}%</span>
+                </div>
+                <div style="background: rgba(255,255,255,0.08); height: 6px; border-radius: 3px; overflow: hidden; margin-bottom: 8px;">
+                    <div style="width:${market.learning_time?.percentage || 80}%; height: 100%; background: linear-gradient(90deg, #a855f7, #c084fc);"></div>
+                </div>
+                <p style="font-size: 0.78rem; color: var(--text-secondary); margin: 0; line-height: 1.3;">${market.learning_time?.text || "15 hrs/week study"}</p>
+            </div>
         </div>
     </div>
 
@@ -857,6 +876,57 @@ ${(() => {
 
         resultCardEl.innerHTML = html;
         resultCardEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+        // Initialize Professional Chart.js Radar Chart
+        setTimeout(() => {
+            const canvas = document.getElementById("marketAnalyticsCanvas");
+            if (canvas && typeof Chart !== "undefined") {
+                if (window.marketChartInstance) {
+                    window.marketChartInstance.destroy();
+                }
+                const ctx = canvas.getContext("2d");
+                window.marketChartInstance = new Chart(ctx, {
+                    type: "radar",
+                    data: {
+                        labels: ["Job Demand", "Growth Rate", "Learning Curve", "Time Index", "Stability"],
+                        datasets: [{
+                            label: "Market Scope Score",
+                            data: [
+                                market.job_demand?.percentage || 88,
+                                market.growth?.percentage || 90,
+                                market.difficulty?.percentage || 75,
+                                market.learning_time?.percentage || 80,
+                                85
+                            ],
+                            backgroundColor: "rgba(250, 204, 21, 0.25)",
+                            borderColor: "#fac515",
+                            pointBackgroundColor: "#fac515",
+                            pointBorderColor: "#fff",
+                            pointHoverBackgroundColor: "#fff",
+                            pointHoverBorderColor: "#fac515",
+                            borderWidth: 2
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        scales: {
+                            r: {
+                                angleLines: { color: "rgba(255, 255, 255, 0.12)" },
+                                grid: { color: "rgba(255, 255, 255, 0.12)" },
+                                pointLabels: { color: "#e2e8f0", font: { size: 10, weight: "bold" } },
+                                ticks: { display: false, backdropColor: "transparent" },
+                                min: 0,
+                                max: 100
+                            }
+                        },
+                        plugins: {
+                            legend: { display: false }
+                        }
+                    }
+                });
+            }
+        }, 100);
 
         const inlineBtn = document.getElementById("inlineDownloadBtn");
         if (inlineBtn) {
