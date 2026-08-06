@@ -120,67 +120,16 @@ country: country
             ${createCareerCard(data.career2, false, country)}
         </div>
 
-        <!-- REAL DATA COMPARISON SUMMARY DASHBOARD -->
-        <div class="comparison-summary" style="background: var(--bg-card); border: 1px solid var(--border); border-radius: 20px; padding: 32px; margin-bottom: 40px;">
+        <!-- HEAD-TO-HEAD DECISION MATRIX TABLE -->
+        <div style="background: var(--bg-card); border: 1px solid var(--border); border-radius: 20px; padding: 32px; margin-bottom: 40px;">
             <div style="margin-bottom: 24px; border-bottom: 1px solid rgba(255,255,255,0.08); padding-bottom: 14px;">
-                <h2 style="color: var(--accent); font-size: 1.5rem; margin: 0 0 6px 0; font-weight: 800; display: flex; align-items: center; gap: 10px;">
-                    📊 Real-World Career Comparison Metrics
-                </h2>
+                <h3 style="color: var(--text-heading); font-size: 1.35rem; font-weight: 800; margin: 0 0 6px 0; display: flex; align-items: center; gap: 10px;">
+                    ⚔️ Head-to-Head Strategic Decision Matrix
+                </h3>
                 <p style="margin: 0; color: var(--text-secondary); font-size: 0.88rem;">
-                    Location-adjusted comparison for ${c1Name} vs ${c2Name} in ${country || 'Target Market'}.
+                    Location-verified parameters for <strong>${c1Name}</strong> vs <strong>${c2Name}</strong> in <strong>${country || 'Target Market'}</strong>.
                 </p>
             </div>
-
-            <!-- REAL COMPARATIVE METRICS GRID -->
-            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 10px;">
-                
-                <!-- 1. Mid Salary -->
-                <div style="background: rgba(0,0,0,0.35); border: 1px solid var(--border); border-radius: 14px; padding: 18px;">
-                    <span style="font-size: 0.76rem; color: var(--text-muted); font-weight: 700; text-transform: uppercase; display: block; margin-bottom: 10px;">
-                        💰 Mid-Level Compensation
-                    </span>
-                    <div style="margin-bottom: 10px; padding-bottom: 8px; border-bottom: 1px solid rgba(255,255,255,0.05);">
-                        <span style="font-size: 0.76rem; color: #60a5fa; font-weight: 800; display: block;">🚀 ${c1Name}</span>
-                        <strong style="font-size: 1rem; color: #22c55e;">${c1Bench.mid || 'Market Rate'}</strong>
-                    </div>
-                    <div>
-                        <span style="font-size: 0.76rem; color: #fde047; font-weight: 800; display: block;">⚡ ${c2Name}</span>
-                        <strong style="font-size: 1rem; color: #22c55e;">${c2Bench.mid || 'Market Rate'}</strong>
-                    </div>
-                </div>
-
-                <!-- 2. Market Demand -->
-                <div style="background: rgba(0,0,0,0.35); border: 1px solid var(--border); border-radius: 14px; padding: 18px;">
-                    <span style="font-size: 0.76rem; color: var(--text-muted); font-weight: 700; text-transform: uppercase; display: block; margin-bottom: 10px;">
-                        🔥 Hiring Demand Rating
-                    </span>
-                    <div style="margin-bottom: 10px; padding-bottom: 8px; border-bottom: 1px solid rgba(255,255,255,0.05);">
-                        <span style="font-size: 0.76rem; color: #60a5fa; font-weight: 800; display: block;">🚀 ${c1Name}</span>
-                        <strong style="font-size: 0.95rem; color: var(--text-heading);">${c1.demand || 'High Demand'}</strong>
-                    </div>
-                    <div>
-                        <span style="font-size: 0.76rem; color: #fde047; font-weight: 800; display: block;">⚡ ${c2Name}</span>
-                        <strong style="font-size: 0.95rem; color: var(--text-heading);">${c2.demand || 'High Demand'}</strong>
-                    </div>
-                </div>
-
-                <!-- 3. Learning Curve -->
-                <div style="background: rgba(0,0,0,0.35); border: 1px solid var(--border); border-radius: 14px; padding: 18px;">
-                    <span style="font-size: 0.76rem; color: var(--text-muted); font-weight: 700; text-transform: uppercase; display: block; margin-bottom: 10px;">
-                        ⏳ Preparation Curve
-                    </span>
-                    <div style="margin-bottom: 10px; padding-bottom: 8px; border-bottom: 1px solid rgba(255,255,255,0.05);">
-                        <span style="font-size: 0.76rem; color: #60a5fa; font-weight: 800; display: block;">🚀 ${c1Name}</span>
-                        <strong style="font-size: 0.88rem; color: var(--text-secondary);">${c1.learning_time || '3-4 Years'}</strong>
-                    </div>
-                    <div>
-                        <span style="font-size: 0.76rem; color: #fde047; font-weight: 800; display: block;">⚡ ${c2Name}</span>
-                        <strong style="font-size: 0.88rem; color: var(--text-secondary);">${c2.learning_time || '3-4 Years'}</strong>
-                    </div>
-                </div>
-
-            </div>
-        </div>
 
         <!-- NEW FEATURE: HEAD-TO-HEAD FEATURE COMPARISON MATRIX -->
         <div style="background: var(--bg-card); border: 1px solid var(--border); border-radius: 20px; padding: 32px; margin-bottom: 40px;">
