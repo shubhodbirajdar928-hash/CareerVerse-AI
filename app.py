@@ -2028,7 +2028,25 @@ def generate_fallback_compare(career1, career2, country="India"):
     
     def get_role_data(name):
         n = name.lower()
-        if any(w in n for w in ["upsc", "ias", "ips", "ssc", "gate", "nda", "police", "government", "officer", "diplomat", "civil servant", "collector", "bureaucrat"]):
+        if any(w in n for w in ["mhcet", "mhcer", "mht cet", "mhtcet"]):
+            sal = "₹4.5 - ₹15 Lakhs / yr (Post Tech Placement)" if country_clean == "India" else "$55,000 - $120,000 / yr"
+            orgs = ["COEP Technological University", "VJTI Mumbai", "ICT Mumbai", "SPIT Mumbai", "PICT Pune", "State CET Cell Maharashtra"]
+            score = 84
+            expectation = "Direct merit admission to top Maharashtra State engineering and pharmacy institutes."
+            unfiltered_reality = "Over 400,000 candidates compete for top Pune & Mumbai college seats; requires 98%+ percentile for computer science branches."
+        elif any(w in n for w in ["kcet", "k-cet", "kea"]):
+            sal = "₹5 - ₹16 Lakhs / yr (Post Tech Placement)" if country_clean == "India" else "$60,000 - $125,000 / yr"
+            orgs = ["RV College of Engineering (RVCE)", "BMS College of Engineering", "PES University", "MS Ramaiah Institute", "Karnataka Examinations Authority"]
+            score = 85
+            expectation = "Government quota merit seats in premier Bengaluru engineering and technology institutes."
+            unfiltered_reality = "Over 250,000 Karnataka students compete; top Bengaluru CS branches close at ranks under 1,000."
+        elif any(w in n for w in ["jee", "jee main", "jee advanced", "iit"]):
+            sal = "₹12 - ₹45 Lakhs / yr (IIT/NIT Graduate Pay)" if country_clean == "India" else "$110,000 - $220,000 / yr"
+            orgs = ["IIT Bombay", "IIT Delhi", "IIT Madras", "IIT Kharagpur", "NIT Trichy", "National Testing Agency (NTA)"]
+            score = 94
+            expectation = "Elite engineering campus placements, high global starting salaries, and top technical reputation."
+            unfiltered_reality = "Extreme national selection (~1.4 million applicants for ~17,000 IIT seats), 2-3 years of intense coaching preparation, and high academic pressure."
+        elif any(w in n for w in ["upsc", "ias", "ips", "ssc", "gate", "nda", "police", "government", "officer", "diplomat", "civil servant", "collector", "bureaucrat"]):
             sal = "₹7 - ₹24 Lakhs / yr (7th Pay Commission + Allowances)" if country_clean == "India" else "$60,000 - $130,000 / yr"
             orgs = ["Union Public Service Commission (UPSC)", "Ministry of External Affairs", "Cabinet Secretariat", "NITI Aayog", "State Administrative Services"]
             score = 90
