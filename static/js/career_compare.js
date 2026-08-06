@@ -440,11 +440,11 @@ function createCareerCard(career, isPrimary, countryTarget) {
                 </h2>
             </div>
 
-            <!-- Country Pay Bands -->
+            <!-- Country Salary Ranges -->
             <div style="background: rgba(0,0,0,0.35); border: 1px solid var(--border); border-radius: 14px; padding: 18px;">
                 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; border-bottom: 1px solid rgba(255,255,255,0.08); padding-bottom: 8px;">
                     <span style="font-size: 0.82rem; font-weight: 800; color: ${accentColor}; display: flex; align-items: center; gap: 6px;">
-                        <i class="fa-solid fa-coins"></i> ${countryName} Pay Bands
+                        <i class="fa-solid fa-coins"></i> ${countryName} Salary Ranges
                     </span>
                 </div>
                 
