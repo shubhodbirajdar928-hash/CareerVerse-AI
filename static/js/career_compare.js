@@ -368,7 +368,7 @@ function createCareerCard(career, isPrimary, countryTarget) {
     const fresherPay = salaryBench.fresher || "Data unavailable";
     const midPay = salaryBench.mid || "Data unavailable";
     const seniorPay = salaryBench.senior || "Data unavailable";
-    const countryName = salaryBench.country || countryTarget || "Target Market";
+    const countryName = salaryBench.target_location || salaryBench.country || countryTarget || "Target Market";
 
     const demandRating = career.demand || (career.demand_score > 85 ? "Very High" : "High");
     const growthOutlook = career.growth || (career.growth_score > 85 ? "Fast Growing" : "Growing");

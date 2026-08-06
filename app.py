@@ -800,13 +800,27 @@ def get_career_salary_benchmark(career, country):
 
 
 def create_normalized_salary_object(career, country):
-    c_name, code, symbol = get_country_currency_info(country)
-    bench = get_career_salary_benchmark(career, country)
+    c_low = (career or "").lower().strip()
+    india_exams = ["upsc", "ias", "ips", "ssc", "gate", "nda", "mpsc", "bpsc", "uppsc", "ras", "jee", "neet", "ifs", "irs", "ies"]
+    
+    if any(term in c_low.split() or term == c_low for term in india_exams):
+        c_name = "India (Official UPSC 7th Pay Commission)"
+        code = "INR"
+        symbol = "₹"
+        bench = {
+            "fresher": "₹7.0L - ₹12.0L / yr",
+            "mid": "₹14.0L - ₹22.0L / yr",
+            "senior": "₹24.0L - ₹45.0L+ / yr"
+        }
+    else:
+        c_name, code, symbol = get_country_currency_info(country)
+        bench = get_career_salary_benchmark(career, country)
 
     target_formatted = f"{bench['fresher']} (Fresher) -> {bench['mid']} (Mid) -> {bench['senior']} (Senior)"
 
     return {
         "target_location": c_name,
+        "country": c_name,
         "currency_symbol": symbol,
         "currency_code": code,
         "fresher": bench["fresher"],
