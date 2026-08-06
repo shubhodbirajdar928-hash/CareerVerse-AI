@@ -690,6 +690,92 @@ def format_multi_currency_salary(country, base_usd_fresher="$70k - $95k / yr", b
     return f"{c_name}: {base_usd_fresher} (Fresher) -> {base_usd_mid} (Mid) -> {base_usd_senior} (Senior)"
 
 # =====================================================
+# Career-Specific Salary Benchmarking Engine
+# =====================================================
+
+def get_career_salary_benchmark(career, country):
+    c_low = (career or "").lower().strip()
+    c_cntry = (country or "").lower().strip()
+    is_india = "india" in c_cntry or not c_cntry or c_cntry == "global"
+
+    # 1. AI / ML / Data Science / Deep Learning / LLM
+    if any(x in c_low for x in ["ai", "ml", "machine learning", "deep learning", "nlp", "llm", "data scientist", "data science"]):
+        if is_india:
+            return {"fresher": "₹8.0L - ₹16.0L / yr", "mid": "₹18.0L - ₹36.0L / yr", "senior": "₹40.0L - ₹90.0L+ / yr"}
+        else:
+            return {"fresher": "$95,000 - $145,000 / yr", "mid": "$155,000 - $230,000 / yr", "senior": "$240,000 - $420,000+ / yr"}
+
+    # 2. DevOps / Cloud / SRE / Cyber Security / System Architect
+    elif any(x in c_low for x in ["devops", "cloud", "sre", "site reliability", "cyber", "security", "sysadmin", "system architect"]):
+        if is_india:
+            return {"fresher": "₹6.5L - ₹12.5L / yr", "mid": "₹15.0L - ₹28.0L / yr", "senior": "₹32.0L - ₹65.0L+ / yr"}
+        else:
+            return {"fresher": "$85,000 - $125,000 / yr", "mid": "$135,000 - $185,000 / yr", "senior": "$190,000 - $310,000+ / yr"}
+
+    # 3. Chemical Scientist / Chemist / Chemistry / R&D Scientist
+    elif any(x in c_low for x in ["chemical", "chemist", "chemistry", "lab scientist", "r&d scientist"]):
+        if is_india:
+            return {"fresher": "₹3.8L - ₹7.0L / yr", "mid": "₹8.5L - ₹16.0L / yr", "senior": "₹18.0L - ₹35.0L / yr"}
+        else:
+            return {"fresher": "$55,000 - $80,000 / yr", "mid": "$85,000 - $130,000 / yr", "senior": "$140,000 - $210,000 / yr"}
+
+    # 4. Doctor / Medical Specialist / Physician / Surgeon / NEET / MBBS
+    elif any(x in c_low for x in ["doctor", "surgeon", "physician", "dentist", "medical", "neet", "mbbs", "md", "ms"]):
+        if is_india:
+            return {"fresher": "₹6.5L - ₹12.0L / yr (Resident Intern)", "mid": "₹18.0L - ₹38.0L / yr (Medical Officer)", "senior": "₹45.0L - ₹1.5Cr+ / yr (Senior Consultant)"}
+        else:
+            return {"fresher": "$68,000 - $85,000 / yr (Resident)", "mid": "$220,000 - $320,000 / yr (Attending)", "senior": "$380,000 - $650,000+ / yr (Specialist)"}
+
+    # 5. Financial Analyst / Investment Banker / Finance Manager / Equity
+    elif any(x in c_low for x in ["financial", "finance", "investment banker", "equity", "cfa", "accounting", "chartered accountant"]):
+        if is_india:
+            return {"fresher": "₹7.0L - ₹14.0L / yr", "mid": "₹16.0L - ₹32.0L / yr", "senior": "₹35.0L - ₹90.0L+ / yr"}
+        else:
+            return {"fresher": "$85,000 - $130,000 / yr", "mid": "$140,000 - $210,000 / yr", "senior": "$220,000 - $450,000+ / yr"}
+
+    # 6. Software / Web / Full Stack / Mobile Developer
+    elif any(x in c_low for x in ["software", "developer", "full stack", "frontend", "backend", "mobile", "ios", "android"]):
+        if is_india:
+            return {"fresher": "₹5.5L - ₹11.0L / yr", "mid": "₹13.0L - ₹24.0L / yr", "senior": "₹28.0L - ₹52.0L+ / yr"}
+        else:
+            return {"fresher": "$80,000 - $115,000 / yr", "mid": "$125,000 - $175,000 / yr", "senior": "$180,000 - $280,000+ / yr"}
+
+    # 7. Management / MBA / Product Manager / Consultant
+    elif any(x in c_low for x in ["mba", "product manager", "management", "consultant", "business analyst"]):
+        if is_india:
+            return {"fresher": "₹8.5L - ₹18.0L / yr", "mid": "₹20.0L - ₹38.0L / yr", "senior": "₹45.0L - ₹1.1Cr+ / yr"}
+        else:
+            return {"fresher": "$95,000 - $145,000 / yr", "mid": "$155,000 - $230,000 / yr", "senior": "$240,000 - $420,000+ / yr"}
+
+    # 8. Civil / Mechanical / Electrical Core Engineer
+    elif any(x in c_low for x in ["civil", "mechanical", "electrical", "structural", "autocad"]):
+        if is_india:
+            return {"fresher": "₹3.6L - ₹6.5L / yr", "mid": "₹8.0L - ₹15.0L / yr", "senior": "₹18.0L - ₹35.0L / yr"}
+        else:
+            return {"fresher": "$65,000 - $88,000 / yr", "mid": "$95,000 - $140,000 / yr", "senior": "$145,000 - $220,000 / yr"}
+
+    # 9. Law / Lawyer / Legal / Advocate
+    elif any(x in c_low for x in ["lawyer", "advocate", "legal", "solicitor", "llb"]):
+        if is_india:
+            return {"fresher": "₹4.5L - ₹9.0L / yr", "mid": "₹12.0L - ₹25.0L / yr", "senior": "₹30.0L - ₹75.0L+ / yr"}
+        else:
+            return {"fresher": "$75,000 - $125,000 / yr", "mid": "$145,000 - $230,000 / yr", "senior": "$250,000 - $500,000+ / yr"}
+
+    # 10. Civil Services / IAS / IPS / Police / UPSC
+    elif any(x in c_low for x in ["ias", "ips", "upsc", "police", "civil servant"]):
+        if is_india:
+            return {"fresher": "₹7.0L - ₹11.0L / yr (SDM/Probationary)", "mid": "₹14.0L - ₹22.0L / yr (Collector/DIG)", "senior": "₹25.0L - ₹40.0L / yr (Secretary/DGP)"}
+        else:
+            return {"fresher": "$60,000 - $85,000 / yr", "mid": "$95,000 - $135,000 / yr", "senior": "$150,000 - $220,000 / yr"}
+
+    # 11. Generic Default (Carefully benchmarked)
+    else:
+        if is_india:
+            return {"fresher": "₹4.5L - ₹8.5L / yr", "mid": "₹10.0L - ₹20.0L / yr", "senior": "₹22.0L - ₹45.0L / yr"}
+        else:
+            return {"fresher": "$60,000 - $90,000 / yr", "mid": "$95,000 - $145,000 / yr", "senior": "$150,000 - $240,000 / yr"}
+
+# =====================================================
 # Fallback Roadmap Generator
 # =====================================================
 
@@ -869,8 +955,10 @@ def get_fallback_roadmap(career, country, months=6):
         daily_plan = ["Monday: 2 hrs Knife Practice & Basic Culinary Techniques", "Tuesday: 2 hrs Recipe Development & Sauce Execution", "Wednesday: 2 hrs Food Safety & HACCP Protocol Study", "Thursday: 2 hrs Menu Engineering & Recipe Costing", "Friday: 2 hrs Fine Dining Plating & Presentation Practice", "Saturday: 3 hrs Kitchen Apprenticeship & Station Service", "Sunday: 1 hr Weekly Culinary Review"]
     else:
         edu = "Relevant Bachelor's / Master's Degree or Industry Certification Track"
-        sal_ind_f, sal_ind_m, sal_ind_s = "₹6.0L - ₹10.0L / yr", "₹14.0L - ₹25.0L / yr", "₹28.0L - ₹55.0L / yr"
-        sal_cnt_f, sal_cnt_m, sal_cnt_s = "$80,000 - $115,000 / yr", "$135,000 - $185,000 / yr", "$195,000 - $320,000 / yr"
+        dyn_sal_ind = get_career_salary_benchmark(career, "India")
+        dyn_sal_cnt = get_career_salary_benchmark(career, country or "Global")
+        sal_ind_f, sal_ind_m, sal_ind_s = dyn_sal_ind["fresher"], dyn_sal_ind["mid"], dyn_sal_ind["senior"]
+        sal_cnt_f, sal_cnt_m, sal_cnt_s = dyn_sal_cnt["fresher"], dyn_sal_cnt["mid"], dyn_sal_cnt["senior"]
         roles = [f"Junior {c_title}", f"Mid-Level {c_title}", f"Senior {c_title}", f"Lead Specialist {c_title}", f"Director / Executive {c_title}"]
         sk_b = [f"Foundations of {c_title}", f"Core Principles & Methodologies", f"Essential Industry Tools for {c_title}", "Professional Communication & Workflow", f"Basic Case Studies in {c_title}"]
         sk_i = [f"Advanced Operations in {c_title}", "Data Analytics & Performance Metrics", f"Cross-Functional Project Management", f"Quality Control & Standards in {c_title}", f"Specialized Software & Tooling"]
@@ -1500,9 +1588,9 @@ Return ONLY valid JSON matching this exact structure:
     "growth": {{"outlook": "Fast Growing", "reason": "Verified multi-year career growth outlook."}},
     "learning_time": {{"duration": "6 Months", "details": "Consistent 15 hrs/week study commitment."}},
     "salary": {{
-      "fresher": "₹6.0L - ₹10.0L / yr",
-      "mid": "₹14.0L - ₹25.0L / yr",
-      "senior": "₹28.0L - ₹55.0L / yr"
+      "fresher": "<fresher_salary_range_for_career_and_country>",
+      "mid": "<mid_salary_range_for_career_and_country>",
+      "senior": "<senior_salary_range_for_career_and_country>"
     }},
     "top_organizations": ["Company A", "Company B", "Company C", "Company D", "Company E"],
     "hiring_hotspots": [
@@ -2361,9 +2449,10 @@ def get_fallback_career_reality(career, country):
             "ai_verdict": "Zero AI Disruption Risk: Human empathy, physical diagnostics, and surgical precision remain 100% human-driven."
         }
 
-    fresher_sal = "₹6.0L - ₹10.0L / yr" if is_india else "$70,000 - $100,000 / yr"
-    mid_sal = "₹14.0L - ₹25.0L / yr" if is_india else "$120,000 - $170,000 / yr"
-    senior_sal = "₹28.0L - ₹55.0L / yr" if is_india else "$180,000 - $280,000 / yr"
+    sal_bench = get_career_salary_benchmark(career, country)
+    fresher_sal = sal_bench["fresher"]
+    mid_sal = sal_bench["mid"]
+    senior_sal = sal_bench["senior"]
 
     return {
         "career": c_title,
@@ -2464,9 +2553,9 @@ Format:
   "competition_level": 85,
   "learning_difficulty": 78,
   "salary_reality": "Realistic salary breakdown for {country}.",
-  "fresher_salary": "₹6.0L - ₹10.0L / yr",
-  "mid_salary": "₹14.0L - ₹25.0L / yr",
-  "senior_salary": "₹28.0L - ₹55.0L / yr",
+  "fresher_salary": "<fresher_salary_range>",
+  "mid_salary": "<mid_salary_range>",
+  "senior_salary": "<senior_salary_range>",
   "not_for_you": ["Reason 1", "Reason 2", "Reason 3"],
   "industry_reality": "Unfiltered market truth.",
   "ai_verdict": "Long-term AI impact assessment."
