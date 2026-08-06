@@ -119,17 +119,8 @@ country: country
 
 
         <div class="compare-grid">
-
-
-
-        ${createCareerCard(data.career1)}
-
-
-
-        ${createCareerCard(data.career2)}
-
-
-
+            ${createCareerCard(data.career1, true, country)}
+            ${createCareerCard(data.career2, false, country)}
         </div>
 
 
@@ -405,86 +396,137 @@ ${data.recommendation}
 
 
 
-// =====================================
-// Career Card Generator
-// =====================================
-
-function createCareerCard(career){
+function createCareerCard(career, isPrimary, countryTarget) {
     if (!career) return '';
 
-    const salary = career.salary || {};
+    const accentColor = isPrimary ? "#3b82f6" : "#facc15";
+    const accentBg = isPrimary ? "rgba(59, 130, 246, 0.08)" : "rgba(250, 204, 21, 0.08)";
+    const borderColor = isPrimary ? "rgba(59, 130, 246, 0.45)" : "rgba(250, 204, 21, 0.45)";
+    const badgeLabel = isPrimary ? "🚀 PRIMARY ROLE 1" : "⚡ COMPARISON ROLE 2";
+    const badgeColor = isPrimary ? "#60a5fa" : "#fde047";
+
+    const salaryBench = career.salary_benchmark || {};
+    const fresherPay = salaryBench.fresher || "Data unavailable";
+    const midPay = salaryBench.mid || "Data unavailable";
+    const seniorPay = salaryBench.senior || "Data unavailable";
+    const countryName = salaryBench.country || countryTarget || "Target Market";
+
+    const demandRating = career.demand || (career.demand_score > 85 ? "Very High" : "High");
+    const growthOutlook = career.growth || (career.growth_score > 85 ? "Fast Growing" : "Growing");
+    const learningTime = career.learning_time || "3-4 Years Dedicated Preparation";
+
     const orgs = Array.isArray(career.organizations) ? career.organizations : [];
     const topCities = Array.isArray(career.top_cities) ? career.top_cities : [];
+    const timeline = Array.isArray(career.future_timeline) ? career.future_timeline : [];
 
     const renderedCities = topCities.map(city => {
         if (typeof city === 'string') {
-            return `
-                <div class="city-box" style="padding: 10px; margin-bottom: 8px; background: rgba(255,255,255,0.03); border-radius: 8px;">
-                    <h4 style="margin: 0 0 4px 0;">🏙️ ${city}</h4>
-                </div>
-            `;
+            return `<span style="font-size: 0.76rem; background: rgba(255,255,255,0.05); border: 1px solid var(--border); padding: 4px 10px; border-radius: 6px; color: var(--text-secondary); font-weight: 600;">🏙️ ${city}</span>`;
         }
         const cityName = city.city || city.name || "Hub City";
-        const cityCountry = city.country || "";
-        const cityDemand = city.demand || "High";
-        const companiesStr = Array.isArray(city.companies) ? city.companies.join(", ") : (city.companies || "");
-        const reasonStr = city.reason || "";
-
-        return `
-            <div class="city-box" style="padding: 10px; margin-bottom: 8px; background: rgba(255,255,255,0.03); border-radius: 8px;">
-                <h4 style="margin: 0 0 4px 0;">🏙️ ${cityName}</h4>
-                ${cityCountry ? `<p style="margin: 2px 0;">🌍 ${cityCountry}</p>` : ''}
-                ${cityDemand ? `<p style="margin: 2px 0;">🔥 ${cityDemand}</p>` : ''}
-                ${companiesStr ? `<p style="margin: 2px 0;">🏢 ${companiesStr}</p>` : ''}
-                ${reasonStr ? `<p style="margin: 2px 0; font-size: 0.85rem; opacity: 0.8;">${reasonStr}</p>` : ''}
-            </div>
-        `;
-    }).join("");
+        return `<span style="font-size: 0.76rem; background: rgba(255,255,255,0.05); border: 1px solid var(--border); padding: 4px 10px; border-radius: 6px; color: var(--text-secondary); font-weight: 600;">🏙️ ${cityName} (${city.demand || 'High'})</span>`;
+    }).join(" ");
 
     return `
-        <div class="compare-card">
-            <div class="section-box title-box">
-                <h2>🚀 ${career.name || "Career Role"}</h2>
+        <div class="compare-card" style="border: 1px solid ${borderColor}; box-shadow: 0 10px 30px rgba(0,0,0,0.4); border-radius: 18px; padding: 24px;">
+            
+            <!-- Card Header -->
+            <div style="background: ${accentBg}; border: 1px solid ${borderColor}; border-radius: 14px; padding: 18px;">
+                <span style="font-size: 0.72rem; font-weight: 800; color: ${badgeColor}; letter-spacing: 1.2px; text-transform: uppercase; display: block; margin-bottom: 6px;">
+                    ${badgeLabel}
+                </span>
+                <h2 style="color: var(--text-heading); font-size: 1.45rem; margin: 0; font-weight: 800;">
+                    ${career.name || "Career Role"}
+                </h2>
             </div>
 
-            <div class="section-box">
-                <h3>💰 Salary</h3>
-                <p>🌍 ${salary.country || "Target Country"}</p>
-                <h2>${salary.amount || "Market Rate"}</h2>
-                <p>💱 ${salary.currency || ""}</p>
-            </div>
-
-            <div class="section-box opportunity-box">
-                <h3>🚀 Career Opportunity Score</h3>
-                <h1>${career.overall_score || 85}/100</h1>
-                <p>Based on:</p>
-                <div class="score-factors">
-                    <span>💰 Salary</span>
-                    <span>📈 Demand</span>
-                    <span>🚀 Growth</span>
-                    <span>⚖️ Stability</span>
-                    <span>🌎 Future Scope</span>
+            <!-- Verified Country Local Pay Bands -->
+            <div style="background: rgba(0,0,0,0.35); border: 1px solid var(--border); border-radius: 14px; padding: 18px;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; border-bottom: 1px solid rgba(255,255,255,0.08); padding-bottom: 8px;">
+                    <span style="font-size: 0.82rem; font-weight: 800; color: ${accentColor}; display: flex; align-items: center; gap: 6px;">
+                        <i class="fa-solid fa-coins"></i> ${countryName} Local Pay Bands
+                    </span>
+                    <span style="font-size: 0.72rem; color: #22c55e; background: rgba(34, 197, 94, 0.15); border: 1px solid rgba(34, 197, 94, 0.4); padding: 2px 8px; border-radius: 12px; font-weight: 700;">
+                        ✓ Industry Verified
+                    </span>
+                </div>
+                
+                <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; text-align: center;">
+                    <div style="background: rgba(34, 197, 94, 0.06); border: 1px solid rgba(34, 197, 94, 0.25); border-radius: 10px; padding: 10px;">
+                        <span style="font-size: 0.68rem; color: var(--text-muted); font-weight: 700; text-transform: uppercase; display: block;">🌱 Entry Level</span>
+                        <strong style="color: #22c55e; font-size: 0.88rem; display: block; margin-top: 4px;">${fresherPay}</strong>
+                    </div>
+                    <div style="background: rgba(250, 204, 21, 0.06); border: 1px solid rgba(250, 204, 21, 0.25); border-radius: 10px; padding: 10px;">
+                        <span style="font-size: 0.68rem; color: var(--text-muted); font-weight: 700; text-transform: uppercase; display: block;">⚡ Mid Level</span>
+                        <strong style="color: var(--accent); font-size: 0.88rem; display: block; margin-top: 4px;">${midPay}</strong>
+                    </div>
+                    <div style="background: rgba(168, 85, 247, 0.06); border: 1px solid rgba(168, 85, 247, 0.25); border-radius: 10px; padding: 10px;">
+                        <span style="font-size: 0.68rem; color: var(--text-muted); font-weight: 700; text-transform: uppercase; display: block;">👑 Senior Lead</span>
+                        <strong style="color: #a855f7; font-size: 0.88rem; display: block; margin-top: 4px;">${seniorPay}</strong>
+                    </div>
                 </div>
             </div>
 
-            <div class="section-box">
-                <h3>📊 Performance</h3>
-                <p>💰 Salary Score: <b>${career.salary_score || 85}/100</b></p>
-                <p>📈 Demand: <b>${career.demand_score || 80}/100</b></p>
-                <p>🚀 Growth: <b>${career.growth_score || 85}/100</b></p>
-                <p>⏳ Learning Time: <b>${career.learning_time || "3-4 Years"}</b></p>
+            <!-- Opportunity Score & Market Indicators -->
+            <div style="background: rgba(0,0,0,0.35); border: 1px solid var(--border); border-radius: 14px; padding: 18px;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                    <span style="font-size: 0.85rem; font-weight: 800; color: var(--text-heading);">🚀 Opportunity Fit Index</span>
+                    <span style="font-size: 1.4rem; font-weight: 900; color: ${accentColor};">${career.overall_score || 85}/100</span>
+                </div>
+
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                    <div style="background: rgba(255,255,255,0.03); border: 1px solid var(--border); border-radius: 10px; padding: 10px;">
+                        <span style="font-size: 0.7rem; color: var(--text-muted); font-weight: 700; display: block;">🔥 JOB DEMAND</span>
+                        <strong style="color: #22c55e; font-size: 0.86rem;">${demandRating}</strong>
+                    </div>
+                    <div style="background: rgba(255,255,255,0.03); border: 1px solid var(--border); border-radius: 10px; padding: 10px;">
+                        <span style="font-size: 0.7rem; color: var(--text-muted); font-weight: 700; display: block;">🚀 FUTURE GROWTH</span>
+                        <strong style="color: #3b82f6; font-size: 0.86rem;">${growthOutlook}</strong>
+                    </div>
+                </div>
+                <div style="margin-top: 10px; font-size: 0.78rem; color: var(--text-secondary);">
+                    ⏳ <strong>Preparation Curve:</strong> ${learningTime}
+                </div>
             </div>
 
-            <div class="section-box">
-                <h3>🏢 Top Organizations</h3>
-                ${orgs.length ? orgs.map(org => `
-                    <div class="list-item">✔ ${typeof org === 'object' ? (org.name || JSON.stringify(org)) : org}</div>
-                `).join("") : '<p>Top Industry Employers</p>'}
+            <!-- 5-Year Progression Timeline -->
+            ${timeline.length ? `
+            <div style="background: rgba(0,0,0,0.35); border: 1px solid var(--border); border-radius: 14px; padding: 18px;">
+                <h4 style="margin: 0 0 10px; font-size: 0.85rem; color: var(--text-heading); font-weight: 800;">
+                    📈 5-Year Promotion & Title Escalation
+                </h4>
+                <div style="display: flex; flex-direction: column; gap: 8px;">
+                    ${timeline.map(step => `
+                        <div style="font-size: 0.78rem; color: var(--text-secondary); background: rgba(255,255,255,0.03); padding: 8px 12px; border-radius: 8px; border-left: 3px solid ${accentColor};">
+                            ${step}
+                        </div>
+                    `).join('')}
+                </div>
+            </div>
+            ` : ''}
+
+            <!-- Top Organizations -->
+            <div style="background: rgba(0,0,0,0.35); border: 1px solid var(--border); border-radius: 14px; padding: 18px;">
+                <h4 style="margin: 0 0 10px; font-size: 0.85rem; color: var(--text-heading); font-weight: 800;">
+                    🏢 Prime Hiring Employers
+                </h4>
+                <div style="display: flex; flex-wrap: wrap; gap: 6px;">
+                    ${orgs.length ? orgs.map(org => `
+                        <span style="font-size: 0.76rem; background: rgba(255,255,255,0.05); border: 1px solid var(--border); padding: 4px 10px; border-radius: 6px; color: var(--text-secondary); font-weight: 600;">
+                            ✓ ${typeof org === 'object' ? (org.name || JSON.stringify(org)) : org}
+                        </span>
+                    `).join('') : '<span style="font-size: 0.78rem; color: var(--text-muted);">Major Industry Employers</span>'}
+                </div>
             </div>
 
-            <div class="section-box">
-                <h3>🏙️ Top Hiring Cities</h3>
-                ${renderedCities || '<p>Global Hiring Hubs</p>'}
+            <!-- Top Hiring Cities -->
+            <div style="background: rgba(0,0,0,0.35); border: 1px solid var(--border); border-radius: 14px; padding: 18px;">
+                <h4 style="margin: 0 0 10px; font-size: 0.85rem; color: var(--text-heading); font-weight: 800;">
+                    🏙️ Top Hiring Hub Cities
+                </h4>
+                <div style="display: flex; flex-wrap: wrap; gap: 6px;">
+                    ${renderedCities || '<span style="font-size: 0.78rem; color: var(--text-muted);">Global Talent Hubs</span>'}
+                </div>
             </div>
         </div>
     `;

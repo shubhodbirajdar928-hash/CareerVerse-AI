@@ -2262,9 +2262,13 @@ JSON Format:
             c2_s = result.get("career2", {}).get("overall_score", 80)
             result["winner"] = career1 if c1_s >= c2_s else career2
 
-        # Normalize top_cities if strings were returned by Gemini
+        # Normalize top_cities & attach ground-truth normalized salary benchmark engine
         for c_key in ["career1", "career2"]:
             if c_key in result and isinstance(result[c_key], dict):
+                c_name = result[c_key].get("name", career1 if c_key == "career1" else career2)
+                norm_sal = create_normalized_salary_object(c_name, country)
+                result[c_key]["salary_benchmark"] = norm_sal
+
                 cities_raw = result[c_key].get("top_cities", [])
                 normalized_cities = []
                 for item in cities_raw:
