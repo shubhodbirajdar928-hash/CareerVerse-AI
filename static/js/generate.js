@@ -294,9 +294,25 @@ function renderPayBandCard(salaryData, targetSalInfo, country) {
         }
     }
 
-    if (!fresher || fresher === "--") fresher = "Data unavailable";
-    if (!mid || mid === "--") mid = "Data unavailable";
-    if (!senior || senior === "--") senior = "Data unavailable";
+    const code = salaryData?.currency_code || targetSalInfo?.currency || "";
+    const sym = salaryData?.currency_symbol || "";
+
+    function ensureCurrencyTag(val) {
+        if (!val || val === "Data unavailable" || val === "--") return "Data unavailable";
+        const v = String(val).trim();
+        if (v === "Data unavailable") return "Data unavailable";
+
+        const hasSym = /[$\u20B9\u00A5\u00A3\u20AC\u20A9\u20BA\u20AA\u0E3F\u20BD\u09AF\u20B1\u20AB\u20A6]/.test(v);
+        const hasCode = /^[A-Z]{3}\s/.test(v) || /\b[A-Z]{3}\b/.test(v);
+        if (hasSym || hasCode) return v;
+
+        const tag = sym || code || "";
+        return tag ? `${tag}${v}` : v;
+    }
+
+    fresher = ensureCurrencyTag(fresher);
+    mid = ensureCurrencyTag(mid);
+    senior = ensureCurrencyTag(senior);
 
     return `
     <div style="margin-top: 22px; background: rgba(15, 23, 42, 0.7); border: 1px solid rgba(250, 204, 21, 0.3); border-radius: 16px; padding: 20px; box-shadow: 0 10px 25px rgba(0,0,0,0.4);">
@@ -1023,6 +1039,18 @@ function generatePDFReport() {
         if (!str) return "";
         return String(str)
             .replace(/₹/g, "INR ")
+            .replace(/¥/g, "JPY ")
+            .replace(/€/g, "EUR ")
+            .replace(/£/g, "GBP ")
+            .replace(/₩/g, "KRW ")
+            .replace(/₺/g, "TRY ")
+            .replace(/₪/g, "ILS ")
+            .replace(/฿/g, "THB ")
+            .replace(/₽/g, "RUB ")
+            .replace(/৳/g, "BDT ")
+            .replace(/₱/g, "PHP ")
+            .replace(/₫/g, "VND ")
+            .replace(/₦/g, "NGN ")
             .replace(/[^\x00-\x7F]/g, "")
             .replace(/\s+/g, " ")
             .trim();
