@@ -2145,6 +2145,28 @@ def generate_fallback_compare(career1, career2, country="India"):
         "recommendation": f"If you seek strong career stability, high sector growth, and high impact opportunities, pursuing a career in {winner_name} is highly recommended. However, if your personal passion aligns with {loser_name}, both fields offer excellent professional development."
     }
 
+INDIA_SPECIFIC_TERMS = ["upsc", "ias", "ips", "ssc", "gate", "nda", "mpsc", "bpsc", "uppsc", "ras", "jee", "neet", "ifs", "irs", "ies"]
+USA_SPECIFIC_TERMS = ["usmle", "nclex", "bar exam", "sat", "act"]
+UK_SPECIFIC_TERMS = ["plab", "gmc"]
+
+def check_region_mismatch(c1, c2, country):
+    country_lower = country.lower().strip() if country else ""
+    c1_lower = c1.lower().strip()
+    c2_lower = c2.lower().strip()
+    
+    warnings = []
+    for c_term, c_name in [(c1_lower, c1), (c2_lower, c2)]:
+        # Check India specific exams
+        if any(term in c_term.split() or term == c_term for term in INDIA_SPECIFIC_TERMS):
+            if country_lower and country_lower not in ["india", "in", "bharat"]:
+                warnings.append(f"⚠️ <strong>Region-Specific Career Alert for {c_name.upper()}:</strong> {c_name.upper()} is an official national examination/service conducted exclusively in <strong>India</strong> for Indian public administration. It is not conducted as a civil service exam in <strong>{country.title()}</strong>. The equivalent career path in {country.title()} is the Federal/National Civil Service or Foreign Service.")
+        # Check USA specific exams
+        elif any(term in c_term.split() or term == c_term for term in USA_SPECIFIC_TERMS):
+            if country_lower and country_lower not in ["usa", "united states", "us", "america"]:
+                warnings.append(f"⚠️ <strong>Region-Specific Career Alert for {c_name.upper()}:</strong> {c_name.upper()} is a US-specific national credential/exam conducted in the <strong>United States</strong>. It is not an official examination in <strong>{country.title()}</strong>.")
+    
+    return " <br><br> ".join(warnings) if warnings else None
+
 @app.route("/compare-api", methods=["POST"])
 def compare_api():
     try:
@@ -2194,10 +2216,16 @@ Student Selected Country:
 Selected Country Currency:
 {currency}
 
+CRITICAL LOCATION VALIDATION INSTRUCTION:
+Check if Career 1 or Career 2 is a nation-specific exam, civil service, or national credential (e.g., UPSC, IAS, IPS, SSC, GATE, NDA, MPSC, USMLE, NCLEX, PLAB, Bar Exam).
+If the user's selected country does NOT conduct or recognize this exam/role natively (for example, UPSC in USA or USMLE in India):
+In "country_mismatch_warning", provide a bold clear statement explaining the geographic restriction (e.g., "⚠️ Region-Specific Career Alert: UPSC (Union Public Service Commission) is an Indian Civil Services examination for government administration in India. It is not an exam conducted in USA. The equivalent US career pathway is US Federal Civil Service / Foreign Service.").
+
 Return ONLY valid JSON.
 
 JSON Format:
 {{
+"country_mismatch_warning": "",
 "career1": {{
 "name": "",
 "salary": {{
@@ -2266,6 +2294,13 @@ JSON Format:
         except Exception as e:
             print(f"[COMPARE FALLBACK ENGAGED] {e}. Generating dynamic fallback comparison for {career1} vs {career2}")
             result = generate_fallback_compare(career1, career2, country)
+
+        # Attach deterministic region mismatch alert if applicable
+        mismatch_alert = check_region_mismatch(career1, career2, country)
+        if mismatch_alert:
+            result["country_mismatch_warning"] = mismatch_alert
+        elif not result.get("country_mismatch_warning"):
+            result["country_mismatch_warning"] = ""
 
         if not result.get("winner"):
             c1_s = result.get("career1", {}).get("overall_score", 85)

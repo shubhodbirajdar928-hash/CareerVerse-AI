@@ -126,9 +126,21 @@ country: country
         const c2Cities = Array.isArray(c2.top_cities) ? c2.top_cities.slice(0, 3).map(c => typeof c === 'object' ? (c.city || c.name || "Hub") : c).join(", ") : "Global Cities";
 
         const c1Bench = c1.salary_benchmark || {};
-        const c2Bench = c2.salary_benchmark || {};
+        const mismatchAlert = data.country_mismatch_warning || "";
 
         result.innerHTML = `
+        ${mismatchAlert ? `
+        <div style="background: rgba(234, 179, 8, 0.08); border: 1px solid rgba(234, 179, 8, 0.4); border-radius: 16px; padding: 22px; margin-bottom: 24px; text-align: left; box-shadow: 0 10px 30px rgba(0,0,0,0.3);">
+            <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 8px;">
+                <i class="fa-solid fa-earth-americas" style="font-size: 1.4rem; color: #facc15;"></i>
+                <strong style="color: #facc15; font-size: 1.05rem;">Geographic / Region-Specific Career Alert</strong>
+            </div>
+            <p style="color: var(--text-heading); font-size: 0.92rem; line-height: 1.6; margin: 0;">
+                ${mismatchAlert}
+            </p>
+        </div>
+        ` : ''}
+
         <div class="compare-grid">
             ${createCareerCard(data.career1, true, country)}
             ${createCareerCard(data.career2, false, country)}
