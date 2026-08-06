@@ -114,6 +114,20 @@ country: country
 
 
 
+        const c1 = data.career1 || {};
+        const c2 = data.career2 || {};
+        const c1Name = c1.name || career1 || "Role 1";
+        const c2Name = c2.name || career2 || "Role 2";
+
+        const c1Orgs = Array.isArray(c1.organizations) ? c1.organizations.slice(0, 3).map(o => typeof o === 'object' ? (o.name || JSON.stringify(o)) : o).join(", ") : "Top Sector Employers";
+        const c2Orgs = Array.isArray(c2.organizations) ? c2.organizations.slice(0, 3).map(o => typeof o === 'object' ? (o.name || JSON.stringify(o)) : o).join(", ") : "Top Sector Employers";
+
+        const c1Cities = Array.isArray(c1.top_cities) ? c1.top_cities.slice(0, 3).map(c => typeof c === 'object' ? (c.city || c.name || "Hub") : c).join(", ") : "Global Cities";
+        const c2Cities = Array.isArray(c2.top_cities) ? c2.top_cities.slice(0, 3).map(c => typeof c === 'object' ? (c.city || c.name || "Hub") : c).join(", ") : "Global Cities";
+
+        const c1Bench = c1.salary_benchmark || {};
+        const c2Bench = c2.salary_benchmark || {};
+
         result.innerHTML = `
         <div class="compare-grid">
             ${createCareerCard(data.career1, true, country)}
