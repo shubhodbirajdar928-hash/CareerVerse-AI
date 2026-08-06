@@ -130,12 +130,6 @@ country: country
                     Location-verified parameters for <strong>${c1Name}</strong> vs <strong>${c2Name}</strong> in <strong>${country || 'Target Market'}</strong>.
                 </p>
             </div>
-
-        <!-- NEW FEATURE: HEAD-TO-HEAD FEATURE COMPARISON MATRIX -->
-        <div style="background: var(--bg-card); border: 1px solid var(--border); border-radius: 20px; padding: 32px; margin-bottom: 40px;">
-            <h3 style="color: var(--text-heading); font-size: 1.25rem; font-weight: 800; margin: 0 0 20px 0; display: flex; align-items: center; gap: 10px;">
-                ⚔️ Head-to-Head Feature Comparison Matrix
-            </h3>
             
             <div style="overflow-x: auto;">
                 <table style="width: 100%; border-collapse: collapse; text-align: left; font-size: 0.88rem;">
@@ -218,16 +212,16 @@ country: country
 
         <!-- WINNER RECOMMENDATION BOX -->
         <div class="winner-box">
-            <h2>🏆 AI Career Recommendation</h2>
+            <h2>🏆 Strategic Career Recommendation</h2>
             <h1>${data.winner}</h1>
             <div class="winner-content">
-                <h3>Why AI selected this?</h3>
+                <h3>Strategic Decision Rationale</h3>
                 <p>${data.reason}</p>
                 <h3>Strategic Advice</h3>
                 <p>${data.recommendation}</p>
             </div>
             <div class="decision-badge">
-                ✨ Best Career Choice Based On Growth & Earning Capacity
+                ✨ Optimal Choice Based On Market Mobility & Salary Trajectory
             </div>
         </div>
         `;
