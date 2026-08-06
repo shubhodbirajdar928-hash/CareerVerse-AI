@@ -275,32 +275,28 @@ function renderPayBandCard(salaryData, targetSalInfo, country) {
     const flag = targetSalInfo.flag || (isIndia ? "🇮🇳" : "🌐");
     const countryName = targetSalInfo.name || (country ? country.trim() : "Target Market");
     
-    let fresher = isIndia ? "₹5.0L - ₹9.0L / yr" : "$65,000 - $95,000 / yr";
-    let mid = isIndia ? "₹12.0L - ₹22.0L / yr" : "$110,000 - $160,000 / yr";
-    let senior = isIndia ? "₹25.0L - ₹55.0L / yr" : "$175,000 - $280,000 / yr";
+    let fresher = "Data unavailable";
+    let mid = "Data unavailable";
+    let senior = "Data unavailable";
 
-    if (salaryData) {
-        if (typeof salaryData === "object") {
-            if (isIndia) {
-                fresher = salaryData.india_fresher || salaryData.fresher || fresher;
-                mid = salaryData.india_mid || salaryData.mid || mid;
-                senior = salaryData.india_senior || salaryData.senior || senior;
-            } else {
-                fresher = salaryData.country_fresher || salaryData.fresher || fresher;
-                mid = salaryData.country_mid || salaryData.mid || mid;
-                senior = salaryData.country_senior || salaryData.senior || senior;
-            }
-        } else if (typeof salaryData === "string") {
-            const parts = salaryData.split("->").map(p => p.replace(/\((Fresher|Mid|Senior)\)/gi, "").trim());
-            if (parts.length >= 3) {
-                fresher = parts[0];
-                mid = parts[1];
-                senior = parts[2];
-            } else if (parts.length === 1 && parts[0]) {
-                fresher = parts[0];
-            }
+    if (salaryData && typeof salaryData === "object") {
+        fresher = salaryData.fresher || salaryData.india_fresher || salaryData.country_fresher || "Data unavailable";
+        mid = salaryData.mid || salaryData.india_mid || salaryData.country_mid || "Data unavailable";
+        senior = salaryData.senior || salaryData.india_senior || salaryData.country_senior || "Data unavailable";
+    } else if (salaryData && typeof salaryData === "string") {
+        const parts = salaryData.split("->").map(p => p.replace(/\((Fresher|Mid|Senior)\)/gi, "").trim());
+        if (parts.length >= 3) {
+            fresher = parts[0];
+            mid = parts[1];
+            senior = parts[2];
+        } else if (parts.length === 1 && parts[0]) {
+            fresher = parts[0];
         }
     }
+
+    if (!fresher || fresher === "--") fresher = "Data unavailable";
+    if (!mid || mid === "--") mid = "Data unavailable";
+    if (!senior || senior === "--") senior = "Data unavailable";
 
     return `
     <div style="margin-top: 22px; background: rgba(15, 23, 42, 0.7); border: 1px solid rgba(250, 204, 21, 0.3); border-radius: 16px; padding: 20px; box-shadow: 0 10px 25px rgba(0,0,0,0.4);">
@@ -757,45 +753,33 @@ ${(() => {
             <div style="background: rgba(34, 197, 94, 0.05); border: 1px solid rgba(34, 197, 94, 0.3); border-radius: 14px; padding: 16px;">
                 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
                     <span style="font-size: 0.78rem; color: #22c55e; font-weight: 800;">🔥 JOB DEMAND</span>
-                    <span style="font-size: 0.9rem; font-weight: 900; color: #22c55e;">${market.job_demand?.percentage || 88}%</span>
+                    <span style="font-size: 0.82rem; font-weight: 900; color: #22c55e; background: rgba(34, 197, 94, 0.15); padding: 2px 10px; border-radius: 10px;">${market.job_demand?.rating || (market.job_demand?.percentage ? (market.job_demand.percentage > 80 ? 'Very High' : 'High') : 'High')}</span>
                 </div>
-                <div style="background: rgba(255,255,255,0.08); height: 6px; border-radius: 3px; overflow: hidden; margin-bottom: 8px;">
-                    <div style="width:${market.job_demand?.percentage || 88}%; height: 100%; background: linear-gradient(90deg, #22c55e, #10b981);"></div>
-                </div>
-                <p style="font-size: 0.78rem; color: var(--text-secondary); margin: 0; line-height: 1.35;">${market.job_demand?.text || `Extremely high market demand driven by global enterprise adoption and talent shortage in ${country || 'this field'}.`}</p>
+                <p style="font-size: 0.78rem; color: var(--text-secondary); margin: 6px 0 0; line-height: 1.4;">${market.job_demand?.reason || market.job_demand?.text || `High market demand driven by enterprise hiring & talent shortage in ${country || 'this field'}.`}</p>
             </div>
 
             <div style="background: rgba(250, 204, 21, 0.05); border: 1px solid rgba(250, 204, 21, 0.3); border-radius: 14px; padding: 16px;">
                 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
                     <span style="font-size: 0.78rem; color: var(--accent); font-weight: 800;">🎯 LEARNING CURVE</span>
-                    <span style="font-size: 0.9rem; font-weight: 900; color: var(--accent);">${market.difficulty?.percentage || 75}%</span>
+                    <span style="font-size: 0.82rem; font-weight: 900; color: var(--accent); background: rgba(250, 204, 21, 0.15); padding: 2px 10px; border-radius: 10px;">${market.difficulty?.level || 'Moderate to High'}</span>
                 </div>
-                <div style="background: rgba(255,255,255,0.08); height: 6px; border-radius: 3px; overflow: hidden; margin-bottom: 8px;">
-                    <div style="width:${market.difficulty?.percentage || 75}%; height: 100%; background: linear-gradient(90deg, #f59e0b, #fac515);"></div>
-                </div>
-                <p style="font-size: 0.78rem; color: var(--text-secondary); margin: 0; line-height: 1.35;">${market.difficulty?.text || "Moderate-to-high learning curve requiring hands-on mastery of core frameworks & tools."}</p>
+                <p style="font-size: 0.78rem; color: var(--text-secondary); margin: 6px 0 0; line-height: 1.4;">${market.difficulty?.reason || market.difficulty?.text || "Moderate to high learning curve requiring structured hands-on practice."}</p>
             </div>
 
             <div style="background: rgba(59, 130, 246, 0.05); border: 1px solid rgba(59, 130, 246, 0.3); border-radius: 14px; padding: 16px;">
                 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
-                    <span style="font-size: 0.78rem; color: #3b82f6; font-weight: 800;">🚀 5-YR GROWTH</span>
-                    <span style="font-size: 0.9rem; font-weight: 900; color: #3b82f6;">${market.growth?.percentage || 90}%</span>
+                    <span style="font-size: 0.78rem; color: #3b82f6; font-weight: 800;">🚀 CAREER GROWTH</span>
+                    <span style="font-size: 0.82rem; font-weight: 900; color: #3b82f6; background: rgba(59, 130, 246, 0.15); padding: 2px 10px; border-radius: 10px;">${market.growth?.outlook || (market.growth?.percentage ? (market.growth.percentage > 80 ? 'Fast Growing' : 'Growing') : 'Growing')}</span>
                 </div>
-                <div style="background: rgba(255,255,255,0.08); height: 6px; border-radius: 3px; overflow: hidden; margin-bottom: 8px;">
-                    <div style="width:${market.growth?.percentage || 90}%; height: 100%; background: linear-gradient(90deg, #3b82f6, #60a5fa);"></div>
-                </div>
-                <p style="font-size: 0.78rem; color: var(--text-secondary); margin: 0; line-height: 1.35;">${market.growth?.text || "Multi-year compound annual growth (+20%+ CAGR) powered by digital transformation."}</p>
+                <p style="font-size: 0.78rem; color: var(--text-secondary); margin: 6px 0 0; line-height: 1.4;">${market.growth?.reason || market.growth?.text || "Strong multi-year expansion powered by technology integration and investments."}</p>
             </div>
 
             <div style="background: rgba(168, 85, 247, 0.05); border: 1px solid rgba(168, 85, 247, 0.3); border-radius: 14px; padding: 16px;">
                 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
                     <span style="font-size: 0.78rem; color: #a855f7; font-weight: 800;">📚 TIME COMMITMENT</span>
-                    <span style="font-size: 0.9rem; font-weight: 900; color: #a855f7;">${market.learning_time?.percentage || 80}%</span>
+                    <span style="font-size: 0.82rem; font-weight: 900; color: #a855f7; background: rgba(168, 85, 247, 0.15); padding: 2px 10px; border-radius: 10px;">${market.learning_time?.duration || '6 Months'}</span>
                 </div>
-                <div style="background: rgba(255,255,255,0.08); height: 6px; border-radius: 3px; overflow: hidden; margin-bottom: 8px;">
-                    <div style="width:${market.learning_time?.percentage || 80}%; height: 100%; background: linear-gradient(90deg, #a855f7, #c084fc);"></div>
-                </div>
-                <p style="font-size: 0.78rem; color: var(--text-secondary); margin: 0; line-height: 1.35;">${market.learning_time?.text || "Estimated 15-20 hours/week of structured practice over 6 months to reach job readiness."}</p>
+                <p style="font-size: 0.78rem; color: var(--text-secondary); margin: 6px 0 0; line-height: 1.4;">${market.learning_time?.details || market.learning_time?.text || "Estimated 15-20 hours/week of structured practice over 6 months."}</p>
             </div>
         </div>
     </div>
@@ -907,19 +891,30 @@ ${(() => {
                     window.marketChartInstance.destroy();
                 }
                 const ctx = canvas.getContext("2d");
+                const mapRatingToScore = (val, defaultScore = 80) => {
+                    if (typeof val === "number") return val;
+                    if (typeof val === "string") {
+                        const v = val.toLowerCase();
+                        if (v.includes("very high") || v.includes("fast growing")) return 92;
+                        if (v.includes("high") || v.includes("growing")) return 78;
+                        if (v.includes("moderate") || v.includes("stable")) return 55;
+                        if (v.includes("low") || v.includes("declining")) return 30;
+                    }
+                    return defaultScore;
+                };
+
+                const demandVal = mapRatingToScore(market.job_demand?.rating || market.job_demand?.percentage, 85);
+                const growthVal = mapRatingToScore(market.growth?.outlook || market.growth?.percentage, 88);
+                const diffVal = mapRatingToScore(market.difficulty?.level || market.difficulty?.percentage, 75);
+                const timeVal = mapRatingToScore(market.learning_time?.duration || market.learning_time?.percentage, 80);
+
                 window.marketChartInstance = new Chart(ctx, {
                     type: "radar",
                     data: {
-                        labels: ["Job Demand", "Growth Rate", "Learning Curve", "Time Index", "Stability"],
+                        labels: ["Job Demand", "Growth Outlook", "Learning Curve", "Time Index", "Stability"],
                         datasets: [{
                             label: "Market Scope Score",
-                            data: [
-                                market.job_demand?.percentage || 88,
-                                market.growth?.percentage || 90,
-                                market.difficulty?.percentage || 75,
-                                market.learning_time?.percentage || 80,
-                                85
-                            ],
+                            data: [demandVal, growthVal, diffVal, timeVal, 85],
                             backgroundColor: "rgba(250, 204, 21, 0.25)",
                             borderColor: "#fac515",
                             pointBackgroundColor: "#fac515",
@@ -1205,12 +1200,19 @@ function generatePDFReport() {
     const market = data.market || {};
     drawSectionHeader("5. Market Intelligence & Hiring Ecosystem");
 
+    const demandRating = market.job_demand?.rating || (market.job_demand?.percentage ? (market.job_demand.percentage > 80 ? 'Very High' : 'High') : 'High');
+    const growthOutlook = market.growth?.outlook || (market.growth?.percentage ? (market.growth.percentage > 80 ? 'Fast Growing' : 'Growing') : 'Growing');
+
+    const freshSalary = market.salary?.fresher || 'Data unavailable';
+    const midSalary = market.salary?.mid || 'Data unavailable';
+    const senSalary = market.salary?.senior || 'Data unavailable';
+
     doc.autoTable({
         startY: y,
-        head: [['Metric', 'Benchmark', 'Top Hiring Companies', 'Key Hiring Hotspots']],
+        head: [['Metric', 'Salary Pay Bands', 'Top Hiring Companies', 'Key Hiring Hotspots']],
         body: [[
-            'Job Demand: ' + (market.job_demand?.percentage || 88) + '%\nGrowth: ' + (market.growth?.percentage || 90) + '%',
-            'Fresher: ' + sanitize(market.salary?.fresher || 'INR 6.5L') + '\nSenior: ' + sanitize(market.salary?.senior || 'INR 25L'),
+            'Job Demand: ' + demandRating + '\nGrowth Outlook: ' + growthOutlook,
+            'Fresher: ' + sanitize(freshSalary) + '\nMid: ' + sanitize(midSalary) + '\nSenior: ' + sanitize(senSalary),
             (market.top_organizations || []).slice(0, 5).join(', '),
             (market.hiring_hotspots || []).map(h => sanitize(h.city)).join(', ')
         ]],

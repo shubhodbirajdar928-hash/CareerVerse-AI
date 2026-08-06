@@ -1342,10 +1342,10 @@ def get_fallback_roadmap(career, country, months=6):
             f"Stay updated on emerging AI trends transforming the {c_title} field."
         ],
         "market": {
-            "job_demand": {"text": f"Extremely High demand with rapid growth across top hiring hubs for {c_title}.", "percentage": 90},
-            "difficulty": {"text": "Moderate to High learning curve requiring dedicated practice.", "percentage": 75},
-            "growth": {"text": "Projected 20%+ annual growth over the next 5 years.", "percentage": 88},
-            "learning_time": {"text": f"Estimated {months} months of consistent 15-20 hrs/week study.", "percentage": 80},
+            "job_demand": {"rating": "Very High", "reason": f"High market demand driven by global enterprise adoption and talent shortage in {c_title}."},
+            "difficulty": {"level": "Moderate to High", "reason": "Requires dedicated practice and structured domain skill acquisition."},
+            "growth": {"outlook": "Fast Growing", "reason": "Strong multi-year expansion driven by digital transformation and industry investment."},
+            "learning_time": {"duration": f"{months} Months", "details": "Consistent 15-20 hrs/week study commitment."},
             "salary": {
                 "fresher": sal_ind_f if is_india else sal_cnt_f,
                 "mid": sal_ind_m if is_india else sal_cnt_m,
@@ -1495,10 +1495,10 @@ Return ONLY valid JSON matching this exact structure:
     "AI Tool Strategy E"
   ],
   "market": {{
-    "job_demand": {{"text": "Extremely High demand with rapid growth.", "percentage": 88}},
-    "difficulty": {{"text": "Moderate to High learning curve requiring dedicated practice.", "percentage": 75}},
-    "growth": {{"text": "Multi-year compound annual growth rate of +22%.", "percentage": 90}},
-    "learning_time": {{"text": "6 months of consistent 15 hrs/week study.", "percentage": 80}},
+    "job_demand": {{"rating": "Very High", "reason": "Verified reason for demand rating in target market."}},
+    "difficulty": {{"level": "Moderate to High", "reason": "Verified learning curve assessment."}},
+    "growth": {{"outlook": "Fast Growing", "reason": "Verified multi-year career growth outlook."}},
+    "learning_time": {{"duration": "6 Months", "details": "Consistent 15 hrs/week study commitment."}},
     "salary": {{
       "fresher": "₹6.0L - ₹10.0L / yr",
       "mid": "₹14.0L - ₹25.0L / yr",
@@ -1520,9 +1520,13 @@ Return ONLY valid JSON matching this exact structure:
   }}
 }}
 
-Rules:
-- MANDATE: EVERY SINGLE ARRAY FIELD (roles, skills.beginner, skills.intermediate, skills.advanced, roadmap.topics, resources.youtube, resources.courses, resources.documentation, resources.books, projects.beginner, projects.intermediate, projects.advanced, certifications, tools, interview_preparation, portfolio_tips, ai_tips, market.top_organizations, market.hiring_hotspots, market.trending_skills, market.daily_plan) MUST CONTAIN AT LEAST 5 ACCURATE, ROLE-SPECIFIC ITEMS. Never output fewer than 5 items per list.
-- CRITICAL DOMAIN MANDATE: Tailor ALL books, courses, YouTube channels, daily plans, tools, certifications, and projects specifically for "{career}". Never assume programming or software engineering if the role is a non-tech career (e.g. Doctor, Lawyer, Police Officer, IAS, Farmer, Pilot, Teacher, Chef, Mechanical/Civil Engineer, Architect, etc.).
+Rules & Anti-Hallucination Mandates:
+- JOB DEMAND RATING: Must ONLY be one of ["Low", "Moderate", "High", "Very High"] with a short reason. NEVER output percentage values (e.g. no "88%").
+- CAREER GROWTH OUTLOOK: Must ONLY be one of ["Declining", "Stable", "Growing", "Fast Growing"] with a short explanation. NEVER output percentage values (e.g. no "90%").
+- SALARY ACCURACY: Provide realistic salary ranges for fresher, mid, and senior levels in local currency for {country}. If reliable salary info is uncertain for an obscure role or region, set the value to "Data unavailable". Never invent exaggerated or random salary values.
+- NO HALLUCINATED LINKS: Never invent fake URLs. Use only real official domain names.
+- MANDATE: EVERY SINGLE ARRAY FIELD (roles, skills.beginner, skills.intermediate, skills.advanced, roadmap.topics, resources.youtube, resources.courses, resources.documentation, resources.books, projects.beginner, projects.intermediate, projects.advanced, certifications, tools, interview_preparation, portfolio_tips, ai_tips, market.top_organizations, market.hiring_hotspots, market.trending_skills, market.daily_plan) MUST CONTAIN AT LEAST 5 ACCURATE, ROLE-SPECIFIC ITEMS.
+- CRITICAL DOMAIN MANDATE: Tailor ALL books, courses, YouTube channels, daily plans, tools, certifications, and projects specifically for "{career}". Never assume programming or software engineering if the role is a non-tech career.
 - Generate exactly {months} objects in the roadmap array.
 - Return ONLY valid JSON. No markdown fences.
 """
