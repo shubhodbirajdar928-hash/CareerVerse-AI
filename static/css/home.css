@@ -849,24 +849,25 @@
 /* ================= TOOLS SECTION ================= */
 
 .tools-section {
-    max-width: 1600px;
-    width: 100%;
-    margin: 0 auto 100px;
-    padding: 0 4%;
-    box-sizing: border-box;
+    max-width: 100% !important;
+    width: 100% !important;
+    margin: 0 auto 100px !important;
+    padding: 0 4% !important;
+    box-sizing: border-box !important;
 }
 
 .tools-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 24px;
+    display: grid !important;
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: 28px !important;
+    width: 100% !important;
 }
 
 .tool-card {
     background: var(--bg-card);
     border: 1px solid var(--border);
-    border-radius: var(--radius-lg);
-    padding: 28px;
+    border-radius: var(--radius-xl);
+    padding: 38px 32px;
     text-decoration: none;
     display: flex;
     flex-direction: column;
@@ -874,6 +875,8 @@
     transition: var(--transition);
     position: relative;
     overflow: hidden;
+    min-height: 290px;
+    box-sizing: border-box;
 }
 
 .tool-card:hover {

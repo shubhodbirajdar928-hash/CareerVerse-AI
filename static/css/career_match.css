@@ -4,8 +4,8 @@
 ========================================== */
 
 .match-page {
-    width: 90%;
-    max-width: 1200px;
+    width: 96%;
+    max-width: 1600px;
     margin: calc(var(--nav-height) + 40px) auto 70px;
     text-align: center;
 }
@@ -144,7 +144,8 @@
 
 .match-results-container,
 #result {
-    max-width: 960px;
+    max-width: 100%;
+    width: 100%;
     margin: 40px auto 0;
     text-align: left;
 }
