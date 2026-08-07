@@ -5,10 +5,12 @@
 
 .about-hero {
     text-align: center;
-    padding: calc(var(--nav-height) + 50px) 5% 50px;
-    max-width: 1000px;
+    padding: calc(var(--nav-height) + 50px) 4% 50px;
+    max-width: 1600px;
+    width: 100%;
     margin: 0 auto;
     position: relative;
+    box-sizing: border-box;
 }
 
 .hero-badge {
@@ -49,7 +51,7 @@
 }
 
 .about-hero p {
-    max-width: 650px;
+    max-width: 750px;
     margin: 0 auto;
     color: var(--text-secondary);
     font-size: 1.05rem;
@@ -59,17 +61,18 @@
 /* ABOUT GRID / CARDS */
 
 .about-grid {
-    width: 90%;
-    max-width: 1200px;
+    width: 96%;
+    max-width: 1600px;
     margin: 40px auto 60px;
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 20px;
+    gap: 24px;
+    box-sizing: border-box;
 }
 
 .about-card {
     background: var(--bg-card);
-    padding: 30px 24px;
+    padding: 32px 26px;
     border-radius: var(--radius-xl);
     border: 1px solid var(--border);
     transition: var(--transition);
@@ -113,8 +116,8 @@
 /* STATS BAR */
 
 .stats {
-    width: 90%;
-    max-width: 1100px;
+    width: 96%;
+    max-width: 1600px;
     margin: 0 auto 60px;
     background: var(--bg-card);
     border: 1px solid var(--border);
@@ -125,6 +128,7 @@
     gap: 20px;
     text-align: center;
     box-shadow: var(--shadow-card);
+    box-sizing: border-box;
 }
 
 .stat-item h1 {
@@ -144,10 +148,11 @@
 /* MISSION BANNER */
 
 .mission-banner {
-    width: 90%;
-    max-width: 900px;
+    width: 96%;
+    max-width: 1600px;
     margin: 0 auto 70px;
     padding: 44px 36px;
+    box-sizing: border-box;
     background: linear-gradient(135deg, rgba(250, 204, 21, 0.08) 0%, var(--bg-card) 100%);
     border: 1px solid var(--accent);
     border-radius: var(--radius-xl);
