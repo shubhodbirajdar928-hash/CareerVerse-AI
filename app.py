@@ -163,61 +163,68 @@ QWERTY_PATTERNS = [
     "1234567890", "0987654321"
 ]
 
-CAREER_KEYWORDS = {
-    # Engineering & Technology
-    "engineer", "developer", "architect", "designer", "manager", "analyst", "consultant", "specialist",
-    "lead", "administrator", "director", "officer", "scientist", "researcher", "coder", "programmer",
-    "software", "web", "fullstack", "frontend", "backend", "cloud", "data", "ai", "ml", "machine",
-    "learning", "cybersecurity", "network", "system", "database", "devops", "sre", "ui", "ux",
-    "product", "project", "scrum", "agile", "qa", "tester", "security", "sysadmin", "infrastructure",
-    "robotics", "embedded", "firmware", "mechatronics", "telecom", "hardware", "bioinformatics",
+COMMON_TYPO_MAP = {
+    "softwere": "software",
+    "softweare": "software",
+    "softwaer": "software",
+    "scintist": "scientist",
+    "scintific": "scientific",
+    "machanical": "mechanical",
+    "mechenical": "mechanical",
+    "fasion": "fashion",
+    "fassion": "fashion",
+    "enginier": "engineer",
+    "enginer": "engineer",
+    "engneer": "engineer",
+    "engeneer": "engineer",
+    "devloper": "developer",
+    "developper": "developer",
+    "devoloper": "developer",
+    "artifical": "artificial",
+    "intelegence": "intelligence",
+    "inteligence": "intelligence",
+    "machne": "machine",
+    "aerospase": "aerospace",
+    "docter": "doctor",
+    "physican": "physician",
+    "aeronaotical": "aeronautical",
+    "pyton": "python",
+    "cybersecuity": "cybersecurity",
+    "cybersecurty": "cybersecurity",
+    "analist": "analyst",
+    "maneger": "manager",
+    "archtect": "architect",
+    "profeser": "professor",
+    "profesor": "professor",
+    "elecrician": "electrician",
+    "plubmer": "plumber",
+    "jornalist": "journalist",
+    "acountant": "accountant",
+    "lawer": "lawyer"
+}
 
-    # Healthcare, Medicine & Life Sciences
-    "doctor", "physician", "surgeon", "nurse", "pharmacist", "therapist", "dentist", "psychiatrist",
-    "psychologist", "counselor", "paramedic", "optometrist", "radiologist", "pathologist", "pediatrician",
-    "dermatologist", "cardiologist", "neurologist", "oncologist", "veterinarian", "biologist", "chemist",
-    "physicist", "microbiologist", "geneticist", "biochemist", "epidemiologist", "pharmacologist",
-    "medical", "clinical", "nursing", "healthcare", "pharma", "biotech", "nutritionist", "dietitian",
+KNOWN_ORGANIZATIONS = {
+    "nasa", "isro", "drdo", "barc", "hal", "bel", "spacex", "blue origin", "esa", "cern",
+    "google", "microsoft", "apple", "amazon", "meta", "netflix", "tesla", "nvidia", "openai", "deepmind",
+    "ibm", "intel", "oracle", "cisco", "tcs", "infosys", "wipro", "hcl", "accenture", "deloitte",
+    "mckinsey", "bcg", "bain", "goldman sachs", "jpmorgan", "morgan stanley", "un", "who", "world bank"
+}
 
-    # Business, Finance, Law & Executive
-    "accountant", "auditor", "lawyer", "attorney", "paralegal", "judge", "advocate", "solicitor",
-    "banker", "trader", "investor", "broker", "underwriter", "actuary", "economist", "statistician",
-    "mathematician", "evaluator", "appraiser", "hr", "recruiter", "founder", "ceo", "cto", "cfo",
-    "coo", "cmo", "cio", "vp", "head", "executive", "administrator", "officer", "supervisor",
-    "business", "sales", "marketing", "finance", "accounting", "banking", "insurance", "realestate",
-    "realtor", "consulting", "strategy", "operations", "supply", "chain", "logistics", "procurement",
+KNOWN_BROAD_FIELDS = {
+    "fashion", "finance", "healthcare", "health", "medicine", "law", "agriculture", "farming",
+    "architecture", "aviation", "cybersecurity", "cyber security", "artificial intelligence",
+    "machine learning", "data science", "space science", "space", "astronomy", "animation",
+    "vfx", "gaming", "game development", "game design", "marketing", "digital marketing",
+    "biotechnology", "biotech", "nanotechnology", "robotics", "devops", "cloud computing",
+    "journalism", "media", "entertainment", "music", "cinema", "filmmaking", "sports",
+    "civil services", "defence", "defense", "military", "education", "teaching", "real estate",
+    "hospitality", "culinary arts", "logistics", "supply chain", "renewable energy"
+}
 
-    # Education, Academia & Research
-    "teacher", "professor", "instructor", "tutor", "lecturer", "educator", "principal", "dean",
-    "academic", "scholar", "historian", "archaeologist", "anthropologist", "sociologist", "geologist",
-    "astronomer", "meteorologist", "oceanographer", "philosopher", "linguist", "translator", "interpreter",
-
-    # Media, Arts, Entertainment & Sports
-    "artist", "animator", "illustrator", "painter", "sculptor", "designer", "photographer", "videographer",
-    "filmmaker", "director", "producer", "editor", "cinematographer", "actor", "actress", "model",
-    "musician", "composer", "singer", "dancer", "choreographer", "writer", "author", "journalist",
-    "reporter", "copywriter", "content", "creator", "influencer", "streamer", "gamer",
-    "athlete", "coach", "trainer", "referee", "sports", "fitness", "physiotherapist",
-
-    # Architecture, Construction, Trades & Skilled Crafts
-    "builder", "contractor", "carpenter", "electrician", "plumber", "welder", "machinist", "mechanic",
-    "technician", "mason", "painter", "roofer", "glazier", "surveyor", "drafteur", "interior",
-    "landscape", "craftsman", "artisan", "blacksmith", "jeweler", "tailor", "fashion",
-
-    # Service, Culinary, Hospitality & Aviation/Maritime
-    "chef", "cook", "baker", "barista", "sommelier", "waiter", "waitress", "bartender", "hotelier",
-    "concierge", "pilot", "captain", "copilot", "navigator", "sailor", "mariner", "flight",
-    "attendant", "steward", "driver", "chauffeur", "conductor", "dispatcher", "logistics",
-
-    # Government, Public Safety, Agriculture & Environment
-    "policeman", "detective", "firefighter", "soldier", "officer", "investigator", "inspector",
-    "civil", "servant", "diplomat", "politician", "mayor", "governor", "ranger", "forester",
-    "farmer", "agronomist", "botanist", "zoologist", "ecologist", "environmental", "conservationist",
-
-    # General Role Standard Terms
-    "lead", "senior", "junior", "principal", "chief", "head", "associate", "intern", "trainee",
-    "freelancer", "consultant", "expert", "practitioner", "agent", "advisor", "coordinator",
-    "planner", "strategist", "analyst", "specialist"
+KNOWN_PLACEHOLDERS = {
+    "test", "testing", "tester", "none", "null", "unknown", "n/a", "na", "sample", "temp",
+    "xyz", "abc", "asdf", "qwerty", "placeholder", "demo", "dummy", "nothing", "anything",
+    "fake", "blah", "random", "job", "career", "work", "role"
 }
 
 def is_qwerty_mashing(text):
@@ -230,32 +237,182 @@ def is_qwerty_mashing(text):
             return True
     return False
 
+def validate_career_universal(career_input):
+    if not career_input or not str(career_input).strip():
+        return {
+            "valid": False,
+            "normalized_input": None,
+            "input_type": "invalid",
+            "error": "Please enter a valid career, job role, profession, or career field."
+        }
+
+    raw = str(career_input).strip()
+    clean = raw.lower()
+
+    # 1. Reject if no letters or numbers
+    if not re.search(r'[a-zA-Z0-9]', clean):
+        return {
+            "valid": False,
+            "normalized_input": None,
+            "input_type": "invalid",
+            "error": "Please enter a valid career, job role, profession, or career field."
+        }
+
+    # 2. Reject symbol spam / invalid punctuation
+    if re.search(r'[@#$%^&*~`_={}\[\]|\\<>;:"]', clean):
+        return {
+            "valid": False,
+            "normalized_input": None,
+            "input_type": "invalid",
+            "error": "Please enter a valid career, job role, profession, or career field."
+        }
+
+    # 3. Reject pure numbers
+    if re.match(r'^\d+$', clean):
+        return {
+            "valid": False,
+            "normalized_input": None,
+            "input_type": "invalid",
+            "error": "Please enter a valid career, job role, profession, or career field."
+        }
+
+    # 4. Reject length out of reasonable range
+    if len(clean) < 2 or len(clean) > 80:
+        return {
+            "valid": False,
+            "normalized_input": None,
+            "input_type": "invalid",
+            "error": "Please enter a valid career, job role, profession, or career field."
+        }
+
+    # 5. Reject exact placeholder/test inputs
+    if clean in KNOWN_PLACEHOLDERS:
+        return {
+            "valid": False,
+            "normalized_input": None,
+            "input_type": "invalid",
+            "error": "Please enter a valid career, job role, profession, or career field."
+        }
+
+    # 6. Reject QWERTY / keyboard mashing & keyboard walks
+    if is_qwerty_mashing(clean):
+        return {
+            "valid": False,
+            "normalized_input": None,
+            "input_type": "invalid",
+            "error": "Please enter a valid career, job role, profession, or career field."
+        }
+
+    # 7. Reject meaningless alphanumeric combos (e.g. abc123xyz, 123abc456)
+    if re.match(r'^[a-z0-9]{5,}$', clean) and re.search(r'\d', clean) and re.search(r'[a-z]', clean):
+        if clean not in ["web3", "web2", "3d", "2d", "5g", "4g", "b2b", "b2c"]:
+            return {
+                "valid": False,
+                "normalized_input": None,
+                "input_type": "invalid",
+                "error": "Please enter a valid career, job role, profession, or career field."
+            }
+
+    # 8. Reject vowel-less gibberish (unless standard known acronyms)
+    alpha_only = re.sub(r'[^a-z]', '', clean)
+    if len(alpha_only) >= 4 and not any(v in alpha_only for v in "aeiouy"):
+        if alpha_only not in VALID_ACRONYMS:
+            return {
+                "valid": False,
+                "normalized_input": None,
+                "input_type": "invalid",
+                "error": "Please enter a valid career, job role, profession, or career field."
+            }
+
+    # 9. Reject unnatural consonant clusters / gibberish patterns (e.g. hfuy, jsdh, zxcv, qwrty)
+    unnatural_patterns = [
+        r'[bcdfghjklmnpqrstvwxz]{5,}',
+        r'^[bcdfghjklmnpqrstvwxz]{4,}',
+        r'^[qwertyuiop]{6,}$',
+        r'^[asdfghjkl]{5,}$',
+        r'^[zxcvbnm]{4,}$',
+        r'(.)\1{3,}'  # 4+ repeated chars e.g. aaaa, zzzz
+    ]
+    for pat in unnatural_patterns:
+        if re.search(pat, clean):
+            return {
+                "valid": False,
+                "normalized_input": None,
+                "input_type": "invalid",
+                "error": "Please enter a valid career, job role, profession, or career field."
+            }
+
+    # 10. Check specific random gibberish (e.g. hfuyaw, jsdhfks)
+    gibberish_subs = ["hfuy", "uyaw", "jsdh", "hfks", "asdf", "dfgh", "ghjk", "jkl;", "zxcv", "xcvb", "cvbn", "vbnm", "qwer", "wert", "erty", "rtyu", "tyui", "yuio", "uiop"]
+    if any(sub in clean for sub in gibberish_subs):
+        return {
+            "valid": False,
+            "normalized_input": None,
+            "input_type": "invalid",
+            "error": "Please enter a valid career, job role, profession, or career field."
+        }
+
+    # 11. Minor typo correction
+    words = clean.split()
+    corrected_words = []
+    for w in words:
+        corrected_words.append(COMMON_TYPO_MAP.get(w, w))
+    normalized_str = " ".join(corrected_words).title()
+
+    # Special handling for known acronyms in title
+    norm_tokens = normalized_str.split()
+    final_tokens = []
+    for tok in norm_tokens:
+        tok_l = tok.lower()
+        if tok_l in VALID_ACRONYMS or tok_l in KNOWN_ORGANIZATIONS:
+            final_tokens.append(tok.upper())
+        else:
+            final_tokens.append(tok)
+    normalized_name = " ".join(final_tokens)
+
+    # 12. Classify input_type
+    clean_norm = normalized_name.lower()
+    
+    # Organization-only (e.g. NASA, ISRO, DRDO)
+    if clean_norm in KNOWN_ORGANIZATIONS:
+        return {
+            "valid": True,
+            "normalized_input": normalized_name,
+            "input_type": "organization_career",
+            "error": None
+        }
+
+    # Organization-specific career (e.g. NASA Aerospace Engineer, ISRO Scientist)
+    if any(clean_norm.startswith(org + " ") or (" " + org + " ") in clean_norm for org in KNOWN_ORGANIZATIONS):
+        return {
+            "valid": True,
+            "normalized_input": normalized_name,
+            "input_type": "organization_career",
+            "error": None
+        }
+
+    # Broad professional fields
+    if clean_norm in KNOWN_BROAD_FIELDS:
+        return {
+            "valid": True,
+            "normalized_input": normalized_name,
+            "input_type": "broad_field",
+            "error": None
+        }
+
+    # Specific real-world careers
+    return {
+        "valid": True,
+        "normalized_input": normalized_name,
+        "input_type": "specific_role",
+        "error": None
+    }
+
 def validate_career_input(career):
-    if not career or not str(career).strip():
-        return False, "⚠️ Career title cannot be empty. Please enter a valid target career role."
-
-    c_raw = str(career).strip()
-    c_clean = c_raw.lower()
-
-    if len(c_clean) < 2:
-        return False, "⚠️ Career title is too short. Please enter a valid job title (at least 2 characters)."
-
-    if len(c_clean) > 70:
-        return False, "⚠️ Career title is too long. Please enter a concise title."
-
-    # Pure numbers
-    if re.match(r'^\d+$', c_clean):
-        return False, "⚠️ Invalid Career Role: Pure numbers are not allowed. Please enter a valid career title (e.g. 'Software Engineer', 'Data Scientist')."
-
-    # Pure symbols
-    if re.match(r'^[^\w\s\+\#\.\/-]+$', c_clean):
-        return False, "⚠️ Invalid Career Role: Symbols only. Please enter a valid career title."
-
-    # QWERTY keyboard mashing check
-    if is_qwerty_mashing(c_clean):
-        return False, f"⚠️ Invalid Career Role: '{c_raw}' appears to be keyboard mashing. Please enter a valid job role (e.g. 'Software Engineer')."
-
-    return True, c_raw.title()
+    res = validate_career_universal(career)
+    if not res["valid"]:
+        return False, res["error"]
+    return True, res["normalized_input"]
 
 REAL_WORLD_COUNTRIES = {
     "afghanistan", "albania", "algeria", "andorra", "angola", "antigua and barbuda", "argentina", "armenia",
@@ -478,6 +635,25 @@ def compare():
 def salary_predictor():
     return render_template("salary_predictor.html")
 
+
+# =====================================================
+# Universal Career Validation Endpoint
+# =====================================================
+
+@app.route("/validate-career", methods=["POST"])
+def validate_career_route():
+    try:
+        data = request.get_json() or {}
+        career_input = data.get("career", "") or data.get("career_input", "")
+        res = validate_career_universal(career_input)
+        return jsonify(res)
+    except Exception as e:
+        return jsonify({
+            "valid": False,
+            "normalized_input": None,
+            "input_type": "invalid",
+            "error": "Error validating career input."
+        }), 500
 
 # =====================================================
 # Clear Chat (Per-User Session)
