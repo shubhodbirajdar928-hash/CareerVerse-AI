@@ -384,7 +384,10 @@ async function generateRoadmapNow() {
 
     const career = careerInputEl.value.trim();
     const country = countryInputEl ? countryInputEl.value.trim() : "";
-    const duration = durationInputEl ? durationInputEl.value.trim() : "6 months";
+    const experience = document.getElementById("experienceInput") ? document.getElementById("experienceInput").value.trim() : "";
+    const skills = document.getElementById("skillsInput") ? document.getElementById("skillsInput").value.trim() : "";
+    const duration = document.getElementById("durationInput") ? document.getElementById("durationInput").value.trim() : (durationInputEl ? durationInputEl.value.trim() : "6 months");
+    const industry = document.getElementById("industryInput") ? document.getElementById("industryInput").value.trim() : "";
 
     const val = validateUserInput(career, country);
     if (!val.valid) {
@@ -406,7 +409,7 @@ async function generateRoadmapNow() {
 
     if (generateBtnEl) {
         generateBtnEl.disabled = true;
-        generateBtnEl.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> Generating Roadmap...`;
+        generateBtnEl.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> Generating Master Roadmap...`;
     }
 
     // Loading Screen
@@ -442,14 +445,14 @@ async function generateRoadmapNow() {
         const response = await fetch("/roadmap", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ career, country, duration })
+            body: JSON.stringify({ career, country, duration, experience, skills, industry })
         });
 
         const responseData = await response.json();
 
         if (generateBtnEl) {
             generateBtnEl.disabled = false;
-            generateBtnEl.innerHTML = `<i class="fa-solid fa-route"></i> Generate AI Roadmap`;
+            generateBtnEl.innerHTML = `<i class="fa-solid fa-route"></i> Generate AI Master Roadmap Now`;
         }
 
         if (!response.ok || responseData.success === false) {

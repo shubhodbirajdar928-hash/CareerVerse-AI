@@ -1682,6 +1682,18 @@ def roadmap():
         else:
             country = "India"
 
+        experience = data.get("experience", "").strip()
+        skills = data.get("skills", "").strip()
+        industry = data.get("industry", "").strip()
+
+        extra_context = ""
+        if experience:
+            extra_context += f"\nCurrent Experience Level: {experience}"
+        if skills:
+            extra_context += f"\nKnown Prerequisite Skills: {skills}"
+        if industry:
+            extra_context += f"\nTarget Industry / Specialization: {industry}"
+
         prompt = f"""
 You are CareerVerse AI, a World-Class Executive Career Architect & Senior Technical Director.
 
@@ -1690,11 +1702,11 @@ Create an accurate, highly detailed, step-by-step master career roadmap specific
 
 Target Career Role: "{career}"
 Preferred Country: {country}
-Roadmap Duration: {duration} ({months} Months)
+Roadmap Duration: {duration} ({months} Months){extra_context}
 
 CRITICAL ACCURACY RULES:
 1. Provide DEEP, SPECIFIC, ACCURATE technical topics, real-world tools, authentic books, exact YouTube channels, and genuine certifications for "{career}". NEVER output generic strings like "Channel 1", "Course 1", "Tool 1", "Topic 1", or "Project 1".
-2. For each month ({months} months total), specify 4-5 exact technologies or skills to learn, 1 real-world portfolio project to build, and 1 clear milestone goal.
+2. For each month ({months} months total), specify 4-5 exact technologies or skills to learn, 1 real-world portfolio project to build, and 1 clear milestone goal tailored to their background.
 3. For salaries, ALWAYS provide India salary in Indian Rupees (e.g. "₹8.0L - ₹18.0L / yr") and Target Country salary in that country's official local currency (e.g. "$90,000 - $165,000 / yr" for USA, "£45,000 - £85,000 / yr" for UK, "€50,000 - €95,000 / yr" for Germany/Europe, "CA$75,000 - CA$135,000 / yr" for Canada).
 
 Return ONLY valid JSON matching this exact structure:
