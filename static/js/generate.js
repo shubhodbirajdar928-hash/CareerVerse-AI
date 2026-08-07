@@ -935,7 +935,7 @@ ${(() => {
         </div>
     </div>
 
-    <h3><i class="fa-solid fa-location-dot"></i> Top 5 Hiring Hotspots</h3>
+    <h3><i class="fa-solid fa-location-dot"></i> Hiring Spots</h3>
     <div style="display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; margin-bottom: 20px;">
         ${(market.hiring_hotspots || []).map(city => `
             <div style="background: rgba(25, 25, 25, 0.8); border: 1px solid var(--border); border-radius: 12px; padding: 12px; text-align: center;">
