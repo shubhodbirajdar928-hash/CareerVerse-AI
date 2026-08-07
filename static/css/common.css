@@ -361,7 +361,7 @@ h1, h2, h3, h4, h5, h6 {
 .site-footer {
     background: #09090b;
     border-top: 1px solid rgba(255, 255, 255, 0.08);
-    padding: 64px 6% 36px;
+    padding: 32px 6% 20px;
     color: #a1a1aa;
     font-family: var(--font-body);
     position: relative;
@@ -371,68 +371,78 @@ h1, h2, h3, h4, h5, h6 {
 .site-footer .logo-name {
     color: #ffffff;
     font-weight: 700;
-    font-size: 1.15rem;
+    font-size: 1.05rem;
 }
 
 .site-footer .logo-tag {
     color: #a1a1aa !important;
-    font-size: 0.72rem;
+    font-size: 0.68rem;
     font-weight: 600;
     letter-spacing: 1px;
 }
 
-.footer-grid {
-    display: grid;
-    grid-template-columns: 1.6fr 1fr 1fr 1fr;
-    gap: 48px;
+.footer-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 36px;
     max-width: 1200px;
     margin: 0 auto;
-    padding-bottom: 48px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    padding-bottom: 24px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
 }
 
-.footer-brand p {
+.footer-brand-section {
+    max-width: 340px;
+}
+
+.footer-brand-section .footer-desc {
     color: #9ca3af;
-    font-size: 0.88rem;
-    line-height: 1.65;
-    margin-top: 14px;
-    max-width: 320px;
+    font-size: 0.82rem;
+    line-height: 1.5;
+    margin-top: 8px;
 }
 
 .footer-social {
     display: flex;
-    gap: 10px;
-    margin-top: 20px;
+    gap: 8px;
+    margin-top: 14px;
 }
 
 .footer-social a {
-    width: 36px;
-    height: 36px;
+    width: 32px;
+    height: 32px;
     display: flex;
     align-items: center;
     justify-content: center;
-    border-radius: 8px;
-    background: rgba(255, 255, 255, 0.05);
+    border-radius: 6px;
+    background: rgba(255, 255, 255, 0.04);
     border: 1px solid rgba(255, 255, 255, 0.08);
     color: #a1a1aa;
-    font-size: 0.88rem;
+    font-size: 0.82rem;
     transition: all 0.2s ease;
     text-decoration: none;
 }
 
 .footer-social a:hover {
-    background: rgba(255, 255, 255, 0.12);
-    border-color: rgba(255, 255, 255, 0.25);
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.2);
     color: #ffffff;
-    transform: translateY(-2px);
+    transform: translateY(-1px);
+}
+
+.footer-nav-section {
+    display: flex;
+    gap: 56px;
 }
 
 .footer-col h4 {
     color: #f4f4f5;
-    font-size: 0.78rem;
+    font-size: 0.74rem;
     font-weight: 700;
-    margin-bottom: 20px;
-    letter-spacing: 0.1em;
+    margin-bottom: 12px;
+    letter-spacing: 0.08em;
     text-transform: uppercase;
 }
 
@@ -440,9 +450,9 @@ h1, h2, h3, h4, h5, h6 {
     display: block;
     color: #9ca3af;
     text-decoration: none;
-    font-size: 0.88rem;
+    font-size: 0.82rem;
     font-weight: 400;
-    margin-bottom: 12px;
+    margin-bottom: 8px;
     transition: color 0.2s ease;
 }
 
@@ -455,19 +465,28 @@ h1, h2, h3, h4, h5, h6 {
     justify-content: space-between;
     align-items: center;
     max-width: 1200px;
-    margin: 28px auto 0;
-    font-size: 0.84rem;
+    margin: 16px auto 0;
+    font-size: 0.78rem;
     color: #71717a;
+    flex-wrap: wrap;
+    gap: 12px;
 }
 
 .footer-legal {
     display: flex;
-    gap: 20px;
+    align-items: center;
+    gap: 10px;
+}
+
+.footer-legal span {
+    color: rgba(255, 255, 255, 0.2);
+    font-size: 0.7rem;
 }
 
 .footer-legal a {
     color: #71717a;
     text-decoration: none;
+    font-size: 0.78rem;
     transition: color 0.2s ease;
 }
 
@@ -476,23 +495,12 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .footer-bottom .copyright {
-    color: var(--text-muted) !important;
-    font-size: 0.8rem !important;
+    color: #71717a !important;
+    font-size: 0.78rem !important;
     margin: 0 !important;
     border: none !important;
     padding: 0 !important;
 }
-
-.footer-legal { display: flex; gap: 20px; }
-
-.footer-legal a {
-    color: var(--text-muted);
-    text-decoration: none;
-    font-size: 0.8rem;
-    transition: color var(--transition);
-}
-
-.footer-legal a:hover { color: var(--text-heading); }
 
 /* Legacy footer */
 footer, .main-footer {
