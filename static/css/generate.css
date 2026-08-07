@@ -7,9 +7,10 @@
 
 .hero {
     min-height: auto;
-    max-width: 1200px;
+    max-width: 1600px;
+    width: 96%;
     margin: 0 auto;
-    padding: calc(var(--nav-height) + 50px) 5% 50px;
+    padding: calc(var(--nav-height) + 50px) 20px 50px;
     display: grid;
     grid-template-columns: 1.1fr 0.9fr;
     align-items: center;
@@ -224,19 +225,21 @@
 /* ================= FORM SECTION ================= */
 
 .generate-section {
-    max-width: 1050px;
-    width: 95%;
+    max-width: 1600px;
+    width: 96%;
     margin: 40px auto 60px;
-    padding: 0 15px;
+    padding: 0 20px;
 }
 
 .generate-card {
     background: var(--bg-card);
     border: 1px solid var(--border);
     border-radius: var(--radius-xl);
-    padding: 40px;
+    padding: 40px 48px;
     box-shadow: var(--shadow-card);
     transition: var(--transition);
+    width: 100%;
+    box-sizing: border-box;
 }
 
 .generate-card:hover {
@@ -373,8 +376,11 @@
 .action-buttons {
     display: flex;
     justify-content: center;
+    width: 100%;
+    max-width: 100%;
     margin: 20px auto 40px;
-    padding: 0 5%;
+    padding: 0 30px;
+    box-sizing: border-box;
 }
 
 #downloadBtn {
@@ -403,20 +409,23 @@
 /* ================= RESULT SECTION ================= */
 
 .result-section {
-    max-width: 1440px;
-    width: 96%;
+    max-width: 100%;
+    width: 100%;
     margin: 0 auto 100px;
-    padding: 0 20px;
+    padding: 0 30px;
+    box-sizing: border-box;
 }
 
 .result-card {
     background: var(--bg-card);
     border: 1px solid var(--border);
     border-radius: var(--radius-xl);
-    padding: 48px 52px;
+    padding: 44px 50px;
     min-height: 320px;
     box-shadow: var(--shadow-card);
     width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
 }
 
 .roadmap-top-bar {
