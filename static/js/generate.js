@@ -409,7 +409,7 @@ async function generateRoadmapNow() {
 
     if (generateBtnEl) {
         generateBtnEl.disabled = true;
-        generateBtnEl.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> Generating Master Roadmap...`;
+        generateBtnEl.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> Generating AI Roadmap...`;
     }
 
     // Loading Screen
@@ -445,14 +445,14 @@ async function generateRoadmapNow() {
         const response = await fetch("/roadmap", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ career, country, duration, experience, skills, industry })
+            body: JSON.stringify({ career, country, duration })
         });
 
         const responseData = await response.json();
 
         if (generateBtnEl) {
             generateBtnEl.disabled = false;
-            generateBtnEl.innerHTML = `<i class="fa-solid fa-route"></i> Generate AI Master Roadmap Now`;
+            generateBtnEl.innerHTML = `<i class="fa-solid fa-route"></i> Generate AI Roadmap`;
         }
 
         if (!response.ok || responseData.success === false) {
