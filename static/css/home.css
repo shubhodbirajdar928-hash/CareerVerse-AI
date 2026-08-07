@@ -9,14 +9,15 @@
 .hero {
     width: 100%;
     position: relative;
-    padding: calc(var(--nav-height) + 40px) 5% 70px;
+    padding: calc(var(--nav-height) + 40px) 4% 70px;
     background: radial-gradient(circle at 50% 0%, rgba(250, 204, 21, 0.08) 0%, transparent 60%);
     border-bottom: 1px solid var(--border);
     box-sizing: border-box;
 }
 
 .hero-container {
-    max-width: 1200px;
+    max-width: 1600px;
+    width: 100%;
     margin: 0 auto;
     display: grid;
     grid-template-columns: 1.15fr 0.85fr;
@@ -763,12 +764,14 @@
 /* ================= METRICS BAR ================= */
 
 .metrics-bar {
-    max-width: 1200px;
+    max-width: 1600px;
+    width: 100%;
     margin: 80px auto 100px;
-    padding: 0 5%;
+    padding: 0 4%;
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 24px;
+    box-sizing: border-box;
 }
 
 .metric-card {
@@ -846,9 +849,11 @@
 /* ================= TOOLS SECTION ================= */
 
 .tools-section {
-    max-width: 1200px;
+    max-width: 1600px;
+    width: 100%;
     margin: 0 auto 100px;
-    padding: 0 5%;
+    padding: 0 4%;
+    box-sizing: border-box;
 }
 
 .tools-grid {
@@ -953,9 +958,11 @@
 /* ================= HOW IT WORKS ================= */
 
 .how-it-works {
-    max-width: 1100px;
+    max-width: 1600px;
+    width: 100%;
     margin: 0 auto 100px;
-    padding: 0 5%;
+    padding: 0 4%;
+    box-sizing: border-box;
 }
 
 .steps-grid {
@@ -1001,9 +1008,11 @@
 /* ================= FAQ SECTION ================= */
 
 .faq-section {
-    max-width: 800px;
+    max-width: 1200px;
+    width: 100%;
     margin: 0 auto 100px;
-    padding: 0 5%;
+    padding: 0 4%;
+    box-sizing: border-box;
 }
 
 .faq-container {
@@ -1071,7 +1080,8 @@
 /* ================= FINAL CTA ================= */
 
 .final-cta {
-    max-width: 1100px;
+    max-width: 1600px;
+    width: 96%;
     margin: 0 auto 90px;
     padding: 48px 50px;
     background: linear-gradient(135deg, rgba(250, 204, 21, 0.08) 0%, var(--bg-card) 100%);
@@ -1083,6 +1093,7 @@
     gap: 30px;
     position: relative;
     overflow: hidden;
+    box-sizing: border-box;
 }
 
 .cta-content small {
