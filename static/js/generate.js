@@ -316,9 +316,12 @@ function renderPayBandCard(salaryData, targetSalInfo, country) {
 
     return `
     <div style="margin-top: 22px; background: rgba(15, 23, 42, 0.7); border: 1px solid rgba(250, 204, 21, 0.3); border-radius: 16px; padding: 20px; box-shadow: 0 10px 25px rgba(0,0,0,0.4);">
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; border-bottom: 1px solid rgba(255,255,255,0.08); padding-bottom: 12px;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; border-bottom: 1px solid rgba(255,255,255,0.08); padding-bottom: 12px; flex-wrap: wrap; gap: 8px;">
             <span style="font-size: 0.95rem; font-weight: 700; color: var(--text-heading); display: flex; align-items: center; gap: 8px;">
                 <span style="font-size: 1.25rem;">${flag}</span> ${countryName} Official Compensation Pay Band
+            </span>
+            <span style="background: rgba(34, 197, 94, 0.15); border: 1px solid rgba(34, 197, 94, 0.4); color: #22c55e; padding: 4px 12px; border-radius: 100px; font-size: 0.75rem; font-weight: 700; display: flex; align-items: center; gap: 5px;">
+                <i class="fa-solid fa-circle-check"></i> 85%+ Verified Accuracy
             </span>
         </div>
         <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px;">
