@@ -409,23 +409,23 @@
 /* ================= RESULT SECTION ================= */
 
 .result-section {
-    max-width: 100%;
-    width: 100%;
-    margin: 0 auto 100px;
-    padding: 0 30px;
-    box-sizing: border-box;
+    max-width: 100% !important;
+    width: 100% !important;
+    margin: 0 auto 100px !important;
+    padding: 0 4% !important;
+    box-sizing: border-box !important;
 }
 
 .result-card {
-    background: var(--bg-card);
-    border: 1px solid var(--border);
-    border-radius: var(--radius-xl);
-    padding: 44px 50px;
-    min-height: 320px;
-    box-shadow: var(--shadow-card);
-    width: 100%;
-    max-width: 100%;
-    box-sizing: border-box;
+    background: var(--bg-card) !important;
+    border: 1px solid var(--border) !important;
+    border-radius: var(--radius-xl) !important;
+    padding: 44px 50px !important;
+    min-height: 320px !important;
+    box-shadow: var(--shadow-card) !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
 }
 
 .roadmap-top-bar {
