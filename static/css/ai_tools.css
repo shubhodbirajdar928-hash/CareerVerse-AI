@@ -248,16 +248,17 @@ section { padding: 70px 5%; }
 /* ================= TOOLS GRID & SECTION HEADER ================= */
 
 .tools-section {
-    max-width: 1600px;
-    width: 100%;
-    margin: 0 auto 80px;
-    padding: 0 4%;
-    box-sizing: border-box;
+    max-width: 100% !important;
+    width: 100% !important;
+    margin: 0 auto 80px !important;
+    padding: 0 4% !important;
+    box-sizing: border-box !important;
 }
 
 .section-header {
     text-align: left;
     margin-bottom: 40px;
+    max-width: 100%;
 }
 
 .section-header-meta {
@@ -311,22 +312,24 @@ section { padding: 70px 5%; }
 }
 
 .tools-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 24px;
-    width: 100%;
+    display: grid !important;
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: 28px !important;
+    width: 100% !important;
 }
 
 .tool-card {
     background: var(--bg-card);
     border: 1px solid var(--border);
     border-radius: var(--radius-xl);
-    padding: 32px 28px;
+    padding: 38px 32px;
     transition: var(--transition);
     display: flex;
     flex-direction: column;
     position: relative;
     overflow: hidden;
+    min-height: 290px;
+    box-sizing: border-box;
 }
 
 .tool-card::before {
