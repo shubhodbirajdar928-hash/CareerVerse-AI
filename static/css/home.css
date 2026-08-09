@@ -2023,62 +2023,7 @@
     }
 }
 
-@media (max-width: 768px) {
-    .stats-bar-inner {
-        gap: 20px;
-    }
 
-    .stat-pill {
-        padding: 0 16px;
-    }
-
-    .stat-divider {
-        display: none;
-    }
-
-    .stat-num {
-        font-size: 1.5rem;
-    }
-
-    .platform-pillars-grid,
-    .why-grid,
-    .audience-grid,
-    .tools-grid-3col {
-        grid-template-columns: 1fr;
-    }
-
-    .steps-grid {
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .step-connector {
-        margin-top: 0;
-        transform: rotate(90deg);
-    }
-
-    .about-platform,
-    .why-section,
-    .audience-section,
-    .how-it-works,
-    .final-cta {
-        padding-left: 5%;
-        padding-right: 5%;
-    }
-
-    .hero-feature-list {
-        margin-bottom: 20px;
-    }
-
-    .about-new-wrapper {
-        flex-direction: column;
-    }
-
-    .about-left,
-    .about-right {
-        width: 100%;
-    }
-}
 
 /* ══════════════════════════════════════════════════════
    ABOUT SECTION — New Two-Column Design
@@ -2314,5 +2259,115 @@
     .about-cta {
         align-self: stretch;
         justify-content: center;
+    }
+}
+
+/* ══════════════════════════════════════════════════════
+   COMPREHENSIVE MOBILE RESPONSIVENESS (< 768px)
+   ══════════════════════════════════════════════════════ */
+@media (max-width: 768px) {
+    /* Prevent horizontal overflow */
+    html, body {
+        overflow-x: hidden;
+    }
+    
+    * {
+        box-sizing: border-box;
+    }
+
+    /* 1. Grid and multi-column layouts */
+    .hero-container,
+    .about-new-wrapper,
+    .platform-pillars-grid,
+    .why-grid,
+    .audience-grid,
+    .tools-grid,
+    .tools-grid-3col,
+    .metrics-bar {
+        grid-template-columns: 1fr;
+    }
+
+    .stats-bar-inner {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .steps-grid {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .step-connector {
+        margin-top: 0;
+        transform: rotate(90deg);
+    }
+    
+    /* 2. Font sizes */
+    h1, .hero-title, .about-heading {
+        font-size: 1.8rem !important;
+    }
+    
+    h2, .section-heading, .section-header h2, .cta-content h2, .final-cta h2, .quiz-header h2 {
+        font-size: 1.4rem !important;
+    }
+
+    /* 3. Hero Section Padding */
+    .hero {
+        padding-top: calc(var(--nav-height) + 30px) !important;
+        padding-bottom: 40px !important;
+    }
+
+    /* 4. Hero buttons stacking */
+    .hero-actions,
+    .hero-buttons {
+        flex-direction: column;
+        width: 100%;
+        gap: 12px;
+    }
+
+    .hero-actions .main-btn,
+    .hero-actions .secondary-btn,
+    .hero-buttons .main-btn,
+    .hero-buttons .secondary-btn {
+        width: 100%;
+        justify-content: center;
+    }
+
+    /* 5. Section Padding Reduction */
+    .about-platform,
+    .why-section,
+    .audience-section,
+    .how-it-works,
+    .final-cta,
+    .faq-section,
+    .stats-bar {
+        padding: 40px 5% !important;
+    }
+    
+    .metrics-bar {
+        margin-top: 40px;
+        margin-bottom: 40px;
+    }
+
+    /* Other Preserved/Consolidated Fixes */
+    .stat-pill {
+        padding: 0 16px;
+    }
+
+    .stat-divider {
+        display: none;
+    }
+
+    .stat-num {
+        font-size: 1.5rem;
+    }
+
+    .hero-feature-list {
+        margin-bottom: 20px;
+    }
+
+    .about-left,
+    .about-right {
+        width: 100%;
     }
 }

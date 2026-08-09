@@ -803,6 +803,10 @@
     .hero-buttons {
         justify-content: center;
     }
+    
+    .hero-output-pills {
+        justify-content: center;
+    }
 
     .analytics-grid {
         grid-template-columns: repeat(2, 1fr);
@@ -810,20 +814,75 @@
 }
 
 @media (max-width: 600px) {
+    .hero h1 {
+        font-size: 2.2rem;
+    }
+
+    .hero-buttons {
+        flex-direction: column;
+        width: 100%;
+        gap: 12px;
+    }
+
+    .main-btn, .secondary-btn {
+        width: 100%;
+        justify-content: center;
+    }
+
     .input-grid {
         grid-template-columns: 1fr;
     }
 
     .generate-card {
-        padding: 26px 20px;
+        padding: 24px 18px;
     }
 
     .result-card {
-        padding: 24px 18px;
+        padding: 24px 18px !important;
     }
 
     .analytics-grid {
         grid-template-columns: 1fr;
+    }
+    
+    .quick-roles {
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        justify-content: flex-start;
+        padding-bottom: 8px;
+    }
+    
+    .quick-roles::-webkit-scrollbar {
+        height: 4px;
+    }
+    .quick-roles::-webkit-scrollbar-thumb {
+        background: var(--border);
+        border-radius: 4px;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero-visual {
+        display: none;
+    }
+    
+    .roadmap-top-bar {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .top-download-btn {
+        width: 100%;
+        justify-content: center;
+    }
+    
+    .roadmap-item {
+        padding: 20px;
+    }
+    
+    .phase-card {
+        padding: 16px;
     }
 }
 

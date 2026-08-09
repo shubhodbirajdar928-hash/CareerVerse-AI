@@ -283,3 +283,16 @@
         }
     }
 })();
+
+// Mobile nav toggle
+const navToggle = document.getElementById('navToggle');
+const navbar = document.getElementById('navbar');
+if (navToggle && navbar) {
+    navToggle.addEventListener('click', () => {
+        navbar.classList.toggle('nav-open');
+    });
+    // Close nav when clicking a link
+    document.querySelectorAll('.nav-links a').forEach(link => {
+        link.addEventListener('click', () => navbar.classList.remove('nav-open'));
+    });
+}
