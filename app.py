@@ -877,23 +877,28 @@ def get_country_currency_info(country):
 
 
 def get_career_salary_benchmark(career, country):
-    from salary_data_layer import get_verified_salary_data
+    from salary_data_layer import get_verified_salary_data, normalize_country_key, COUNTRY_CURRENCY_REGISTRY, get_category_salary_benchmark
     res = get_verified_salary_data(career, country)
-    if res.get("salary") and res["salary"]["min"]:
+    if res.get("salary") and (res["salary"].get("min") or res["salary"].get("fresher")):
         v_sal = res["salary"]
+        fresher_val = v_sal.get("fresher") or v_sal.get("min")
+        mid_val = v_sal.get("mid") or v_sal.get("median")
+        senior_val = v_sal.get("senior") or v_sal.get("max")
         return {
-            "fresher": v_sal["min"],
-            "mid": v_sal["median"],
-            "senior": v_sal["max"]
+            "fresher": fresher_val,
+            "mid": mid_val,
+            "senior": senior_val
         }
-    
-    # Fallback to standard country-aware category mapping if no specific role data found
-    is_india = "india" in (country or "").lower()
+
+    c_norm = normalize_country_key(country)
+    curr_meta = COUNTRY_CURRENCY_REGISTRY.get(c_norm, {"code": "USD", "symbol": "$", "name": "United States dollar"})
+    bm = get_category_salary_benchmark(career, c_norm, curr_meta)
     return {
-        "fresher": "₹5.0L - ₹9.0L / yr" if is_india else "$65,000 - $85,000 / yr",
-        "mid": "₹12.0L - ₹20.0L / yr" if is_india else "$105,000 - $145,000 / yr",
-        "senior": "₹24.0L - ₹45.0L / yr" if is_india else "$155,000 - $240,000 / yr"
+        "fresher": bm["fresher_fmt"],
+        "mid": bm["mid_fmt"],
+        "senior": bm["senior_fmt"]
     }
+
 
 
 
@@ -938,6 +943,39 @@ def create_normalized_salary_object(career, country):
         "senior": bench["senior"],
         "formatted_range": target_formatted
     }
+
+def sanitize_market_hiring_data(market_dict, country, career):
+    if not isinstance(market_dict, dict):
+        return market_dict
+    c_low = (country or "").lower().strip()
+    
+    if any(w in c_low for w in ["uk", "united kingdom", "england", "scotland", "wales", "london", "great britain"]):
+        hotspots = market_dict.get("hiring_hotspots", [])
+        has_us_cities = any("san francisco" in str(h).lower() or "austin" in str(h).lower() or "new york" in str(h).lower() or "seattle" in str(h).lower() for h in hotspots)
+        if not hotspots or has_us_cities:
+            market_dict["hiring_hotspots"] = [
+                {"city": "London", "demand": "Very High", "reason": "UK capital, major studio HQs & international corporate hubs."},
+                {"city": "Manchester", "demand": "High", "reason": "Leading UK digital media, tech & innovation center."},
+                {"city": "Birmingham", "demand": "High", "reason": "Major commercial & industrial hub with growing hiring demand."},
+                {"city": "Bristol", "demand": "High", "reason": "Premier creative tech, animation & engineering ecosystem."},
+                {"city": "Edinburgh", "demand": "Moderate-High", "reason": "Financial services, tech startups & academic research hub."}
+            ]
+        orgs = market_dict.get("top_organizations", [])
+        has_indian_conglom = any("tata" in str(o).lower() or "reliance" in str(o).lower() for o in orgs)
+        if (has_indian_conglom or not orgs) and any(w in (career or "").lower() for w in ["3d", "artist", "animat", "vfx", "game", "design"]):
+            market_dict["top_organizations"] = ["DNEG (London)", "Framestore", "Industrial Light & Magic (London)", "Creative Assembly", "Sony PlayStation Studios UK"]
+    elif any(w in c_low for w in ["india", "in", "bharat"]):
+        hotspots = market_dict.get("hiring_hotspots", [])
+        has_us_cities = any("san francisco" in str(h).lower() or "austin" in str(h).lower() for h in hotspots)
+        if not hotspots or has_us_cities:
+            market_dict["hiring_hotspots"] = [
+                {"city": "Bengaluru", "demand": "Very High", "reason": "Silicon Valley of India, tech unicorns & R&D hubs."},
+                {"city": "Mumbai", "demand": "Very High", "reason": "Financial capital, entertainment & corporate HQs."},
+                {"city": "Hyderabad", "demand": "High", "reason": "Major IT, pharmaceutical & global GCC hubs."},
+                {"city": "Pune", "demand": "High", "reason": "Automotive R&D, IT services & engineering hubs."},
+                {"city": "Delhi NCR", "demand": "High", "reason": "National capital region, e-commerce & corporate HQs."}
+            ]
+    return market_dict
 
 # =====================================================
 # Fallback Roadmap Generator
@@ -1796,6 +1834,7 @@ Rules & Anti-Hallucination Mandates:
 
             roadmap_data["overview"]["salary"] = norm_sal
             roadmap_data["market"]["salary"] = norm_sal
+            roadmap_data["market"] = sanitize_market_hiring_data(roadmap_data["market"], country, career)
             return success(roadmap_data)
         except Exception as api_err:
             print(f"Roadmap generation error for '{career}': {api_err}")

@@ -222,41 +222,42 @@ function formatIndiaSalary(rawSal, fallback = "₹6.5L - ₹18.0L / yr") {
 }
 
 const COUNTRY_CONFIG_MAP = {
-    "india": { flag: "🇮🇳", name: "India", symbol: "₹", defaultSal: "₹6.5L - ₹22.0L / yr" },
-    "united states": { flag: "🇺🇸", name: "USA", symbol: "$", defaultSal: "$70,000 - $160,000 / yr" },
-    "usa": { flag: "🇺🇸", name: "USA", symbol: "$", defaultSal: "$70,000 - $160,000 / yr" },
-    "us": { flag: "🇺🇸", name: "USA", symbol: "$", defaultSal: "$70,000 - $160,000 / yr" },
-    "united kingdom": { flag: "🇬🇧", name: "UK", symbol: "£", defaultSal: "£32,000 - £85,000 / yr" },
-    "uk": { flag: "🇬🇧", name: "UK", symbol: "£", defaultSal: "£32,000 - £85,000 / yr" },
-    "germany": { flag: "🇩🇪", name: "Germany", symbol: "€", defaultSal: "€42,000 - €95,000 / yr" },
-    "france": { flag: "🇫🇷", name: "France", symbol: "€", defaultSal: "€40,000 - €90,000 / yr" },
-    "netherlands": { flag: "🇳🇱", name: "Netherlands", symbol: "€", defaultSal: "€45,000 - €98,000 / yr" },
-    "spain": { flag: "🇪🇸", name: "Spain", symbol: "€", defaultSal: "€35,000 - €75,000 / yr" },
-    "italy": { flag: "🇮🇹", name: "Italy", symbol: "€", defaultSal: "€32,000 - €70,000 / yr" },
-    "canada": { flag: "🇨🇦", name: "Canada", symbol: "CA$", defaultSal: "CA$55,000 - CA$125,000 / yr" },
-    "australia": { flag: "🇦🇺", name: "Australia", symbol: "A$", defaultSal: "A$65,000 - A$140,000 / yr" },
-    "uae": { flag: "🇦🇪", name: "UAE / Dubai", symbol: "AED", defaultSal: "AED 12,000 - AED 35,000 / mo" },
-    "dubai": { flag: "🇦🇪", name: "Dubai", symbol: "AED", defaultSal: "AED 12,000 - AED 35,000 / mo" },
-    "saudi arabia": { flag: "🇸🇦", name: "Saudi Arabia", symbol: "SAR", defaultSal: "SAR 10,000 - SAR 28,000 / mo" },
-    "singapore": { flag: "🇸🇬", name: "Singapore", symbol: "S$", defaultSal: "S$48,000 - S$115,000 / yr" },
-    "japan": { flag: "🇯🇵", name: "Japan", symbol: "¥", defaultSal: "¥4,500,000 - ¥10,500,000 / yr" },
-    "south korea": { flag: "🇰🇷", name: "South Korea", symbol: "₩", defaultSal: "₩38,000,000 - ₩95,000,000 / yr" },
-    "switzerland": { flag: "🇨🇭", name: "Switzerland", symbol: "CHF", defaultSal: "CHF 75,000 - CHF 150,000 / yr" },
-    "brazil": { flag: "🇧🇷", name: "Brazil", symbol: "R$", defaultSal: "R$ 5,500 - R$ 18,000 / mo" },
-    "mexico": { flag: "🇲🇽", name: "Mexico", symbol: "MEX$", defaultSal: "MEX$ 18,000 - MEX$ 65,000 / mo" },
-    "south africa": { flag: "🇿🇦", name: "South Africa", symbol: "R", defaultSal: "R 22,000 - R 68,000 / mo" },
-    "nigeria": { flag: "🇳🇬", name: "Nigeria", symbol: "₦", defaultSal: "₦ 350,000 - ₦ 1,200,000 / mo" },
-    "pakistan": { flag: "🇵🇰", name: "Pakistan", symbol: "PKR", defaultSal: "PKR 85,000 - PKR 280,000 / mo" }
+    "india": { flag: "🇮🇳", name: "India", symbol: "₹", defaultSal: "₹4.5L - ₹22.0L / yr" },
+    "united states": { flag: "🇺🇸", name: "USA", symbol: "$", defaultSal: "$55,000 - $160,000 / yr" },
+    "usa": { flag: "🇺🇸", name: "USA", symbol: "$", defaultSal: "$55,000 - $160,000 / yr" },
+    "us": { flag: "🇺🇸", name: "USA", symbol: "$", defaultSal: "$55,000 - $160,000 / yr" },
+    "united kingdom": { flag: "🇬🇧", name: "United Kingdom", symbol: "£", defaultSal: "£25,000 - £85,000 / yr" },
+    "uk": { flag: "🇬🇧", name: "United Kingdom", symbol: "£", defaultSal: "£25,000 - £85,000 / yr" },
+    "england": { flag: "🇬🇧", name: "United Kingdom (England)", symbol: "£", defaultSal: "£25,000 - £85,000 / yr" },
+    "scotland": { flag: "🇬🇧", name: "United Kingdom (Scotland)", symbol: "£", defaultSal: "£25,000 - £85,000 / yr" },
+    "wales": { flag: "🇬🇧", name: "United Kingdom (Wales)", symbol: "£", defaultSal: "£25,000 - £85,000 / yr" },
+    "great britain": { flag: "🇬🇧", name: "United Kingdom", symbol: "£", defaultSal: "£25,000 - £85,000 / yr" },
+    "gb": { flag: "🇬🇧", name: "United Kingdom", symbol: "£", defaultSal: "£25,000 - £85,000 / yr" },
+    "london": { flag: "🇬🇧", name: "United Kingdom (London)", symbol: "£", defaultSal: "£28,000 - £95,000 / yr" },
+    "germany": { flag: "🇩🇪", name: "Germany", symbol: "€", defaultSal: "€35,000 - €95,000 / yr" },
+    "france": { flag: "🇫🇷", name: "France", symbol: "€", defaultSal: "€32,000 - €90,000 / yr" },
+    "netherlands": { flag: "🇳🇱", name: "Netherlands", symbol: "€", defaultSal: "€38,000 - €98,000 / yr" },
+    "spain": { flag: "🇪🇸", name: "Spain", symbol: "€", defaultSal: "€28,000 - €75,000 / yr" },
+    "italy": { flag: "🇮🇹", name: "Italy", symbol: "€", defaultSal: "€28,000 - €70,000 / yr" },
+    "canada": { flag: "🇨🇦", name: "Canada", symbol: "CA$", defaultSal: "CA$48,000 - CA$125,000 / yr" },
+    "australia": { flag: "🇦🇺", name: "Australia", symbol: "A$", defaultSal: "A$55,000 - A$140,000 / yr" },
+    "uae": { flag: "🇦🇪", name: "UAE / Dubai", symbol: "AED", defaultSal: "AED 9,000 - AED 35,000 / mo" },
+    "dubai": { flag: "🇦🇪", name: "Dubai", symbol: "AED", defaultSal: "AED 9,000 - AED 35,000 / mo" },
+    "saudi arabia": { flag: "🇸🇦", name: "Saudi Arabia", symbol: "SAR", defaultSal: "SAR 8,000 - SAR 28,000 / mo" },
+    "singapore": { flag: "🇸🇬", name: "Singapore", symbol: "S$", defaultSal: "S$38,000 - S$115,000 / yr" },
+    "japan": { flag: "🇯🇵", name: "Japan", symbol: "¥", defaultSal: "¥3,500,000 - ¥10,500,000 / yr" },
+    "south korea": { flag: "🇰🇷", name: "South Korea", symbol: "₩", defaultSal: "₩32,000,000 - ₩95,000,000 / yr" },
+    "switzerland": { flag: "🇨🇭", name: "Switzerland", symbol: "CHF", defaultSal: "CHF 65,000 - CHF 150,000 / yr" }
 };
 
 function getCountrySalaryInfo(country, rawSalary) {
     const cLow = (country || "").toLowerCase().trim();
     for (const [key, cfg] of Object.entries(COUNTRY_CONFIG_MAP)) {
-        if (cLow.includes(key)) {
+        if (cLow.includes(key) || key.includes(cLow)) {
             if (rawSalary && (rawSalary.includes(cfg.symbol) || rawSalary.includes(cfg.name))) {
                 return { flag: cfg.flag, name: cfg.name, salary: rawSalary };
             }
-            return { flag: cfg.flag, name: cfg.name, salary: cfg.defaultSal };
+            return { flag: cfg.flag, name: cfg.name, salary: rawSalary || cfg.defaultSal };
         }
     }
 
