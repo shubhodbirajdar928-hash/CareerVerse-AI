@@ -723,7 +723,7 @@ You help with:
 • Learning Roadmaps
 • Resume Review
 • Interview Preparation
-• Salary Guidance
+• Salary Guidance (Ensure numbers are 80-90% accurate to real, current market data)
 • Skill Gap Analysis
 • Courses
 • Books
@@ -1836,7 +1836,7 @@ Return ONLY valid JSON matching this exact structure:
 Rules & Anti-Hallucination Mandates:
 - JOB DEMAND RATING: Must ONLY be one of ["Low", "Moderate", "High", "Very High"] with a short reason. NEVER output percentage values (e.g. no "88%").
 - CAREER GROWTH OUTLOOK: Must ONLY be one of ["Declining", "Stable", "Growing", "Fast Growing"] with a short explanation. NEVER output percentage values (e.g. no "90%").
-- SALARY ACCURACY: Provide realistic salary ranges for fresher, mid, and senior levels in local currency for {country}. If reliable salary info is uncertain for an obscure role or region, set the value to "Data unavailable". Never invent exaggerated or random salary values.
+- SALARY ACCURACY: You MUST ensure salary predictions are 80-90% accurate to the real, current market data for {country}. Provide highly realistic salary ranges for fresher, mid, and senior levels in local currency. If reliable salary info is uncertain for an obscure role or region, use your best real-market estimate. Never invent exaggerated or random salary values.
 - NO HALLUCINATED LINKS: Never invent fake URLs. Use only real official domain names.
 - MANDATE: EVERY SINGLE ARRAY FIELD (roles, skills.beginner, skills.intermediate, skills.advanced, roadmap.topics, resources.youtube, resources.courses, resources.documentation, resources.books, projects.beginner, projects.intermediate, projects.advanced, certifications, tools, interview_preparation, portfolio_tips, ai_tips, market.top_organizations, market.hiring_hotspots, market.trending_skills, market.daily_plan) MUST CONTAIN AT LEAST 5 ACCURATE, ROLE-SPECIFIC ITEMS.
 - CRITICAL DOMAIN MANDATE: Tailor ALL books, courses, YouTube channels, daily plans, tools, certifications, and projects specifically for "{career}". Never assume programming or software engineering if the role is a non-tech career.
@@ -2305,7 +2305,7 @@ Key Technical Skills: {skills if skills else 'Not Specified'}
 
 CRITICAL ACCURACY RULES:
 1. Format ALL salaries in official local currency ({currency}). For India, use "₹ Lakhs / yr" (e.g. "₹8.5L - ₹16.0L / yr"). For USD/Global, use "$k / yr" (e.g. "$95,000 - $145,000 / yr").
-2. Do NOT use fake static percentages or generic placeholder numbers. Base predictions on real-world compensation benchmarks for {role} in {country}.
+2. SALARY ACCURACY: You MUST ensure salary predictions are 80-90% accurate to the real, current market data for {country}. Do NOT use fake static percentages or generic placeholder numbers. Base predictions on real-world compensation benchmarks for {role} in {country}.
 3. Provide 4 percentile pay bands: 25th Percentile (Entry), 50th Percentile (Median), 75th Percentile (High Performer), and 90th Percentile (Top Tier Lead).
 
 Return ONLY valid JSON in this exact structure:
