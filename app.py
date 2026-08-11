@@ -2365,19 +2365,13 @@ Return ONLY valid JSON:
                 "recommendation": "Focus on building portfolio proof with high-value technical skills to command upper percentile pay."
             }
 
-        # Format salary progression bands for frontend compatibility
-        v_exp_band = verified_res["experience"]["source_band"]
+        # Format salary progression bands using dynamic verified benchmarks
+        bench = get_career_salary_benchmark(role, country_raw)
         salary_progression = [
-            {"level": "Entry Level (0-2 Yrs)", "salary": f"{curr_symbol}6.0L - ₹10.0L / yr" if country_raw.lower() == "india" else f"{curr_symbol}60,000 - {curr_symbol}85,000 / yr"},
-            {"level": "Mid Level (3-5 Yrs)", "salary": f"{curr_symbol}12.0L - ₹20.0L / yr" if country_raw.lower() == "india" else f"{curr_symbol}90,000 - {curr_symbol}130,000 / yr"},
-            {"level": "Senior Level (6-9 Yrs)", "salary": f"{curr_symbol}22.0L - ₹38.0L / yr" if country_raw.lower() == "india" else f"{curr_symbol}135,000 - {curr_symbol}185,000 / yr"},
-            {"level": "Principal / Lead (10+ Yrs)", "salary": f"{curr_symbol}40.0L - ₹65.0L / yr" if country_raw.lower() == "india" else f"{curr_symbol}190,000 - {curr_symbol}270,000 / yr"}
+            {"level": "Entry Level (0-2 Yrs)", "salary": bench["fresher"]},
+            {"level": "Mid Level (3-7 Yrs)", "salary": bench["mid"]},
+            {"level": "Senior Level (8+ Yrs)", "salary": bench["senior"]}
         ]
-        
-        # Override the current experience level to use the exact verified range
-        for item in salary_progression:
-            if item["level"].split()[0].lower() in v_exp_band.lower():
-                item["salary"] = f"{v_sal['min']} - {v_sal['max']}"
 
         # Combine verified results with LLM metadata
         final_res = verified_res.copy()

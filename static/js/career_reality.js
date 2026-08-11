@@ -75,15 +75,22 @@ realityBtn.onclick = async function() {
         let countryFlag = "🌐";
         let countryName = country ? country.trim() : "Global";
 
-        if (cLow.includes("india")) { countryFlag = "🇮🇳"; countryName = "India"; }
-        else if (cLow.includes("usa") || cLow.includes("united states") || cLow.includes("us")) { countryFlag = "🇺🇸"; countryName = "USA"; }
-        else if (cLow.includes("uk") || cLow.includes("united kingdom")) { countryFlag = "🇬🇧"; countryName = "UK"; }
-        else if (cLow.includes("germany")) { countryFlag = "🇩🇪"; countryName = "Germany"; }
+        if (cLow.includes("india") || cLow.includes("bharat")) { countryFlag = "🇮🇳"; countryName = "India"; }
+        else if (cLow.includes("usa") || cLow.includes("united states") || cLow.includes("us") || cLow.includes("america")) { countryFlag = "🇺🇸"; countryName = "USA"; }
+        else if (cLow.includes("uk") || cLow.includes("united kingdom") || cLow.includes("england") || cLow.includes("scotland") || cLow.includes("wales") || cLow.includes("london") || cLow.includes("great britain")) { countryFlag = "🇬🇧"; countryName = "United Kingdom (England)"; }
+        else if (cLow.includes("germany") || cLow.includes("deutschland")) { countryFlag = "🇩🇪"; countryName = "Germany"; }
         else if (cLow.includes("france")) { countryFlag = "🇫🇷"; countryName = "France"; }
         else if (cLow.includes("canada")) { countryFlag = "🇨🇦"; countryName = "Canada"; }
         else if (cLow.includes("australia")) { countryFlag = "🇦🇺"; countryName = "Australia"; }
         else if (cLow.includes("uae") || cLow.includes("dubai")) { countryFlag = "🇦🇪"; countryName = "UAE / Dubai"; }
+        else if (cLow.includes("saudi") || cLow.includes("ksa")) { countryFlag = "🇸🇦"; countryName = "Saudi Arabia"; }
+        else if (cLow.includes("singapore")) { countryFlag = "🇸🇬"; countryName = "Singapore"; }
         else if (cLow.includes("japan")) { countryFlag = "🇯🇵"; countryName = "Japan"; }
+        else if (cLow.includes("korea")) { countryFlag = "🇰🇷"; countryName = "South Korea"; }
+        else if (cLow.includes("switzerland")) { countryFlag = "🇨🇭"; countryName = "Switzerland"; }
+        else if (cLow.includes("spain")) { countryFlag = "🇪🇸"; countryName = "Spain"; }
+        else if (cLow.includes("italy")) { countryFlag = "🇮🇹"; countryName = "Italy"; }
+        else if (cLow.includes("netherlands")) { countryFlag = "🇳🇱"; countryName = "Netherlands"; }
 
         const isIndia = cLow.includes("india") || (data.salary_reality || "").includes("₹");
         const fresherSal = data.fresher_salary && data.fresher_salary !== "--" ? data.fresher_salary : (isIndia ? "₹5.0L - ₹9.0L / yr" : "$65,000 - $90,000 / yr");
