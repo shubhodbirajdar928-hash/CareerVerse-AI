@@ -2088,6 +2088,7 @@ def generate_fallback_skill_gap(career, user_skills=""):
         ]
         existing = ["Basic Human Biology Fundamentals", "Patient Communication & Empathy", "First Aid & Vital Signs Monitoring", "Medical Terminology Basics", "High Ethics & Stress Resilience"] if has_sk else ["Interest in Health Sciences", "Basic Biology Understanding"]
         missing = ["Advanced Clinical Therapeutics", "Specialized Diagnostic EMR Systems", "Surgical & Emergency Procedures", "Pharmacology & Dosage Calculation", "Hospital Board Accreditation"]
+        harsh_realities = ["High stress and burnout rates are common", "Extremely long working hours and shifts", "Significant legal and malpractice liabilities", "Continuous lifelong exams and certifications required"]
         priority = ["1. Complete Formal Medical Degree (MBBS/MD/BDS)", "2. Master Pharmacology & Diagnostic Protocols", "3. Complete Clinical Hospital Internship Rotation", "4. Acquire Medical License & Board Registration", "5. Train on Advanced Hospital Diagnostic EMR Tools"]
         score = 68 if has_sk else 32
         level = "Intermediate" if has_sk else "Beginner"
@@ -2102,6 +2103,7 @@ def generate_fallback_skill_gap(career, user_skills=""):
         ]
         existing = ["Core Language Syntax (Python/JS)", "Git Version Control Basics", "HTML/CSS / Front-End Fundamentals", "Basic Database & SQL Queries", "Logical Problem Solving"] if has_sk else ["Basic Computer Literacy", "Logical Aptitude"]
         missing = ["Advanced System Design & Scalability", "Production Microservices & REST APIs", "Cloud Infrastructure (AWS/GCP/Azure)", "CI/CD Pipeline Automation", "Unit Testing & Security Hardening"]
+        harsh_realities = ["Constant tech stack churn requires non-stop learning", "High competition for entry-level roles", "Sedentary lifestyle and screen fatigue", "On-call rotations can disrupt personal life"]
         priority = ["1. Master Data Structures & Algorithms", "2. Build & Deploy 2 Full-Stack Production Apps", "3. Master System Architecture Fundamentals", "4. Learn Cloud Deployment (AWS/GCP/Docker)", "5. Contribute to Open-Source Software Repos"]
         score = 72 if has_sk else 35
         level = "Intermediate" if has_sk else "Beginner"
@@ -2116,6 +2118,7 @@ def generate_fallback_skill_gap(career, user_skills=""):
         ]
         existing = ["Basic Soil & Crop Knowledge", "Organic Farming Principles", "Equipment Operation Basics", "Weather & Seasonal Awareness", "Practical Field Hardworking Attitude"] if has_sk else ["Interest in Agricultural Science", "Field Work Willingness"]
         missing = ["Precision Agriculture Sensors & Drones", "Modern Hydroponics & Smart Irrigation", "Agri-Market Futures & Supply Economics", "Biological Pest Control Protocols", "Govt Agricultural Subsidy & Export Standards"]
+        harsh_realities = ["Heavy physical labor in unpredictable weather", "Income is highly dependent on market prices and climate", "High initial capital investment for modern tech", "Long working hours during planting and harvest seasons"]
         priority = ["1. Study Modern Agronomy & Soil Chemistry", "2. Adopt Precision Irrigation & Drone Tech", "3. Learn Crop Pest Management Standards", "4. Master Agri-Business Economics & Logistics", "5. Get Certified in Sustainable Agriculture"]
         score = 65 if has_sk else 30
         level = "Intermediate" if has_sk else "Beginner"
@@ -2130,6 +2133,7 @@ def generate_fallback_skill_gap(career, user_skills=""):
         ]
         existing = [f"Foundational knowledge of {c_norm}", "Operational tool understanding", "Analytical reasoning & problem solving", "Team collaboration & communication", "Active interest in professional growth"] if has_sk else ["General Aptitude", "Motivation to Learn"]
         missing = ["Advanced specialized industry software", "Regulatory, safety & quality benchmarks", "End-to-end practical project management", "Quantitative metrics & decision frameworks", "Senior stakeholder communication"]
+        harsh_realities = ["Entry-level pay may be lower than expected", "High competition and saturation in popular roles", "Routine tasks can lead to burnout", "Continuous upskilling is mandatory to stay relevant"]
         priority = [f"1. Master core missing tools for {c_norm}", "2. Complete 2 practical hands-on projects", "3. Obtain recognized industry certifications", "4. Build a professional portfolio showcasing work", "5. Develop senior-level project leadership skills"]
         score = 68 if has_sk else 32
         level = "Intermediate" if has_sk else "Beginner"
@@ -2144,6 +2148,7 @@ def generate_fallback_skill_gap(career, user_skills=""):
         "skill_analysis": analysis,
         "existing_skills": existing,
         "missing_skills": missing,
+        "harsh_realities": harsh_realities,
         "priority_skills": priority,
         "recommendation": f"Based on your profile for {c_norm}, you have established a good foundation. Focus on bridging your critical missing skills over the next 3 to 6 months by building hands-on projects and obtaining specialized industry credentials."
     }
@@ -2212,6 +2217,12 @@ JSON Format:
   "3. Obtain recognized industry certifications",
   "4. Build a public portfolio showcasing work",
   "5. Develop project management leadership"
+],
+"harsh_realities": [
+  "High competition for entry-level roles",
+  "Constant need to upskill and learn new tech",
+  "Burnout from tight deadlines and expectations",
+  "Initial pay may be lower than market averages"
 ],
 "recommendation": "Executive 3-4 line recommendation."
 }}

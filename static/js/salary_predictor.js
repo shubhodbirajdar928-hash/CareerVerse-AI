@@ -135,23 +135,38 @@ if (btn) {
                         </p>
                     </div>
 
-                    <!-- 4 STAT CARDS -->
-                    <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px;">
-                        <div class="salary-card" style="background: var(--bg-card); border: 1px solid var(--border); border-radius: 14px; padding: 18px; text-align: center;">
-                            <span style="font-size: 0.78rem; color: var(--text-secondary); font-weight: 600;">🔥 Hiring Demand</span>
-                            <h3 style="font-size: 1.5rem; color: var(--accent); margin: 6px 0 0; font-weight: 800;">${data.market_demand || 85}%</h3>
+                    <!-- 4 STAT CARDS (Responsive & Circular) -->
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px;">
+                        <div class="salary-card" style="background: var(--bg-card); border: 1px solid var(--border); border-radius: 14px; padding: 18px; text-align: center; display: flex; flex-direction: column; align-items: center;">
+                            <span style="font-size: 0.85rem; color: var(--text-secondary); font-weight: 600; margin-bottom: 12px;">🔥 Hiring Demand</span>
+                            <div style="width: 70px; height: 70px; border-radius: 50%; background: conic-gradient(var(--accent) ${data.market_demand || 85}%, var(--bg-primary) 0); display: flex; align-items: center; justify-content: center; position: relative;">
+                                <div style="width: 56px; height: 56px; border-radius: 50%; background: var(--bg-card); display: flex; align-items: center; justify-content: center; font-weight: 800; color: var(--text-heading); font-size: 1rem;">
+                                    ${data.market_demand || 85}%
+                                </div>
+                            </div>
                         </div>
-                        <div class="salary-card" style="background: var(--bg-card); border: 1px solid var(--border); border-radius: 14px; padding: 18px; text-align: center;">
-                            <span style="font-size: 0.78rem; color: var(--text-secondary); font-weight: 600;">🚀 Pay Growth</span>
-                            <h3 style="font-size: 1.5rem; color: var(--accent); margin: 6px 0 0; font-weight: 800;">${data.growth_score || 82}%</h3>
+                        <div class="salary-card" style="background: var(--bg-card); border: 1px solid var(--border); border-radius: 14px; padding: 18px; text-align: center; display: flex; flex-direction: column; align-items: center;">
+                            <span style="font-size: 0.85rem; color: var(--text-secondary); font-weight: 600; margin-bottom: 12px;">🚀 Pay Growth</span>
+                            <div style="width: 70px; height: 70px; border-radius: 50%; background: conic-gradient(#f97316 ${data.growth_score || 82}%, var(--bg-primary) 0); display: flex; align-items: center; justify-content: center; position: relative;">
+                                <div style="width: 56px; height: 56px; border-radius: 50%; background: var(--bg-card); display: flex; align-items: center; justify-content: center; font-weight: 800; color: var(--text-heading); font-size: 1rem;">
+                                    ${data.growth_score || 82}%
+                                </div>
+                            </div>
                         </div>
-                        <div class="salary-card" style="background: var(--bg-card); border: 1px solid var(--border); border-radius: 14px; padding: 18px; text-align: center;">
-                            <span style="font-size: 0.78rem; color: var(--text-secondary); font-weight: 600;">🎯 AI Confidence</span>
-                            <h3 style="font-size: 1.5rem; color: var(--accent); margin: 6px 0 0; font-weight: 800;">${data.confidence_score || 88}%</h3>
+                        <div class="salary-card" style="background: var(--bg-card); border: 1px solid var(--border); border-radius: 14px; padding: 18px; text-align: center; display: flex; flex-direction: column; align-items: center;">
+                            <span style="font-size: 0.85rem; color: var(--text-secondary); font-weight: 600; margin-bottom: 12px;">🎯 AI Confidence</span>
+                            <div style="width: 70px; height: 70px; border-radius: 50%; background: conic-gradient(#3b82f6 ${data.confidence_score || 88}%, var(--bg-primary) 0); display: flex; align-items: center; justify-content: center; position: relative;">
+                                <div style="width: 56px; height: 56px; border-radius: 50%; background: var(--bg-card); display: flex; align-items: center; justify-content: center; font-weight: 800; color: var(--text-heading); font-size: 1rem;">
+                                    ${data.confidence_score || 88}%
+                                </div>
+                            </div>
                         </div>
-                        <div class="salary-card" style="background: var(--bg-card); border: 1px solid var(--border); border-radius: 14px; padding: 18px; text-align: center;">
-                            <span style="font-size: 0.78rem; color: var(--text-secondary); font-weight: 600;">💱 Currency</span>
-                            <h3 style="font-size: 1.1rem; color: #22c55e; margin: 8px 0 0; font-weight: 700;">${data.currency ? data.currency.code + ' (' + data.currency.symbol + ')' : (isIndia ? '₹ INR' : '$ USD')}</h3>
+                        <div class="salary-card" style="background: var(--bg-card); border: 1px solid var(--border); border-radius: 14px; padding: 18px; text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: center;">
+                            <span style="font-size: 0.85rem; color: var(--text-secondary); font-weight: 600; margin-bottom: 12px;">💱 Currency</span>
+                            <div style="width: 70px; height: 70px; border-radius: 50%; background: rgba(34, 197, 94, 0.1); border: 2px solid #22c55e; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; color: #22c55e;">
+                                <i class="fa-solid fa-coins"></i>
+                            </div>
+                            <h3 style="font-size: 1rem; color: #22c55e; margin: 12px 0 0; font-weight: 700;">${data.currency ? data.currency.code : (isIndia ? 'INR' : 'USD')}</h3>
                         </div>
                     </div>
 
@@ -180,8 +195,8 @@ if (btn) {
                         </div>
                     </div>
 
-                    <!-- 2-COLUMN GRID -->
-                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px;">
+                    <!-- 2-COLUMN GRID (Responsive Grid correction) -->
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 24px;">
                         <!-- LEFT COLUMN -->
                         <div style="display: flex; flex-direction: column; gap: 24px;">
                             <!-- SALARY PROGRESSION -->

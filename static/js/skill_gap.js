@@ -130,6 +130,13 @@ function renderSkillGapDashboard(data, targetCareer, container) {
         "5. Develop senior-level project management skills"
     ];
 
+    const harshRealities = Array.isArray(data.harsh_realities) && data.harsh_realities.length ? data.harsh_realities : [
+        "High competition for entry-level roles in this field",
+        "Continuous lifelong upskilling is mandatory to stay relevant",
+        "Early-career pay might be lower than industry averages",
+        "Burnout and high stress are common during project crunches"
+    ];
+
     container.innerHTML = `
         <div class="skill-dashboard">
             <!-- 1. Header Banner -->
@@ -172,22 +179,22 @@ function renderSkillGapDashboard(data, targetCareer, container) {
                 </div>
             </div>
 
-            <!-- 3. Skill Proficiency Matrix (5 Bars) -->
+            <!-- 3. Skill Proficiency Matrix (Circular) -->
             <div class="proficiency-card">
-                <h3><i class="fa-solid fa-chart-column"></i> Competency Benchmark Matrix</h3>
-                <div class="skill-bar-list">
+                <h3><i class="fa-solid fa-chart-pie"></i> Competency Benchmark Matrix</h3>
+                <div class="skill-circle-grid" style="display: flex; gap: 24px; flex-wrap: wrap; justify-content: center; margin-top: 24px;">
                     ${skillAnalysis.map(item => {
                         const skName = typeof item === 'object' ? (item.skill || item.name || "Competency") : item;
                         const skScore = typeof item === 'object' ? (item.score || 60) : 60;
+                        const color = skScore >= 75 ? '#22c55e' : (skScore >= 45 ? '#facc15' : '#ef4444');
                         return `
-                            <div class="skill-bar-row">
-                                <div class="skill-bar-meta">
-                                    <span>${skName}</span>
-                                    <span class="score-tag">${skScore}%</span>
+                            <div class="skill-circle-item" style="display: flex; flex-direction: column; align-items: center; width: 150px; text-align: center;">
+                                <div class="circle-progress" style="width: 90px; height: 90px; border-radius: 50%; background: conic-gradient(${color} ${skScore}%, var(--bg-primary) 0); display: flex; align-items: center; justify-content: center; margin-bottom: 14px; position: relative; box-shadow: 0 4px 12px rgba(0,0,0,0.3);">
+                                    <div style="width: 74px; height: 74px; border-radius: 50%; background: var(--bg-card); display: flex; align-items: center; justify-content: center; font-weight: 800; color: var(--text-heading); font-size: 1.2rem;">
+                                        ${skScore}%
+                                    </div>
                                 </div>
-                                <div class="skill-bar-track">
-                                    <div class="skill-bar-fill" style="width: ${skScore}%;"></div>
-                                </div>
+                                <span style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.35;">${skName}</span>
                             </div>
                         `;
                     }).join("")}
@@ -218,6 +225,19 @@ function renderSkillGapDashboard(data, targetCareer, container) {
                             </div>
                         `).join("")}
                     </div>
+                </div>
+            </div>
+
+            <!-- 4.1 Harsh Realities (Market Reality Check) -->
+            <div class="reality-card" style="background: rgba(239, 68, 68, 0.05); border: 1px solid rgba(239, 68, 68, 0.3); border-radius: 16px; padding: 24px; margin-top: 24px;">
+                <h3 style="color: #ef4444; margin-bottom: 16px; display: flex; align-items: center; gap: 8px;"><i class="fa-solid fa-skull-crossbones"></i> Market Reality Check (Harsh Truths)</h3>
+                <div class="skill-tags-list">
+                    ${harshRealities.map(hr => `
+                        <div class="skill-tag-item" style="background: rgba(239, 68, 68, 0.1); color: #fca5a5; border-color: rgba(239, 68, 68, 0.2);">
+                            <i class="fa-solid fa-bolt"></i>
+                            <span>${hr}</span>
+                        </div>
+                    `).join("")}
                 </div>
             </div>
 
