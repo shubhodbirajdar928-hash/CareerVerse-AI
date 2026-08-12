@@ -400,33 +400,8 @@
     background: transparent;
     transition: background 0.28s ease;
 }
-
 .hub-tool-card:hover {
-    border-color: var(--accent);
     transform: translateY(-5px);
-    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(250, 204, 21, 0.15);
-}
-
-.hub-tool-card:hover::after {
-    background: var(--accent);
-}
-
-.hub-tool-card-live {
-    border-color: rgba(34, 197, 94, 0.2);
-    background: linear-gradient(135deg, var(--bg-card) 70%, rgba(34, 197, 94, 0.03) 100%);
-}
-
-.hub-tool-card-live:hover {
-    border-color: #22c55e;
-    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(34, 197, 94, 0.15);
-}
-
-.hub-tool-card-live::after {
-    background: transparent;
-}
-
-.hub-tool-card-live:hover::after {
-    background: #22c55e;
 }
 
 /* Card top row */
@@ -441,32 +416,173 @@
     width: 50px;
     height: 50px;
     border-radius: var(--radius-md);
-    background: var(--accent-soft);
-    border: 1px solid rgba(250, 204, 21, 0.2);
     display: grid;
     place-items: center;
     font-size: 1.3rem;
-    color: var(--accent);
     transition: var(--transition);
+    border: 1px solid transparent;
 }
 
 .hub-tool-card:hover .htc-icon {
-    background: var(--accent);
-    color: #0a0a0a;
-    border-color: var(--accent);
     transform: scale(1.05) rotate(-4deg);
 }
 
-.htc-icon-live {
-    background: rgba(34, 197, 94, 0.1) !important;
-    border-color: rgba(34, 197, 94, 0.3) !important;
-    color: #22c55e !important;
+/* Card Themes (CSS Variables) */
+.hub-tool-card.card-amber {
+    --hub-accent: #facc15;
+    --hub-accent-rgb: 250, 204, 21;
+}
+.hub-tool-card.card-blue {
+    --hub-accent: #3b82f6;
+    --hub-accent-rgb: 59, 130, 246;
+}
+.hub-tool-card.card-indigo {
+    --hub-accent: #6366f1;
+    --hub-accent-rgb: 99, 102, 241;
+}
+.hub-tool-card.card-emerald {
+    --hub-accent: #10b981;
+    --hub-accent-rgb: 16, 185, 129;
+}
+.hub-tool-card.card-rose {
+    --hub-accent: #f43f5e;
+    --hub-accent-rgb: 244, 63, 94;
+}
+.hub-tool-card.card-cyan {
+    --hub-accent: #06b6d4;
+    --hub-accent-rgb: 6, 182, 212;
+}
+.hub-tool-card.card-orange {
+    --hub-accent: #f97316;
+    --hub-accent-rgb: 249, 115, 22;
+}
+.hub-tool-card.card-purple {
+    --hub-accent: #a855f7;
+    --hub-accent-rgb: 168, 85, 247;
+}
+.hub-tool-card.card-green {
+    --hub-accent: #22c55e;
+    --hub-accent-rgb: 34, 197, 94;
 }
 
-.hub-tool-card-live:hover .htc-icon-live {
-    background: #22c55e !important;
-    color: #0a0a0a !important;
-    border-color: #22c55e !important;
+/* Applying Variables to Hub Cards */
+.hub-tool-card.card-amber,
+.hub-tool-card.card-blue,
+.hub-tool-card.card-indigo,
+.hub-tool-card.card-emerald,
+.hub-tool-card.card-rose,
+.hub-tool-card.card-cyan,
+.hub-tool-card.card-orange,
+.hub-tool-card.card-purple,
+.hub-tool-card.card-green {
+    border-color: rgba(var(--hub-accent-rgb), 0.15);
+    background: linear-gradient(135deg, var(--bg-card) 70%, rgba(var(--hub-accent-rgb), 0.03) 100%);
+}
+
+.hub-tool-card.card-amber:hover,
+.hub-tool-card.card-blue:hover,
+.hub-tool-card.card-indigo:hover,
+.hub-tool-card.card-emerald:hover,
+.hub-tool-card.card-rose:hover,
+.hub-tool-card.card-cyan:hover,
+.hub-tool-card.card-orange:hover,
+.hub-tool-card.card-purple:hover,
+.hub-tool-card.card-green:hover {
+    border-color: var(--hub-accent);
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(var(--hub-accent-rgb), 0.15);
+}
+
+.hub-tool-card.card-amber::after,
+.hub-tool-card.card-blue::after,
+.hub-tool-card.card-indigo::after,
+.hub-tool-card.card-emerald::after,
+.hub-tool-card.card-rose::after,
+.hub-tool-card.card-cyan::after,
+.hub-tool-card.card-orange::after,
+.hub-tool-card.card-purple::after,
+.hub-tool-card.card-green::after {
+    background: transparent;
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    transition: background 0.28s ease;
+}
+
+.hub-tool-card.card-amber:hover::after,
+.hub-tool-card.card-blue:hover::after,
+.hub-tool-card.card-indigo:hover::after,
+.hub-tool-card.card-emerald:hover::after,
+.hub-tool-card.card-rose:hover::after,
+.hub-tool-card.card-cyan:hover::after,
+.hub-tool-card.card-orange:hover::after,
+.hub-tool-card.card-purple:hover::after,
+.hub-tool-card.card-green:hover::after {
+    background: var(--hub-accent);
+}
+
+.hub-tool-card.card-amber .htc-icon,
+.hub-tool-card.card-blue .htc-icon,
+.hub-tool-card.card-indigo .htc-icon,
+.hub-tool-card.card-emerald .htc-icon,
+.hub-tool-card.card-rose .htc-icon,
+.hub-tool-card.card-cyan .htc-icon,
+.hub-tool-card.card-orange .htc-icon,
+.hub-tool-card.card-purple .htc-icon,
+.hub-tool-card.card-green .htc-icon {
+    background: rgba(var(--hub-accent-rgb), 0.08);
+    border-color: rgba(var(--hub-accent-rgb), 0.25);
+    color: var(--hub-accent);
+}
+
+.hub-tool-card.card-amber:hover .htc-icon,
+.hub-tool-card.card-blue:hover .htc-icon,
+.hub-tool-card.card-indigo:hover .htc-icon,
+.hub-tool-card.card-emerald:hover .htc-icon,
+.hub-tool-card.card-rose:hover .htc-icon,
+.hub-tool-card.card-cyan:hover .htc-icon,
+.hub-tool-card.card-orange:hover .htc-icon,
+.hub-tool-card.card-purple:hover .htc-icon,
+.hub-tool-card.card-green:hover .htc-icon {
+    background: var(--hub-accent);
+    color: #0a0a0a;
+    border-color: var(--hub-accent);
+}
+
+.hub-tool-card.card-amber .htc-num,
+.hub-tool-card.card-blue .htc-num,
+.hub-tool-card.card-indigo .htc-num,
+.hub-tool-card.card-emerald .htc-num,
+.hub-tool-card.card-rose .htc-num,
+.hub-tool-card.card-cyan .htc-num,
+.hub-tool-card.card-orange .htc-num,
+.hub-tool-card.card-purple .htc-num,
+.hub-tool-card.card-green .htc-num {
+    color: rgba(var(--hub-accent-rgb), 0.1);
+}
+
+.hub-tool-card.card-amber .htc-features i,
+.hub-tool-card.card-blue .htc-features i,
+.hub-tool-card.card-indigo .htc-features i,
+.hub-tool-card.card-emerald .htc-features i,
+.hub-tool-card.card-rose .htc-features i,
+.hub-tool-card.card-cyan .htc-features i,
+.hub-tool-card.card-orange .htc-features i,
+.hub-tool-card.card-purple .htc-features i,
+.hub-tool-card.card-green .htc-features i {
+    color: var(--hub-accent);
+}
+
+.hub-tool-card.card-amber .htc-launch,
+.hub-tool-card.card-blue .htc-launch,
+.hub-tool-card.card-indigo .htc-launch,
+.hub-tool-card.card-emerald .htc-launch,
+.hub-tool-card.card-rose .htc-launch,
+.hub-tool-card.card-cyan .htc-launch,
+.hub-tool-card.card-orange .htc-launch,
+.hub-tool-card.card-purple .htc-launch,
+.hub-tool-card.card-green .htc-launch {
+    color: var(--hub-accent);
 }
 
 /* Badges */

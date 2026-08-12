@@ -12,7 +12,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="{{ url_for('static', filename='css/common.css') }}?v=20260809_v5">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/ai_tools.css') }}?v=20260809_v5">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/ai_tools.css') }}?v=20260812_v1">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
 </head>
 
@@ -123,7 +123,7 @@
         <div class="hub-tools-grid" id="toolsGrid">
 
             <!-- 1. Career Roadmap -->
-            <a href="/generate" class="hub-tool-card" data-tags="plan roadmap learning path career" data-category="plan">
+            <a href="/generate" class="hub-tool-card card-amber" data-tags="plan roadmap learning path career" data-category="plan">
                 <div class="htc-top">
                     <div class="htc-icon"><i class="fa-solid fa-route"></i></div>
                     <div class="htc-badges">
@@ -144,7 +144,7 @@
             </a>
 
             <!-- 2. Career Match -->
-            <a href="/career-match" class="hub-tool-card" data-tags="plan career match discover personality" data-category="plan">
+            <a href="/career-match" class="hub-tool-card card-blue" data-tags="plan career match discover personality" data-category="plan">
                 <div class="htc-top">
                     <div class="htc-icon"><i class="fa-solid fa-bullseye"></i></div>
                     <div class="htc-badges">
@@ -165,7 +165,7 @@
             </a>
 
             <!-- 3. Career Compare -->
-            <a href="/compare" class="hub-tool-card" data-tags="plan compare careers side by side" data-category="plan">
+            <a href="/compare" class="hub-tool-card card-indigo" data-tags="plan compare careers side by side" data-category="plan">
                 <div class="htc-top">
                     <div class="htc-icon"><i class="fa-solid fa-scale-balanced"></i></div>
                     <div class="htc-badges">
@@ -199,7 +199,7 @@
         <div class="hub-tools-grid hub-tools-grid-market">
 
             <!-- 4. Salary Predictor -->
-            <a href="/salary-predictor" class="hub-tool-card" data-tags="market salary compensation pay benchmark" data-category="market">
+            <a href="/salary-predictor" class="hub-tool-card card-emerald" data-tags="market salary compensation pay benchmark" data-category="market">
                 <div class="htc-top">
                     <div class="htc-icon"><i class="fa-solid fa-indian-rupee-sign"></i></div>
                     <div class="htc-badges">
@@ -220,7 +220,7 @@
             </a>
 
             <!-- 5. Career Reality Check -->
-            <a href="/career-reality" class="hub-tool-card" data-tags="market reality check day in life stress truth" data-category="market">
+            <a href="/career-reality" class="hub-tool-card card-rose" data-tags="market reality check day in life stress truth" data-category="market">
                 <div class="htc-top">
                     <div class="htc-icon"><i class="fa-solid fa-earth-americas"></i></div>
                     <div class="htc-badges">
@@ -241,7 +241,7 @@
             </a>
 
             <!-- 6. Career Intelligence -->
-            <a href="/career-intelligence" class="hub-tool-card" data-tags="market intelligence trends hiring automation risk future" data-category="market">
+            <a href="/career-intelligence" class="hub-tool-card card-cyan" data-tags="market intelligence trends hiring automation risk future" data-category="market">
                 <div class="htc-top">
                     <div class="htc-icon"><i class="fa-solid fa-chart-simple"></i></div>
                     <div class="htc-badges">
@@ -275,7 +275,7 @@
         <div class="hub-tools-grid hub-tools-grid-prepare">
 
             <!-- 7. Resume Analyzer -->
-            <a href="/resume" class="hub-tool-card" data-tags="prepare resume ats score analyze pdf upload" data-category="prepare">
+            <a href="/resume" class="hub-tool-card card-orange" data-tags="prepare resume ats score analyze pdf upload" data-category="prepare">
                 <div class="htc-top">
                     <div class="htc-icon"><i class="fa-solid fa-file-lines"></i></div>
                     <div class="htc-badges">
@@ -296,7 +296,7 @@
             </a>
 
             <!-- 8. Skill Gap Analyzer -->
-            <a href="/skill-gap" class="hub-tool-card" data-tags="prepare skill gap learn missing upskill" data-category="prepare">
+            <a href="/skill-gap" class="hub-tool-card card-purple" data-tags="prepare skill gap learn missing upskill" data-category="prepare">
                 <div class="htc-top">
                     <div class="htc-icon"><i class="fa-solid fa-chart-line"></i></div>
                     <div class="htc-badges">
@@ -317,9 +317,9 @@
             </a>
 
             <!-- 9. AI Career Chat -->
-            <a href="/career-chat" class="hub-tool-card hub-tool-card-live" data-tags="prepare chat mentor interview salary negotiation advice" data-category="prepare">
+            <a href="/career-chat" class="hub-tool-card card-green" data-tags="prepare chat mentor interview salary negotiation advice" data-category="prepare">
                 <div class="htc-top">
-                    <div class="htc-icon htc-icon-live"><i class="fa-solid fa-comments"></i></div>
+                    <div class="htc-icon"><i class="fa-solid fa-comments"></i></div>
                     <div class="htc-badges">
                         <span class="htc-badge htc-badge-live"><span class="live-dot"></span> 24/7 Live</span>
                     </div>
@@ -333,7 +333,7 @@
                     <span><i class="fa-solid fa-check"></i> 24/7 instant answers</span>
                 </div>
                 <div class="htc-footer">
-                    <span class="htc-launch htc-launch-live">Start Chatting <i class="fa-solid fa-arrow-right"></i></span>
+                    <span class="htc-launch">Start Chatting <i class="fa-solid fa-arrow-right"></i></span>
                 </div>
             </a>
 
