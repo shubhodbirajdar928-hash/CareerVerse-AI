@@ -12,7 +12,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="{{ url_for('static', filename='css/common.css') }}?v=20260809_v5">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}?v=20260809_v5">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}?v=20260812_v1">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
 </head>
 
@@ -24,20 +24,38 @@
 <!-- ═══════════════════════════════════════════
      SECTION 1: HERO — First Impression
      ═══════════════════════════════════════════ -->
-<section class="hero-new">
-    <div class="hero-new-container">
-        <h1 class="hero-new-title">
-            The Future of<br>
-            <span>Career Navigation.</span>
+<section class="hero">
+    <div class="hero-container">
+
+        <span class="hero-eyebrow">Free · No Login · Powered by Gemini AI</span>
+
+        <h1 class="hero-title">
+            Plan Your Career<br>
+            <span>with AI That Understands You</span>
         </h1>
-        <p class="hero-new-subtitle">
-            Harness the power of artificial intelligence to map your career path, analyze your skills, and predict your market value. Professional insights, instantly.
+
+        <p class="hero-subtitle">
+            9 free AI tools to help you choose the right career, check your salary,
+            fix your resume, and learn what skills you need — for any job, in any country.
         </p>
-        <div class="hero-new-actions">
-            <a href="/generate" class="btn-primary-ad">
-                Start Your Journey
+
+        <div class="hero-actions">
+            <a href="/generate" class="main-btn" id="hero-cta-primary">
+                <i class="fa-solid fa-wand-magic-sparkles"></i>
+                Build My Career Roadmap
+            </a>
+            <a href="#tools-section" class="secondary-btn" id="hero-cta-secondary">
+                <i class="fa-solid fa-layer-group"></i>
+                See All Tools
             </a>
         </div>
+
+        <div class="hero-trust-bar">
+            <div class="trust-item"><i class="fa-solid fa-lock"></i> Your data stays private</div>
+            <div class="trust-item"><i class="fa-solid fa-globe"></i> Works in 195+ countries</div>
+            <div class="trust-item"><i class="fa-solid fa-bolt"></i> Results in seconds</div>
+        </div>
+
     </div>
 </section>
 
