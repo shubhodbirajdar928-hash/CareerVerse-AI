@@ -625,6 +625,42 @@
     padding: 22px;
     margin-bottom: 16px;
     transition: var(--transition);
+    position: relative;
+    overflow: hidden;
+}
+
+.phase-card::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -100%;
+    width: 30%;
+    height: 200%;
+    background: linear-gradient(
+        to right,
+        transparent,
+        rgba(255, 255, 255, 0.03),
+        rgba(255, 255, 255, 0.08),
+        rgba(255, 255, 255, 0.03),
+        transparent
+    );
+    transform: rotate(30deg);
+    transition: none;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.phase-card:hover::before {
+    animation: phase-shimmer-sweep 1.2s ease-in-out forwards;
+}
+
+@keyframes phase-shimmer-sweep {
+    0% {
+        left: -100%;
+    }
+    100% {
+        left: 200%;
+    }
 }
 
 .phase-card:hover {
@@ -739,12 +775,14 @@
 
 .progress-fill {
     height: 100%;
-    background: var(--accent);
+    background: linear-gradient(90deg, var(--accent) 0%, #fde047 50%, var(--accent) 100%);
+    background-size: 200% 100%;
     border-radius: 100px;
     display: flex;
     align-items: center;
     justify-content: flex-end;
     transition: width 1s ease;
+    animation: liquid-flow 2s linear infinite;
 }
 
 .progress-text {

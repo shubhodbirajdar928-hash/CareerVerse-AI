@@ -329,12 +329,16 @@
 .progress-bar .bar {
     height: 100%;
     border-radius: 10px;
-    background: var(--accent);
+    background: linear-gradient(90deg, var(--accent) 0%, #fde047 50%, var(--accent) 100%);
+    background-size: 200% 100%;
+    animation: liquid-flow 2s linear infinite;
 }
 
 .progress-bar .bar-fill-100 {
     width: 100%;
-    background: #10b981;
+    background: linear-gradient(90deg, #10b981 0%, #34d399 50%, #10b981 100%);
+    background-size: 200% 100%;
+    animation: liquid-flow 2s linear infinite;
 }
 
 .progress-bar .bar-fill-65 {
@@ -517,6 +521,40 @@
 
 .tool-card:hover {
     transform: translateY(-4px);
+}
+
+.tool-card::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -100%;
+    width: 30%;
+    height: 200%;
+    background: linear-gradient(
+        to right,
+        transparent,
+        rgba(255, 255, 255, 0.05),
+        rgba(255, 255, 255, 0.12),
+        rgba(255, 255, 255, 0.05),
+        transparent
+    );
+    transform: rotate(30deg);
+    transition: none;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.tool-card:hover::after {
+    animation: shimmer-sweep 1.2s ease-in-out forwards;
+}
+
+@keyframes shimmer-sweep {
+    0% {
+        left: -100%;
+    }
+    100% {
+        left: 200%;
+    }
 }
 
 .tool-featured {

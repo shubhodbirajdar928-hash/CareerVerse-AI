@@ -392,6 +392,40 @@
     box-sizing: border-box;
 }
 
+.hub-tool-card::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -100%;
+    width: 30%;
+    height: 200%;
+    background: linear-gradient(
+        to right,
+        transparent,
+        rgba(255, 255, 255, 0.05),
+        rgba(255, 255, 255, 0.12),
+        rgba(255, 255, 255, 0.05),
+        transparent
+    );
+    transform: rotate(30deg);
+    transition: none;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.hub-tool-card:hover::before {
+    animation: hub-shimmer-sweep 1.2s ease-in-out forwards;
+}
+
+@keyframes hub-shimmer-sweep {
+    0% {
+        left: -100%;
+    }
+    100% {
+        left: 200%;
+    }
+}
+
 .hub-tool-card::after {
     content: '';
     position: absolute;
