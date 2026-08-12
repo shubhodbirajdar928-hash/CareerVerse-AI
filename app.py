@@ -932,6 +932,8 @@ def create_normalized_salary_object(career, country):
         bench = get_career_salary_benchmark(career, country)
 
     target_formatted = f"{bench['fresher']} (Fresher) -> {bench['mid']} (Mid) -> {bench['senior']} (Senior)"
+    
+    reason = f"Compensation levels for a {career} in {c_name} are driven by high cognitive demand, specialized technical expertise, and local talent scarcity."
 
     return {
         "target_location": c_name,
@@ -941,7 +943,8 @@ def create_normalized_salary_object(career, country):
         "fresher": bench["fresher"],
         "mid": bench["mid"],
         "senior": bench["senior"],
-        "formatted_range": target_formatted
+        "formatted_range": target_formatted,
+        "reason": reason
     }
 
 def sanitize_market_hiring_data(market_dict, country, career):
@@ -1717,7 +1720,8 @@ Return ONLY valid JSON matching this exact structure:
       "country_mid": "$120,000 - $170,000 / yr",
       "country_senior": "$180,000 - $280,000 / yr",
       "india": "₹6.0L - ₹10.0L / yr (Fresher) -> ₹14.0L - ₹25.0L / yr (Mid) -> ₹28.0L - ₹55.0L / yr (Senior)",
-      "country": "$70,000 - $100,000 / yr (Fresher) -> $120,000 - $170,000 / yr (Mid) -> $180,000 - $280,000 / yr (Senior)"
+      "country": "$70,000 - $100,000 / yr (Fresher) -> $120,000 - $170,000 / yr (Mid) -> $180,000 - $280,000 / yr (Senior)",
+      "reason": "Detailed explanation explaining why this career commands this salary (e.g. key drivers like talent scarcity, cognitive demand, credentials, industry margins, etc.)"
     }},
     "future_scope": "5-year growth trajectory, AI impact, and job market outlook.",
     "macro_evolution": {{
@@ -1790,7 +1794,8 @@ Return ONLY valid JSON matching this exact structure:
     "salary": {{
       "fresher": "<fresher_salary_range_for_career_and_country>",
       "mid": "<mid_salary_range_for_career_and_country>",
-      "senior": "<senior_salary_range_for_career_and_country>"
+      "senior": "<senior_salary_range_for_career_and_country>",
+      "reason": "Detailed explanation explaining why this career commands this salary..."
     }},
     "top_organizations": ["Company A", "Company B", "Company C", "Company D", "Company E"],
     "hiring_hotspots": [
@@ -1827,6 +1832,20 @@ Rules & Anti-Hallucination Mandates:
 
             # Enforce single shared normalized salary object across both overview & market
             norm_sal = create_normalized_salary_object(career, country)
+            
+            custom_reason = None
+            if "overview" in roadmap_data and isinstance(roadmap_data["overview"], dict):
+                llm_sal = roadmap_data["overview"].get("salary")
+                if isinstance(llm_sal, dict) and llm_sal.get("reason"):
+                    custom_reason = llm_sal.get("reason")
+            if not custom_reason and "market" in roadmap_data and isinstance(roadmap_data["market"], dict):
+                llm_sal = roadmap_data["market"].get("salary")
+                if isinstance(llm_sal, dict) and llm_sal.get("reason"):
+                    custom_reason = llm_sal.get("reason")
+            
+            if custom_reason:
+                norm_sal["reason"] = custom_reason
+
             if "overview" not in roadmap_data or not isinstance(roadmap_data["overview"], dict):
                 roadmap_data["overview"] = {}
             if "market" not in roadmap_data or not isinstance(roadmap_data["market"], dict):
@@ -1952,6 +1971,7 @@ def generate_fallback_match(career, country="India", qualification="", skills=""
         "qualification_match_score": qual_score,
         "industry_demand_score": 88,
         "salary_expectation": sal_expectation,
+        "salary_reason": f"Compensation levels for a {career.title()} in {country_clean} are driven by high cognitive demand, specialized technical expertise, and local talent scarcity.",
         "strengths": [
             "Strong core logical & analytical problem-solving foundation",
             "High dedication to continuous professional learning",
@@ -2035,6 +2055,7 @@ Return ONLY valid JSON in this exact structure:
   "qualification_match_score": 0,
   "industry_demand_score": 0,
   "salary_expectation": "",
+  "salary_reason": "Detailed explanation explaining why this career commands this salary (e.g. key drivers like talent scarcity, cognitive demand, credentials, industry margins, etc.)",
   "strengths": ["Point 1", "Point 2", "Point 3", "Point 4", "Point 5"],
   "missing_skills": ["Skill 1", "Skill 2", "Skill 3", "Skill 4", "Skill 5"],
   "career_advantages": ["Advantage 1", "Advantage 2", "Advantage 3"],
@@ -2344,7 +2365,7 @@ def salary_predictor_api():
 You are CareerVerse AI, a Senior Global Compensation Executive.
 
 TASK:
-Provide top hiring companies, high-value skills for pay boost, and negotiation advice for the following role:
+Provide top hiring companies, high-value skills for pay boost, negotiation advice, and a detailed explanation of why this career commands this salary for the following role:
 Role: {role}
 Target Country: {country_raw}
 Verified Salary Range: {v_sal['min']} to {v_sal['max']} (Median: {v_sal['median']})
@@ -2354,13 +2375,15 @@ CRITICAL RULES:
 2. Provide exactly 5 top hiring companies.
 3. Provide exactly 5 recommended high-value skills.
 4. Provide a professional, personalized negotiation advice paragraph.
+5. Provide a detailed, professional 1-2 sentence explanation of why this career commands this salary level (focusing on skill scarcity, complexity, industry margins, value-add, or certifications).
 
 Return ONLY valid JSON:
 {{
   "top_companies": ["Company A", "Company B", "Company C", "Company D", "Company E"],
   "best_cities": ["City A", "City B", "City C", "City D"],
   "recommended_skills": ["Skill A", "Skill B", "Skill C", "Skill D", "Skill E"],
-  "recommendation": "Custom negotiation advice text..."
+  "recommendation": "Custom negotiation advice text...",
+  "salary_reason": "Explanation of why this role commands this level of pay..."
 }}
 """
         try:
@@ -2373,7 +2396,8 @@ Return ONLY valid JSON:
                 "top_companies": ["Google", "Microsoft", "Meta", "Amazon", "Apple"],
                 "best_cities": [city or "Major Industry Hubs"],
                 "recommended_skills": ["Communication", "Leadership", "Technical Domain Mastery"],
-                "recommendation": "Focus on building portfolio proof with high-value technical skills to command upper percentile pay."
+                "recommendation": "Focus on building portfolio proof with high-value technical skills to command upper percentile pay.",
+                "salary_reason": f"Compensation levels for a {role} reflect high cognitive demand, specialized technical expertise, and local talent scarcity."
             }
 
         # Format salary progression bands using dynamic verified benchmarks
@@ -2402,7 +2426,8 @@ Return ONLY valid JSON:
             "best_cities": llm_res.get("best_cities", []),
             "recommended_skills": llm_res.get("recommended_skills", []),
             "salary_progression": salary_progression,
-            "recommendation": llm_res.get("recommendation", "")
+            "recommendation": llm_res.get("recommendation", ""),
+            "salary_reason": llm_res.get("salary_reason", f"Compensation levels for a {role} reflect high cognitive demand, specialized technical expertise, and local talent scarcity.")
         })
 
         return success(final_res)
@@ -2523,7 +2548,8 @@ def generate_fallback_compare(career1, career2, country="India"):
                 "experience_level": "Fresher to Mid-Level",
                 "country": country_clean,
                 "amount": sal,
-                "currency": curr_info
+                "currency": curr_info,
+                "reason": f"Compensation levels for a {name} reflect high cognitive demand, specialized technical expertise, and local talent scarcity."
             },
             "overall_score": score,
             "salary_score": min(100, max(50, score + 2)),
@@ -2660,7 +2686,8 @@ JSON Format:
 "experience_level": "Fresher",
 "country": "",
 "amount": "",
-"currency": ""
+"currency": "",
+"reason": "Detailed explanation explaining why this career commands this salary (e.g. key drivers like talent scarcity, cognitive demand, credentials, industry margins, etc.)"
 }},
 "overall_score": 0,
 "salary_score": 0,
@@ -2687,7 +2714,8 @@ JSON Format:
 "experience_level": "Fresher",
 "country": "",
 "amount": "",
-"currency": ""
+"currency": "",
+"reason": "Detailed explanation explaining why this career commands this salary..."
 }},
 "overall_score": 0,
 "salary_score": 0,
@@ -2740,6 +2768,9 @@ JSON Format:
             if c_key in result and isinstance(result[c_key], dict):
                 c_name = result[c_key].get("name", career1 if c_key == "career1" else career2)
                 norm_sal = create_normalized_salary_object(c_name, country)
+                llm_sal = result[c_key].get("salary")
+                if isinstance(llm_sal, dict) and llm_sal.get("reason"):
+                    norm_sal["reason"] = llm_sal.get("reason")
                 result[c_key]["salary_benchmark"] = norm_sal
 
                 cities_raw = result[c_key].get("top_cities", [])

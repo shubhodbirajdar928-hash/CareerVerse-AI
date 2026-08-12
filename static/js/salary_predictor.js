@@ -91,7 +91,10 @@ if (btn) {
                         <p style="color: var(--text-secondary); font-size: 0.9rem; margin-top: 4px;">🌍 <strong>${targetCountry}</strong> — ${targetCity}</p>
                         
                         <h1 style="font-size: 3.5rem; font-weight: 800; color: var(--accent); margin: 16px 0 10px; line-height: 1;">${estimatedSalary}</h1>
-                        <p style="color: var(--text-secondary); font-size: 0.95rem; margin: 0;">Verified Annual Package based on official market records & experience mapping.</p>
+                        <p style="color: var(--text-secondary); font-size: 0.95rem; margin: 0 0 16px;">Verified Annual Package based on official market records & experience mapping.</p>
+                        <div style="max-width: 650px; margin: 16px auto 0; padding: 12px 18px; background: rgba(250, 204, 21, 0.04); border: 1px dashed rgba(250, 204, 21, 0.35); border-radius: 12px; font-size: 0.88rem; color: var(--text-primary); line-height: 1.5; text-align: center;">
+                            <strong>Why this salary?</strong> ${data.salary_reason || 'This compensation profile reflects high cognitive complexity, localized skills scarcity, and strong market demand for qualified practitioners.'}
+                        </div>
                     </div>
 
                     <!-- VERIFIED DATA SOURCE DETAILS (Section 20/23/25) -->

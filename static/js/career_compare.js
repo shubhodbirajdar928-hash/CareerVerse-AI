@@ -530,6 +530,9 @@ function createCareerCard(career, isPrimary, countryTarget) {
                         <strong style="color: #a855f7; font-size: 0.88rem; display: block; margin-top: 4px;">${seniorPay}</strong>
                     </div>
                 </div>
+                <div style="margin-top: 12px; border-top: 1px solid rgba(255,255,255,0.06); padding-top: 10px; font-size: 0.8rem; color: var(--text-secondary); line-height: 1.45;">
+                    <strong>Why this salary?</strong> ${salaryBench.reason || 'This compensation profile is shaped by technical expertise requirements, talent scarcity, and industry margins.'}
+                </div>
             </div>
 
             <!-- Opportunity Fit Index & Market Indicators -->

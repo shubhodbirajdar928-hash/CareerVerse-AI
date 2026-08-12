@@ -339,6 +339,9 @@ function renderPayBandCard(salaryData, targetSalInfo, country) {
                 <h4 style="color: #a855f7; font-size: 1.05rem; margin: 6px 0 0; font-weight: 800;">${senior}</h4>
             </div>
         </div>
+        <div style="margin-top: 16px; border-top: 1px solid rgba(255,255,255,0.08); padding-top: 14px; font-size: 0.82rem; color: var(--text-secondary); line-height: 1.5;">
+            <strong>Why this salary?</strong> ${salaryData?.reason || 'Driven by specialized competency requirements, cognitive complexity, and strong regional market demands.'}
+        </div>
     </div>
     `;
 }

@@ -124,6 +124,11 @@ if (btn) {
                         </div>
                     </div>
 
+                    <!-- Salary Reason Callout Block -->
+                    <div style="background: rgba(34, 197, 94, 0.04); border: 1px dashed rgba(34, 197, 94, 0.35); border-radius: 14px; padding: 14px 20px; font-size: 0.88rem; color: var(--text-primary); line-height: 1.5; margin-bottom: 8px;">
+                        <strong>Why this salary?</strong> ${data.salary_reason || 'This compensation level is driven by specialized technical requirements, target country hiring demands, and competitive role values.'}
+                    </div>
+
                     <!-- 2-COLUMN ANALYSIS GRID -->
                     <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px;">
                         <!-- LEFT COLUMN -->
