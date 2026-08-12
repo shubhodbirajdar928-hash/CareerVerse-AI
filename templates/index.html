@@ -12,7 +12,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="{{ url_for('static', filename='css/common.css') }}?v=20260812_v3">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}?v=20260812_v3">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}?v=20260812_v4">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
 </head>
 
@@ -24,32 +24,55 @@
 <!-- ══════════════ HERO ══════════════ -->
 <section class="hero">
     <div class="hero-glow"></div>
+    <div class="hero-grid-pattern"></div>
     <div class="hero-container">
-        <span class="hero-eyebrow"><i class="fa-solid fa-sparkles"></i> Free Forever · No Login Required</span>
-        <h1 class="hero-title">Plan Your Career<br><span>with AI That Gets It</span></h1>
+        <span class="hero-eyebrow"><i class="fa-solid fa-sparkles"></i> AI-Powered Career Intelligence</span>
+        <h1 class="hero-title">Your Entire Career,<br><span>Mapped in Seconds.</span></h1>
         <p class="hero-subtitle">
-            Pick a career, choose your country, and get a full roadmap — salary ranges,
-            skills to learn, resume tips, and market insights. All powered by Gemini AI.
+            Get a step-by-step roadmap, check realistic salaries, score your resume, and close skill gaps. Powered by Google's Gemini AI.
         </p>
-        <div class="hero-actions">
-            <a href="/generate" class="main-btn" id="hero-cta-primary">
-                <i class="fa-solid fa-wand-magic-sparkles"></i> Build My Roadmap
-            </a>
-            <a href="#tools" class="ghost-btn" id="hero-cta-secondary">
-                Explore All 9 Tools <i class="fa-solid fa-arrow-down"></i>
-            </a>
-        </div>
+
+        <!-- Interactive Quick-Start Console -->
+        <form action="/generate" method="GET" class="hero-console">
+            <div class="console-row">
+                <div class="console-input-group">
+                    <label for="console-role">Target Career</label>
+                    <input type="text" id="console-role" name="role" placeholder="e.g. Data Scientist, UX Designer..." required>
+                </div>
+                <div class="console-divider"></div>
+                <div class="console-input-group">
+                    <label for="console-country">Country</label>
+                    <input type="text" id="console-country" name="country" placeholder="e.g. India, United States..." required>
+                </div>
+                <button type="submit" class="console-btn">
+                    <span>Generate</span> <i class="fa-solid fa-wand-magic-sparkles"></i>
+                </button>
+            </div>
+            <div class="console-suggestions">
+                <span class="suggest-label">Try searching:</span>
+                <button type="button" class="suggest-chip" onclick="setConsole('AI Engineer', 'India')">AI Engineer (India)</button>
+                <button type="button" class="suggest-chip" onclick="setConsole('Product Manager', 'United States')">Product Manager (US)</button>
+                <button type="button" class="suggest-chip" onclick="setConsole('UX Designer', 'United Kingdom')">UX Designer (UK)</button>
+            </div>
+        </form>
+
         <div class="hero-proof">
             <div class="proof-item"><i class="fa-solid fa-shield-check"></i> Private & Secure</div>
             <div class="proof-divider"></div>
             <div class="proof-item"><i class="fa-solid fa-earth-americas"></i> 195+ Countries</div>
             <div class="proof-divider"></div>
-            <div class="proof-item"><i class="fa-solid fa-bolt"></i> Instant Results</div>
-            <div class="proof-divider"></div>
-            <div class="proof-item"><i class="fa-brands fa-google"></i> Gemini AI</div>
+            <div class="proof-item"><i class="fa-solid fa-bolt"></i> Instant Analysis</div>
         </div>
     </div>
 </section>
+
+<script>
+function setConsole(role, country) {
+    document.getElementById('console-role').value = role;
+    document.getElementById('console-country').value = country;
+    document.getElementById('console-role').focus();
+}
+</script>
 
 
 <!-- ══════════════ QUICK HIGHLIGHTS ══════════════ -->
