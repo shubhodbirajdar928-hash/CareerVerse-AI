@@ -26,53 +26,98 @@
     <div class="hero-glow"></div>
     <div class="hero-grid-pattern"></div>
     <div class="hero-container">
-        <span class="hero-eyebrow"><i class="fa-solid fa-sparkles"></i> AI-Powered Career Intelligence</span>
-        <h1 class="hero-title">Your Entire Career,<br><span>Mapped in Seconds.</span></h1>
-        <p class="hero-subtitle">
-            Get a step-by-step roadmap, check realistic salaries, score your resume, and close skill gaps. Powered by Google's Gemini AI.
-        </p>
-
-        <!-- Interactive Quick-Start Console -->
-        <form action="/generate" method="GET" class="hero-console">
-            <div class="console-row">
-                <div class="console-input-group">
-                    <label for="console-role">Target Career</label>
-                    <input type="text" id="console-role" name="role" placeholder="e.g. Data Scientist, UX Designer..." required>
-                </div>
-                <div class="console-divider"></div>
-                <div class="console-input-group">
-                    <label for="console-country">Country</label>
-                    <input type="text" id="console-country" name="country" placeholder="e.g. India, United States..." required>
-                </div>
-                <button type="submit" class="console-btn">
-                    <span>Generate</span> <i class="fa-solid fa-wand-magic-sparkles"></i>
-                </button>
+        
+        <!-- Left Column: Content -->
+        <div class="hero-content">
+            <span class="hero-eyebrow">
+                <i class="fa-solid fa-sparkles"></i> 
+                Now Powered by Gemini 1.5 Pro
+            </span>
+            <h1 class="hero-title">
+                Navigate Your Career<br>
+                <span>with Precision.</span>
+            </h1>
+            <p class="hero-subtitle">
+                CareerVerse AI is a free intelligence suite that builds custom learning roadmaps, 
+                calculates realistic salary benchmarks, and analyzes resumes for ATS. No signups, no paywalls.
+            </p>
+            <div class="hero-actions">
+                <a href="/generate" class="main-btn">
+                    <span>Launch Roadmap Generator</span> 
+                    <i class="fa-solid fa-arrow-right"></i>
+                </a>
+                <a href="#tools" class="ghost-btn">
+                    <span>Explore All 9 Tools</span>
+                </a>
             </div>
-            <div class="console-suggestions">
-                <span class="suggest-label">Try searching:</span>
-                <button type="button" class="suggest-chip" onclick="setConsole('AI Engineer', 'India')">AI Engineer (India)</button>
-                <button type="button" class="suggest-chip" onclick="setConsole('Product Manager', 'United States')">Product Manager (US)</button>
-                <button type="button" class="suggest-chip" onclick="setConsole('UX Designer', 'United Kingdom')">UX Designer (UK)</button>
+            <div class="hero-proof">
+                <div class="proof-item"><i class="fa-solid fa-circle-check"></i> 100% Free Forever</div>
+                <div class="proof-divider"></div>
+                <div class="proof-item"><i class="fa-solid fa-shield-halved"></i> Privacy First</div>
+                <div class="proof-divider"></div>
+                <div class="proof-item"><i class="fa-solid fa-globe"></i> 195+ Countries</div>
             </div>
-        </form>
-
-        <div class="hero-proof">
-            <div class="proof-item"><i class="fa-solid fa-shield-check"></i> Private & Secure</div>
-            <div class="proof-divider"></div>
-            <div class="proof-item"><i class="fa-solid fa-earth-americas"></i> 195+ Countries</div>
-            <div class="proof-divider"></div>
-            <div class="proof-item"><i class="fa-solid fa-bolt"></i> Instant Analysis</div>
         </div>
+
+        <!-- Right Column: Visual UI Playground -->
+        <div class="hero-visual">
+            <div class="visual-card">
+                <div class="card-header">
+                    <div class="window-dots">
+                        <span class="dot"></span>
+                        <span class="dot"></span>
+                        <span class="dot"></span>
+                    </div>
+                    <span class="badge-live"><span class="live-dot"></span> SIMULATED METRICS</span>
+                </div>
+                <div class="card-body">
+                    <div class="career-title-row">
+                        <div class="icon-box"><i class="fa-solid fa-route"></i></div>
+                        <div>
+                            <h4>AI & Machine Learning Engineer</h4>
+                            <small>Tech Hub Focus · India / US</small>
+                        </div>
+                    </div>
+                    <div class="metric-grid">
+                        <div class="metric-box">
+                            <span class="label">MARKET DEMAND</span>
+                            <span class="value val-green">High Growth (94%)</span>
+                        </div>
+                        <div class="metric-box">
+                            <span class="label">AVG. SALARY (INDIA)</span>
+                            <span class="value">₹18.5L / yr</span>
+                        </div>
+                    </div>
+                    <div class="roadmap-preview">
+                        <span class="roadmap-label">ROADMAP PHASES</span>
+                        <div class="phase-item">
+                            <div class="phase-meta">
+                                <span>Phase 1: Math & Python Foundations</span>
+                                <span class="percent">100%</span>
+                            </div>
+                            <div class="progress-bar"><div class="bar bar-fill-100"></div></div>
+                        </div>
+                        <div class="phase-item">
+                            <div class="phase-meta">
+                                <span>Phase 2: Core Machine Learning</span>
+                                <span class="percent">65%</span>
+                            </div>
+                            <div class="progress-bar"><div class="bar bar-fill-65"></div></div>
+                        </div>
+                        <div class="phase-item">
+                            <div class="phase-meta">
+                                <span>Phase 3: Deploying Models (MLOps)</span>
+                                <span class="percent">0%</span>
+                            </div>
+                            <div class="progress-bar"><div class="bar bar-fill-0"></div></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </div>
 </section>
-
-<script>
-function setConsole(role, country) {
-    document.getElementById('console-role').value = role;
-    document.getElementById('console-country').value = country;
-    document.getElementById('console-role').focus();
-}
-</script>
 
 
 <!-- ══════════════ QUICK HIGHLIGHTS ══════════════ -->
