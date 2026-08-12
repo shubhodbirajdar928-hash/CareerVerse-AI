@@ -313,30 +313,112 @@
 }
 
 .tool-card:hover {
-    border-color: rgba(250, 204, 21, 0.25);
     transform: translateY(-4px);
-    box-shadow: 0 12px 36px rgba(0, 0, 0, 0.25);
-}
-
-.tool-card:hover::before {
-    background: linear-gradient(90deg, var(--accent), transparent);
 }
 
 .tool-featured {
-    border-color: rgba(250, 204, 21, 0.15);
-    background: linear-gradient(180deg, rgba(250, 204, 21, 0.03) 0%, var(--bg-card) 40%);
+    background: linear-gradient(180deg, rgba(var(--card-accent-rgb), 0.03) 0%, var(--bg-card) 40%);
 }
 
-.tool-live {
-    border-color: rgba(16, 185, 129, 0.2);
+/* Card Themes (CSS Variables) */
+.card-amber {
+    --card-accent: #facc15;
+    --card-accent-rgb: 250, 204, 21;
+}
+.card-blue {
+    --card-accent: #3b82f6;
+    --card-accent-rgb: 59, 130, 246;
+}
+.card-indigo {
+    --card-accent: #6366f1;
+    --card-accent-rgb: 99, 102, 241;
+}
+.card-emerald {
+    --card-accent: #10b981;
+    --card-accent-rgb: 16, 185, 129;
+}
+.card-rose {
+    --card-accent: #f43f5e;
+    --card-accent-rgb: 244, 63, 94;
+}
+.card-cyan {
+    --card-accent: #06b6d4;
+    --card-accent-rgb: 6, 182, 212;
+}
+.card-orange {
+    --card-accent: #f97316;
+    --card-accent-rgb: 249, 115, 22;
+}
+.card-purple {
+    --card-accent: #a855f7;
+    --card-accent-rgb: 168, 85, 247;
+}
+.card-green {
+    --card-accent: #22c55e;
+    --card-accent-rgb: 34, 197, 94;
 }
 
-.tool-live:hover {
-    border-color: rgba(16, 185, 129, 0.4);
+/* Applying Variables to Cards */
+.tool-card.card-amber,
+.tool-card.card-blue,
+.tool-card.card-indigo,
+.tool-card.card-emerald,
+.tool-card.card-rose,
+.tool-card.card-cyan,
+.tool-card.card-orange,
+.tool-card.card-purple,
+.tool-card.card-green {
+    border-color: rgba(var(--card-accent-rgb), 0.15);
 }
 
-.tool-live:hover::before {
-    background: linear-gradient(90deg, #10b981, transparent);
+.tool-card.card-amber:hover,
+.tool-card.card-blue:hover,
+.tool-card.card-indigo:hover,
+.tool-card.card-emerald:hover,
+.tool-card.card-rose:hover,
+.tool-card.card-cyan:hover,
+.tool-card.card-orange:hover,
+.tool-card.card-purple:hover,
+.tool-card.card-green:hover {
+    border-color: rgba(var(--card-accent-rgb), 0.35);
+    box-shadow: 0 12px 36px rgba(0, 0, 0, 0.25), 0 0 20px rgba(var(--card-accent-rgb), 0.08);
+}
+
+.tool-card.card-amber:hover::before,
+.tool-card.card-blue:hover::before,
+.tool-card.card-indigo:hover::before,
+.tool-card.card-emerald:hover::before,
+.tool-card.card-rose:hover::before,
+.tool-card.card-cyan:hover::before,
+.tool-card.card-orange:hover::before,
+.tool-card.card-purple:hover::before,
+.tool-card.card-green:hover::before {
+    background: linear-gradient(90deg, var(--card-accent), transparent);
+}
+
+.tool-card.card-amber .tool-icon,
+.tool-card.card-blue .tool-icon,
+.tool-card.card-indigo .tool-icon,
+.tool-card.card-emerald .tool-icon,
+.tool-card.card-rose .tool-icon,
+.tool-card.card-cyan .tool-icon,
+.tool-card.card-orange .tool-icon,
+.tool-card.card-purple .tool-icon,
+.tool-card.card-green .tool-icon {
+    background: rgba(var(--card-accent-rgb), 0.08);
+    color: var(--card-accent);
+}
+
+.tool-card.card-amber:hover .tool-cta,
+.tool-card.card-blue:hover .tool-cta,
+.tool-card.card-indigo:hover .tool-cta,
+.tool-card.card-emerald:hover .tool-cta,
+.tool-card.card-rose:hover .tool-cta,
+.tool-card.card-cyan:hover .tool-cta,
+.tool-card.card-orange:hover .tool-cta,
+.tool-card.card-purple:hover .tool-cta,
+.tool-card.card-green:hover .tool-cta {
+    color: var(--card-accent);
 }
 
 .tool-card-header {
