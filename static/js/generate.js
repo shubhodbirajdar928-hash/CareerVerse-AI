@@ -579,7 +579,7 @@ async function generateRoadmapNow() {
 
 <div class="roadmap-item">
     <h2><i class="fa-solid fa-route"></i> Step-by-Step Monthly Execution Roadmap</h2>
-    <div style="display: flex; flex-direction: column; gap: 16px;">
+    <div style="display: flex; flex-direction: column; gap: 16px; perspective: 1000px;">
         ${roadmap.map((month, idx) => `
             <div class="phase-card">
                 <div class="phase-header">

@@ -174,12 +174,26 @@
     backdrop-filter: blur(16px);
     transform: rotateY(-8deg) rotateX(4deg);
     transition: all 0.4s ease;
+    animation: floating-hero-card 6s ease-in-out infinite;
 }
 
 .visual-card:hover {
+    animation: none;
     transform: rotateY(0deg) rotateX(0deg) scale(1.02);
     border-color: rgba(250, 204, 21, 0.2);
     box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6), 0 0 30px rgba(250, 204, 21, 0.05);
+}
+
+@keyframes floating-hero-card {
+    0% {
+        transform: rotateY(-8deg) rotateX(4deg) translateY(0);
+    }
+    50% {
+        transform: rotateY(-8deg) rotateX(4deg) translateY(-12px);
+    }
+    100% {
+        transform: rotateY(-8deg) rotateX(4deg) translateY(0);
+    }
 }
 
 .visual-card .card-header {
@@ -492,6 +506,7 @@
     gap: 24px;
     max-width: 1300px;
     margin: 0 auto;
+    perspective: 1000px;
 }
 
 .tool-card {
@@ -500,7 +515,7 @@
     border-radius: 14px;
     padding: 36px 32px 32px;
     text-decoration: none;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), border-color 0.3s ease, box-shadow 0.3s ease;
     display: flex;
     flex-direction: column;
     gap: 16px;
@@ -520,7 +535,7 @@
 }
 
 .tool-card:hover {
-    transform: translateY(-4px);
+    transform: translateY(-8px) scale(1.02) rotateX(3deg) rotateY(-3deg);
 }
 
 .tool-card::after {
