@@ -391,19 +391,19 @@
 }
 
 .section-header h2 {
-    font-size: clamp(1.7rem, 3.5vw, 2.5rem);
+    font-size: clamp(2rem, 4.5vw, 3rem);
     color: var(--text-heading);
     font-weight: 800;
     margin-bottom: 10px;
-    letter-spacing: -0.02em;
+    letter-spacing: -0.025em;
 }
 
 .section-header p {
-    font-size: 0.95rem;
+    font-size: 1.05rem;
     color: var(--text-secondary);
-    max-width: 480px;
+    max-width: 540px;
     margin: 0 auto;
-    line-height: 1.6;
+    line-height: 1.65;
 }
 
 .reveal {
@@ -478,15 +478,15 @@
 
 /* === TOOLS GRID === */
 .tools-section {
-    padding: 90px 32px;
+    padding: 120px 32px;
     border-bottom: 1px solid var(--border);
 }
 
 .tools-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 18px;
-    max-width: 1100px;
+    gap: 24px;
+    max-width: 1300px;
     margin: 0 auto;
 }
 
@@ -494,12 +494,12 @@
     background: var(--bg-card);
     border: 1px solid var(--border);
     border-radius: 14px;
-    padding: 30px 26px 26px;
+    padding: 36px 32px 32px;
     text-decoration: none;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     display: flex;
     flex-direction: column;
-    gap: 14px;
+    gap: 16px;
     position: relative;
     overflow: hidden;
 }
@@ -673,16 +673,16 @@
 }
 
 .tool-card h3 {
-    font-size: 1.08rem;
+    font-size: 1.22rem;
     color: var(--text-heading);
     font-weight: 700;
     margin: 0;
 }
 
 .tool-card p {
-    font-size: 0.88rem;
+    font-size: 0.95rem;
     color: var(--text-secondary);
-    line-height: 1.55;
+    line-height: 1.58;
     margin: 0;
     flex-grow: 1;
 }
@@ -705,12 +705,12 @@
 
 /* === HOW IT WORKS === */
 .how-section {
-    padding: 90px 32px;
+    padding: 120px 32px;
     border-bottom: 1px solid var(--border);
 }
 
 .how-grid {
-    max-width: 900px;
+    max-width: 1100px;
     margin: 0 auto;
     display: flex;
     align-items: flex-start;
@@ -725,30 +725,30 @@
 }
 
 .how-num {
-    width: 52px;
-    height: 52px;
-    border-radius: 14px;
+    width: 64px;
+    height: 64px;
+    border-radius: 16px;
     background: rgba(250, 204, 21, 0.08);
     border: 1px solid rgba(250, 204, 21, 0.15);
     color: var(--accent);
-    font-size: 1rem;
+    font-size: 1.15rem;
     font-weight: 800;
     display: grid;
     place-items: center;
-    margin: 0 auto 18px auto;
+    margin: 0 auto 22px auto;
 }
 
 .how-step h3 {
-    font-size: 1.1rem;
+    font-size: 1.25rem;
     color: var(--text-heading);
     font-weight: 700;
-    margin-bottom: 8px;
+    margin-bottom: 10px;
 }
 
 .how-step p {
-    font-size: 0.92rem;
+    font-size: 0.96rem;
     color: var(--text-secondary);
-    line-height: 1.55;
+    line-height: 1.6;
 }
 
 .how-connector {
@@ -762,23 +762,23 @@
 
 /* === WHY SECTION === */
 .why-section {
-    padding: 90px 32px;
+    padding: 120px 32px;
     border-bottom: 1px solid var(--border);
 }
 
 .why-grid {
-    max-width: 920px;
+    max-width: 1200px;
     margin: 0 auto;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 16px;
+    gap: 24px;
 }
 
 .why-item {
     background: var(--bg-card);
     border: 1px solid var(--border);
     border-radius: 14px;
-    padding: 28px 22px;
+    padding: 36px 28px;
     text-align: center;
     transition: all 0.25s ease;
 }
@@ -789,38 +789,38 @@
 }
 
 .why-item i {
-    font-size: 1.4rem;
+    font-size: 1.6rem;
     color: var(--accent);
-    margin-bottom: 14px;
+    margin-bottom: 16px;
     display: block;
 }
 
 .why-item strong {
     display: block;
-    font-size: 0.95rem;
+    font-size: 1.1rem;
     color: var(--text-heading);
     font-weight: 700;
-    margin-bottom: 4px;
+    margin-bottom: 6px;
 }
 
 .why-item span {
-    font-size: 0.78rem;
+    font-size: 0.86rem;
     color: var(--text-muted);
-    line-height: 1.4;
+    line-height: 1.45;
 }
 
 /* === FAQ === */
 .faq-section {
-    padding: 90px 32px;
+    padding: 120px 32px;
     border-bottom: 1px solid var(--border);
 }
 
 .faq-container {
-    max-width: 750px;
+    max-width: 900px;
     margin: 0 auto;
     display: flex;
     flex-direction: column;
-    gap: 6px;
+    gap: 10px;
 }
 
 .faq-item {
@@ -841,11 +841,11 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 20px 24px;
+    padding: 24px 30px;
     background: none;
     border: none;
     color: var(--text-heading);
-    font-size: 0.92rem;
+    font-size: 1.02rem;
     font-weight: 600;
     cursor: pointer;
     font-family: inherit;
@@ -874,8 +874,8 @@
 }
 
 .faq-answer p {
-    padding: 0 24px 20px;
-    font-size: 0.85rem;
+    padding: 0 30px 24px;
+    font-size: 0.92rem;
     color: var(--text-secondary);
     line-height: 1.6;
     margin: 0;
@@ -883,13 +883,13 @@
 
 /* === FINAL CTA === */
 .final-cta {
-    padding: 100px 32px;
+    padding: 130px 32px;
     position: relative;
     overflow: hidden;
 }
 
 .final-cta-inner {
-    max-width: 600px;
+    max-width: 700px;
     margin: 0 auto;
     text-align: center;
     position: relative;
@@ -909,17 +909,17 @@
 }
 
 .final-cta-inner h2 {
-    font-size: clamp(1.6rem, 3.5vw, 2.3rem);
+    font-size: clamp(2rem, 4.5vw, 2.8rem);
     color: var(--text-heading);
     font-weight: 800;
-    margin-bottom: 10px;
-    letter-spacing: -0.02em;
+    margin-bottom: 12px;
+    letter-spacing: -0.025em;
 }
 
 .final-cta-inner p {
-    font-size: 1.08rem;
+    font-size: 1.2rem;
     color: var(--text-secondary);
-    margin-bottom: 36px;
+    margin-bottom: 40px;
 }
 
 .final-cta-btns {
