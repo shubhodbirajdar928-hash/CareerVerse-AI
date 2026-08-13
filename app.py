@@ -988,6 +988,27 @@ def get_fallback_roadmap(career, country, months=6):
     c_title = career.strip().title() if career else "Professional"
     c_low = career.lower() if career else ""
     is_india = "india" in (country or "").lower() or not (country or "").strip()
+    # Default Initializations to prevent UnboundLocalError
+    edu = f"Bachelor's Degree in relevant field or equivalent professional portfolio for {c_title}"
+    sal_ind_f, sal_ind_m, sal_ind_s = "₹4.5L - ₹7.5L / yr", "₹10.0L - ₹18.0L / yr", "₹22.0L - ₹45.0L / yr"
+    sal_cnt_f, sal_cnt_m, sal_cnt_s = "$55,000 - $80,000 / yr", "$90,000 - $140,000 / yr", "$160,000 - $260,000 / yr"
+    roles = [f"Junior {c_title}", f"Associate {c_title}", f"Senior {c_title}", f"Lead {c_title} Specialist", f"Director / Head of {c_title}"]
+    sk_b = [f"Foundational {c_title} Concepts", "Industry Fundamentals", "Basic Tooling & Workflow", "Time Management", "Professional Communication"]
+    sk_i = [f"Intermediate {c_title} Execution", "Data Analysis & Metrics", "Problem Solving & Troubleshooting", "Standard Compliance & Safety", "Team Collaboration"]
+    sk_a = [f"Advanced {c_title} Strategy", "Leadership & Mentorship", "System Optimization & Scalability", "Risk Management & Planning", "Budgeting & Financial Stewardship"]
+    yt = [{"name": "Google Learning Portal", "url": "https://www.youtube.com"}, {"name": "Industry Overview Guides", "url": "https://www.youtube.com"}]
+    courses = [{"name": "Coursera Professional Learning", "url": "https://www.coursera.org"}, {"name": "edX Skill Academy", "url": "https://www.edx.org"}]
+    docs = [{"name": "Official Industry Guidelines", "url": "https://en.wikipedia.org"}]
+    books = [{"name": "Standard Reference Handbook", "url": "https://amazon.com"}]
+    projs_b = [f"Basic {c_title} Practical Study", f"Foundational {c_title} Case Study", f"Initial {c_title} Project", "Process Auditing Task", "Standard Report Writing"]
+    projs_i = [f"Intermediate {c_title} Portfolio Project", f"Standard {c_title} Quality Audit", f"Client-Facing {c_title} Execution", "Workflow Integration Project", "Team Performance Assessment"]
+    projs_a = [f"Advanced {c_title} Strategy Capstone", f"Enterprise {c_title} Deployment Plan", f"Global {c_title} Performance Analysis", "Strategic Resource Allocation Study", "Industry Compliance Review"]
+    certs = [f"Certified {c_title} Professional", f"Advanced {c_title} Specialist License", "Standard Project Management Certificate", "Industry Operations Credential", "Professional Development Diploma"]
+    tools = ["Standard Enterprise Tools", "Industry Software Utilities", "Process Flow Simulators", "Reporting Dashboards", "Team Collaboration Suite"]
+    top_orgs = ["Global Enterprise Systems", "Leading Industry Operations", "National Sector Corporations", "Regional Services Group", "Specialist Consulting Firm"]
+    hotspots = [{"city": "Mumbai / India", "demand": "High", "reason": "Major Industrial & Commerce Hub"}, {"city": "New York / USA", "demand": "High", "reason": "Global Corporate Headquarters Hub"}, {"city": "London / UK", "demand": "High", "reason": "International Services Hub"}, {"city": "Bengaluru", "demand": "High", "reason": "Tech & Services Operations Hub"}, {"city": "Delhi NCR", "demand": "Moderate-High", "reason": "Corporate Offices & Government Agencies"}]
+    trend_skills = [f"Digital {c_title} Workflows", "Process Automation", "Data-Driven Reporting", "AI-Assisted Efficiency", "Remote Collaboration"]
+    daily_plan = ["Monday: 2 hrs Core Principles", "Tuesday: 2 hrs Technical Study", "Wednesday: 2 hrs Tooling Practice", "Thursday: 2 hrs Portfolio Work", "Friday: 2 hrs Weekly Review", "Saturday: 3 hrs Case Study Analysis", "Sunday: 1 hr Weekly Knowledge Assessment"]
 
     # Sector Classification
     if any(w in c_low for w in ["doctor", "surgeon", "physician", "dentist", "nurse", "medical", "pharmacist"]):
