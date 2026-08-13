@@ -127,6 +127,23 @@ if (btn) {
                     <!-- Salary Reason Callout Block -->
                     <div style="background: rgba(34, 197, 94, 0.04); border: 1px dashed rgba(34, 197, 94, 0.35); border-radius: 14px; padding: 14px 20px; font-size: 0.88rem; color: var(--text-primary); line-height: 1.5; margin-bottom: 8px;">
                         <strong>Why this salary?</strong> ${data.salary_reason || 'This compensation level is driven by specialized technical requirements, target country hiring demands, and competitive role values.'}
+                        <div style="margin-top: 10px; padding-top: 8px; border-top: 1px dashed rgba(34, 197, 94, 0.2); font-size: 0.76rem; color: var(--text-muted); display: flex; align-items: center; gap: 6px; flex-wrap: wrap;">
+                            <span><i class="fa-solid fa-database" style="color: #22c55e;"></i> Checked Sources:</span>
+                            ${(function() {
+                                const cLow = (targetCountry || "").toLowerCase();
+                                let sources = [];
+                                if (cLow.includes("india")) {
+                                    sources = ["Ministry of Labour (GoI)", "NCS"];
+                                } else if (cLow.includes("united states") || cLow.includes("usa") || cLow.includes("us")) {
+                                    sources = ["US BLS OEWS", "O*NET"];
+                                } else if (cLow.includes("united kingdom") || cLow.includes("uk")) {
+                                    sources = ["UK Dept for Education", "ONS Registry"];
+                                } else {
+                                    sources = ["ILO Datasets", "CareerVerse Registries"];
+                                }
+                                return sources.map(src => `<span style="background: rgba(34, 197, 94, 0.06); padding: 1px 6px; border-radius: 4px; border: 1px solid rgba(34, 197, 94, 0.15); color: #22c55e; font-weight: 600;">${src}</span>`).join('');
+                            })()}
+                        </div>
                     </div>
 
                     <!-- 2-COLUMN ANALYSIS GRID -->

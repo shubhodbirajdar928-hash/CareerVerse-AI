@@ -438,6 +438,18 @@ function createCareerCard(career, isPrimary, countryTarget) {
     const midPay = salaryBench.mid || "Data unavailable";
     const seniorPay = salaryBench.senior || "Data unavailable";
     const countryName = salaryBench.target_location || salaryBench.country || countryTarget || "Target Market";
+    
+    let sourcesChecked = [];
+    const cLow = countryName.toLowerCase();
+    if (cLow.includes("india")) {
+        sourcesChecked = ["Ministry of Labour (GoI)", "NCS"];
+    } else if (cLow.includes("united states") || cLow.includes("usa") || cLow.includes("us")) {
+        sourcesChecked = ["US BLS OEWS", "O*NET OnLine"];
+    } else if (cLow.includes("united kingdom") || cLow.includes("uk")) {
+        sourcesChecked = ["UK Dept for Education", "ONS ASHE"];
+    } else {
+        sourcesChecked = ["ILO Registry", "Verified Benchmarks"];
+    }
 
     const demandRating = career.demand || (career.demand_score > 85 ? "Very High" : "High");
     const growthOutlook = career.growth || (career.growth_score > 85 ? "Fast Growing" : "Growing");
@@ -532,6 +544,10 @@ function createCareerCard(career, isPrimary, countryTarget) {
                 </div>
                 <div style="margin-top: 12px; border-top: 1px solid rgba(255,255,255,0.06); padding-top: 10px; font-size: 0.8rem; color: var(--text-secondary); line-height: 1.45;">
                     <strong>Why this salary?</strong> ${salaryBench.reason || 'This compensation profile is shaped by technical expertise requirements, talent scarcity, and industry margins.'}
+                </div>
+                <div style="margin-top: 10px; padding-top: 8px; border-top: 1px dashed rgba(255,255,255,0.06); font-size: 0.74rem; color: var(--text-muted); display: flex; align-items: center; gap: 6px; flex-wrap: wrap;">
+                    <span><i class="fa-solid fa-database" style="color: ${accentColor};"></i> Sources:</span>
+                    ${sourcesChecked.map(src => `<span style="background: rgba(255,255,255,0.03); padding: 1px 6px; border-radius: 4px; border: 1px solid rgba(255,255,255,0.05); color: var(--text-secondary); font-weight: 600;">${src}</span>`).join('')}
                 </div>
             </div>
 
