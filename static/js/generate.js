@@ -571,7 +571,7 @@ async function generateRoadmapNow() {
             </ul>
         </div>
 
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 24px;">
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin-bottom: 24px;">
             <div style="background: rgba(25, 25, 25, 0.7); border: 1px solid var(--border); border-radius: 14px; padding: 18px;">
                 <h3 style="margin-top: 0; color: var(--accent);"><i class="fa-solid fa-user-graduate"></i> Education & Path</h3>
                 <p style="font-size: 0.92rem; margin: 0; line-height: 1.5; color: var(--text-secondary);">${overview.education || "Bachelor's Degree in relevant field / Portfolio Proof"}</p>
@@ -582,219 +582,526 @@ async function generateRoadmapNow() {
             </div>
         </div>
 
-        <!-- Past, Present & Future Timeline Reason Card -->
+        <!-- Past, Present & Future Timeline -->
         <div style="background: rgba(250, 204, 21, 0.03); border: 1px solid rgba(250, 204, 21, 0.25); border-radius: 16px; padding: 20px; margin-bottom: 24px;">
-            <h3 style="margin-top: 0; color: var(--accent); font-size: 1rem; margin-bottom: 14px;"><i class="fa-solid fa-hourglass-half"></i> Past, Present & Future Macro Market Evolution</h3>
-            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px;">
-                <div style="background: rgba(59, 130, 246, 0.05); border: 1px solid rgba(59, 130, 246, 0.25); border-radius: 12px; padding: 14px;">
+            <h3 style="margin-top: 0; color: var(--accent); font-size: 1.05rem; margin-bottom: 14px;"><i class="fa-solid fa-hourglass-half"></i> Past, Present & Future Macro Market Evolution</h3>
+            <div style="display: flex; flex-direction: column; gap: 14px;">
+                <div style="background: rgba(59, 130, 246, 0.05); border: 1px solid rgba(59, 130, 246, 0.2); border-radius: 12px; padding: 14px;">
                     <span style="font-size: 0.75rem; color: #3b82f6; font-weight: 800; text-transform: uppercase; display: block; margin-bottom: 4px;">📜 PAST (10-Yr Evolution)</span>
-                    <p style="font-size: 0.82rem; color: var(--text-secondary); margin: 0; line-height: 1.4;">${(overview.macro_evolution?.past || `Historically, this role relied on manual execution, legacy tools, and localized workflows.`)}</p>
+                    <p style="font-size: 0.88rem; color: var(--text-secondary); margin: 0; line-height: 1.5;">${(overview.macro_evolution?.past || `Historically, this role relied on manual execution, legacy tools, and localized workflows.`)}</p>
                 </div>
-                <div style="background: rgba(250, 204, 21, 0.05); border: 1px solid rgba(250, 204, 21, 0.25); border-radius: 12px; padding: 14px;">
+                <div style="background: rgba(250, 204, 21, 0.05); border: 1px solid rgba(250, 204, 21, 0.2); border-radius: 12px; padding: 14px;">
                     <span style="font-size: 0.75rem; color: var(--accent); font-weight: 800; text-transform: uppercase; display: block; margin-bottom: 4px;">⚡ PRESENT (Current Realities)</span>
-                    <p style="font-size: 0.82rem; color: var(--text-secondary); margin: 0; line-height: 1.4;">${(overview.macro_evolution?.present || `Currently in high demand driven by digital transformation, modern tech stacks, and cloud integration.`)}</p>
+                    <p style="font-size: 0.88rem; color: var(--text-secondary); margin: 0; line-height: 1.5;">${(overview.macro_evolution?.present || `Currently in high demand driven by digital transformation, modern tech stacks, and cloud integration.`)}</p>
                 </div>
-                <div style="background: rgba(34, 197, 94, 0.05); border: 1px solid rgba(34, 197, 94, 0.25); border-radius: 12px; padding: 14px;">
+                <div style="background: rgba(34, 197, 94, 0.05); border: 1px solid rgba(34, 197, 94, 0.2); border-radius: 12px; padding: 14px;">
                     <span style="font-size: 0.75rem; color: #22c55e; font-weight: 800; text-transform: uppercase; display: block; margin-bottom: 4px;">🚀 FUTURE (5-10 Yr Scope)</span>
-                    <p style="font-size: 0.82rem; color: var(--text-secondary); margin: 0; line-height: 1.4;">${(overview.macro_evolution?.future || `Over the next decade, AI integration will automate routine work, elevating specialists into strategic decision-makers.`)}</p>
+                    <p style="font-size: 0.88rem; color: var(--text-secondary); margin: 0; line-height: 1.5;">${(overview.macro_evolution?.future || `Over the next decade, AI integration will automate routine work, elevating specialists into strategic decision-makers.`)}</p>
                 </div>
             </div>
         </div>
 
-        <h3 style="margin-top: 10px;"><i class="fa-solid fa-clock"></i> Day-in-the-Life & Daily Duty Workflow</h3>
-        <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-bottom: 24px;">
-            <div style="background: rgba(59, 130, 246, 0.05); border: 1px solid rgba(59, 130, 246, 0.3); border-radius: 14px; padding: 16px;">
-                <div style="font-size: 0.75rem; color: #3b82f6; font-weight: 800; text-transform: uppercase; margin-bottom: 4px;">🌅 09:00 AM - 10:30 AM</div>
-                <strong style="color: var(--text-heading); font-size: 0.92rem; display: block; margin-bottom: 4px;">Morning Alignment</strong>
-                <p style="font-size: 0.8rem; color: var(--text-secondary); margin: 0; line-height: 1.4;">Sync with teams, review daily goals, and check urgent updates.</p>
+        <h3 style="margin-top: 10px; margin-bottom: 16px;"><i class="fa-solid fa-clock"></i> Day-in-the-Life & Daily Duty Workflow</h3>
+        <div style="display: flex; flex-direction: column; gap: 16px; border-left: 2px solid rgba(250, 204, 21, 0.15); padding-left: 20px; margin-left: 10px; margin-bottom: 28px;">
+            <div style="position: relative;">
+                <span style="position: absolute; left: -26px; top: 4px; width: 10px; height: 10px; border-radius: 50%; background: #3b82f6; box-shadow: 0 0 8px #3b82f6;"></span>
+                <span style="font-size: 0.75rem; color: #3b82f6; font-weight: 800; text-transform: uppercase; display: block; margin-bottom: 4px;">🌅 09:00 AM - 10:30 AM · Morning Alignment & Standup</span>
+                <p style="font-size: 0.88rem; color: var(--text-secondary); margin: 0; line-height: 1.5;">Sync with cross-functional teams, triage daily priorities, and review critical operational deliverables.</p>
             </div>
-            <div style="background: rgba(34, 197, 94, 0.05); border: 1px solid rgba(34, 197, 94, 0.3); border-radius: 14px; padding: 16px;">
-                <div style="font-size: 0.75rem; color: #22c55e; font-weight: 800; text-transform: uppercase; margin-bottom: 4px;">🧠 10:30 AM - 01:30 PM</div>
-                <strong style="color: var(--text-heading); font-size: 0.92rem; display: block; margin-bottom: 4px;">Deep Focus Execution</strong>
-                <p style="font-size: 0.8rem; color: var(--text-secondary); margin: 0; line-height: 1.4;">High-value learning, hands-on tasks, and building core projects.</p>
+            <div style="position: relative;">
+                <span style="position: absolute; left: -26px; top: 4px; width: 10px; height: 10px; border-radius: 50%; background: #22c55e; box-shadow: 0 0 8px #22c55e;"></span>
+                <span style="font-size: 0.75rem; color: #22c55e; font-weight: 800; text-transform: uppercase; display: block; margin-bottom: 4px;">🧠 10:30 AM - 01:30 PM · Deep Focus Execution</span>
+                <p style="font-size: 0.88rem; color: var(--text-secondary); margin: 0; line-height: 1.5;">Uninterrupted high-value problem solving, technical/strategic execution, and core milestone building.</p>
             </div>
-            <div style="background: rgba(250, 204, 21, 0.05); border: 1px solid rgba(250, 204, 21, 0.3); border-radius: 14px; padding: 16px;">
-                <div style="font-size: 0.75rem; color: var(--accent); font-weight: 800; text-transform: uppercase; margin-bottom: 4px;">🤝 02:30 PM - 04:30 PM</div>
-                <strong style="color: var(--text-heading); font-size: 0.92rem; display: block; margin-bottom: 4px;">Collaboration & Review</strong>
-                <p style="font-size: 0.8rem; color: var(--text-secondary); margin: 0; line-height: 1.4;">Discuss hard concepts, mock reviews, and code/design sharing.</p>
+            <div style="position: relative;">
+                <span style="position: absolute; left: -26px; top: 4px; width: 10px; height: 10px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 8px var(--accent);"></span>
+                <span style="font-size: 0.75rem; color: var(--accent); font-weight: 800; text-transform: uppercase; display: block; margin-bottom: 4px;">🤝 02:30 PM - 04:30 PM · Collaboration & Review</span>
+                <p style="font-size: 0.88rem; color: var(--text-secondary); margin: 0; line-height: 1.5;">Stakeholder feedback loops, peer reviews, technical architecture sessions, and mentoring junior peers.</p>
             </div>
-            <div style="background: rgba(168, 85, 247, 0.05); border: 1px solid rgba(168, 85, 247, 0.3); border-radius: 14px; padding: 16px;">
+            <div style="position: relative;">
+                <span style="position: absolute; left: -26px; top: 4px; width: 10px; height: 10px; border-radius: 50%; background: #a855f7; box-shadow: 0 0 8px #a855f7;"></span>
+                <span style="font-size: 0.75rem; color: #a855f7; font-weight: 800; text-transform: uppercase; display: block; margin-bottom: 4px;">🚀 04:30 PM - 06:00 PM · Quality Audit & Learning</span>
+                <p style="font-size: 0.88rem; color: var(--text-secondary); margin: 0; line-height: 1.5;">Testing & validating day's work, updating task boards, and spending 30 mins exploring cutting-edge AI tools.</p>
+            </div>
+        </div>
 
-    <!-- Global Mobility & Relocation Readiness Index -->
-    ${(() => {
-        const cLow = (country || "").toLowerCase().trim();
-        const careerTitle = data.career || career || "Professional";
-        
-        let visaName = "Standard Work Permit / Skilled Visa";
-        let visaDetails = "Requires official job offer & corporate sponsorship from licensed employer.";
-        let languageReq = "English (Professional Working)";
-        let languageDetails = "International business language standard across major corporate hubs.";
-        let score = "90 / 100";
-
-        if (cLow.includes("japan")) {
-            visaName = "HSP Visa / Engineer Work Status";
-            visaDetails = "Fast-track 1-3 year permanent residency for Highly Skilled Professionals.";
-            languageReq = "Japanese JLPT N3 / N2 (Target)";
-            languageDetails = "English used in multinational tech; JLPT N3 unlocks 5x more local roles.";
-            score = "92 / 100";
-        } else if (cLow.includes("germany") || cLow.includes("europe") || cLow.includes("eu")) {
-            visaName = "EU Blue Card / Opportunity Card";
-            visaDetails = "Fast-track residence permit with minimum salary threshold requirements.";
-            languageReq = "German B1/B2 (Recommended)";
-            languageDetails = "Tech hubs (Berlin/Munich) operate in English; B1 accelerates permanent PR.";
-            score = "95 / 100";
-        } else if (cLow.includes("usa") || cLow.includes("united states") || cLow.includes("america")) {
-            visaName = "H-1B / O-1 / L-1 Intracompany";
-            visaDetails = "Cap-subject lottery or specialized talent visa; STEM OPT extension for graduates.";
-            languageReq = "Native / Fluent English";
-            languageDetails = "Full professional fluency required for technical interviews & client presentation.";
-            score = "94 / 100";
-        } else if (cLow.includes("uk") || cLow.includes("united kingdom")) {
-            visaName = "Skilled Worker Visa (SWV)";
-            visaDetails = "Point-based immigration system requiring licensed sponsor & salary threshold.";
-            languageReq = "IELTS / B2 English Certified";
-            languageDetails = "Standard UKVI English proficiency certification required for visa application.";
-            score = "93 / 100";
-        } else if (cLow.includes("uae") || cLow.includes("dubai") || cLow.includes("saudi")) {
-            visaName = "Golden Visa / Tax-Free Work Permit";
-            visaDetails = "10-year residency for top talent & executive specialists; 0% personal income tax.";
-            languageReq = "English (Arabic Advantage)";
-            languageDetails = "Corporate business operates entirely in English; Arabic is a strong local asset.";
-            score = "96 / 100";
-        } else if (cLow.includes("india")) {
-            visaName = "Domestic Prime Market";
-            visaDetails = "Seamless national mobility across major Tier-1 technology & corporate hubs.";
-            languageReq = "English & Regional Fluency";
-            languageDetails = "English is the standard corporate medium across Indian enterprise hubs.";
-            score = "98 / 100";
-        }
-
-        const countryName = targetSalInfo?.name || (country ? country.trim() : "Target Market");
-
-        return `
-        <div style="background: rgba(15, 23, 42, 0.85); border: 1px solid rgba(59, 130, 246, 0.35); border-radius: 18px; padding: 22px; margin-top: 20px; margin-bottom: 20px; box-shadow: 0 12px 30px rgba(0,0,0,0.45); backdrop-filter: blur(10px);">
-            <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; margin-bottom: 16px; border-bottom: 1px solid rgba(255,255,255,0.08); padding-bottom: 12px;">
-                <span style="font-size: 1.02rem; font-weight: 800; color: var(--text-heading); display: flex; align-items: center; gap: 10px;">
-                    <span style="font-size: 1.3rem;">🌐</span> Global Mobility & Relocation Readiness Index (${countryName})
-                </span>
-                <span style="background: rgba(59, 130, 246, 0.15); color: #60a5fa; border: 1px solid rgba(59, 130, 246, 0.4); font-size: 0.78rem; padding: 4px 12px; border-radius: 20px; font-weight: 800;">
-                    <i class="fa-solid fa-plane-departure"></i> International Hiring Active
-                </span>
+        <h3 style="margin-top: 10px;"><i class="fa-solid fa-chart-line"></i> Fast-Track Career Leveling & Promotion Roadmap</h3>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; margin-bottom: 24px;">
+            <div style="background: rgba(34, 197, 94, 0.04); border: 1px solid rgba(34, 197, 94, 0.3); border-radius: 14px; padding: 18px;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                    <span style="font-size: 0.78rem; color: #22c55e; font-weight: 800; text-transform: uppercase;">🟢 Level 1: Junior (0 - 2 Yrs)</span>
+                    <span style="font-size: 0.7rem; background: rgba(34, 197, 94, 0.15); color: #22c55e; padding: 2px 8px; border-radius: 12px; font-weight: 700;">Execution</span>
+                </div>
+                <strong style="color: var(--text-heading); font-size: 0.92rem; display: block; margin-bottom: 6px;">Task Reliability & Core Skills</strong>
+                <p style="font-size: 0.8rem; color: var(--text-secondary); margin: 0 0 10px; line-height: 1.4;">Deliver assigned deliverables on time with zero hand-holding and maintain clean documentation.</p>
+                <div style="font-size: 0.75rem; color: #22c55e; font-weight: 700;">🎯 Promotion Trigger: <span style="color: var(--text-primary); font-weight: 400;">&lt;5% rework rate &amp; proactive daily updates.</span></div>
             </div>
 
-            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px;">
-                <div style="background: rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.06); border-radius: 14px; padding: 16px;">
-                    <span style="font-size: 0.72rem; color: #3b82f6; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px;">📜 Visa & Work Authorization</span>
-                    <h4 style="color: var(--text-heading); font-size: 0.92rem; margin: 6px 0 4px; font-weight: 800;">${visaName}</h4>
-                    <p style="font-size: 0.76rem; color: var(--text-secondary); margin: 0; line-height: 1.35;">${visaDetails}</p>
+            <div style="background: rgba(250, 204, 21, 0.04); border: 1px solid rgba(250, 204, 21, 0.3); border-radius: 14px; padding: 18px;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                    <span style="font-size: 0.78rem; color: var(--accent); font-weight: 800; text-transform: uppercase;">🟡 Level 2: Mid-Level (2 - 5 Yrs)</span>
+                    <span style="font-size: 0.7rem; background: rgba(250, 204, 21, 0.15); color: var(--accent); padding: 2px 8px; border-radius: 12px; font-weight: 700;">Ownership</span>
+                </div>
+                <strong style="color: var(--text-heading); font-size: 0.92rem; display: block; margin-bottom: 6px;">End-to-End System Design</strong>
+                <p style="font-size: 0.8rem; color: var(--text-secondary); margin: 0 0 10px; line-height: 1.4;">Own complex module features, lead technical reviews, and mentor junior team members.</p>
+                <div style="font-size: 0.75rem; color: var(--accent); font-weight: 700;">🎯 Promotion Trigger: <span style="color: var(--text-primary); font-weight: 400;">Leading 2+ major projects boosting team efficiency.</span></div>
+            </div>
+
+            <div style="background: rgba(168, 85, 247, 0.04); border: 1px solid rgba(168, 85, 247, 0.3); border-radius: 14px; padding: 18px;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                    <span style="font-size: 0.78rem; color: #a855f7; font-weight: 800; text-transform: uppercase;">🟣 Level 3: Senior / Lead (5+ Yrs)</span>
+                    <span style="font-size: 0.7rem; background: rgba(168, 85, 247, 0.15); color: #a855f7; padding: 2px 8px; border-radius: 12px; font-weight: 700;">Strategy</span>
+                </div>
+                <strong style="color: var(--text-heading); font-size: 0.92rem; display: block; margin-bottom: 6px;">Enterprise Strategy &amp; Architecture</strong>
+                <p style="font-size: 0.8rem; color: var(--text-secondary); margin: 0 0 10px; line-height: 1.4;">Architect long-term technology roadmaps, resolve critical bottlenecks, and align goals with business ROI.</p>
+                <div style="font-size: 0.75rem; color: #a855f7; font-weight: 700;">🎯 Promotion Trigger: <span style="color: var(--text-primary); font-weight: 400;">Driving strategic ROI &amp; shaping organizational standards.</span></div>
+            </div>
+        </div>
+
+        <!-- PAGE FOOTER NAV -->
+        <div class="page-footer-nav" style="display: flex; justify-content: space-between; align-items: center; margin-top: 32px; padding-top: 16px; border-top: 1px solid var(--border);">
+            <button type="button" class="footer-nav-btn" disabled style="opacity: 0.3; cursor: not-allowed;"><i class="fa-solid fa-arrow-left"></i> Prev Page</button>
+            <span style="font-size: 0.88rem; color: var(--text-secondary); font-weight: 600;">Page 1 of 6</span>
+            <button type="button" class="footer-nav-btn" onclick="showRoadmapPage(2)">Next Page <i class="fa-solid fa-arrow-right"></i></button>
+        </div>
+    </div>
+</div>
+
+<!-- ================= PAGE 2: STUDY TIMELINE ================= -->
+<div class="roadmap-page" id="roadmap-page-2">
+    <div class="roadmap-item">
+        <h2><i class="fa-solid fa-route"></i> Step-by-Step Learning Timeline</h2>
+        <p style="font-size: 0.95rem; line-height: 1.6; margin-bottom: 24px; color: var(--text-secondary);">
+            Master this career path structured across sequential phases. Complete each milestone goal and project to progress.
+        </p>
+
+        <div class="timeline-container" style="display: flex; flex-direction: column; gap: 24px;">
+            ${(roadmap || []).map((phase, idx) => `
+                <div class="phase-card" style="background: rgba(25, 25, 25, 0.7); border: 1px solid var(--border); border-radius: 16px; padding: 22px; position: relative; box-shadow: 0 4px 15px rgba(0,0,0,0.25);">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; flex-wrap: wrap; gap: 8px;">
+                        <span style="background: rgba(250, 204, 21, 0.1); border: 1px solid rgba(250, 204, 21, 0.3); color: var(--accent); padding: 4px 12px; border-radius: 20px; font-size: 0.8rem; font-weight: 800; text-transform: uppercase;">
+                            <i class="fa-solid fa-calendar-days"></i> ${phase.month || `Phase ${idx + 1}`}
+                        </span>
+                        <span style="color: var(--text-muted); font-size: 0.85rem; font-weight: 600;">Step ${idx + 1} of ${(roadmap || []).length}</span>
+                    </div>
+                    
+                    <h3 style="margin-top: 0; margin-bottom: 12px; color: var(--text-heading); font-size: 1.15rem;">${phase.title || "Core Foundations"}</h3>
+                    
+                    <div style="margin-bottom: 16px;">
+                        <strong style="color: var(--text-primary); font-size: 0.9rem; display: block; margin-bottom: 6px;">Key Concepts & Topics:</strong>
+                        <ul style="margin: 0; padding-left: 20px; font-size: 0.88rem; color: var(--text-secondary); line-height: 1.5; gap: 4px; display: flex; flex-direction: column;">
+                            ${(phase.topics || []).map(topic => `<li>${topic}</li>`).join("")}
+                        </ul>
+                    </div>
+
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 14px; background: rgba(0,0,0,0.2); padding: 14px; border-radius: 10px; border: 1px solid rgba(255,255,255,0.03);">
+                        <div>
+                            <strong style="color: #3b82f6; font-size: 0.8rem; text-transform: uppercase; display: block; margin-bottom: 4px;"><i class="fa-solid fa-code"></i> Practical Project</strong>
+                            <p style="font-size: 0.84rem; color: var(--text-secondary); margin: 0; line-height: 1.4;">${phase.project || "Implement domain basics."}</p>
+                        </div>
+                        <div>
+                            <strong style="color: #22c55e; font-size: 0.8rem; text-transform: uppercase; display: block; margin-bottom: 4px;"><i class="fa-solid fa-bullseye"></i> Phase Milestone Goal</strong>
+                            <p style="font-size: 0.84rem; color: var(--text-secondary); margin: 0; line-height: 1.4;">${phase.goal || "Validation test."}</p>
+                        </div>
+                    </div>
+                </div>
+            `).join("")}
+        </div>
+
+        <!-- PAGE FOOTER NAV -->
+        <div class="page-footer-nav" style="display: flex; justify-content: space-between; align-items: center; margin-top: 32px; padding-top: 16px; border-top: 1px solid var(--border);">
+            <button type="button" class="footer-nav-btn" onclick="showRoadmapPage(1)"><i class="fa-solid fa-arrow-left"></i> Prev Page</button>
+            <span style="font-size: 0.88rem; color: var(--text-secondary); font-weight: 600;">Page 2 of 6</span>
+            <button type="button" class="footer-nav-btn" onclick="showRoadmapPage(3)">Next Page <i class="fa-solid fa-arrow-right"></i></button>
+        </div>
+    </div>
+</div>
+
+<!-- ================= PAGE 3: SKILLS MATRIX ================= -->
+<div class="roadmap-page" id="roadmap-page-3">
+    <div class="roadmap-item">
+        <h2><i class="fa-solid fa-code"></i> Skill Matrix & Tool Proficiency</h2>
+        <p style="font-size: 0.95rem; line-height: 1.6; margin-bottom: 24px; color: var(--text-secondary);">
+            Track your professional skill set. Check off items as you learn them to monitor your journey.
+        </p>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin-bottom: 28px;">
+            <div style="background: rgba(34, 197, 94, 0.03); border: 1px solid rgba(34, 197, 94, 0.2); border-radius: 16px; padding: 20px;">
+                <h3 style="margin-top: 0; color: #22c55e; margin-bottom: 14px;"><i class="fa-solid fa-circle-check"></i> Beginner Core Skills</h3>
+                <div style="display: flex; flex-direction: column; gap: 10px;">
+                    ${(skills.beginner || ["Foundational concepts"]).map((s, idx) => `
+                        <div class="custom-checkbox" style="display: flex; align-items: flex-start; gap: 10px;">
+                            <input type="checkbox" id="beg-chk-${idx}" style="margin-top: 4px; cursor: pointer;">
+                            <label for="beg-chk-${idx}" style="font-size: 0.9rem; color: var(--text-secondary); cursor: pointer; line-height: 1.4;">${s}</label>
+                        </div>
+                    `).join("")}
+                </div>
+            </div>
+
+            <div style="background: rgba(250, 204, 21, 0.03); border: 1px solid rgba(250, 204, 21, 0.2); border-radius: 16px; padding: 20px;">
+                <h3 style="margin-top: 0; color: var(--accent); margin-bottom: 14px;"><i class="fa-solid fa-circle-check"></i> Intermediate Execution</h3>
+                <div style="display: flex; flex-direction: column; gap: 10px;">
+                    ${(skills.intermediate || ["Applied engineering workflows"]).map((s, idx) => `
+                        <div class="custom-checkbox" style="display: flex; align-items: flex-start; gap: 10px;">
+                            <input type="checkbox" id="int-chk-${idx}" style="margin-top: 4px; cursor: pointer;">
+                            <label for="int-chk-${idx}" style="font-size: 0.9rem; color: var(--text-secondary); cursor: pointer; line-height: 1.4;">${s}</label>
+                        </div>
+                    `).join("")}
+                </div>
+            </div>
+
+            <div style="background: rgba(168, 85, 247, 0.03); border: 1px solid rgba(168, 85, 247, 0.2); border-radius: 16px; padding: 20px;">
+                <h3 style="margin-top: 0; color: #a855f7; margin-bottom: 14px;"><i class="fa-solid fa-circle-check"></i> Advanced Leadership</h3>
+                <div style="display: flex; flex-direction: column; gap: 10px;">
+                    ${(skills.advanced || ["Strategic systems & architecture"]).map((s, idx) => `
+                        <div class="custom-checkbox" style="display: flex; align-items: flex-start; gap: 10px;">
+                            <input type="checkbox" id="adv-chk-${idx}" style="margin-top: 4px; cursor: pointer;">
+                            <label for="adv-chk-${idx}" style="font-size: 0.9rem; color: var(--text-secondary); cursor: pointer; line-height: 1.4;">${s}</label>
+                        </div>
+                    `).join("")}
+                </div>
+            </div>
+        </div>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin-bottom: 24px;">
+            <div style="background: rgba(25, 25, 25, 0.7); border: 1px solid var(--border); border-radius: 16px; padding: 20px;">
+                <h3 style="margin-top: 0; color: var(--accent);"><i class="fa-solid fa-screwdriver-wrench"></i> Recommended Tools & Software</h3>
+                <div class="chip-grid" style="display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px;">
+                    ${(tools || ["Git", "Excel", "Terminal"]).map(t => `<span class="chip-item">🛠 ${t}</span>`).join("")}
+                </div>
+            </div>
+
+            <div style="background: rgba(25, 25, 25, 0.7); border: 1px solid var(--border); border-radius: 16px; padding: 20px;">
+                <h3 style="margin-top: 0; color: #3b82f6;"><i class="fa-solid fa-certificate"></i> Key Professional Certifications</h3>
+                <div style="display: flex; flex-direction: column; gap: 8px; margin-top: 12px;">
+                    ${(certifications || ["Google Cloud Professional Certification", "AWS Practitioner", "Project Management Professional (PMP)"]).map(cert => `
+                        <div style="font-size: 0.88rem; color: var(--text-secondary); padding: 8px; background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.04); border-radius: 8px; display: flex; align-items: center; gap: 8px;">
+                            <i class="fa-solid fa-award" style="color: #3b82f6;"></i> ${cert}
+                        </div>
+                    `).join("")}
+                </div>
+            </div>
+        </div>
+
+        <!-- PAGE FOOTER NAV -->
+        <div class="page-footer-nav" style="display: flex; justify-content: space-between; align-items: center; margin-top: 32px; padding-top: 16px; border-top: 1px solid var(--border);">
+            <button type="button" class="footer-nav-btn" onclick="showRoadmapPage(2)"><i class="fa-solid fa-arrow-left"></i> Prev Page</button>
+            <span style="font-size: 0.88rem; color: var(--text-secondary); font-weight: 600;">Page 3 of 6</span>
+            <button type="button" class="footer-nav-btn" onclick="showRoadmapPage(4)">Next Page <i class="fa-solid fa-arrow-right"></i></button>
+        </div>
+    </div>
+</div>
+
+<!-- ================= PAGE 4: PORTFOLIO PROJECTS ================= -->
+<div class="roadmap-page" id="roadmap-page-4">
+    <div class="roadmap-item">
+        <h2><i class="fa-solid fa-laptop-code"></i> Real-World Portfolio Projects</h2>
+        <p style="font-size: 0.95rem; line-height: 1.6; margin-bottom: 24px; color: var(--text-secondary);">
+            Acquire proof of work by building these practical portfolio items. Stacking high-quality projects is crucial to land jobs.
+        </p>
+
+        <div style="display: flex; flex-direction: column; gap: 20px; margin-bottom: 24px;">
+            <div style="background: rgba(34, 197, 94, 0.03); border: 1px solid rgba(34, 197, 94, 0.25); border-radius: 16px; padding: 20px;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; flex-wrap: wrap; gap: 8px;">
+                    <h3 style="margin: 0; color: #22c55e; font-size: 1.1rem;"><i class="fa-solid fa-seedling"></i> Beginner Portfolio Milestones</h3>
+                    <span style="font-size: 0.72rem; color: #22c55e; background: rgba(34, 197, 94, 0.1); padding: 2px 10px; border-radius: 10px; font-weight: 700;">Foundation</span>
+                </div>
+                <div style="display: flex; flex-direction: column; gap: 10px; margin-top: 10px;">
+                    ${(projects.beginner || ["Construct foundation level project to learn syntax & standard tools."]).map((p, idx) => `
+                        <div style="background: rgba(0,0,0,0.2); padding: 12px; border-radius: 10px; border: 1px solid rgba(255,255,255,0.02); font-size: 0.9rem; color: var(--text-secondary); line-height: 1.45;">
+                            <strong>Project ${idx + 1}:</strong> ${p}
+                        </div>
+                    `).join("")}
+                </div>
+            </div>
+
+            <div style="background: rgba(250, 204, 21, 0.03); border: 1px solid rgba(250, 204, 21, 0.25); border-radius: 16px; padding: 20px;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; flex-wrap: wrap; gap: 8px;">
+                    <h3 style="margin: 0; color: var(--accent); font-size: 1.1rem;"><i class="fa-solid fa-fire"></i> Intermediate Capstones</h3>
+                    <span style="font-size: 0.72rem; color: var(--accent); background: rgba(250, 204, 21, 0.1); padding: 2px 10px; border-radius: 10px; font-weight: 700;">Applied</span>
+                </div>
+                <div style="display: flex; flex-direction: column; gap: 10px; margin-top: 10px;">
+                    ${(projects.intermediate || ["Build functional end-to-end applications demonstrating intermediate mastery."]).map((p, idx) => `
+                        <div style="background: rgba(0,0,0,0.2); padding: 12px; border-radius: 10px; border: 1px solid rgba(255,255,255,0.02); font-size: 0.9rem; color: var(--text-secondary); line-height: 1.45;">
+                            <strong>Project ${idx + 1}:</strong> ${p}
+                        </div>
+                    `).join("")}
+                </div>
+            </div>
+
+            <div style="background: rgba(168, 85, 247, 0.03); border: 1px solid rgba(168, 85, 247, 0.25); border-radius: 16px; padding: 20px;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; flex-wrap: wrap; gap: 8px;">
+                    <h3 style="margin: 0; color: #a855f7; font-size: 1.1rem;"><i class="fa-solid fa-crown"></i> Advanced Enterprise Case Studies</h3>
+                    <span style="font-size: 0.72rem; color: #a855f7; background: rgba(168, 85, 247, 0.1); padding: 2px 10px; border-radius: 10px; font-weight: 700;">Scale & Security</span>
+                </div>
+                <div style="display: flex; flex-direction: column; gap: 10px; margin-top: 10px;">
+                    ${(projects.advanced || ["Scale performance, handle high concurrency, and implement production architecture."]).map((p, idx) => `
+                        <div style="background: rgba(0,0,0,0.2); padding: 12px; border-radius: 10px; border: 1px solid rgba(255,255,255,0.02); font-size: 0.9rem; color: var(--text-secondary); line-height: 1.45;">
+                            <strong>Project ${idx + 1}:</strong> ${p}
+                        </div>
+                    `).join("")}
+                </div>
+            </div>
+        </div>
+
+        <!-- PAGE FOOTER NAV -->
+        <div class="page-footer-nav" style="display: flex; justify-content: space-between; align-items: center; margin-top: 32px; padding-top: 16px; border-top: 1px solid var(--border);">
+            <button type="button" class="footer-nav-btn" onclick="showRoadmapPage(3)"><i class="fa-solid fa-arrow-left"></i> Prev Page</button>
+            <span style="font-size: 0.88rem; color: var(--text-secondary); font-weight: 600;">Page 4 of 6</span>
+            <button type="button" class="footer-nav-btn" onclick="showRoadmapPage(5)">Next Page <i class="fa-solid fa-arrow-right"></i></button>
+        </div>
+    </div>
+</div>
+
+<!-- ================= PAGE 5: PREP & RESOURCES ================= -->
+<div class="roadmap-page" id="roadmap-page-5">
+    <div class="roadmap-item">
+        <h2><i class="fa-solid fa-graduation-cap"></i> Preparation Strategy & Curated Resources</h2>
+        <p style="font-size: 0.95rem; line-height: 1.6; margin-bottom: 24px; color: var(--text-secondary);">
+            Optimize your preparation roadmap with hand-picked textbooks, online programs, official documentation, and shortcuts.
+        </p>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin-bottom: 24px;">
+            <div style="background: rgba(25, 25, 25, 0.7); border: 1px solid var(--border); border-radius: 16px; padding: 20px;">
+                <h3 style="margin-top: 0; color: var(--accent);"><i class="fa-solid fa-laptop"></i> Recommended Courses & Programs</h3>
+                <ul style="margin: 0; padding-left: 20px; font-size: 0.88rem; color: var(--text-secondary); line-height: 1.5; gap: 8px; display: flex; flex-direction: column;">
+                    ${(resources.courses || ["Coursera Specialized Track", "Udemy Advanced Masterclass", "Vetted Certification Tracks"]).map(c => `<li>${c}</li>`).join("")}
+                </ul>
+            </div>
+
+            <div style="background: rgba(25, 25, 25, 0.7); border: 1px solid var(--border); border-radius: 16px; padding: 20px;">
+                <h3 style="margin-top: 0; color: #3b82f6;"><i class="fa-solid fa-book"></i> Vetted Books & Publications</h3>
+                <ul style="margin: 0; padding-left: 20px; font-size: 0.88rem; color: var(--text-secondary); line-height: 1.5; gap: 8px; display: flex; flex-direction: column;">
+                    ${(resources.books || ["Industry Standard Handbook", "Designing High Reliability Systems", "Operational Strategy Book"]).map(b => `<li>${b}</li>`).join("")}
+                </ul>
+            </div>
+
+            <div style="background: rgba(25, 25, 25, 0.7); border: 1px solid var(--border); border-radius: 16px; padding: 20px;">
+                <h3 style="margin-top: 0; color: #22c55e;"><i class="fa-solid fa-file-lines"></i> Official Documentation</h3>
+                <ul style="margin: 0; padding-left: 20px; font-size: 0.88rem; color: var(--text-secondary); line-height: 1.5; gap: 8px; display: flex; flex-direction: column;">
+                    ${(resources.documentation || ["Official API Guidelines & Reference Docs", "Community standards & whitepapers"]).map(d => `<li>${d}</li>`).join("")}
+                </ul>
+            </div>
+
+            <div style="background: rgba(25, 25, 25, 0.7); border: 1px solid var(--border); border-radius: 16px; padding: 20px;">
+                <h3 style="margin-top: 0; color: #a855f7;"><i class="fa-solid fa-play"></i> YouTube Channels & Communities</h3>
+                <ul style="margin: 0; padding-left: 20px; font-size: 0.88rem; color: var(--text-secondary); line-height: 1.5; gap: 8px; display: flex; flex-direction: column;">
+                    ${(resources.youtube_channels || ["Top-Tier Tech Creators", "Mock Interview Prep channels", "Expert Code Walkthroughs"]).map(y => `<li>${y}</li>`).join("")}
+                </ul>
+            </div>
+        </div>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin-bottom: 20px;">
+            <div style="background: rgba(25, 25, 25, 0.7); border: 1px solid var(--border); border-radius: 16px; padding: 20px;">
+                <h3 style="margin-top: 0; color: var(--accent);"><i class="fa-solid fa-clipboard-question"></i> Top 5 Interview Prep Questions</h3>
+                <ul style="margin: 0; padding-left: 20px; font-size: 0.88rem; color: var(--text-secondary); line-height: 1.5; gap: 8px; display: flex; flex-direction: column;">
+                    ${(interview || ["Prepare core technical questions in your domain", "Mock architectural design exercises"]).map(i => `<li>💬 ${i}</li>`).join("")}
+                </ul>
+            </div>
+
+            <div style="background: rgba(25, 25, 25, 0.7); border: 1px solid var(--border); border-radius: 16px; padding: 20px;">
+                <h3 style="margin-top: 0; color: #3b82f6;"><i class="fa-solid fa-bullseye"></i> Top 5 Portfolio Building Hacks</h3>
+                <ul style="margin: 0; padding-left: 20px; font-size: 0.88rem; color: var(--text-secondary); line-height: 1.5; gap: 8px; display: flex; flex-direction: column;">
+                    ${(portfolio || ["Host active live demonstrations of all projects", "Write highly technical case studies on Github"]).map(p => `<li>🎯 ${p}</li>`).join("")}
+                </ul>
+            </div>
+
+            <div style="background: rgba(25, 25, 25, 0.7); border: 1px solid var(--border); border-radius: 16px; padding: 20px;">
+                <h3 style="margin-top: 0; color: #a855f7;"><i class="fa-solid fa-wand-magic-sparkles"></i> Top 5 AI Hacks / Prompt Models</h3>
+                <ul style="margin: 0; padding-left: 20px; font-size: 0.88rem; color: var(--text-secondary); line-height: 1.5; gap: 8px; display: flex; flex-direction: column;">
+                    ${(aiTips || ["Ask AI to review your design patterns & structures", "Simulate live coding interviews using specialized prompt roles"]).map(a => `<li>🤖 ${a}</li>`).join("")}
+                </ul>
+            </div>
+        </div>
+
+        <!-- PAGE FOOTER NAV -->
+        <div class="page-footer-nav" style="display: flex; justify-content: space-between; align-items: center; margin-top: 32px; padding-top: 16px; border-top: 1px solid var(--border);">
+            <button type="button" class="footer-nav-btn" onclick="showRoadmapPage(4)"><i class="fa-solid fa-arrow-left"></i> Prev Page</button>
+            <span style="font-size: 0.88rem; color: var(--text-secondary); font-weight: 600;">Page 5 of 6</span>
+            <button type="button" class="footer-nav-btn" onclick="showRoadmapPage(6)">Next Page <i class="fa-solid fa-arrow-right"></i></button>
+        </div>
+    </div>
+</div>
+
+<!-- ================= PAGE 6: MARKET & HIRING ================= -->
+<div class="roadmap-page" id="roadmap-page-6">
+    <div class="roadmap-item">
+        <h2><i class="fa-solid fa-chart-pie"></i> Market Intelligence & Hiring Landscape</h2>
+        <p style="font-size: 0.95rem; line-height: 1.6; margin-bottom: 24px; color: var(--text-secondary);">
+            Evaluate salary metrics, global mobility scope, visa configurations, hiring clusters, and core parameters.
+        </p>
+
+        <!-- Official Country Salary Pay Band Card -->
+        ${renderPayBandCard(overview.salary || market.salary, targetSalInfo, country)}
+
+        <!-- Global Mobility & Relocation Readiness Index -->
+        ${(() => {
+            const cLow = (country || "").toLowerCase().trim();
+            const careerTitle = data.career || career || "Professional";
+            
+            let visaName = "Standard Work Permit / Skilled Visa";
+            let visaDetails = "Requires official job offer & corporate sponsorship from licensed employer.";
+            let languageReq = "English (Professional Working)";
+            let languageDetails = "International business language standard across major corporate hubs.";
+            let score = "90 / 100";
+
+            if (cLow.includes("japan")) {
+                visaName = "HSP Visa / Engineer Work Status";
+                visaDetails = "Fast-track 1-3 year permanent residency for Highly Skilled Professionals.";
+                languageReq = "Japanese JLPT N3 / N2 (Target)";
+                languageDetails = "English used in multinational tech; JLPT N3 unlocks 5x more local roles.";
+                score = "92 / 100";
+            } else if (cLow.includes("germany") || cLow.includes("europe") || cLow.includes("eu")) {
+                visaName = "EU Blue Card / Opportunity Card";
+                visaDetails = "Fast-track residence permit with minimum salary threshold requirements.";
+                languageReq = "German B1/B2 (Recommended)";
+                languageDetails = "Tech hubs (Berlin/Munich) operate in English; B1 accelerates permanent PR.";
+                score = "95 / 100";
+            } else if (cLow.includes("usa") || cLow.includes("united states") || cLow.includes("america")) {
+                visaName = "H-1B / O-1 / L-1 Intracompany";
+                visaDetails = "Cap-subject lottery or specialized talent visa; STEM OPT extension for graduates.";
+                languageReq = "Native / Fluent English";
+                languageDetails = "Full professional fluency required for technical interviews & client presentation.";
+                score = "94 / 100";
+            } else if (cLow.includes("uk") || cLow.includes("united kingdom")) {
+                visaName = "Skilled Worker Visa (SWV)";
+                visaDetails = "Point-based immigration system requiring licensed sponsor & salary threshold.";
+                languageReq = "IELTS / B2 English Certified";
+                languageDetails = "Standard UKVI English proficiency certification required for visa application.";
+                score = "93 / 100";
+            } else if (cLow.includes("uae") || cLow.includes("dubai") || cLow.includes("saudi")) {
+                visaName = "Golden Visa / Tax-Free Work Permit";
+                visaDetails = "10-year residency for top talent & executive specialists; 0% personal income tax.";
+                languageReq = "English (Arabic Advantage)";
+                languageDetails = "Corporate business operates entirely in English; Arabic is a strong local asset.";
+                score = "96 / 100";
+            } else if (cLow.includes("india")) {
+                visaName = "Domestic Prime Market";
+                visaDetails = "Seamless national mobility across major Tier-1 technology & corporate hubs.";
+                languageReq = "English & Regional Fluency";
+                languageDetails = "English is the standard corporate medium across Indian enterprise hubs.";
+                score = "98 / 100";
+            }
+
+            const countryName = targetSalInfo?.name || (country ? country.trim() : "Target Market");
+
+            return `
+            <div style="background: rgba(15, 23, 42, 0.85); border: 1px solid rgba(59, 130, 246, 0.35); border-radius: 18px; padding: 22px; margin-top: 20px; margin-bottom: 20px; box-shadow: 0 12px 30px rgba(0,0,0,0.45); backdrop-filter: blur(10px);">
+                <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; margin-bottom: 16px; border-bottom: 1px solid rgba(255,255,255,0.08); padding-bottom: 12px;">
+                    <span style="font-size: 1.02rem; font-weight: 800; color: var(--text-heading); display: flex; align-items: center; gap: 10px;">
+                        <span style="font-size: 1.3rem;">🌐</span> Global Mobility & Relocation Readiness Index (${countryName})
+                    </span>
+                    <span style="background: rgba(59, 130, 246, 0.15); color: #60a5fa; border: 1px solid rgba(59, 130, 246, 0.4); font-size: 0.78rem; padding: 4px 12px; border-radius: 20px; font-weight: 800;">
+                        <i class="fa-solid fa-plane-departure"></i> International Hiring Active
+                    </span>
                 </div>
 
-                <div style="background: rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.06); border-radius: 14px; padding: 16px;">
-                    <span style="font-size: 0.72rem; color: #22c55e; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px;">🗣️ Language & Cultural Prep</span>
-                    <h4 style="color: #22c55e; font-size: 0.92rem; margin: 6px 0 4px; font-weight: 800;">${languageReq}</h4>
-                    <p style="font-size: 0.76rem; color: var(--text-secondary); margin: 0; line-height: 1.35;">${languageDetails}</p>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 14px;">
+                    <div style="background: rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.06); border-radius: 14px; padding: 16px;">
+                        <span style="font-size: 0.72rem; color: #3b82f6; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px;">📜 Visa & Work Authorization</span>
+                        <h4 style="color: var(--text-heading); font-size: 0.92rem; margin: 6px 0 4px; font-weight: 800;">${visaName}</h4>
+                        <p style="font-size: 0.76rem; color: var(--text-secondary); margin: 0; line-height: 1.35;">${visaDetails}</p>
+                    </div>
+
+                    <div style="background: rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.06); border-radius: 14px; padding: 16px;">
+                        <span style="font-size: 0.72rem; color: #22c55e; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px;">🗣️ Language & Cultural Prep</span>
+                        <h4 style="color: #22c55e; font-size: 0.92rem; margin: 6px 0 4px; font-weight: 800;">${languageReq}</h4>
+                        <p style="font-size: 0.76rem; color: var(--text-secondary); margin: 0; line-height: 1.35;">${languageDetails}</p>
+                    </div>
+
+                    <div style="background: rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.06); border-radius: 14px; padding: 16px;">
+                        <span style="font-size: 0.72rem; color: #a855f7; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px;">💎 Global Mobility Score</span>
+                        <h4 style="color: #d8b4fe; font-size: 1.1rem; margin: 4px 0 2px; font-weight: 900;">${score}</h4>
+                        <p style="font-size: 0.76rem; color: var(--text-secondary); margin: 0; line-height: 1.35;">High international transferability for ${careerTitle}.</p>
+                    </div>
+                </div>
+            </div>
+            `;
+        })()}
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; margin-bottom: 24px; align-items: center;">
+            <div style="background: rgba(25, 25, 25, 0.7); border: 1px solid var(--border); border-radius: 16px; padding: 20px; box-shadow: 0 8px 24px rgba(0,0,0,0.4);">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                    <span style="font-size: 0.88rem; font-weight: 800; color: var(--text-heading);"><i class="fa-solid fa-chart-radar" style="color: var(--accent); margin-right: 6px;"></i> Market Ecosystem Radar</span>
+                </div>
+                <div style="height: 230px; position: relative;">
+                    <canvas id="marketAnalyticsCanvas"></canvas>
+                </div>
+            </div>
+
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 14px;">
+                <div style="background: rgba(34, 197, 94, 0.05); border: 1px solid rgba(34, 197, 94, 0.3); border-radius: 14px; padding: 16px;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+                        <span style="font-size: 0.78rem; color: #22c55e; font-weight: 800;">🔥 JOB DEMAND</span>
+                        <span style="font-size: 0.82rem; font-weight: 900; color: #22c55e; background: rgba(34, 197, 94, 0.15); padding: 2px 10px; border-radius: 10px;">${market.job_demand?.rating || (market.job_demand?.percentage ? (market.job_demand.percentage > 80 ? 'Very High' : 'High') : 'High')}</span>
+                    </div>
+                    <p style="font-size: 0.78rem; color: var(--text-secondary); margin: 6px 0 0; line-height: 1.4;">${market.job_demand?.reason || market.job_demand?.text || `High market demand driven by enterprise hiring.`}</p>
                 </div>
 
-                <div style="background: rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.06); border-radius: 14px; padding: 16px;">
-                    <span style="font-size: 0.72rem; color: #a855f7; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px;">💎 Global Mobility Score</span>
-                    <h4 style="color: #d8b4fe; font-size: 1.1rem; margin: 4px 0 2px; font-weight: 900;">${score}</h4>
-                    <p style="font-size: 0.76rem; color: var(--text-secondary); margin: 0; line-height: 1.35;">High international transferability for ${careerTitle}.</p>
+                <div style="background: rgba(250, 204, 21, 0.05); border: 1px solid rgba(250, 204, 21, 0.3); border-radius: 14px; padding: 16px;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+                        <span style="font-size: 0.78rem; color: var(--accent); font-weight: 800;">🎯 LEARNING CURVE</span>
+                        <span style="font-size: 0.82rem; font-weight: 900; color: var(--accent); background: rgba(250, 204, 21, 0.15); padding: 2px 10px; border-radius: 10px;">${market.difficulty?.level || 'Moderate to High'}</span>
+                    </div>
+                    <p style="font-size: 0.78rem; color: var(--text-secondary); margin: 6px 0 0; line-height: 1.4;">${market.difficulty?.reason || market.difficulty?.text || "Moderate to high learning curve requiring structured hands-on practice."}</p>
+                </div>
+
+                <div style="background: rgba(59, 130, 246, 0.05); border: 1px solid rgba(59, 130, 246, 0.3); border-radius: 14px; padding: 16px;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+                        <span style="font-size: 0.78rem; color: #3b82f6; font-weight: 800;">🚀 CAREER GROWTH</span>
+                        <span style="font-size: 0.82rem; font-weight: 900; color: #3b82f6; background: rgba(59, 130, 246, 0.15); padding: 2px 10px; border-radius: 10px;">${market.growth?.outlook || (market.growth?.percentage ? (market.growth.percentage > 80 ? 'Fast Growing' : 'Growing') : 'Growing')}</span>
+                    </div>
+                    <p style="font-size: 0.78rem; color: var(--text-secondary); margin: 6px 0 0; line-height: 1.4;">${market.growth?.reason || market.growth?.text || "Strong multi-year expansion powered by technology integration."}</p>
+                </div>
+
+                <div style="background: rgba(168, 85, 247, 0.05); border: 1px solid rgba(168, 85, 247, 0.3); border-radius: 14px; padding: 16px;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+                        <span style="font-size: 0.78rem; color: #a855f7; font-weight: 800;">📚 TIME COMMITMENT</span>
+                        <span style="font-size: 0.82rem; font-weight: 900; color: #a855f7; background: rgba(168, 85, 247, 0.15); padding: 2px 10px; border-radius: 10px;">${market.learning_time?.duration || '6 Months'}</span>
+                    </div>
+                    <p style="font-size: 0.78rem; color: var(--text-secondary); margin: 6px 0 0; line-height: 1.4;">${market.learning_time?.details || market.learning_time?.text || "Estimated time commitment for structured learning to entry level."}</p>
                 </div>
             </div>
         </div>
-        `;
-    })()}
 
-    <!-- Official Country Salary Pay Band Card -->
-    ${renderPayBandCard(overview.salary || market.salary, targetSalInfo, country)}
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin-bottom: 20px;">
+            <div>
+                <h3><i class="fa-solid fa-building"></i> Top 5 Hiring Organizations</h3>
+                <div class="chip-grid">
+                    ${(market.top_organizations || []).map(o => `<span class="chip-item">🏢 ${o}</span>`).join("")}
+                </div>
+            </div>
+            <div>
+                <h3><i class="fa-solid fa-fire"></i> Top 5 Trending Skills</h3>
+                <div class="chip-grid">
+                    ${(market.trending_skills || []).map(s => `<span class="chip-item">🔥 ${s}</span>`).join("")}
+                </div>
+            </div>
+        </div>
 
-    <h3 style="margin-top: 10px;"><i class="fa-solid fa-clock"></i> Day-in-the-Life & Daily Duty Workflow</h3>
-    <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-bottom: 24px;">
-        <div style="background: rgba(59, 130, 246, 0.05); border: 1px solid rgba(59, 130, 246, 0.3); border-radius: 14px; padding: 16px;">
-            <div style="font-size: 0.75rem; color: #3b82f6; font-weight: 800; text-transform: uppercase; margin-bottom: 4px;">🌅 09:00 AM - 10:30 AM</div>
-            <strong style="color: var(--text-heading); font-size: 0.92rem; display: block; margin-bottom: 4px;">Morning Alignment & Standup</strong>
-            <p style="font-size: 0.8rem; color: var(--text-secondary); margin: 0; line-height: 1.4;">Sync with cross-functional teams, triage daily priorities, and review critical operational deliverables.</p>
+        <h3><i class="fa-solid fa-location-dot"></i> Hiring Spots</h3>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; margin-bottom: 20px;">
+            ${(market.hiring_hotspots || []).map(city => `
+                <div style="background: rgba(25, 25, 25, 0.8); border: 1px solid var(--border); border-radius: 12px; padding: 12px; text-align: center;">
+                    <span style="font-size: 0.75rem; color: var(--accent); font-weight: 700;">📍 ${city.city}</span>
+                    <h5 style="margin: 4px 0; color: var(--text-heading); font-size: 0.85rem;">${city.demand}</h5>
+                    <p style="font-size: 0.75rem; color: var(--text-secondary); margin: 0; line-height: 1.35;">${city.reason}</p>
+                </div>
+            `).join("")}
         </div>
-        <div style="background: rgba(34, 197, 94, 0.05); border: 1px solid rgba(34, 197, 94, 0.3); border-radius: 14px; padding: 16px;">
-            <div style="font-size: 0.75rem; color: #22c55e; font-weight: 800; text-transform: uppercase; margin-bottom: 4px;">🧠 10:30 AM - 01:30 PM</div>
-            <strong style="color: var(--text-heading); font-size: 0.92rem; display: block; margin-bottom: 4px;">Deep Focus Execution</strong>
-            <p style="font-size: 0.8rem; color: var(--text-secondary); margin: 0; line-height: 1.4;">Uninterrupted high-value problem solving, technical/strategic execution, and core milestone building.</p>
-        </div>
-        <div style="background: rgba(250, 204, 21, 0.05); border: 1px solid rgba(250, 204, 21, 0.3); border-radius: 14px; padding: 16px;">
-            <div style="font-size: 0.75rem; color: var(--accent); font-weight: 800; text-transform: uppercase; margin-bottom: 4px;">🤝 02:30 PM - 04:30 PM</div>
-            <strong style="color: var(--text-heading); font-size: 0.92rem; display: block; margin-bottom: 4px;">Collaboration & Review</strong>
-            <p style="font-size: 0.8rem; color: var(--text-secondary); margin: 0; line-height: 1.4;">Stakeholder feedback loops, peer reviews, technical architecture sessions, and mentoring junior peers.</p>
-        </div>
-        <div style="background: rgba(168, 85, 247, 0.05); border: 1px solid rgba(168, 85, 247, 0.3); border-radius: 14px; padding: 16px;">
-            <div style="font-size: 0.75rem; color: #a855f7; font-weight: 800; text-transform: uppercase; margin-bottom: 4px;">🚀 04:30 PM - 06:00 PM</div>
-            <strong style="color: var(--text-heading); font-size: 0.92rem; display: block; margin-bottom: 4px;">Quality Audit & Learning</strong>
-            <p style="font-size: 0.8rem; color: var(--text-secondary); margin: 0; line-height: 1.4;">Testing & validating day's work, updating task boards, and spending 30 mins exploring cutting-edge AI tools.</p>
+
+        <h3><i class="fa-solid fa-calendar-check"></i> Top 5 Weekly Study Plan Steps</h3>
+        <ul>
+            ${(market.daily_plan || []).map(day => `<li>📅 ${day}</li>`).join("")}
+        </ul>
+
+        <!-- PAGE FOOTER NAV -->
+        <div class="page-footer-nav" style="display: flex; justify-content: space-between; align-items: center; margin-top: 32px; padding-top: 16px; border-top: 1px solid var(--border);">
+            <button type="button" class="footer-nav-btn" onclick="showRoadmapPage(5)"><i class="fa-solid fa-arrow-left"></i> Prev Page</button>
+            <span style="font-size: 0.88rem; color: var(--text-secondary); font-weight: 600;">Page 6 of 6</span>
+            <button type="button" class="footer-nav-btn" disabled style="opacity: 0.3; cursor: not-allowed;">Next Page <i class="fa-solid fa-arrow-right"></i></button>
         </div>
     </div>
-
-    <h3 style="margin-top: 10px;"><i class="fa-solid fa-chart-line"></i> Fast-Track Career Leveling & Promotion Roadmap</h3>
-    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 24px;">
-        <div style="background: rgba(34, 197, 94, 0.04); border: 1px solid rgba(34, 197, 94, 0.3); border-radius: 14px; padding: 18px;">
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
-                <span style="font-size: 0.78rem; color: #22c55e; font-weight: 800; text-transform: uppercase;">🟢 Level 1: Junior (0 - 2 Yrs)</span>
-                <span style="font-size: 0.7rem; background: rgba(34, 197, 94, 0.15); color: #22c55e; padding: 2px 8px; border-radius: 12px; font-weight: 700;">Execution</span>
-            </div>
-            <strong style="color: var(--text-heading); font-size: 0.92rem; display: block; margin-bottom: 6px;">Task Reliability & Core Skills</strong>
-            <p style="font-size: 0.8rem; color: var(--text-secondary); margin: 0 0 10px; line-height: 1.4;">Deliver assigned deliverables on time with zero hand-holding and maintain clean documentation.</p>
-            <div style="font-size: 0.75rem; color: #22c55e; font-weight: 700;">🎯 Promotion Trigger: <span style="color: var(--text-primary); font-weight: 400;">&lt;5% rework rate &amp; proactive daily updates.</span></div>
-        </div>
-
-        <div style="background: rgba(250, 204, 21, 0.04); border: 1px solid rgba(250, 204, 21, 0.3); border-radius: 14px; padding: 18px;">
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
-                <span style="font-size: 0.78rem; color: var(--accent); font-weight: 800; text-transform: uppercase;">🟡 Level 2: Mid-Level (2 - 5 Yrs)</span>
-                <span style="font-size: 0.7rem; background: rgba(250, 204, 21, 0.15); color: var(--accent); padding: 2px 8px; border-radius: 12px; font-weight: 700;">Ownership</span>
-            </div>
-            <strong style="color: var(--text-heading); font-size: 0.92rem; display: block; margin-bottom: 6px;">End-to-End System Design</strong>
-            <p style="font-size: 0.8rem; color: var(--text-secondary); margin: 0 0 10px; line-height: 1.4;">Own complex module features, lead technical reviews, and mentor junior team members.</p>
-            <div style="font-size: 0.75rem; color: var(--accent); font-weight: 700;">🎯 Promotion Trigger: <span style="color: var(--text-primary); font-weight: 400;">Leading 2+ major projects boosting team efficiency.</span></div>
-        </div>
-
-        <div style="background: rgba(168, 85, 247, 0.04); border: 1px solid rgba(168, 85, 247, 0.3); border-radius: 14px; padding: 18px;">
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
-                <span style="font-size: 0.78rem; color: #a855f7; font-weight: 800; text-transform: uppercase;">🟣 Level 3: Senior / Lead (5+ Yrs)</span>
-                <span style="font-size: 0.7rem; background: rgba(168, 85, 247, 0.15); color: #a855f7; padding: 2px 8px; border-radius: 12px; font-weight: 700;">Strategy</span>
-            </div>
-            <strong style="color: var(--text-heading); font-size: 0.92rem; display: block; margin-bottom: 6px;">Enterprise Strategy &amp; Architecture</strong>
-            <p style="font-size: 0.8rem; color: var(--text-secondary); margin: 0 0 10px; line-height: 1.4;">Architect long-term technology roadmaps, resolve critical bottlenecks, and align goals with business ROI.</p>
-            <div style="font-size: 0.75rem; color: #a855f7; font-weight: 700;">🎯 Promotion Trigger: <span style="color: var(--text-primary); font-weight: 400;">Driving strategic ROI &amp; shaping organizational standards.</span></div>
-        </div>
-    </div>
-
-    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 20px;">
-        <div>
-            <h3><i class="fa-solid fa-building"></i> Top 5 Hiring Organizations</h3>
-            <div class="chip-grid">
-                ${(market.top_organizations || []).map(o => `<span class="chip-item">🏢 ${o}</span>`).join("")}
-            </div>
-        </div>
-        <div>
-            <h3><i class="fa-solid fa-fire"></i> Top 5 Trending Skills</h3>
-            <div class="chip-grid">
-                ${(market.trending_skills || []).map(s => `<span class="chip-item">🔥 ${s}</span>`).join("")}
-            </div>
-        </div>
-    </div>
-
-    <h3><i class="fa-solid fa-location-dot"></i> Hiring Spots</h3>
-    <div style="display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; margin-bottom: 20px;">
-        ${(market.hiring_hotspots || []).map(city => `
-            <div style="background: rgba(25, 25, 25, 0.8); border: 1px solid var(--border); border-radius: 12px; padding: 12px; text-align: center;">
-                <span style="font-size: 0.75rem; color: var(--accent); font-weight: 700;">📍 ${city.city}</span>
-                <h5 style="margin: 4px 0; color: var(--text-heading); font-size: 0.85rem;">${city.demand}</h5>
-                <p style="font-size: 0.75rem; color: var(--text-secondary); margin: 0;">${city.reason}</p>
-            </div>
-        `).join("")}
-    </div>
-
-    <h3><i class="fa-solid fa-calendar-check"></i> Top 5 Weekly Study Plan Steps</h3>
-    <ul>
-        ${(market.daily_plan || []).map(day => `<li>📅 ${day}</li>`).join("")}
-    </ul>
 </div>
             <hr style="margin-top:40px">
             <p style="text-align:center; font-size:14px; color:#777; margin-top:15px;">Generated by <b>CareerVerse AI</b></p>
@@ -1177,5 +1484,110 @@ function generatePDFReport() {
     const safeFileName = sanitize(data.career || 'CareerVerse').replace(/\s+/g, '_');
     doc.save(`${safeFileName}_Roadmap.pdf`);
 }
+
+// ==========================================
+// Page Router & Radar Chart Initializer
+// ==========================================
+
+window.showRoadmapPage = function(pageNum) {
+    // 1. Update active state on navigator buttons
+    const buttons = document.querySelectorAll(".roadmap-page-btn");
+    buttons.forEach((btn, idx) => {
+        if (idx + 1 === pageNum) {
+            btn.classList.add("active");
+        } else {
+            btn.classList.remove("active");
+        }
+    });
+
+    // 2. Update active state on roadmap pages
+    const pages = document.querySelectorAll(".roadmap-page");
+    pages.forEach((page, idx) => {
+        if (idx + 1 === pageNum) {
+            page.classList.add("active");
+            page.style.display = "block";
+        } else {
+            page.classList.remove("active");
+            page.style.display = "none";
+        }
+    });
+
+    // 3. Scroll container into view smoothly
+    const container = document.querySelector(".roadmap-top-bar");
+    if (container) {
+        container.scrollIntoView({ behavior: "smooth", block: "nearest" });
+    }
+
+    // 4. Deferred initialization of Radar chart on page 6
+    if (pageNum === 6) {
+        initRadarChartDeferred();
+    }
+};
+
+function initRadarChartDeferred() {
+    setTimeout(() => {
+        const canvas = document.getElementById("marketAnalyticsCanvas");
+        if (canvas && typeof Chart !== "undefined") {
+            if (window.marketChartInstance) {
+                window.marketChartInstance.destroy();
+            }
+            const ctx = canvas.getContext("2d");
+            const market = window.currentRoadmap?.market || {};
+            
+            const mapRatingToScore = (val, defaultScore = 80) => {
+                if (typeof val === "number") return val;
+                if (typeof val === "string") {
+                    const v = val.toLowerCase();
+                    if (v.includes("very high") || v.includes("fast growing")) return 92;
+                    if (v.includes("high") || v.includes("growing")) return 78;
+                    if (v.includes("moderate") || v.includes("stable")) return 55;
+                    if (v.includes("low") || v.includes("declining")) return 30;
+                }
+                return defaultScore;
+            };
+
+            const demandVal = mapRatingToScore(market.job_demand?.rating || market.job_demand?.percentage, 85);
+            const growthVal = mapRatingToScore(market.growth?.outlook || market.growth?.percentage, 88);
+            const diffVal = mapRatingToScore(market.difficulty?.level || market.difficulty?.percentage, 75);
+            const timeVal = mapRatingToScore(market.learning_time?.duration || market.learning_time?.percentage, 80);
+
+            window.marketChartInstance = new Chart(ctx, {
+                type: "radar",
+                data: {
+                    labels: ["Job Demand", "Growth Outlook", "Learning Curve", "Time Index", "Stability"],
+                    datasets: [{
+                        label: "Market Scope Score",
+                        data: [demandVal, growthVal, diffVal, timeVal, 85],
+                        backgroundColor: "rgba(250, 204, 21, 0.25)",
+                        borderColor: "#fac515",
+                        pointBackgroundColor: "#fac515",
+                        pointBorderColor: "#fff",
+                        pointHoverBackgroundColor: "#fff",
+                        pointHoverBorderColor: "#fac515",
+                        borderWidth: 2
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        r: {
+                            angleLines: { color: "rgba(255, 255, 255, 0.12)" },
+                            grid: { color: "rgba(255, 255, 255, 0.12)" },
+                            pointLabels: { color: "#e2e8f0", font: { size: 10, weight: "bold" } },
+                            ticks: { display: false, backdropColor: "transparent" },
+                            min: 0,
+                            max: 100
+                        }
+                    },
+                    plugins: {
+                        legend: { display: false }
+                    }
+                }
+            });
+        }
+    }, 100);
+}
+
 
 
