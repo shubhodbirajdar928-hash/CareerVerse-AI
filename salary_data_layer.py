@@ -138,6 +138,30 @@ COUNTRY_CURRENCY_REGISTRY = {
     "switzerland": {"code": "CHF", "symbol": "CHF", "name": "Swiss franc", "locale": "de-CH"}
 }
 
+# Dynamically extend COUNTRY_CURRENCY_REGISTRY with all 195 countries from countries_currency.json
+try:
+    import json
+    import os
+    # Determine the correct relative path to the json file
+    json_path = os.path.join(os.path.dirname(__file__), "static", "data", "countries_currency.json")
+    if os.path.exists(json_path):
+        with open(json_path, "r", encoding="utf-8") as f:
+            cc_data = json.load(f)
+        for c_name, c_val in cc_data.items():
+            parts = c_val.split()
+            code = parts[0] if len(parts) > 0 else "USD"
+            symbol = parts[1] if len(parts) > 1 else "$"
+            c_norm = c_name.strip().lower()
+            if c_norm not in COUNTRY_CURRENCY_REGISTRY:
+                COUNTRY_CURRENCY_REGISTRY[c_norm] = {
+                    "code": code,
+                    "symbol": symbol,
+                    "name": f"{c_name} Currency",
+                    "locale": "en-US"
+                }
+except Exception as e:
+    print(f"Error loading countries_currency.json dynamically: {e}")
+
 def normalize_country_key(country_input):
     if not country_input:
         return "united states"
@@ -147,7 +171,36 @@ def normalize_country_key(country_input):
     for alias, canonical in COUNTRY_ALIAS_MAP.items():
         if alias in c_clean or c_clean in alias:
             return canonical
+    
+    # Try exact match in registry
+    if c_clean in COUNTRY_CURRENCY_REGISTRY:
+        return c_clean
+        
+    # Try substring match in registry
+    for registry_key in COUNTRY_CURRENCY_REGISTRY.keys():
+        if registry_key in c_clean or c_clean in registry_key:
+            return registry_key
+            
     return c_clean
+
+def enforce_currency_symbol(salary_str, symbol):
+    if not salary_str:
+        return salary_str
+    import re
+    # Replace standard currency symbols: $, €, £, ¥, ₩, ₹, ₪, ₫, ₭, ₮, ₯, ₰, ₳, ₶, ₷, 🪙, ﷼, ₻, ₼, ₾, ₿
+    pattern_symbols = re.compile(r'[\$\u20AC\u00A3\u00A5\u20A9\u20B9\u20AA\u20AB\u20AD\u20AE\u20AF\u20B0\u20B1\u20B2\u20B3\u20B4\u20B5\u20B6\u20B7\u20B8\u20BA\u20BC\u20BD\u20BE\u20BF\uFDFC]')
+    cleaned = pattern_symbols.sub(symbol, salary_str)
+    
+    # Also replace any 3-letter uppercase words that look like currency codes (USD, EUR, ZAR, etc.) followed by space/digits or symbols
+    pattern_codes = re.compile(r'\b[A-Z]{3}\b')
+    cleaned = pattern_codes.sub(symbol, cleaned)
+    
+    # Remove any extra spaces after target symbol
+    cleaned = cleaned.replace(symbol + " ", symbol)
+    
+    # Normalize duplicate symbols
+    cleaned = re.sub(rf'{re.escape(symbol)}+', symbol, cleaned)
+    return cleaned
 
 
 # =====================================================
@@ -674,6 +727,9 @@ def get_verified_salary_data(career, country, region=None, city=None, experience
             from app import generate_with_fallback, clean_json
             import json
             
+            code_str = curr_meta.get("code", "USD")
+            symbol_str = curr_meta.get("symbol", "$")
+            
             prompt = f"""
 You are a global compensation benchmarking AI.
 Analyze the current 2026 market compensation rates for:
@@ -695,8 +751,10 @@ You must return ONLY a valid JSON object matching this structure (no markdown fe
 }}
 
 Rules:
-1. Use the local currency of {country_normal.title()}. For India, use Lakhs per year (e.g. "₹5.0L - ₹8.5L / yr"). For US, use standard formatting (e.g. "$75,000 - $110,000 / yr").
-2. Ensure the ranges are highly realistic and align with active 2026 market signals.
+1. Use the local currency of {country_normal.title()} ({code_str}, Symbol: {symbol_str}). Do NOT output Indian Rupees (INR/₹) unless {country_normal.title()} is India.
+2. Ensure all numbers in fresher/mid/senior formatting use {symbol_str} as the currency symbol (e.g. "{symbol_str}45,000 - {symbol_str}75,000 / yr").
+3. Ensure the min, max, and median values are integers representing the annual base salary in the local currency ({code_str}).
+4. Ensure the ranges are highly realistic and align with active 2026 market signals.
 """
             raw_text = generate_with_fallback(prompt)
             cleaned_text = clean_json(raw_text)
@@ -738,9 +796,9 @@ Rules:
                         "min": data["min"],
                         "max": data["max"],
                         "median": data["median"],
-                        "fresher": data["fresher"].strip(),
-                        "mid": data["mid"].strip(),
-                        "senior": data["senior"].strip(),
+                        "fresher": enforce_currency_symbol(data["fresher"].strip(), curr_meta["symbol"]),
+                        "mid": enforce_currency_symbol(data["mid"].strip(), curr_meta["symbol"]),
+                        "senior": enforce_currency_symbol(data["senior"].strip(), curr_meta["symbol"]),
                         "reason": data.get("reason", "").strip(),
                         "period": "annual",
                         "compensation_type": "base",

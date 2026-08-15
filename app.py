@@ -904,11 +904,12 @@ def get_career_salary_benchmark(career, country):
         }
 
     # Step 2: Use LLM dynamic query for high-fidelity active market rates in 2026
+    c_name, code, symbol = get_country_currency_info(country)
     prompt = f"""
 You are a global compensation benchmarking AI.
 Analyze the current 2026 market compensation rates for:
 Role: "{career}"
-Country: "{c_norm.title()}"
+Country: "{c_name}"
 
 You must return ONLY a valid JSON object matching this structure (no markdown fences, no other text):
 {{
@@ -919,7 +920,7 @@ You must return ONLY a valid JSON object matching this structure (no markdown fe
 }}
 
 Rules:
-1. Use the local currency of {c_norm.title()}. For India, use Lakhs per year (e.g. "₹5.0L - ₹8.5L / yr"). For US, use standard formatting (e.g. "$75,000 - $110,000 / yr").
+1. Use the local currency of {c_name} ({code}, Symbol: {symbol}). Do NOT output Indian Rupees (INR/₹) unless {c_name} is India.
 2. Ensure the ranges are highly realistic and align with active 2026 market signals.
 """
     try:
@@ -967,6 +968,7 @@ def is_indian_exam(career_text):
     return False
 
 def create_normalized_salary_object(career, country):
+    from salary_data_layer import enforce_currency_symbol
     country_clean = country.title() if country else "India"
     
     if is_indian_exam(career) and country_clean.lower() not in ["india", "in", "bharat"]:
@@ -978,7 +980,11 @@ def create_normalized_salary_object(career, country):
         c_name, code, symbol = get_country_currency_info(country)
         bench = get_career_salary_benchmark(career, country)
 
-    target_formatted = f"{bench['fresher']} (Fresher) -> {bench['mid']} (Mid) -> {bench['senior']} (Senior)"
+    fresher_clean = enforce_currency_symbol(bench["fresher"], symbol)
+    mid_clean = enforce_currency_symbol(bench["mid"], symbol)
+    senior_clean = enforce_currency_symbol(bench["senior"], symbol)
+
+    target_formatted = f"{fresher_clean} (Fresher) -> {mid_clean} (Mid) -> {senior_clean} (Senior)"
     
     reason = bench.get("reason") or f"Compensation levels for a {career} in {c_name} are driven by high cognitive demand, specialized technical expertise, and local talent scarcity."
 
@@ -987,9 +993,15 @@ def create_normalized_salary_object(career, country):
         "country": c_name,
         "currency_symbol": symbol,
         "currency_code": code,
-        "fresher": bench["fresher"],
-        "mid": bench["mid"],
-        "senior": bench["senior"],
+        "fresher": fresher_clean,
+        "mid": mid_clean,
+        "senior": senior_clean,
+        "country_fresher": fresher_clean,
+        "country_mid": mid_clean,
+        "country_senior": senior_clean,
+        "india_fresher": fresher_clean,
+        "india_mid": mid_clean,
+        "india_senior": senior_clean,
         "formatted_range": target_formatted,
         "reason": reason
     }
@@ -1753,6 +1765,8 @@ def roadmap():
         skills = data.get("skills", "").strip()
         industry = data.get("industry", "").strip()
 
+        target_country_name, target_currency_code, target_currency_symbol = get_country_currency_info(country)
+
         extra_context = ""
         if experience:
             extra_context += f"\nCurrent Experience Level: {experience}"
@@ -1768,13 +1782,24 @@ EVALUATION TASK:
 Create an accurate, highly detailed, step-by-step master career roadmap specifically for:
 
 Target Career Role: "{career}"
-Preferred Country: {country}
+Preferred Country: {country} (Official Currency: {target_currency_code}, Symbol: {target_currency_symbol})
 Roadmap Duration: {duration} ({months} Months){extra_context}
 
 CRITICAL ACCURACY RULES:
 1. Provide DEEP, SPECIFIC, ACCURATE technical topics, real-world tools, authentic books, exact YouTube channels, and genuine certifications for "{career}". NEVER output generic strings like "Channel 1", "Course 1", "Tool 1", "Topic 1", or "Project 1".
-2. For each month ({months} months total), specify 4-5 exact technologies or skills to learn, 1 real-world portfolio project to build, and 1 clear milestone goal tailored to their background.
-3. For salaries, ALWAYS provide India salary in Indian Rupees (e.g. "₹8.0L - ₹18.0L / yr") and Target Country salary in that country's official local currency (e.g. "$90,000 - $165,000 / yr" for USA, "£45,000 - £85,000 / yr" for UK, "€50,000 - €95,000 / yr" for Germany/Europe, "CA$75,000 - CA$135,000 / yr" for Canada).
+2. You MUST recommend real, verified courses, vetted books/publications, official documentation, and real YouTube channels & communities with direct, valid, and fully-formed URLs.
+   - For 'courses': provide direct URLs on Coursera, edX, Udemy, or official universities (e.g., 'https://www.coursera.org/specializations/python', 'https://react.dev/learn', etc.).
+   - For 'books': provide direct info or search URLs on Amazon, Goodreads, or official portals (e.g., 'https://www.amazon.com/dp/0132350882', etc.).
+   - For 'documentation': provide direct, official URL addresses of the technologies or frameworks (e.g., 'https://docs.python.org/3/', 'https://developer.mozilla.org', etc.).
+   - For 'youtube': provide the actual, specific handle link of verified educational YouTube creators (e.g., 'https://www.youtube.com/@freecodecamp', 'https://www.youtube.com/@ProgrammingWithMosh', 'https://www.youtube.com/@MITOCW', etc.).
+   - Do NOT use generic placeholder homepages like 'https://www.youtube.com', 'https://www.coursera.org', or 'https://amazon.com'. Provide full, direct paths.
+3. For each month ({months} months total), specify 4-5 exact technologies or skills to learn, 1 real-world portfolio project to build, and 1 clear milestone goal tailored to their background.
+4. For salaries, you MUST ONLY provide the salary in the official currency of {country} ({target_currency_code}) using the official symbol ({target_currency_symbol}). Do NOT output Indian Rupees (INR/₹) unless {country} is India.
+   - For India, use Lakhs per year (e.g. "₹8.0L - ₹15.0L / yr").
+   - For USA, use standard USD format (e.g. "$90,000 - $150,000 / yr").
+   - For Europe/Germany/France, use EUR format (e.g. "€50,000 - €90,000 / yr").
+   - For UK, use GBP format (e.g. "£45,000 - £85,000 / yr").
+   - Ensure the pay band is highly realistic for {country}.
 
 Return ONLY valid JSON matching this exact structure:
 
@@ -1793,15 +1818,17 @@ Return ONLY valid JSON matching this exact structure:
     "roles": ["Junior Title", "Mid-Level Title", "Senior Title", "Lead Specialist Title", "Executive / Director Title"],
     "education": "Required degrees, certifications, or self-taught paths.",
     "salary": {{
-      "fresher": "₹6.0L - ₹10.0L / yr",
-      "mid": "₹14.0L - ₹25.0L / yr",
-      "senior": "₹28.0L - ₹55.0L / yr",
-      "country_fresher": "$70,000 - $100,000 / yr",
-      "country_mid": "$120,000 - $170,000 / yr",
-      "country_senior": "$180,000 - $280,000 / yr",
-      "india": "₹6.0L - ₹10.0L / yr (Fresher) -> ₹14.0L - ₹25.0L / yr (Mid) -> ₹28.0L - ₹55.0L / yr (Senior)",
-      "country": "$70,000 - $100,000 / yr (Fresher) -> $120,000 - $170,000 / yr (Mid) -> $180,000 - $280,000 / yr (Senior)",
-      "reason": "Detailed explanation explaining why this career commands this salary (e.g. key drivers like talent scarcity, cognitive demand, credentials, industry margins, etc.)"
+      "fresher": "<annual_fresher_salary_in_{target_currency_code}_formatted_with_{target_currency_symbol}>",
+      "mid": "<annual_mid_salary_in_{target_currency_code}_formatted_with_{target_currency_symbol}>",
+      "senior": "<annual_senior_salary_in_{target_currency_code}_formatted_with_{target_currency_symbol}>",
+      "country_fresher": "<annual_fresher_salary_in_{target_currency_code}_formatted_with_{target_currency_symbol}>",
+      "country_mid": "<annual_mid_salary_in_{target_currency_code}_formatted_with_{target_currency_symbol}>",
+      "country_senior": "<annual_senior_salary_in_{target_currency_code}_formatted_with_{target_currency_symbol}>",
+      "india": "<annual_salary_range_in_INR_if_India_otherwise_same_as_country_fresher_mid_senior>",
+      "country": "<annual_fresher_salary_in_{target_currency_code}_formatted_with_{target_currency_symbol}> (Fresher) -> <annual_mid_salary_in_{target_currency_code}_formatted_with_{target_currency_symbol}> (Mid) -> <annual_senior_salary_in_{target_currency_code}_formatted_with_{target_currency_symbol}> (Senior)",
+      "currency_code": "{target_currency_code}",
+      "currency_symbol": "{target_currency_symbol}",
+      "reason": "Detailed explanation explaining why this career commands this salary in {country}..."
     }},
     "future_scope": "5-year growth trajectory, AI impact, and job market outlook.",
     "macro_evolution": {{
@@ -1896,7 +1923,7 @@ Return ONLY valid JSON matching this exact structure:
 Rules & Anti-Hallucination Mandates:
 - JOB DEMAND RATING: Must ONLY be one of ["Low", "Moderate", "High", "Very High"] with a short reason. NEVER output percentage values (e.g. no "88%").
 - CAREER GROWTH OUTLOOK: Must ONLY be one of ["Declining", "Stable", "Growing", "Fast Growing"] with a short explanation. NEVER output percentage values (e.g. no "90%").
-- SALARY ACCURACY: You MUST ensure salary predictions are 80-90% accurate to the real, current market data for {country}. Provide highly realistic salary ranges for fresher, mid, and senior levels in local currency. If reliable salary info is uncertain for an obscure role or region, use your best real-market estimate. Never invent exaggerated or random salary values.
+- SALARY ACCURACY: You MUST ensure salary predictions are 80-90% accurate to the real, current market data for {country}. Provide highly realistic salary ranges for fresher, mid, and senior levels in {target_currency_code} ({target_currency_symbol}) currency ONLY. Never output generic or mock Indian Rupees (INR/₹) unless {country} is India.
 - NO HALLUCINATED LINKS: Never invent fake URLs. Use only real official domain names.
 - MANDATE: EVERY SINGLE ARRAY FIELD (overview.responsibilities, roles, skills.beginner, skills.intermediate, skills.advanced, roadmap.topics, resources.youtube, resources.courses, resources.documentation, resources.books, projects.beginner, projects.intermediate, projects.advanced, certifications, tools, interview_preparation, portfolio_tips, ai_tips, market.top_organizations, market.hiring_hotspots, market.trending_skills, market.daily_plan) MUST CONTAIN AT LEAST 5 ACCURATE, ROLE-SPECIFIC ITEMS.
 - CRITICAL DOMAIN MANDATE: Tailor ALL books, courses, YouTube channels, daily plans, tools, certifications, and projects specifically for "{career}". Never assume programming or software engineering if the role is a non-tech career.
