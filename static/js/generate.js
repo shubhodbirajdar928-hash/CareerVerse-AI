@@ -518,7 +518,7 @@ async function generateRoadmapNow() {
         // -----------------------------
 
         let html = `
-<div class="roadmap-top-bar">
+<div class="roadmap-top-bar" style="margin-bottom: 20px;">
     <div class="roadmap-title-group">
         <span class="roadmap-top-badge"><i class="fa-solid fa-wand-magic-sparkles"></i> AI MASTER ROADMAP</span>
         <h1>${data.career || career}</h1>
@@ -528,278 +528,97 @@ async function generateRoadmapNow() {
     </button>
 </div>
 
-<!-- ================= OVERVIEW ================= -->
-
-<div class="roadmap-item">
-    <h2><i class="fa-solid fa-book-open"></i> Career Overview & Market Scope</h2>
-    <p style="font-size: 1rem; line-height: 1.7; margin-bottom: 20px;">${overview.description || "Comprehensive professional career breakdown."}</p>
-
-
-    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 20px;">
-        <div style="background: rgba(25, 25, 25, 0.7); border: 1px solid var(--border); border-radius: 14px; padding: 18px;">
-            <h3 style="margin-top: 0; color: var(--accent);"><i class="fa-solid fa-user-graduate"></i> Education & Path</h3>
-            <p style="font-size: 0.92rem; margin: 0;">${overview.education || "Bachelor's Degree in STEM / Portfolio Proof"}</p>
-        </div>
-        <div style="background: rgba(25, 25, 25, 0.7); border: 1px solid var(--border); border-radius: 14px; padding: 18px;">
-            <h3 style="margin-top: 0; color: #22c55e;"><i class="fa-solid fa-chart-line"></i> 5-Year Future Trajectory</h3>
-            <p style="font-size: 0.92rem; margin: 0;">${overview.future_scope || "High demand across global hubs."}</p>
-        </div>
-    </div>
-
-    <!-- Past, Present & Future Timeline Reason Card -->
-    <div style="background: rgba(250, 204, 21, 0.03); border: 1px solid rgba(250, 204, 21, 0.25); border-radius: 16px; padding: 20px; margin-bottom: 20px;">
-        <h3 style="margin-top: 0; color: var(--accent); font-size: 1rem; margin-bottom: 14px;"><i class="fa-solid fa-hourglass-half"></i> Past, Present & Future Macro Market Evolution</h3>
-        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px;">
-            <div style="background: rgba(59, 130, 246, 0.05); border: 1px solid rgba(59, 130, 246, 0.25); border-radius: 12px; padding: 14px;">
-                <span style="font-size: 0.75rem; color: #3b82f6; font-weight: 800; text-transform: uppercase; display: block; margin-bottom: 4px;">📜 PAST (10-Yr Evolution)</span>
-                <p style="font-size: 0.82rem; color: var(--text-secondary); margin: 0; line-height: 1.4;">${(overview.macro_evolution?.past || `Historically, ${data.career || career} relied on manual execution, legacy tools, and localized workflows with minimal automation.`)}</p>
-            </div>
-            <div style="background: rgba(250, 204, 21, 0.05); border: 1px solid rgba(250, 204, 21, 0.25); border-radius: 12px; padding: 14px;">
-                <span style="font-size: 0.75rem; color: var(--accent); font-weight: 800; text-transform: uppercase; display: block; margin-bottom: 4px;">⚡ PRESENT (Current Realities)</span>
-                <p style="font-size: 0.82rem; color: var(--text-secondary); margin: 0; line-height: 1.4;">${(overview.macro_evolution?.present || `Currently in high demand driven by digital transformation, modern tech stacks, and cloud integration across global hiring hubs.`)}</p>
-            </div>
-            <div style="background: rgba(34, 197, 94, 0.05); border: 1px solid rgba(34, 197, 94, 0.25); border-radius: 12px; padding: 14px;">
-                <span style="font-size: 0.75rem; color: #22c55e; font-weight: 800; text-transform: uppercase; display: block; margin-bottom: 4px;">🚀 FUTURE (5-10 Yr Scope)</span>
-                <p style="font-size: 0.82rem; color: var(--text-secondary); margin: 0; line-height: 1.4;">${(overview.macro_evolution?.future || `Over the next decade, AI co-pilots will eliminate routine work, elevating specialists into strategic decision-makers with top-tier earning potential.`)}</p>
-            </div>
-        </div>
-    </div>
-
-    <h3><i class="fa-solid fa-layer-group"></i> Top 5 Career Progression Roles</h3>
-    <div class="chip-grid">
-        ${(overview.roles || []).map(r => `<span class="chip-item">👔 ${r}</span>`).join("")}
-    </div>
+<!-- ================= NAVIGATION BAR ================= -->
+<div class="roadmap-navigator">
+    <button class="roadmap-page-btn active" id="roadmap-btn-1" onclick="showRoadmapPage(1)">
+        <i class="fa-solid fa-book-open"></i> Profile & Scope
+    </button>
+    <button class="roadmap-page-btn" id="roadmap-btn-2" onclick="showRoadmapPage(2)">
+        <i class="fa-solid fa-route"></i> Study Timeline
+    </button>
+    <button class="roadmap-page-btn" id="roadmap-btn-3" onclick="showRoadmapPage(3)">
+        <i class="fa-solid fa-code"></i> Skills & Tools
+    </button>
+    <button class="roadmap-page-btn" id="roadmap-btn-4" onclick="showRoadmapPage(4)">
+        <i class="fa-solid fa-laptop-code"></i> Projects
+    </button>
+    <button class="roadmap-page-btn" id="roadmap-btn-5" onclick="showRoadmapPage(5)">
+        <i class="fa-solid fa-graduation-cap"></i> Prep & Resources
+    </button>
+    <button class="roadmap-page-btn" id="roadmap-btn-6" onclick="showRoadmapPage(6)">
+        <i class="fa-solid fa-chart-pie"></i> Market & Hiring
+    </button>
 </div>
 
-<!-- ================= SKILLS ================= -->
-
-<div class="roadmap-item">
-    <h2><i class="fa-solid fa-code"></i> Interactive Skill Checklist Matrix (Top 5 Per Level)</h2>
-    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;">
-        <div style="background: rgba(34, 197, 94, 0.04); border: 1px solid rgba(34, 197, 94, 0.3); border-radius: 14px; padding: 18px;">
-            <h3 style="color: #22c55e; margin-top: 0;"><i class="fa-solid fa-seedling"></i> Beginner</h3>
-            <ul style="gap: 8px;">
-                ${(skills.beginner || []).map(s => `<li style="border-color: rgba(34, 197, 94, 0.2); font-size: 0.86rem; display: flex; align-items: center; gap: 8px;"><input type="checkbox" style="accent-color: #22c55e; width: 15px; height: 15px; cursor: pointer;"> <span>${s}</span></li>`).join("")}
-            </ul>
-        </div>
-        <div style="background: rgba(250, 204, 21, 0.04); border: 1px solid rgba(250, 204, 21, 0.3); border-radius: 14px; padding: 18px;">
-            <h3 style="color: var(--accent); margin-top: 0;"><i class="fa-solid fa-gears"></i> Intermediate</h3>
-            <ul style="gap: 8px;">
-                ${(skills.intermediate || []).map(s => `<li style="border-color: rgba(250, 204, 21, 0.2); font-size: 0.86rem; display: flex; align-items: center; gap: 8px;"><input type="checkbox" style="accent-color: var(--accent); width: 15px; height: 15px; cursor: pointer;"> <span>${s}</span></li>`).join("")}
-            </ul>
-        </div>
-        <div style="background: rgba(168, 85, 247, 0.04); border: 1px solid rgba(168, 85, 247, 0.3); border-radius: 14px; padding: 18px;">
-            <h3 style="color: #a855f7; margin-top: 0;"><i class="fa-solid fa-shield-halved"></i> Advanced</h3>
-            <ul style="gap: 8px;">
-                ${(skills.advanced || []).map(s => `<li style="border-color: rgba(168, 85, 247, 0.2); font-size: 0.86rem; display: flex; align-items: center; gap: 8px;"><input type="checkbox" style="accent-color: #a855f7; width: 15px; height: 15px; cursor: pointer;"> <span>${s}</span></li>`).join("")}
-            </ul>
-        </div>
-    </div>
-</div>
-
-<!-- ================= ROADMAP TIMELINE ================= -->
-
-<div class="roadmap-item">
-    <h2><i class="fa-solid fa-route"></i> Step-by-Step Monthly Execution Roadmap</h2>
-    <div style="display: flex; flex-direction: column; gap: 16px; perspective: 1000px;">
-        ${roadmap.map((month, idx) => `
-            <div class="phase-card">
-                <div class="phase-header">
-                    <span class="phase-badge">${month.month || `Month ${idx + 1}`}</span>
-                    <strong style="color: var(--text-heading); font-size: 1.05rem;">${month.title || `Phase ${idx + 1}: Core Development`}</strong>
-                </div>
-                <h4 style="font-size: 0.88rem; color: var(--accent); margin: 0 0 10px; font-weight: 700;">🧠 Core Tech Topics to Master:</h4>
-                <ul style="margin-bottom: 14px; gap: 6px;">
-                    ${(month.topics || []).map(topic => `<li style="font-size: 0.88rem; padding: 8px 14px;">⚡ ${topic}</li>`).join("")}
-                </ul>
-                ${month.project ? `
-                    <div style="background: rgba(250, 204, 21, 0.06); border: 1px solid rgba(250, 204, 21, 0.3); border-radius: 10px; padding: 10px 14px; margin-bottom: 10px;">
-                        <strong style="color: var(--accent); font-size: 0.86rem;">💼 Month Project:</strong>
-                        <span style="color: var(--text-primary); font-size: 0.86rem;"> ${month.project}</span>
-                    </div>
-                ` : ''}
-                ${month.goal ? `
-                    <div style="background: rgba(34, 197, 94, 0.06); border: 1px solid rgba(34, 197, 94, 0.3); border-radius: 10px; padding: 10px 14px;">
-                        <strong style="color: #22c55e; font-size: 0.86rem;">🎯 Phase Goal:</strong>
-                        <span style="color: var(--text-primary); font-size: 0.86rem;"> ${month.goal}</span>
-                    </div>
-                ` : ''}
-            </div>
-        `).map(item => item).join("")}
-    </div>
-</div>
-
-<!-- ================= LEARNING RESOURCES ================= -->
-
-<div class="roadmap-item">
-    <h2><i class="fa-solid fa-graduation-cap"></i> Curated Learning Resources (Top 5 Per Category)</h2>
-    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
-        <div>
-            <h3><i class="fa-brands fa-youtube" style="color: #ef4444;"></i> Top 5 Authentic YouTube Channels</h3>
-            <div style="display: flex; flex-direction: column; gap: 8px;">
-                ${(resources.youtube || []).map(item => `
-                    <a href="${item.url}" target="_blank" rel="noopener noreferrer" class="resource-link" style="display: flex; justify-content: space-between; align-items: center; text-decoration: none;">
-                        <span><i class="fa-brands fa-youtube" style="color: #ef4444; margin-right: 6px;"></i> ${item.name}</span>
-                    </a>
-                `).join("")}
-            </div>
-        </div>
-        <div>
-            <h3><i class="fa-solid fa-certificate" style="color: var(--accent);"></i> Top 5 Courses & Bootcamps</h3>
-            <div style="display: flex; flex-direction: column; gap: 8px;">
-                ${(resources.courses || []).map(item => `
-                    <a href="${item.url}" target="_blank" rel="noopener noreferrer" class="resource-link" style="display: flex; justify-content: space-between; align-items: center; text-decoration: none;">
-                        <span>🎓 ${item.name}</span>
-                    </a>
-                `).join("")}
-            </div>
-        </div>
-        <div>
-            <h3><i class="fa-solid fa-file-code" style="color: #3b82f6;"></i> Top 5 Official Docs</h3>
-            <div style="display: flex; flex-direction: column; gap: 8px;">
-                ${(resources.documentation || []).map(item => `
-                    <a href="${item.url}" target="_blank" rel="noopener noreferrer" class="resource-link" style="display: flex; justify-content: space-between; align-items: center; text-decoration: none;">
-                        <span>📄 ${item.name}</span>
-                    </a>
-                `).join("")}
-            </div>
-        </div>
-        <div>
-            <h3><i class="fa-solid fa-book" style="color: #a855f7;"></i> Top 5 Must-Read Books</h3>
-            <div style="display: flex; flex-direction: column; gap: 8px;">
-                ${(resources.books || []).map(item => `
-                    <a href="${item.url}" target="_blank" rel="noopener noreferrer" class="resource-link" style="display: flex; justify-content: space-between; align-items: center; text-decoration: none;">
-                        <span>📖 ${item.name}</span>
-                    </a>
-                `).join("")}
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- ================= PROJECTS / PRACTICAL MILESTONES ================= -->
-
-${(() => {
-    const isTechRole = /developer|engineer|coder|programmer|software|web|fullstack|frontend|backend|cloud|data|ai|ml|cybersecurity|devops|qa|sysadmin|blockchain/i.test(data.career_title || "");
-    const projectSectionTitle = isTechRole ? "Real-World Technical Projects" : "Practical Milestones & Domain Case Studies";
-    const projectIcon = isTechRole ? "fa-laptop-code" : "fa-briefcase";
-    const beginnerLabel = isTechRole ? "Beginner Projects" : "Beginner Practicums & Case Logs";
-    const intermediateLabel = isTechRole ? "Intermediate Projects" : "Intermediate Field Assignments";
-    const advancedLabel = isTechRole ? "Advanced Enterprise Projects" : "Advanced Clinical & Strategic Case Studies";
-    const beginnerIcon = isTechRole ? "fa-cubes" : "fa-seedling";
-    const intermediateIcon = isTechRole ? "fa-network-wired" : "fa-diagram-project";
-    const advancedIcon = isTechRole ? "fa-server" : "fa-award";
-
-    return `
+<!-- ================= PAGE 1: CAREER PROFILE ================= -->
+<div class="roadmap-page active" id="roadmap-page-1">
     <div class="roadmap-item">
-        <h2><i class="fa-solid ${projectIcon}"></i> ${projectSectionTitle} (Top 5 Per Tier)</h2>
-        <div style="display: flex; flex-direction: column; gap: 16px;">
-            <div>
-                <h3 style="color: #22c55e;"><i class="fa-solid ${beginnerIcon}"></i> ${beginnerLabel}</h3>
-                <ul>${(projects.beginner || []).map(p => `<li>🟢 ${p}</li>`).join("")}</ul>
-            </div>
-            <div>
-                <h3 style="color: var(--accent);"><i class="fa-solid ${intermediateIcon}"></i> ${intermediateLabel}</h3>
-                <ul>${(projects.intermediate || []).map(p => `<li>🟡 ${p}</li>`).join("")}</ul>
-            </div>
-            <div>
-                <h3 style="color: #a855f7;"><i class="fa-solid ${advancedIcon}"></i> ${advancedLabel}</h3>
-                <ul>${(projects.advanced || []).map(p => `<li>🟣 ${p}</li>`).join("")}</ul>
-            </div>
-        </div>
-    </div>
-    `;
-})()}
+        <h2><i class="fa-solid fa-circle-info"></i> What is this Career?</h2>
+        <p style="font-size: 1.05rem; line-height: 1.7; margin-bottom: 24px; color: var(--text-primary); font-weight: 400;">
+            ${overview.description || "Comprehensive professional career breakdown."}
+        </p>
 
-<!-- ================= CERTIFICATIONS & TOOLS ================= -->
+        <!-- Responsibilities Box -->
+        <div class="responsibilities-box">
+            <h3><i class="fa-solid fa-briefcase"></i> Core Day-to-Day Responsibilities</h3>
+            <ul class="responsibilities-list">
+                ${(overview.responsibilities || [
+                    "Perform core duties, analyze data, and implement domain methodologies.",
+                    "Collaborate with team members and report findings to relevant stakeholders.",
+                    "Ensure quality control, maintain standard guidelines, and resolve operational issues.",
+                    "Leverage modern software, tools, and processes to optimize productivity."
+                ]).map(resp => `<li>${resp}</li>`).join("")}
+            </ul>
+        </div>
 
-<div class="roadmap-item">
-    <h2><i class="fa-solid fa-award"></i> Top 5 Certifications & Essential Tools</h2>
-    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
-        <div>
-            <h3><i class="fa-solid fa-trophy" style="color: var(--accent);"></i> Top 5 Certifications</h3>
-            <div class="chip-grid">
-                ${(certifications || []).map(c => `<span class="chip-item">🏆 ${c}</span>`).join("")}
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 24px;">
+            <div style="background: rgba(25, 25, 25, 0.7); border: 1px solid var(--border); border-radius: 14px; padding: 18px;">
+                <h3 style="margin-top: 0; color: var(--accent);"><i class="fa-solid fa-user-graduate"></i> Education & Path</h3>
+                <p style="font-size: 0.92rem; margin: 0; line-height: 1.5; color: var(--text-secondary);">${overview.education || "Bachelor's Degree in relevant field / Portfolio Proof"}</p>
             </div>
-        </div>
-        <div>
-            <h3><i class="fa-solid fa-screwdriver-wrench" style="color: #3b82f6;"></i> Top 5 Tools & Tech Stack</h3>
-            <div class="chip-grid">
-                ${(tools || []).map(t => `<span class="chip-item">🧰 ${t}</span>`).join("")}
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- ================= INTERVIEW & PORTFOLIO STRATEGY ================= -->
-
-<div class="roadmap-item">
-    <h2><i class="fa-solid fa-comments"></i> Interview, Portfolio & AI Productivity (Top 5 Each)</h2>
-    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;">
-        <div style="background: rgba(25, 25, 25, 0.7); border: 1px solid var(--border); border-radius: 14px; padding: 18px;">
-            <h3 style="margin-top: 0; color: var(--accent);"><i class="fa-solid fa-clipboard-question"></i> Top 5 Interview Qs</h3>
-            <ul style="gap: 8px;">${(interview || []).map(i => `<li style="font-size: 0.84rem; padding: 8px 12px;">💬 ${i}</li>`).join("")}</ul>
-        </div>
-        <div style="background: rgba(25, 25, 25, 0.7); border: 1px solid var(--border); border-radius: 14px; padding: 18px;">
-            <h3 style="margin-top: 0; color: #3b82f6;"><i class="fa-solid fa-bullseye"></i> Top 5 Portfolio Tips</h3>
-            <ul style="gap: 8px;">${(portfolio || []).map(p => `<li style="font-size: 0.84rem; padding: 8px 12px;">🎯 ${p}</li>`).join("")}</ul>
-        </div>
-        <div style="background: rgba(25, 25, 25, 0.7); border: 1px solid var(--border); border-radius: 14px; padding: 18px;">
-            <h3 style="margin-top: 0; color: #a855f7;"><i class="fa-solid fa-wand-magic-sparkles"></i> Top 5 AI Hacks</h3>
-            <ul style="gap: 8px;">${(aiTips || []).map(a => `<li style="font-size: 0.84rem; padding: 8px 12px;">🤖 ${a}</li>`).join("")}</ul>
-        </div>
-    </div>
-</div>
-
-<!-- ================= CAREER INTELLIGENCE ================= -->
-
-<div class="roadmap-item">
-    <h2><i class="fa-solid fa-chart-pie"></i> Market Intelligence & Hiring Ecosystem</h2>
-    
-    <div style="display: grid; grid-template-columns: 1.1fr 1fr; gap: 20px; margin-bottom: 24px; align-items: center;">
-        <div style="background: rgba(25, 25, 25, 0.7); border: 1px solid var(--border); border-radius: 16px; padding: 20px; box-shadow: 0 8px 24px rgba(0,0,0,0.4);">
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
-                <span style="font-size: 0.88rem; font-weight: 800; color: var(--text-heading);"><i class="fa-solid fa-chart-radar" style="color: var(--accent); margin-right: 6px;"></i> Market Ecosystem Radar</span>
-            </div>
-            <div style="height: 230px; position: relative;">
-                <canvas id="marketAnalyticsCanvas"></canvas>
+            <div style="background: rgba(25, 25, 25, 0.7); border: 1px solid var(--border); border-radius: 14px; padding: 18px;">
+                <h3 style="margin-top: 0; color: #22c55e;"><i class="fa-solid fa-chart-line"></i> 5-Year Future Trajectory</h3>
+                <p style="font-size: 0.92rem; margin: 0; line-height: 1.5; color: var(--text-secondary);">${overview.future_scope || "High demand across global hubs."}</p>
             </div>
         </div>
 
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px;">
-            <div style="background: rgba(34, 197, 94, 0.05); border: 1px solid rgba(34, 197, 94, 0.3); border-radius: 14px; padding: 16px;">
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
-                    <span style="font-size: 0.78rem; color: #22c55e; font-weight: 800;">🔥 JOB DEMAND</span>
-                    <span style="font-size: 0.82rem; font-weight: 900; color: #22c55e; background: rgba(34, 197, 94, 0.15); padding: 2px 10px; border-radius: 10px;">${market.job_demand?.rating || (market.job_demand?.percentage ? (market.job_demand.percentage > 80 ? 'Very High' : 'High') : 'High')}</span>
+        <!-- Past, Present & Future Timeline Reason Card -->
+        <div style="background: rgba(250, 204, 21, 0.03); border: 1px solid rgba(250, 204, 21, 0.25); border-radius: 16px; padding: 20px; margin-bottom: 24px;">
+            <h3 style="margin-top: 0; color: var(--accent); font-size: 1rem; margin-bottom: 14px;"><i class="fa-solid fa-hourglass-half"></i> Past, Present & Future Macro Market Evolution</h3>
+            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px;">
+                <div style="background: rgba(59, 130, 246, 0.05); border: 1px solid rgba(59, 130, 246, 0.25); border-radius: 12px; padding: 14px;">
+                    <span style="font-size: 0.75rem; color: #3b82f6; font-weight: 800; text-transform: uppercase; display: block; margin-bottom: 4px;">📜 PAST (10-Yr Evolution)</span>
+                    <p style="font-size: 0.82rem; color: var(--text-secondary); margin: 0; line-height: 1.4;">${(overview.macro_evolution?.past || `Historically, this role relied on manual execution, legacy tools, and localized workflows.`)}</p>
                 </div>
-                <p style="font-size: 0.78rem; color: var(--text-secondary); margin: 6px 0 0; line-height: 1.4;">${market.job_demand?.reason || market.job_demand?.text || `High market demand driven by enterprise hiring & talent shortage in ${country || 'this field'}.`}</p>
-            </div>
-
-            <div style="background: rgba(250, 204, 21, 0.05); border: 1px solid rgba(250, 204, 21, 0.3); border-radius: 14px; padding: 16px;">
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
-                    <span style="font-size: 0.78rem; color: var(--accent); font-weight: 800;">🎯 LEARNING CURVE</span>
-                    <span style="font-size: 0.82rem; font-weight: 900; color: var(--accent); background: rgba(250, 204, 21, 0.15); padding: 2px 10px; border-radius: 10px;">${market.difficulty?.level || 'Moderate to High'}</span>
+                <div style="background: rgba(250, 204, 21, 0.05); border: 1px solid rgba(250, 204, 21, 0.25); border-radius: 12px; padding: 14px;">
+                    <span style="font-size: 0.75rem; color: var(--accent); font-weight: 800; text-transform: uppercase; display: block; margin-bottom: 4px;">⚡ PRESENT (Current Realities)</span>
+                    <p style="font-size: 0.82rem; color: var(--text-secondary); margin: 0; line-height: 1.4;">${(overview.macro_evolution?.present || `Currently in high demand driven by digital transformation, modern tech stacks, and cloud integration.`)}</p>
                 </div>
-                <p style="font-size: 0.78rem; color: var(--text-secondary); margin: 6px 0 0; line-height: 1.4;">${market.difficulty?.reason || market.difficulty?.text || "Moderate to high learning curve requiring structured hands-on practice."}</p>
+                <div style="background: rgba(34, 197, 94, 0.05); border: 1px solid rgba(34, 197, 94, 0.25); border-radius: 12px; padding: 14px;">
+                    <span style="font-size: 0.75rem; color: #22c55e; font-weight: 800; text-transform: uppercase; display: block; margin-bottom: 4px;">🚀 FUTURE (5-10 Yr Scope)</span>
+                    <p style="font-size: 0.82rem; color: var(--text-secondary); margin: 0; line-height: 1.4;">${(overview.macro_evolution?.future || `Over the next decade, AI integration will automate routine work, elevating specialists into strategic decision-makers.`)}</p>
+                </div>
             </div>
+        </div>
 
+        <h3 style="margin-top: 10px;"><i class="fa-solid fa-clock"></i> Day-in-the-Life & Daily Duty Workflow</h3>
+        <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-bottom: 24px;">
             <div style="background: rgba(59, 130, 246, 0.05); border: 1px solid rgba(59, 130, 246, 0.3); border-radius: 14px; padding: 16px;">
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
-                    <span style="font-size: 0.78rem; color: #3b82f6; font-weight: 800;">🚀 CAREER GROWTH</span>
-                    <span style="font-size: 0.82rem; font-weight: 900; color: #3b82f6; background: rgba(59, 130, 246, 0.15); padding: 2px 10px; border-radius: 10px;">${market.growth?.outlook || (market.growth?.percentage ? (market.growth.percentage > 80 ? 'Fast Growing' : 'Growing') : 'Growing')}</span>
-                </div>
-                <p style="font-size: 0.78rem; color: var(--text-secondary); margin: 6px 0 0; line-height: 1.4;">${market.growth?.reason || market.growth?.text || "Strong multi-year expansion powered by technology integration and investments."}</p>
+                <div style="font-size: 0.75rem; color: #3b82f6; font-weight: 800; text-transform: uppercase; margin-bottom: 4px;">🌅 09:00 AM - 10:30 AM</div>
+                <strong style="color: var(--text-heading); font-size: 0.92rem; display: block; margin-bottom: 4px;">Morning Alignment</strong>
+                <p style="font-size: 0.8rem; color: var(--text-secondary); margin: 0; line-height: 1.4;">Sync with teams, review daily goals, and check urgent updates.</p>
             </div>
-
+            <div style="background: rgba(34, 197, 94, 0.05); border: 1px solid rgba(34, 197, 94, 0.3); border-radius: 14px; padding: 16px;">
+                <div style="font-size: 0.75rem; color: #22c55e; font-weight: 800; text-transform: uppercase; margin-bottom: 4px;">🧠 10:30 AM - 01:30 PM</div>
+                <strong style="color: var(--text-heading); font-size: 0.92rem; display: block; margin-bottom: 4px;">Deep Focus Execution</strong>
+                <p style="font-size: 0.8rem; color: var(--text-secondary); margin: 0; line-height: 1.4;">High-value learning, hands-on tasks, and building core projects.</p>
+            </div>
+            <div style="background: rgba(250, 204, 21, 0.05); border: 1px solid rgba(250, 204, 21, 0.3); border-radius: 14px; padding: 16px;">
+                <div style="font-size: 0.75rem; color: var(--accent); font-weight: 800; text-transform: uppercase; margin-bottom: 4px;">🤝 02:30 PM - 04:30 PM</div>
+                <strong style="color: var(--text-heading); font-size: 0.92rem; display: block; margin-bottom: 4px;">Collaboration & Review</strong>
+                <p style="font-size: 0.8rem; color: var(--text-secondary); margin: 0; line-height: 1.4;">Discuss hard concepts, mock reviews, and code/design sharing.</p>
+            </div>
             <div style="background: rgba(168, 85, 247, 0.05); border: 1px solid rgba(168, 85, 247, 0.3); border-radius: 14px; padding: 16px;">
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
-                    <span style="font-size: 0.78rem; color: #a855f7; font-weight: 800;">📚 TIME COMMITMENT</span>
-                    <span style="font-size: 0.82rem; font-weight: 900; color: #a855f7; background: rgba(168, 85, 247, 0.15); padding: 2px 10px; border-radius: 10px;">${market.learning_time?.duration || '6 Months'}</span>
-                </div>
-                <p style="font-size: 0.78rem; color: var(--text-secondary); margin: 6px 0 0; line-height: 1.4;">${market.learning_time?.details || market.learning_time?.text || "Estimated 15-20 hours/week of structured practice over 6 months."}</p>
-            </div>
-        </div>
-    </div>
 
     <!-- Global Mobility & Relocation Readiness Index -->
     ${(() => {

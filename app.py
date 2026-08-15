@@ -1638,6 +1638,12 @@ def get_fallback_roadmap(career, country, months=6):
         "duration": f"{months} months",
         "overview": {
             "description": f"Comprehensive, professional career development path for becoming an elite {c_title}. This roadmap covers foundational knowledge, practical field execution, and senior leadership.",
+            "responsibilities": [
+                f"Master core tools, workflows, and operational standards required in the {c_title} field.",
+                f"Collaborate with cross-functional stakeholders to deliver high-quality professional results.",
+                f"Design, optimize, and maintain systems, products, or processes aligned with {c_title} best practices.",
+                f"Mentor junior peers and drive continuous improvement across team deliverables and operations."
+            ],
             "roles": roles,
             "education": edu,
             "salary": norm_sal,
@@ -1778,6 +1784,12 @@ Return ONLY valid JSON matching this exact structure:
   "duration": "{duration}",
   "overview": {{
     "description": "Comprehensive professional breakdown of {career} in modern industry.",
+    "responsibilities": [
+      "Core Responsibility A: Precise, detailed duty of what professionals in this career execute daily.",
+      "Core Responsibility B: Specific task, collaboration, or operational function in this profession.",
+      "Core Responsibility C: Critical delivery, strategic planning, or system upkeep responsibility.",
+      "Core Responsibility D: Core workflow, compliance standard, or leadership expectation."
+    ],
     "roles": ["Junior Title", "Mid-Level Title", "Senior Title", "Lead Specialist Title", "Executive / Director Title"],
     "education": "Required degrees, certifications, or self-taught paths.",
     "salary": {{
@@ -1886,7 +1898,7 @@ Rules & Anti-Hallucination Mandates:
 - CAREER GROWTH OUTLOOK: Must ONLY be one of ["Declining", "Stable", "Growing", "Fast Growing"] with a short explanation. NEVER output percentage values (e.g. no "90%").
 - SALARY ACCURACY: You MUST ensure salary predictions are 80-90% accurate to the real, current market data for {country}. Provide highly realistic salary ranges for fresher, mid, and senior levels in local currency. If reliable salary info is uncertain for an obscure role or region, use your best real-market estimate. Never invent exaggerated or random salary values.
 - NO HALLUCINATED LINKS: Never invent fake URLs. Use only real official domain names.
-- MANDATE: EVERY SINGLE ARRAY FIELD (roles, skills.beginner, skills.intermediate, skills.advanced, roadmap.topics, resources.youtube, resources.courses, resources.documentation, resources.books, projects.beginner, projects.intermediate, projects.advanced, certifications, tools, interview_preparation, portfolio_tips, ai_tips, market.top_organizations, market.hiring_hotspots, market.trending_skills, market.daily_plan) MUST CONTAIN AT LEAST 5 ACCURATE, ROLE-SPECIFIC ITEMS.
+- MANDATE: EVERY SINGLE ARRAY FIELD (overview.responsibilities, roles, skills.beginner, skills.intermediate, skills.advanced, roadmap.topics, resources.youtube, resources.courses, resources.documentation, resources.books, projects.beginner, projects.intermediate, projects.advanced, certifications, tools, interview_preparation, portfolio_tips, ai_tips, market.top_organizations, market.hiring_hotspots, market.trending_skills, market.daily_plan) MUST CONTAIN AT LEAST 5 ACCURATE, ROLE-SPECIFIC ITEMS.
 - CRITICAL DOMAIN MANDATE: Tailor ALL books, courses, YouTube channels, daily plans, tools, certifications, and projects specifically for "{career}". Never assume programming or software engineering if the role is a non-tech career.
 - EXAMS & PREPARATION: If "{career}" is a competitive exam, entrance exam, or certification test (e.g., UPSC, GATE, JEE, NEET, MPSC, BPSC, SSC, CAT, CLAT, etc.), construct the entire roadmap as a structured preparation curriculum. Map each month to syllabus subjects, revision schedules, and practice/mock tests, rather than traditional job responsibilities.
 - NO ERROR KEYS: You must NEVER return an "error" or "message" key in the JSON indicating inability to generate. You MUST always generate the complete JSON structure successfully.
