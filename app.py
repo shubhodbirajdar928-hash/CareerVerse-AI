@@ -1006,37 +1006,145 @@ def create_normalized_salary_object(career, country):
         "reason": reason
     }
 
+HOTSPOTS_DATABASE = {
+    "india": [
+        {"city": "Bengaluru", "demand": "Very High", "reason": "Silicon Valley of India, tech unicorns & R&D hubs."},
+        {"city": "Mumbai", "demand": "Very High", "reason": "Financial capital, entertainment & corporate HQs."},
+        {"city": "Hyderabad", "demand": "High", "reason": "Major IT, pharmaceutical & global GCC hubs."},
+        {"city": "Pune", "demand": "High", "reason": "Automotive R&D, IT services & engineering hubs."},
+        {"city": "Delhi NCR", "demand": "High", "reason": "National capital region, e-commerce & corporate HQs."}
+    ],
+    "united kingdom": [
+        {"city": "London", "demand": "Very High", "reason": "UK capital, major studio HQs & international corporate hubs."},
+        {"city": "Manchester", "demand": "High", "reason": "Leading UK digital media, tech & innovation center."},
+        {"city": "Birmingham", "demand": "High", "reason": "Major commercial & industrial hub with growing hiring demand."},
+        {"city": "Bristol", "demand": "High", "reason": "Premier creative tech, animation & engineering ecosystem."},
+        {"city": "Edinburgh", "demand": "Moderate-High", "reason": "Financial services, tech startups & academic research hub."}
+    ],
+    "united states": [
+        {"city": "San Francisco", "demand": "Very High", "reason": "Global tech epicenter, venture capital and startup hub."},
+        {"city": "New York", "demand": "Very High", "reason": "Financial capital, media conglomerate HQs and startup ecosystem."},
+        {"city": "Austin", "demand": "High", "reason": "Major tech hub, favorable tax environment and hardware engineering hub."},
+        {"city": "Seattle", "demand": "High", "reason": "Cloud infrastructure giants (Amazon, Microsoft) and enterprise software."},
+        {"city": "Boston", "demand": "High", "reason": "Leading hub for biotechnology, robotics and higher education research."}
+    ],
+    "canada": [
+        {"city": "Toronto", "demand": "Very High", "reason": "Financial core of Canada, massive tech and AI research hubs."},
+        {"city": "Vancouver", "demand": "Very High", "reason": "Major hub for VFX, game development, and tech startups."},
+        {"city": "Montreal", "demand": "High", "reason": "Global gaming studio cluster and AI research center."},
+        {"city": "Ottawa", "demand": "High", "reason": "Public sector tech, telecommunications and SaaS companies."},
+        {"city": "Calgary", "demand": "Moderate-High", "reason": "Energy sector tech, logistics and growing software hubs."}
+    ],
+    "australia": [
+        {"city": "Sydney", "demand": "Very High", "reason": "Financial heart, tech HQs and dominant startup ecosystem."},
+        {"city": "Melbourne", "demand": "Very High", "reason": "Creative tech, design, biotech and major cultural tech hub."},
+        {"city": "Brisbane", "demand": "High", "reason": "Growing software development, aviation and resource tech center."},
+        {"city": "Adelaide", "demand": "Moderate-High", "reason": "Defense tech, space industry and engineering hub."},
+        {"city": "Perth", "demand": "Moderate-High", "reason": "Resource tech, mining software and maritime engineering."}
+    ],
+    "germany": [
+        {"city": "Berlin", "demand": "Very High", "reason": "Startup capital of Europe, creative tech and fintech hubs."},
+        {"city": "Munich", "demand": "Very High", "reason": "Automotive tech, engineering and corporate Siemens/BMW HQs."},
+        {"city": "Frankfurt", "demand": "High", "reason": "Financial capital of Eurozone, banking tech and cloud centers."},
+        {"city": "Hamburg", "demand": "High", "reason": "Logistics, media, game development and commerce hubs."},
+        {"city": "Stuttgart", "demand": "Moderate-High", "reason": "Industrial manufacturing, mechanical engineering and automotive."}
+    ],
+    "france": [
+        {"city": "Paris", "demand": "Very High", "reason": "Capital city, startup incubators and corporate headquarters."},
+        {"city": "Lyon", "demand": "High", "reason": "Biotech, chemical engineering and digital entertainment hub."},
+        {"city": "Toulouse", "demand": "High", "reason": "European aerospace capital, aviation engineering and robotics."},
+        {"city": "Nantes", "demand": "Moderate-High", "reason": "Creative tech, green energy startups and digital agencies."},
+        {"city": "Sophia Antipolis", "demand": "High", "reason": "Major technology park for telecom, AI and microelectronics."}
+    ]
+}
+
 def sanitize_market_hiring_data(market_dict, country, career):
     if not isinstance(market_dict, dict):
         return market_dict
     c_low = (country or "").lower().strip()
     
-    if any(w in c_low for w in ["uk", "united kingdom", "england", "scotland", "wales", "london", "great britain"]):
-        hotspots = market_dict.get("hiring_hotspots", [])
-        has_us_cities = any("san francisco" in str(h).lower() or "austin" in str(h).lower() or "new york" in str(h).lower() or "seattle" in str(h).lower() for h in hotspots)
-        if not hotspots or has_us_cities:
-            market_dict["hiring_hotspots"] = [
-                {"city": "London", "demand": "Very High", "reason": "UK capital, major studio HQs & international corporate hubs."},
-                {"city": "Manchester", "demand": "High", "reason": "Leading UK digital media, tech & innovation center."},
-                {"city": "Birmingham", "demand": "High", "reason": "Major commercial & industrial hub with growing hiring demand."},
-                {"city": "Bristol", "demand": "High", "reason": "Premier creative tech, animation & engineering ecosystem."},
-                {"city": "Edinburgh", "demand": "Moderate-High", "reason": "Financial services, tech startups & academic research hub."}
+    from salary_data_layer import normalize_country_key
+    c_norm = normalize_country_key(c_low)
+    
+    target_key = None
+    for k in HOTSPOTS_DATABASE.keys():
+        if k in c_norm or c_norm in k:
+            target_key = k
+            break
+            
+    hotspots = market_dict.get("hiring_hotspots", [])
+    if not isinstance(hotspots, list):
+        hotspots = []
+        
+    if target_key == "united kingdom":
+        if any("san francisco" in str(h).lower() or "austin" in str(h).lower() or "new york" in str(h).lower() for h in hotspots):
+            hotspots = []
+    elif target_key == "india":
+        if any("san francisco" in str(h).lower() or "austin" in str(h).lower() for h in hotspots):
+            hotspots = []
+            
+    if len(hotspots) < 5:
+        if target_key and target_key in HOTSPOTS_DATABASE:
+            default_list = HOTSPOTS_DATABASE[target_key]
+            existing_names = {h.get("city", "").lower() for h in hotspots if isinstance(h, dict) and h.get("city")}
+            for default_item in default_list:
+                if len(hotspots) >= 5:
+                    break
+                if default_item["city"].lower() not in existing_names:
+                    hotspots.append(default_item)
+        else:
+            c_title = country.title()
+            default_fallbacks = [
+                {"city": f"Capital District, {c_title}", "demand": "Very High", "reason": f"Administrative center, commercial hub and major hiring node in {c_title}."},
+                {"city": f"Metropolitan Center, {c_title}", "demand": "High", "reason": f"Principal financial district, corporate HQs and service sector in {c_title}."},
+                {"city": f"Technology Park, {c_title}", "demand": "High", "reason": f"Special economic zone, innovation parks and regional development in {c_title}."},
+                {"city": f"Industrial Zone, {c_title}", "demand": "Moderate-High", "reason": f"Manufacturing powerhouse, logistics infrastructure and production in {c_title}."},
+                {"city": f"Coastal Port City, {c_title}", "demand": "Moderate-High", "reason": f"Trade gateway, import-export commerce and shipping hub in {c_title}."}
             ]
-        orgs = market_dict.get("top_organizations", [])
+            existing_names = {h.get("city", "").lower() for h in hotspots if isinstance(h, dict) and h.get("city")}
+            for default_item in default_fallbacks:
+                if len(hotspots) >= 5:
+                    break
+                if default_item["city"].lower() not in existing_names:
+                    hotspots.append(default_item)
+                    
+    sanitized_hotspots = []
+    for h in hotspots[:5]:
+        if isinstance(h, dict):
+            city_name = h.get("city") or h.get("name") or "Key Commercial Hub"
+            demand_val = h.get("demand") or h.get("demand_level") or "High"
+            reason_val = h.get("reason") or h.get("justification") or f"Growing recruitment activity for {career} specialists."
+            sanitized_hotspots.append({
+                "city": city_name,
+                "demand": demand_val,
+                "reason": reason_val
+            })
+        else:
+            sanitized_hotspots.append({
+                "city": str(h),
+                "demand": "High",
+                "reason": f"Active talent recruitment and hiring demand for {career} roles."
+            })
+            
+    while len(sanitized_hotspots) < 5:
+        idx = len(sanitized_hotspots) + 1
+        sanitized_hotspots.append({
+            "city": f"Regional Hub #{idx}",
+            "demand": "High",
+            "reason": f"Expanding industry presence and hiring demand for {career} specialists."
+        })
+        
+    market_dict["hiring_hotspots"] = sanitized_hotspots
+
+    # Sanitize organizations
+    orgs = market_dict.get("top_organizations", [])
+    if not isinstance(orgs, list):
+        orgs = []
+    if target_key == "united kingdom":
         has_indian_conglom = any("tata" in str(o).lower() or "reliance" in str(o).lower() for o in orgs)
         if (has_indian_conglom or not orgs) and any(w in (career or "").lower() for w in ["3d", "artist", "animat", "vfx", "game", "design"]):
             market_dict["top_organizations"] = ["DNEG (London)", "Framestore", "Industrial Light & Magic (London)", "Creative Assembly", "Sony PlayStation Studios UK"]
-    elif any(w in c_low for w in ["india", "in", "bharat"]):
-        hotspots = market_dict.get("hiring_hotspots", [])
-        has_us_cities = any("san francisco" in str(h).lower() or "austin" in str(h).lower() for h in hotspots)
-        if not hotspots or has_us_cities:
-            market_dict["hiring_hotspots"] = [
-                {"city": "Bengaluru", "demand": "Very High", "reason": "Silicon Valley of India, tech unicorns & R&D hubs."},
-                {"city": "Mumbai", "demand": "Very High", "reason": "Financial capital, entertainment & corporate HQs."},
-                {"city": "Hyderabad", "demand": "High", "reason": "Major IT, pharmaceutical & global GCC hubs."},
-                {"city": "Pune", "demand": "High", "reason": "Automotive R&D, IT services & engineering hubs."},
-                {"city": "Delhi NCR", "demand": "High", "reason": "National capital region, e-commerce & corporate HQs."}
-            ]
+            
     return market_dict
 
 # =====================================================
