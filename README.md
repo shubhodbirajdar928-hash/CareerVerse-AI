@@ -10,9 +10,10 @@
 
 ---
 
-## 🌟 What's New in Version 2.5
+## 🌟 What's New in Version 2.6
 
-- 🌍 **Universal Multi-Domain Career Engine**: Supports **250+ real-world career fields** across Healthcare, Engineering, Agriculture, Government, Education, Law, Aviation, Culinary, Arts, Public Safety, and Skilled Trades.
+- 🛡️ **Resilient Exam & Acronym Validation Layer**: Refactored the universal validation engine to run word-by-word checks. Valid central and state-level competitive exams (e.g., UPSC, MPSC, BPSC, GPSC, GATE, JEE, NEET) can now successfully generate roadmaps without triggering unnatural consonant cluster or gibberish flags.
+- 💰 **Dynamic Real-Time AI Salary Intelligence fallbacks**: Upgraded the core data layer (`salary_data_layer.py`) to leverage real-time Google Gemini inferences when a career or job role is not matched in the verified hardcoded database. It dynamically generates highly-accurate fresher, mid-level, and senior-level local salary brackets, percentiles, and market justifications.
 - 💱 **Multi-Currency Salary Breakdown**: Displays **India Expected Pay Band** in Indian Rupees (`₹ Lakhs / yr`) alongside the **Target Country Pay Band** in its official local currency (`$`, `£`, `€`, `CA$`, `AU$`, `AED`, `SG$`, `¥`).
 - 📈 **3-Tier Salary Progression Grid**: Interactive breakdown across `👨‍💻 Fresher (0-2 Yrs)`, `🚀 Mid-Level (2-5 Yrs)`, and `🏆 Experienced (5+ Yrs)`.
 - 💬 **ChatGPT / Claude Executive AI Career Mentor**: Split-workspace interface featuring a collapsible sidebar, recent conversation history, prompt cards, auto-expanding textareas (`Shift + Enter`), rich markdown rendering, and animated 3-dot pulse typing indicators.
