@@ -23,7 +23,7 @@ const VALID_ACRONYMS = [
     "ai", "ml", "ui", "ux", "hr", "pr", "it", "qa", "seo", "sre", "cto", "ceo", "cfo", "vp", "dba", "erp", "crm", "bi", "ar", "vr", "3d", "2d", "5g", "cad", "gis", "pm", "dev", "ops", "sec", "mlops", "devops", "secops", "web3", "web2", "ios", "nlp", "llm", "genai", "c++", "c#", ".net",
     "mbbs", "bds", "bams", "bhms", "bpt", "mch", "dnb", "bums", "brms", "md", "ms", "frcs", "mrcp", "mrcs", "pharmd", "gnm", "anm",
     "llb", "llm", "bcl", "aibe", "clat",
-    "ias", "ips", "ifs", "irs", "upsc", "nda", "cds", "afcat", "ssc", "psc", "gpsc", "mpsc", "uppsc", "bpsc",
+    "ias", "ips", "ifs", "irs", "upsc", "nda", "cds", "afcat", "ssc", "psc", "gpsc", "mpsc", "uppsc", "bpsc", "chsl", "wbcs", "jkpsc", "tnpsc", "tspsc", "cgpsc", "hpsc", "kpsc", "ppsc", "mppsc", "rrb", "isro", "drdo", "barc", "hal", "bel", "gail", "ntpc",
     "cpl", "atpl", "ppl", "dgca", "faa",
     "ca", "cfa", "cpa", "cfp", "cma", "acca", "cs", "frm",
     "btech", "mtech", "bca", "mca", "bba", "mba", "bsc", "msc", "phd", "bed", "med", "bdes", "mdes", "barch", "march"

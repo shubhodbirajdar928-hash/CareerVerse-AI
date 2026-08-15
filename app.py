@@ -148,7 +148,7 @@ VALID_ACRONYMS = {
     # Law & Judicial Acronyms
     "llb", "llm", "bcl", "aibe", "clat",
     # Civil Services, Defense & Public Acronyms
-    "ias", "ips", "ifs", "irs", "upsc", "nda", "cds", "afcat", "ssc", "psc", "gpsc", "mpsc", "uppsc", "bpsc",
+    "ias", "ips", "ifs", "irs", "upsc", "nda", "cds", "afcat", "ssc", "psc", "gpsc", "mpsc", "uppsc", "bpsc", "chsl", "wbcs", "jkpsc", "tnpsc", "tspsc", "cgpsc", "hpsc", "kpsc", "ppsc", "mppsc", "rrb", "isro", "drdo", "barc", "hal", "bel", "gail", "ntpc",
     # Aviation Acronyms
     "cpl", "atpl", "ppl", "dgca", "faa",
     # Business, Finance & Accounting Acronyms
@@ -325,32 +325,39 @@ def validate_career_universal(career_input):
             }
 
     # 9. Reject unnatural consonant clusters / gibberish patterns (e.g. hfuy, jsdh, zxcv, qwrty)
-    unnatural_patterns = [
-        r'[bcdfghjklmnpqrstvwxz]{5,}',
-        r'^[bcdfghjklmnpqrstvwxz]{4,}',
-        r'^[qwertyuiop]{6,}$',
-        r'^[asdfghjkl]{5,}$',
-        r'^[zxcvbnm]{4,}$',
-        r'(.)\1{3,}'  # 4+ repeated chars e.g. aaaa, zzzz
-    ]
-    for pat in unnatural_patterns:
-        if re.search(pat, clean):
+    words_to_check = clean.split()
+    for w in words_to_check:
+        if w in VALID_ACRONYMS:
+            continue
+        unnatural_patterns = [
+            r'[bcdfghjklmnpqrstvwxz]{5,}',
+            r'^[bcdfghjklmnpqrstvwxz]{4,}',
+            r'^[qwertyuiop]{6,}$',
+            r'^[asdfghjkl]{5,}$',
+            r'^[zxcvbnm]{4,}$',
+            r'(.)\1{3,}'  # 4+ repeated chars e.g. aaaa, zzzz
+        ]
+        for pat in unnatural_patterns:
+            if re.search(pat, w):
+                return {
+                    "valid": False,
+                    "normalized_input": None,
+                    "input_type": "invalid",
+                    "error": "Please enter a valid career, job role, profession, or career field."
+                }
+
+    # 10. Check specific random gibberish (e.g. hfuyaw, jsdhfks)
+    gibberish_subs = ["hfuy", "uyaw", "jsdh", "hfks", "asdf", "dfgh", "ghjk", "jkl;", "zxcv", "xcvb", "cvbn", "vbnm", "qwer", "wert", "erty", "rtyu", "tyui", "yuio", "uiop"]
+    for w in words_to_check:
+        if w in VALID_ACRONYMS:
+            continue
+        if any(sub in w for sub in gibberish_subs):
             return {
                 "valid": False,
                 "normalized_input": None,
                 "input_type": "invalid",
                 "error": "Please enter a valid career, job role, profession, or career field."
             }
-
-    # 10. Check specific random gibberish (e.g. hfuyaw, jsdhfks)
-    gibberish_subs = ["hfuy", "uyaw", "jsdh", "hfks", "asdf", "dfgh", "ghjk", "jkl;", "zxcv", "xcvb", "cvbn", "vbnm", "qwer", "wert", "erty", "rtyu", "tyui", "yuio", "uiop"]
-    if any(sub in clean for sub in gibberish_subs):
-        return {
-            "valid": False,
-            "normalized_input": None,
-            "input_type": "invalid",
-            "error": "Please enter a valid career, job role, profession, or career field."
-        }
 
     # 11. Minor typo correction
     words = clean.split()
@@ -1881,6 +1888,8 @@ Rules & Anti-Hallucination Mandates:
 - NO HALLUCINATED LINKS: Never invent fake URLs. Use only real official domain names.
 - MANDATE: EVERY SINGLE ARRAY FIELD (roles, skills.beginner, skills.intermediate, skills.advanced, roadmap.topics, resources.youtube, resources.courses, resources.documentation, resources.books, projects.beginner, projects.intermediate, projects.advanced, certifications, tools, interview_preparation, portfolio_tips, ai_tips, market.top_organizations, market.hiring_hotspots, market.trending_skills, market.daily_plan) MUST CONTAIN AT LEAST 5 ACCURATE, ROLE-SPECIFIC ITEMS.
 - CRITICAL DOMAIN MANDATE: Tailor ALL books, courses, YouTube channels, daily plans, tools, certifications, and projects specifically for "{career}". Never assume programming or software engineering if the role is a non-tech career.
+- EXAMS & PREPARATION: If "{career}" is a competitive exam, entrance exam, or certification test (e.g., UPSC, GATE, JEE, NEET, MPSC, BPSC, SSC, CAT, CLAT, etc.), construct the entire roadmap as a structured preparation curriculum. Map each month to syllabus subjects, revision schedules, and practice/mock tests, rather than traditional job responsibilities.
+- NO ERROR KEYS: You must NEVER return an "error" or "message" key in the JSON indicating inability to generate. You MUST always generate the complete JSON structure successfully.
 - Generate exactly {months} objects in the roadmap array.
 - Return ONLY valid JSON. No markdown fences.
 """
