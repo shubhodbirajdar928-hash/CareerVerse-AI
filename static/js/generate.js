@@ -392,6 +392,25 @@ function getSeniorSalary(market, country) {
     return "$140,000 - $220,000 / yr";
 }
 
+function renderResourceList(items, fallbackItems, iconClass, linkColor) {
+    const list = items || fallbackItems;
+    if (!list || !Array.isArray(list)) return "";
+    return list.map(item => {
+        if (item && typeof item === "object") {
+            const name = item.name || item.title || "Resource Link";
+            const url = item.url || "#";
+            return `
+                <li>
+                    <a href="${url}" target="_blank" style="color: ${linkColor}; text-decoration: none; font-weight: 500; display: inline-flex; align-items: center; gap: 6px; transition: opacity 0.2s;" onmouseover="this.style.opacity='0.8'" onmouseout="this.style.opacity='1'">
+                        <i class="${iconClass}"></i> ${name}
+                    </a>
+                </li>
+            `;
+        }
+        return `<li>${item}</li>`;
+    }).join("");
+}
+
 // ==========================================
 // Generate Roadmap Global Handler
 // ==========================================
@@ -865,28 +884,28 @@ async function generateRoadmapNow() {
             <div style="background: rgba(25, 25, 25, 0.7); border: 1px solid var(--border); border-radius: 16px; padding: 20px;">
                 <h3 style="margin-top: 0; color: var(--accent);"><i class="fa-solid fa-laptop"></i> Recommended Courses & Programs</h3>
                 <ul style="margin: 0; padding-left: 20px; font-size: 0.88rem; color: var(--text-secondary); line-height: 1.5; gap: 8px; display: flex; flex-direction: column;">
-                    ${(resources.courses || ["Coursera Specialized Track", "Udemy Advanced Masterclass", "Vetted Certification Tracks"]).map(c => `<li>${c}</li>`).join("")}
+                    ${renderResourceList(resources.courses, ["Coursera Specialized Track", "Udemy Advanced Masterclass", "Vetted Certification Tracks"], "fa-solid fa-graduation-cap", "#60a5fa")}
                 </ul>
             </div>
 
             <div style="background: rgba(25, 25, 25, 0.7); border: 1px solid var(--border); border-radius: 16px; padding: 20px;">
                 <h3 style="margin-top: 0; color: #3b82f6;"><i class="fa-solid fa-book"></i> Vetted Books & Publications</h3>
                 <ul style="margin: 0; padding-left: 20px; font-size: 0.88rem; color: var(--text-secondary); line-height: 1.5; gap: 8px; display: flex; flex-direction: column;">
-                    ${(resources.books || ["Industry Standard Handbook", "Designing High Reliability Systems", "Operational Strategy Book"]).map(b => `<li>${b}</li>`).join("")}
+                    ${renderResourceList(resources.books, ["Industry Standard Handbook", "Designing High Reliability Systems", "Operational Strategy Book"], "fa-solid fa-book", "#60a5fa")}
                 </ul>
             </div>
 
             <div style="background: rgba(25, 25, 25, 0.7); border: 1px solid var(--border); border-radius: 16px; padding: 20px;">
                 <h3 style="margin-top: 0; color: #22c55e;"><i class="fa-solid fa-file-lines"></i> Official Documentation</h3>
                 <ul style="margin: 0; padding-left: 20px; font-size: 0.88rem; color: var(--text-secondary); line-height: 1.5; gap: 8px; display: flex; flex-direction: column;">
-                    ${(resources.documentation || ["Official API Guidelines & Reference Docs", "Community standards & whitepapers"]).map(d => `<li>${d}</li>`).join("")}
+                    ${renderResourceList(resources.documentation, ["Official API Guidelines & Reference Docs", "Community standards & whitepapers"], "fa-solid fa-file-code", "#4ade80")}
                 </ul>
             </div>
 
             <div style="background: rgba(25, 25, 25, 0.7); border: 1px solid var(--border); border-radius: 16px; padding: 20px;">
                 <h3 style="margin-top: 0; color: #a855f7;"><i class="fa-solid fa-play"></i> YouTube Channels & Communities</h3>
                 <ul style="margin: 0; padding-left: 20px; font-size: 0.88rem; color: var(--text-secondary); line-height: 1.5; gap: 8px; display: flex; flex-direction: column;">
-                    ${(resources.youtube_channels || ["Top-Tier Tech Creators", "Mock Interview Prep channels", "Expert Code Walkthroughs"]).map(y => `<li>${y}</li>`).join("")}
+                    ${renderResourceList(resources.youtube || resources.youtube_channels, ["Top-Tier Tech Creators", "Mock Interview Prep channels", "Expert Code Walkthroughs"], "fa-brands fa-youtube", "#f87171")}
                 </ul>
             </div>
         </div>
