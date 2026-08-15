@@ -10,8 +10,10 @@
 
 ---
 
-## 🌟 What's New in Version 2.6
+## 🌟 What's New in Version 2.7
 
+- 📚 **Verified Resource Recommender & Direct Link Integration**: Prompts the AI engine to retrieve and return actual, verified, real-world learning links. Youtube channels (`https://www.youtube.com/@freecodecamp`), online courses (Coursera/edX), vetted books, and official documentation are returned with direct paths instead of generic homepages.
+- 💼 **Universal "Practical Tasks & Applications" Section Renaming**: Changed references from "Projects" to "Hands-On Tasks & Practical Applications" across the UI, navigation tabs, month timeline cards, and the PDF export module. This makes the learning roadmap perfectly friendly for non-technical careers, medical students, and competitive exam preparation.
 - 🛡️ **Resilient Exam & Acronym Validation Layer**: Refactored the universal validation engine to run word-by-word checks. Valid central and state-level competitive exams (e.g., UPSC, MPSC, BPSC, GPSC, GATE, JEE, NEET) can now successfully generate roadmaps without triggering unnatural consonant cluster or gibberish flags.
 - 💰 **Dynamic Real-Time AI Salary Intelligence fallbacks**: Upgraded the core data layer (`salary_data_layer.py`) to leverage real-time Google Gemini inferences when a career or job role is not matched in the verified hardcoded database. It dynamically generates highly-accurate fresher, mid-level, and senior-level local salary brackets, percentiles, and market justifications.
 - 💱 **Multi-Currency Salary Breakdown**: Displays **India Expected Pay Band** in Indian Rupees (`₹ Lakhs / yr`) alongside the **Target Country Pay Band** in its official local currency (`$`, `£`, `€`, `CA$`, `AU$`, `AED`, `SG$`, `¥`).

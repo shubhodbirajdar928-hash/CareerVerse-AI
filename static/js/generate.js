@@ -559,7 +559,7 @@ async function generateRoadmapNow() {
         <i class="fa-solid fa-code"></i> Skills & Tools
     </button>
     <button class="roadmap-page-btn" id="roadmap-btn-4" onclick="showRoadmapPage(4)">
-        <i class="fa-solid fa-laptop-code"></i> Projects
+        <i class="fa-solid fa-laptop-code"></i> Practical Tasks
     </button>
     <button class="roadmap-page-btn" id="roadmap-btn-5" onclick="showRoadmapPage(5)">
         <i class="fa-solid fa-graduation-cap"></i> Prep & Resources
@@ -691,7 +691,7 @@ async function generateRoadmapNow() {
     <div class="roadmap-item">
         <h2><i class="fa-solid fa-route"></i> Step-by-Step Learning Timeline</h2>
         <p style="font-size: 0.95rem; line-height: 1.6; margin-bottom: 24px; color: var(--text-secondary);">
-            Master this career path structured across sequential phases. Complete each milestone goal and project to progress.
+            Master this career path structured across sequential phases. Complete each milestone goal and task to progress.
         </p>
 
         <div class="timeline-container" style="display: flex; flex-direction: column; gap: 24px;">
@@ -715,7 +715,7 @@ async function generateRoadmapNow() {
 
                     <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 14px; background: rgba(0,0,0,0.2); padding: 14px; border-radius: 10px; border: 1px solid rgba(255,255,255,0.03);">
                         <div>
-                            <strong style="color: #3b82f6; font-size: 0.8rem; text-transform: uppercase; display: block; margin-bottom: 4px;"><i class="fa-solid fa-code"></i> Practical Project</strong>
+                            <strong style="color: #3b82f6; font-size: 0.8rem; text-transform: uppercase; display: block; margin-bottom: 4px;"><i class="fa-solid fa-briefcase"></i> Practical Task / Project</strong>
                             <p style="font-size: 0.84rem; color: var(--text-secondary); margin: 0; line-height: 1.4;">${phase.project || "Implement domain basics."}</p>
                         </div>
                         <div>
@@ -814,21 +814,21 @@ async function generateRoadmapNow() {
 <!-- ================= PAGE 4: PORTFOLIO PROJECTS ================= -->
 <div class="roadmap-page" id="roadmap-page-4">
     <div class="roadmap-item">
-        <h2><i class="fa-solid fa-laptop-code"></i> Real-World Portfolio Projects</h2>
+        <h2><i class="fa-solid fa-laptop-code"></i> Hands-On Tasks & Practical Applications</h2>
         <p style="font-size: 0.95rem; line-height: 1.6; margin-bottom: 24px; color: var(--text-secondary);">
-            Acquire proof of work by building these practical portfolio items. Stacking high-quality projects is crucial to land jobs.
+            Acquire real-world experience and proof of work by completing these practical tasks, case studies, or portfolio items.
         </p>
 
         <div style="display: flex; flex-direction: column; gap: 20px; margin-bottom: 24px;">
             <div style="background: rgba(34, 197, 94, 0.03); border: 1px solid rgba(34, 197, 94, 0.25); border-radius: 16px; padding: 20px;">
                 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; flex-wrap: wrap; gap: 8px;">
-                    <h3 style="margin: 0; color: #22c55e; font-size: 1.1rem;"><i class="fa-solid fa-seedling"></i> Beginner Portfolio Milestones</h3>
+                    <h3 style="margin: 0; color: #22c55e; font-size: 1.1rem;"><i class="fa-solid fa-seedling"></i> Beginner Tasks & Projects</h3>
                     <span style="font-size: 0.72rem; color: #22c55e; background: rgba(34, 197, 94, 0.1); padding: 2px 10px; border-radius: 10px; font-weight: 700;">Foundation</span>
                 </div>
                 <div style="display: flex; flex-direction: column; gap: 10px; margin-top: 10px;">
-                    ${(projects.beginner || ["Construct foundation level project to learn syntax & standard tools."]).map((p, idx) => `
+                    ${(projects.beginner || ["Construct foundation level project/task to learn concepts & standard tools."]).map((p, idx) => `
                         <div style="background: rgba(0,0,0,0.2); padding: 12px; border-radius: 10px; border: 1px solid rgba(255,255,255,0.02); font-size: 0.9rem; color: var(--text-secondary); line-height: 1.45;">
-                            <strong>Project ${idx + 1}:</strong> ${p}
+                            <strong>Task ${idx + 1}:</strong> ${p}
                         </div>
                     `).join("")}
                 </div>
@@ -836,13 +836,13 @@ async function generateRoadmapNow() {
 
             <div style="background: rgba(250, 204, 21, 0.03); border: 1px solid rgba(250, 204, 21, 0.25); border-radius: 16px; padding: 20px;">
                 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; flex-wrap: wrap; gap: 8px;">
-                    <h3 style="margin: 0; color: var(--accent); font-size: 1.1rem;"><i class="fa-solid fa-fire"></i> Intermediate Capstones</h3>
+                    <h3 style="margin: 0; color: var(--accent); font-size: 1.1rem;"><i class="fa-solid fa-fire"></i> Intermediate Tasks & Projects</h3>
                     <span style="font-size: 0.72rem; color: var(--accent); background: rgba(250, 204, 21, 0.1); padding: 2px 10px; border-radius: 10px; font-weight: 700;">Applied</span>
                 </div>
                 <div style="display: flex; flex-direction: column; gap: 10px; margin-top: 10px;">
-                    ${(projects.intermediate || ["Build functional end-to-end applications demonstrating intermediate mastery."]).map((p, idx) => `
+                    ${(projects.intermediate || ["Build functional projects or case studies demonstrating intermediate mastery."]).map((p, idx) => `
                         <div style="background: rgba(0,0,0,0.2); padding: 12px; border-radius: 10px; border: 1px solid rgba(255,255,255,0.02); font-size: 0.9rem; color: var(--text-secondary); line-height: 1.45;">
-                            <strong>Project ${idx + 1}:</strong> ${p}
+                            <strong>Task ${idx + 1}:</strong> ${p}
                         </div>
                     `).join("")}
                 </div>
@@ -850,13 +850,13 @@ async function generateRoadmapNow() {
 
             <div style="background: rgba(168, 85, 247, 0.03); border: 1px solid rgba(168, 85, 247, 0.25); border-radius: 16px; padding: 20px;">
                 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; flex-wrap: wrap; gap: 8px;">
-                    <h3 style="margin: 0; color: #a855f7; font-size: 1.1rem;"><i class="fa-solid fa-crown"></i> Advanced Enterprise Case Studies</h3>
+                    <h3 style="margin: 0; color: #a855f7; font-size: 1.1rem;"><i class="fa-solid fa-crown"></i> Advanced Tasks & Case Studies</h3>
                     <span style="font-size: 0.72rem; color: #a855f7; background: rgba(168, 85, 247, 0.1); padding: 2px 10px; border-radius: 10px; font-weight: 700;">Scale & Security</span>
                 </div>
                 <div style="display: flex; flex-direction: column; gap: 10px; margin-top: 10px;">
-                    ${(projects.advanced || ["Scale performance, handle high concurrency, and implement production architecture."]).map((p, idx) => `
+                    ${(projects.advanced || ["Complete advanced case studies, mock audits, or high-concurrency systems."]).map((p, idx) => `
                         <div style="background: rgba(0,0,0,0.2); padding: 12px; border-radius: 10px; border: 1px solid rgba(255,255,255,0.02); font-size: 0.9rem; color: var(--text-secondary); line-height: 1.45;">
-                            <strong>Project ${idx + 1}:</strong> ${p}
+                            <strong>Task ${idx + 1}:</strong> ${p}
                         </div>
                     `).join("")}
                 </div>
@@ -1433,12 +1433,12 @@ function generatePDFReport() {
     const roadmapRows = roadmap.map(m => [
         sanitize(m.month || 'Phase') + '\n' + sanitize(m.title || ''),
         (m.topics || []).map(t => '• ' + sanitize(t)).join('\n'),
-        'Project: ' + sanitize(m.project || 'N/A') + '\nGoal: ' + sanitize(m.goal || 'N/A')
+        'Task/Project: ' + sanitize(m.project || 'N/A') + '\nGoal: ' + sanitize(m.goal || 'N/A')
     ]);
 
     doc.autoTable({
         startY: y,
-        head: [['Month / Phase Title', 'Core Topics to Master', 'Hands-On Project & Goal']],
+        head: [['Month / Phase Title', 'Core Topics to Master', 'Practical Task & Milestone Goal']],
         body: roadmapRows,
         styles: { fontSize: 8, cellPadding: 3.5 },
         headStyles: { fillColor: NAVY, textColor: [255, 255, 255], fontStyle: 'bold' },
@@ -1453,7 +1453,7 @@ function generatePDFReport() {
 
     // SECTION 4: PROJECTS & CERTIFICATIONS
     const projects = data.projects || {};
-    drawSectionHeader("4. Real-World Portfolio Projects");
+    drawSectionHeader("4. Hands-On Tasks & Practical Applications");
 
     const projRows = [];
     const maxP = Math.max((projects.beginner || []).length, (projects.intermediate || []).length, (projects.advanced || []).length);
@@ -1467,7 +1467,7 @@ function generatePDFReport() {
 
     doc.autoTable({
         startY: y,
-        head: [['Beginner Projects', 'Intermediate Projects', 'Advanced Enterprise Projects']],
+        head: [['Beginner Tasks & Projects', 'Intermediate Tasks & Projects', 'Advanced Tasks & Case Studies']],
         body: projRows,
         styles: { fontSize: 8.5, cellPadding: 3.5 },
         headStyles: { fillColor: SLATE, textColor: [255, 255, 255], fontStyle: 'bold' },
