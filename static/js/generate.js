@@ -281,9 +281,15 @@ function renderPayBandCard(salaryData, targetSalInfo, country) {
     let senior = "Data unavailable";
 
     if (salaryData && typeof salaryData === "object") {
-        fresher = salaryData.fresher || salaryData.india_fresher || salaryData.country_fresher || "Data unavailable";
-        mid = salaryData.mid || salaryData.india_mid || salaryData.country_mid || "Data unavailable";
-        senior = salaryData.senior || salaryData.india_senior || salaryData.country_senior || "Data unavailable";
+        if (isIndia) {
+            fresher = salaryData.india_fresher || salaryData.india || salaryData.fresher || "Data unavailable";
+            mid = salaryData.india_mid || salaryData.mid || "Data unavailable";
+            senior = salaryData.india_senior || salaryData.senior || "Data unavailable";
+        } else {
+            fresher = salaryData.country_fresher || salaryData.fresher || "Data unavailable";
+            mid = salaryData.country_mid || salaryData.mid || "Data unavailable";
+            senior = salaryData.country_senior || salaryData.senior || "Data unavailable";
+        }
     } else if (salaryData && typeof salaryData === "string") {
         const parts = salaryData.split("->").map(p => p.replace(/\((Fresher|Mid|Senior)\)/gi, "").trim());
         if (parts.length >= 3) {
@@ -530,7 +536,7 @@ async function generateRoadmapNow() {
         const portfolio = data.portfolio_tips || [];
         const aiTips = data.ai_tips || [];
         const market = data.market || {};
-        const targetSalInfo = getCountrySalaryInfo(country, overview.salary?.country || overview.salary?.usa);
+        const targetSalInfo = getCountrySalaryInfo(country, overview.salary?.formatted_range || overview.salary?.country || overview.salary?.usa);
 
         // -----------------------------
         // Start HTML
