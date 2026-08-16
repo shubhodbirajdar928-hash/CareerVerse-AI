@@ -1899,7 +1899,7 @@ CRITICAL ACCURACY RULES:
    - For 'courses': provide direct URLs on Coursera, edX, Udemy, or official universities (e.g., 'https://www.coursera.org/specializations/python', 'https://react.dev/learn', etc.).
    - For 'books': provide direct info or search URLs on Amazon, Goodreads, or official portals (e.g., 'https://www.amazon.com/dp/0132350882', etc.).
    - For 'documentation': provide direct, official URL addresses of the technologies or frameworks (e.g., 'https://docs.python.org/3/', 'https://developer.mozilla.org', etc.).
-   - For 'youtube': provide the actual, specific handle link of verified educational YouTube creators (e.g., 'https://www.youtube.com/@freecodecamp', 'https://www.youtube.com/@ProgrammingWithMosh', 'https://www.youtube.com/@MITOCW', etc.).
+   - For 'youtube': provide the actual, specific handle link of verified educational YouTube creators with over 1 MILLION followers (e.g., 'https://www.youtube.com/@freecodecamp', 'https://www.youtube.com/@ProgrammingWithMosh', 'https://www.youtube.com/@MITOCW', 'https://www.youtube.com/@Fireship', 'https://www.youtube.com/@TraversyMedia', etc.). Do NOT recommend channels with low follower counts.
    - Do NOT use generic placeholder homepages like 'https://www.youtube.com', 'https://www.coursera.org', or 'https://amazon.com'. Provide full, direct paths.
 3. For each month ({months} months total), specify 4-5 exact technologies or skills to learn, 1 real-world portfolio project to build, and 1 clear milestone goal tailored to their background.
 4. For salaries, you MUST ONLY provide the salary in the official currency of {country} ({target_currency_code}) using the official symbol ({target_currency_symbol}). Do NOT output Indian Rupees (INR/₹) unless {country} is India.

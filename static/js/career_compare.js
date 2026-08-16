@@ -364,7 +364,7 @@ country: country
                 <p>${data.recommendation}</p>
             </div>
             <div class="decision-badge">
-                ✨ Optimal Choice Based On Market Mobility & Salary Trajectory
+                ✨ Optimal Choice Based On AI Resilience & Salary Trajectory
             </div>
         </div>
         `;

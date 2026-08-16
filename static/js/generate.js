@@ -959,85 +959,97 @@ async function generateRoadmapNow() {
         <!-- Official Country Salary Pay Band Card -->
         ${renderPayBandCard(overview.salary || market.salary, targetSalInfo, country)}
 
-        <!-- Global Mobility & Relocation Readiness Index -->
+        <!-- AI Resilience & Career Longevity Index -->
         ${(() => {
-            const cLow = (country || "").toLowerCase().trim();
             const careerTitle = data.career || career || "Professional";
+            const cLow = careerTitle.toLowerCase();
             
-            let visaName = "Standard Work Permit / Skilled Visa";
-            let visaDetails = "Requires official job offer & corporate sponsorship from licensed employer.";
-            let languageReq = "English (Professional Working)";
-            let languageDetails = "International business language standard across major corporate hubs.";
-            let score = "90 / 100";
+            let aiRisk = "Low-Moderate Risk / Augmented Workflows";
+            let aiRiskDetails = "AI automates routine analysis and boilerplate deliverables, but human strategic oversight remains essential.";
+            let futureProofing = "Strategic Governance & Human-in-the-Loop Integration";
+            let futureProofingDetails = "Focus on client consultation, final quality assurance, and directing AI multi-agent workflows to scale output.";
+            let score = "88 / 100";
+            let tier = "Highly Resilient";
+            let tierColor = "#22c55e"; // Green
 
-            if (cLow.includes("japan")) {
-                visaName = "HSP Visa / Engineer Work Status";
-                visaDetails = "Fast-track 1-3 year permanent residency for Highly Skilled Professionals.";
-                languageReq = "Japanese JLPT N3 / N2 (Target)";
-                languageDetails = "English used in multinational tech; JLPT N3 unlocks 5x more local roles.";
-                score = "92 / 100";
-            } else if (cLow.includes("germany") || cLow.includes("europe") || cLow.includes("eu")) {
-                visaName = "EU Blue Card / Opportunity Card";
-                visaDetails = "Fast-track residence permit with minimum salary threshold requirements.";
-                languageReq = "German B1/B2 (Recommended)";
-                languageDetails = "Tech hubs (Berlin/Munich) operate in English; B1 accelerates permanent PR.";
-                score = "95 / 100";
-            } else if (cLow.includes("usa") || cLow.includes("united states") || cLow.includes("america")) {
-                visaName = "H-1B / O-1 / L-1 Intracompany";
-                visaDetails = "Cap-subject lottery or specialized talent visa; STEM OPT extension for graduates.";
-                languageReq = "Native / Fluent English";
-                languageDetails = "Full professional fluency required for technical interviews & client presentation.";
-                score = "94 / 100";
-            } else if (cLow.includes("uk") || cLow.includes("united kingdom")) {
-                visaName = "Skilled Worker Visa (SWV)";
-                visaDetails = "Point-based immigration system requiring licensed sponsor & salary threshold.";
-                languageReq = "IELTS / B2 English Certified";
-                languageDetails = "Standard UKVI English proficiency certification required for visa application.";
-                score = "93 / 100";
-            } else if (cLow.includes("uae") || cLow.includes("dubai") || cLow.includes("saudi")) {
-                visaName = "Golden Visa / Tax-Free Work Permit";
-                visaDetails = "10-year residency for top talent & executive specialists; 0% personal income tax.";
-                languageReq = "English (Arabic Advantage)";
-                languageDetails = "Corporate business operates entirely in English; Arabic is a strong local asset.";
-                score = "96 / 100";
-            } else if (cLow.includes("india")) {
-                visaName = "Domestic Prime Market";
-                visaDetails = "Seamless national mobility across major Tier-1 technology & corporate hubs.";
-                languageReq = "English & Regional Fluency";
-                languageDetails = "English is the standard corporate medium across Indian enterprise hubs.";
+            if (cLow.includes("software") || cLow.includes("developer") || cLow.includes("backend") || cLow.includes("frontend") || cLow.includes("coder") || cLow.includes("programmer")) {
+                aiRisk = "Low-Medium Risk / Augmented Software Engineering";
+                aiRiskDetails = "AI coding assistants accelerate syntax generation, but human architects are critical for system design, security, and integration.";
+                futureProofing = "System Architecture & AI Agent Orchestration";
+                futureProofingDetails = "Shift from writing basic code to designing complex microservices, debugging edge cases, and guiding coding agents.";
+                score = "90 / 100";
+                tier = "Co-Pilot Enabled";
+                tierColor = "#3b82f6"; // Blue
+            } else if (cLow.includes("data") || cLow.includes("statistic") || cLow.includes("analyst")) {
+                aiRisk = "Medium Risk / Predictive & Automated Analytics";
+                aiRiskDetails = "Automated ML handles basic model fitting, but human domain context and business alignment are highly irreplaceable.";
+                futureProofing = "Domain Integration & Causal ML Auditing";
+                futureProofingDetails = "Develop deep business domain expertise, master A/B testing interpretation, and audit model bias/compliance.";
+                score = "82 / 100";
+                tier = "Augmented Specialist";
+                tierColor = "#eab308"; // Yellow
+            } else if (cLow.includes("doctor") || cLow.includes("nurse") || cLow.includes("medical") || cLow.includes("dentist") || cLow.includes("surgeon") || cLow.includes("physician") || cLow.includes("clinical")) {
+                aiRisk = "Extremely Low Risk / Physical & Critical Care";
+                aiRiskDetails = "Diagnostic AI assists, but physical treatment, critical care decision-making, and patient trust require human presence.";
+                futureProofing = "Clinical Empathy & Hybrid Diagnostics";
+                futureProofingDetails = "Combine high-level AI diagnostic insights with patient relationship management and hands-on clinical procedures.";
                 score = "98 / 100";
+                tier = "Immune to Automation";
+                tierColor = "#22c55e"; // Green
+            } else if (cLow.includes("design") || cLow.includes("artist") || cLow.includes("3d") || cLow.includes("vfx") || cLow.includes("animat") || cLow.includes("creative") || cLow.includes("graphic")) {
+                aiRisk = "Medium Risk / Generative Creative Assistance";
+                aiRiskDetails = "Generative models produce asset drafts quickly, but final artistic direction, brand voice consistency, and emotion belong to humans.";
+                futureProofing = "Art Direction & Creative Prompt Engineering";
+                futureProofingDetails = "Evolve into an art director who curates, refines, and directs AI-generated media to align with strategic brand storytelling.";
+                score = "80 / 100";
+                tier = "Creative Director";
+                tierColor = "#a855f7"; // Purple
+            } else if (cLow.includes("manager") || cLow.includes("director") || cLow.includes("lead") || cLow.includes("executive") || cLow.includes("product") || cLow.includes("consultant")) {
+                aiRisk = "Low Risk / Interpersonal & Strategic Leadership";
+                aiRiskDetails = "AI cannot coordinate cross-functional teams, resolve human conflicts, negotiate contracts, or align stakeholder vision.";
+                futureProofing = "Stakeholder Synergy & High-Stakes Negotiation";
+                futureProofingDetails = "Double down on communication, emotional intelligence, resource orchestration, and value-stream mapping.";
+                score = "94 / 100";
+                tier = "Management Shielded";
+                tierColor = "#22c55e"; // Green
+            } else if (cLow.includes("exam") || cLow.includes("preparation") || cLow.includes("upsc") || cLow.includes("gate") || cLow.includes("jee") || cLow.includes("neet") || cLow.includes("psc")) {
+                aiRisk = "Low Risk / Statutory Policy & Public Administration";
+                aiRiskDetails = "Public policy enforcement and civic administration demand human accountability, legal authority, and ethical judgment.";
+                futureProofing = "Ethical Decision Making & Public Policy Governance";
+                futureProofingDetails = "Focus on administrative efficiency, community crisis resolution, and integration of automated civic tech services.";
+                score = "96 / 100";
+                tier = "Statutory Authority";
+                tierColor = "#22c55e"; // Green
             }
-
-            const countryName = targetSalInfo?.name || (country ? country.trim() : "Target Market");
 
             return `
             <div style="background: rgba(15, 23, 42, 0.85); border: 1px solid rgba(59, 130, 246, 0.35); border-radius: 18px; padding: 22px; margin-top: 20px; margin-bottom: 20px; box-shadow: 0 12px 30px rgba(0,0,0,0.45); backdrop-filter: blur(10px);">
                 <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; margin-bottom: 16px; border-bottom: 1px solid rgba(255,255,255,0.08); padding-bottom: 12px;">
                     <span style="font-size: 1.02rem; font-weight: 800; color: var(--text-heading); display: flex; align-items: center; gap: 10px;">
-                        <span style="font-size: 1.3rem;">🌐</span> Global Mobility & Relocation Readiness Index (${countryName})
+                        <span style="font-size: 1.3rem;">🛡️</span> AI Resilience & Career Longevity Index
                     </span>
-                    <span style="background: rgba(59, 130, 246, 0.15); color: #60a5fa; border: 1px solid rgba(59, 130, 246, 0.4); font-size: 0.78rem; padding: 4px 12px; border-radius: 20px; font-weight: 800;">
-                        <i class="fa-solid fa-plane-departure"></i> International Hiring Active
+                    <span style="background: rgba(34, 197, 94, 0.15); color: ${tierColor}; border: 1px solid ${tierColor}66; font-size: 0.78rem; padding: 4px 12px; border-radius: 20px; font-weight: 800;">
+                        <i class="fa-solid fa-shield-halved"></i> Status: ${tier}
                     </span>
                 </div>
 
                 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 14px;">
                     <div style="background: rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.06); border-radius: 14px; padding: 16px;">
-                        <span style="font-size: 0.72rem; color: #3b82f6; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px;">📜 Visa & Work Authorization</span>
-                        <h4 style="color: var(--text-heading); font-size: 0.92rem; margin: 6px 0 4px; font-weight: 800;">${visaName}</h4>
-                        <p style="font-size: 0.76rem; color: var(--text-secondary); margin: 0; line-height: 1.35;">${visaDetails}</p>
+                        <span style="font-size: 0.72rem; color: #3b82f6; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px;">🤖 AI Impact & Automation Risk</span>
+                        <h4 style="color: var(--text-heading); font-size: 0.92rem; margin: 6px 0 4px; font-weight: 800;">${aiRisk}</h4>
+                        <p style="font-size: 0.76rem; color: var(--text-secondary); margin: 0; line-height: 1.35;">${aiRiskDetails}</p>
                     </div>
 
                     <div style="background: rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.06); border-radius: 14px; padding: 16px;">
-                        <span style="font-size: 0.72rem; color: #22c55e; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px;">🗣️ Language & Cultural Prep</span>
-                        <h4 style="color: #22c55e; font-size: 0.92rem; margin: 6px 0 4px; font-weight: 800;">${languageReq}</h4>
-                        <p style="font-size: 0.76rem; color: var(--text-secondary); margin: 0; line-height: 1.35;">${languageDetails}</p>
+                        <span style="font-size: 0.72rem; color: #22c55e; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px;">🛡️ Future-Proofing Strategy</span>
+                        <h4 style="color: #22c55e; font-size: 0.92rem; margin: 6px 0 4px; font-weight: 800;">${futureProofing}</h4>
+                        <p style="font-size: 0.76rem; color: var(--text-secondary); margin: 0; line-height: 1.35;">${futureProofingDetails}</p>
                     </div>
 
                     <div style="background: rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.06); border-radius: 14px; padding: 16px;">
-                        <span style="font-size: 0.72rem; color: #a855f7; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px;">💎 Global Mobility Score</span>
+                        <span style="font-size: 0.72rem; color: #a855f7; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px;">📈 AI Resilience Score</span>
                         <h4 style="color: #d8b4fe; font-size: 1.1rem; margin: 4px 0 2px; font-weight: 900;">${score}</h4>
-                        <p style="font-size: 0.76rem; color: var(--text-secondary); margin: 0; line-height: 1.35;">High international transferability for ${careerTitle}.</p>
+                        <p style="font-size: 0.76rem; color: var(--text-secondary); margin: 0; line-height: 1.35;">High career longevity and AI disruption protection for ${careerTitle}.</p>
                     </div>
                 </div>
             </div>
