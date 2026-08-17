@@ -6,8 +6,12 @@ import pdfplumber
 from dotenv import load_dotenv
 from google import genai
 from flask import Flask, render_template, request, jsonify, session
+from werkzeug.utils import secure_filename
 from datetime import datetime
 import re
+
+def allowed_file(filename):
+    return "." in filename and filename.rsplit(".", 1)[1].lower() == "pdf"
 
 # =====================================================
 # Load Environment Variables
@@ -3043,23 +3047,34 @@ def resume_api():
         if file.filename == "":
             return failure("No file selected.", 400)
 
+        if not allowed_file(file.filename):
+            return failure("Invalid file type. Only PDF files are allowed.", 400)
+
+        safe_name = secure_filename(file.filename)
         filepath = os.path.join(
             app.config["UPLOAD_FOLDER"],
-            file.filename
+            safe_name
         )
 
         file.save(filepath)
 
         resume_text = ""
-
-        with pdfplumber.open(filepath) as pdf:
-
-            for page in pdf.pages:
-
-                text = page.extract_text()
-
-                if text:
-                    resume_text += text + "\n"
+        try:
+            try:
+                with pdfplumber.open(filepath) as pdf:
+                    for page in pdf.pages:
+                        text = page.extract_text()
+                        if text:
+                            resume_text += text + "\n"
+            except Exception as pdf_err:
+                print(f"Error reading PDF with pdfplumber: {pdf_err}")
+                return failure("Unable to read the uploaded resume or the file is corrupted.", 400)
+        finally:
+            try:
+                if os.path.exists(filepath):
+                    os.remove(filepath)
+            except Exception as clean_err:
+                print(f"Error cleaning up temporary upload file: {clean_err}")
 
         if resume_text.strip() == "":
             return failure(
