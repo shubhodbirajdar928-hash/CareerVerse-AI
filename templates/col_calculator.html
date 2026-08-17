@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Calculate Purchasing Power Parity (PPP) and cost-of-living adjusted salaries across 195+ countries with CareerVerse AI.">
+    <title>Cost of Living &amp; PPP Calculator | CareerVerse AI</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/common.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/col_calculator.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+</head>
+<body>
+
+{% include 'partials/navbar.html' %}
+
+<section class="col-page reveal">
+    <div class="hero-badge">
+        <span></span>
+        PPP &amp; COMPENSATION LOCALIZATION ENGINE
+    </div>
+    
+    <h1>Cost of Living <span>&amp; PPP Calculator</span></h1>
+    <p>Convert your salary to its purchasing-power-equivalent across 195+ countries based on current Cost of Living indices.</p>
+    
+    <div class="calculator-card">
+        <h2><i class="fa-solid fa-calculator"></i> PPP Salary Adjuster</h2>
+        
+        <div class="calculator-grid">
+            <div class="input-box">
+                <label for="baseSalary"><i class="fa-solid fa-wallet"></i> Current Base Salary</label>
+                <input type="number" id="baseSalary" placeholder="e.g. 100000" min="1">
+            </div>
+            
+            <div class="input-box">
+                <label for="baseCountry"><i class="fa-solid fa-map-pin"></i> Base Country / Region</label>
+                <input type="text" id="baseCountry" placeholder="e.g. United States, Germany" value="United States">
+            </div>
+            
+            <div class="input-box">
+                <label for="targetCountry"><i class="fa-solid fa-location-arrow"></i> Target Country / Region</label>
+                <input type="text" id="targetCountry" placeholder="e.g. India, Japan, United Kingdom" value="India">
+            </div>
+        </div>
+        
+        <button id="calculateBtn" type="button">
+            <i class="fa-solid fa-wand-magic-sparkles"></i> Calculate Adjusted Salary
+        </button>
+    </div>
+    
+    <div id="loading" class="loading hidden">
+        <div class="loader"></div>
+        <p>Analyzing purchasing power and local indexing...</p>
+    </div>
+    
+    <div id="result" class="result-dashboard hidden">
+        <div class="dashboard-grid">
+            <!-- Left Side: Salary PPP Summary -->
+            <div class="results-summary-card">
+                <span class="card-tag">PURCHASING POWER EQUIVALENT</span>
+                <h1 id="adjustedSalaryDisplay">--</h1>
+                <p id="comparisonExplanation" class="col-explanation">--</p>
+                
+                <div class="col-comparison-meter">
+                    <div class="meter-labels">
+                        <span id="baseCountryLabel">Base: 100</span>
+                        <span id="targetCountryLabel">Target: 24.5</span>
+                    </div>
+                    <div class="meter-track">
+                        <div id="meterFill" class="meter-fill" style="width: 50%;"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Right Side: AI Relocation Insights -->
+            <div class="insights-card">
+                <h3><i class="fa-solid fa-lightbulb"></i> Relocation &amp; Negotiation Advisory</h3>
+                <ul id="insightsList" class="insights-list">
+                    <!-- Dynamic bullets here -->
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% include 'partials/footer.html' %}
+
+<script src="{{ url_for('static', filename='js/ui-effects.js') }}"></script>
+<script src="{{ url_for('static', filename='js/col_calculator.js') }}"></script>
+
+</body>
+</html>

@@ -3680,6 +3680,166 @@ Rules:
 
         return handle_gemini_error(e)        
 # =====================================================
+# Cost of Living & PPP Calculator API
+# =====================================================
+
+COL_INDEX_DATABASE = {
+    "united states": {"index": 100.0, "currency_code": "USD", "currency_symbol": "$"},
+    "india": {"index": 24.5, "currency_code": "INR", "currency_symbol": "₹"},
+    "united kingdom": {"index": 68.5, "currency_code": "GBP", "currency_symbol": "£"},
+    "canada": {"index": 67.2, "currency_code": "CAD", "currency_symbol": "$"},
+    "germany": {"index": 65.8, "currency_code": "EUR", "currency_symbol": "€"},
+    "france": {"index": 64.2, "currency_code": "EUR", "currency_symbol": "€"},
+    "australia": {"index": 77.4, "currency_code": "AUD", "currency_symbol": "$"},
+    "japan": {"index": 52.6, "currency_code": "JPY", "currency_symbol": "¥"},
+    "singapore": {"index": 85.2, "currency_code": "SGD", "currency_symbol": "$"},
+    "brazil": {"index": 32.1, "currency_code": "BRL", "currency_symbol": "R$"},
+    "south africa": {"index": 38.4, "currency_code": "ZAR", "currency_symbol": "R"},
+    "united arab emirates": {"index": 59.5, "currency_code": "AED", "currency_symbol": "د.إ"},
+    "saudi arabia": {"index": 48.2, "currency_code": "SAR", "currency_symbol": "ر.س"},
+    "switzerland": {"index": 118.5, "currency_code": "CHF", "currency_symbol": "CHF"},
+    "netherlands": {"index": 69.8, "currency_code": "EUR", "currency_symbol": "€"},
+    "ireland": {"index": 75.6, "currency_code": "EUR", "currency_symbol": "€"}
+}
+
+def get_country_col_info(country):
+    clean_country = country.strip().lower()
+    
+    # Try direct lookup
+    for name, info in COL_INDEX_DATABASE.items():
+        if clean_country == name or clean_country in name:
+            return info
+            
+    # Try alias resolve from COUNTRY_ALIAS_MAP in salary_data_layer
+    try:
+        from salary_data_layer import COUNTRY_ALIAS_MAP
+        resolved_country = COUNTRY_ALIAS_MAP.get(clean_country, clean_country)
+        for name, info in COL_INDEX_DATABASE.items():
+            if resolved_country == name or resolved_country in name:
+                return info
+    except Exception:
+        pass
+            
+    # Fallback to COUNTRY_CURRENCY parsing
+    default_index = 45.0
+    symbol_str = COUNTRY_CURRENCY.get(country.title(), "USD $")
+    code, symbol = "USD", "$"
+    parts = symbol_str.split()
+    if len(parts) >= 2:
+        code = parts[0]
+        symbol = parts[1]
+    elif len(parts) == 1:
+        code = parts[0]
+        symbol = ""
+        
+    return {"index": default_index, "currency_code": code, "currency_symbol": symbol}
+
+@app.route("/col-calculator")
+def col_calculator():
+    return render_template("col_calculator.html")
+
+@app.route("/col-calculator-api", methods=["POST"])
+def col_calculator_api():
+    try:
+        data = request.get_json() or {}
+        base_salary_raw = data.get("base_salary", "")
+        base_country = data.get("base_country", "").strip() or "United States"
+        target_country = data.get("target_country", "").strip() or "India"
+
+        # Validate inputs
+        if not base_salary_raw:
+            return failure("Please enter a base salary.", 400)
+            
+        try:
+            base_salary = float(str(base_salary_raw).replace(",", "").replace("$", "").replace("₹", "").strip())
+        except ValueError:
+            return failure("Please enter a valid numeric salary.", 400)
+
+        # Validate base & target countries
+        is_v_base, base_c_res = validate_country_strict(base_country)
+        if not is_v_base:
+            return failure(base_c_res, 400)
+            
+        is_v_target, target_c_res = validate_country_strict(target_country)
+        if not is_v_target:
+            return failure(target_c_res, 400)
+
+        # Resolve index information
+        base_info = get_country_col_info(base_c_res)
+        target_info = get_country_col_info(target_c_res)
+
+        base_index = base_info["index"]
+        target_index = target_info["index"]
+
+        # Calculate adjusted target salary
+        target_salary = base_salary * (target_index / base_index)
+
+        # Cost ratio comparison
+        if target_index < base_index:
+            percent_diff = ((base_index - target_index) / base_index) * 100
+            comparison_text = f"{target_c_res} is {percent_diff:.1f}% cheaper to live in than {base_c_res}."
+        elif target_index > base_index:
+            percent_diff = ((target_index - base_index) / base_index) * 100
+            comparison_text = f"{target_c_res} is {percent_diff:.1f}% more expensive to live in than {base_c_res}."
+        else:
+            comparison_text = f"The cost of living in {target_c_res} is equivalent to {base_c_res}."
+
+        # Fetch custom insights from LLM
+        prompt = f"""
+You are an expert International Compensation Analyst.
+A professional is evaluating relocation:
+- Base Country: {base_c_res} (Cost of Living Index: {base_index})
+- Target Country: {target_c_res} (Cost of Living Index: {target_index})
+- Base Salary: {base_info['currency_symbol']}{base_salary:,.0f}
+- Calculated PPP Equivalent Salary: {target_info['currency_symbol']}{target_salary:,.0f}
+
+Provide exactly 3 short bullet points (under 16 words each) about the relocation impact.
+Return ONLY a valid JSON list of 3 strings. Example: ["tip 1", "tip 2", "tip 3"]. Do not return markdown.
+"""
+        tips = []
+        try:
+            llm_text = generate_with_fallback(prompt)
+            cleaned = clean_json(llm_text)
+            tips = json.loads(cleaned)
+        except Exception as e:
+            print(f"LLM CoL tips generation error: {e}")
+            
+        # Fallback default tips if LLM fails
+        if not tips or not isinstance(tips, list) or len(tips) < 3:
+            if target_index < base_index:
+                tips = [
+                    f"Rent and monthly utility costs are significantly lower in {target_c_res}.",
+                    "Your local purchasing power will increase, allowing for higher monthly savings.",
+                    f"Aim to negotiate above {target_info['currency_symbol']}{target_salary:,.0f} to improve your savings rate."
+                ]
+            else:
+                tips = [
+                    f"Expect substantially higher rent and housing costs in {target_c_res}.",
+                    "Daily expenses and services will require a higher budget allocation.",
+                    f"Negotiate for at least {target_info['currency_symbol']}{target_salary:,.0f} to maintain your current lifestyle."
+                ]
+
+        result = {
+            "success": True,
+            "base_country": base_c_res,
+            "target_country": target_c_res,
+            "base_salary": base_salary,
+            "base_currency_code": base_info["currency_code"],
+            "base_currency_symbol": base_info["currency_symbol"],
+            "target_salary": target_salary,
+            "target_currency_code": target_info["currency_code"],
+            "target_currency_symbol": target_info["currency_symbol"],
+            "base_col_index": base_index,
+            "target_col_index": target_index,
+            "comparison_text": comparison_text,
+            "insights": tips
+        }
+        return jsonify(result)
+    except Exception as e:
+        traceback.print_exc()
+        return failure("An error occurred during Cost of Living calculation.", 500)
+
+# =====================================================
 # Run Flask
 # =====================================================
 
