@@ -626,62 +626,240 @@ async function generateRoadmapNow() {
             </div>
         </div>
 
-        <h3 style="margin-top: 10px; margin-bottom: 16px;"><i class="fa-solid fa-clock"></i> Day-in-the-Life & Daily Duty Workflow</h3>
-        <div style="display: flex; flex-direction: column; gap: 16px; border-left: 2px solid rgba(250, 204, 21, 0.15); padding-left: 20px; margin-left: 10px; margin-bottom: 28px;">
-            <div style="position: relative;">
-                <span style="position: absolute; left: -26px; top: 4px; width: 10px; height: 10px; border-radius: 50%; background: #3b82f6; box-shadow: 0 0 8px #3b82f6;"></span>
-                <span style="font-size: 0.75rem; color: #3b82f6; font-weight: 800; text-transform: uppercase; display: block; margin-bottom: 4px;">🌅 09:00 AM - 10:30 AM · Morning Alignment & Standup</span>
-                <p style="font-size: 0.88rem; color: var(--text-secondary); margin: 0; line-height: 1.5;">Sync with cross-functional teams, triage daily priorities, and review critical operational deliverables.</p>
-            </div>
-            <div style="position: relative;">
-                <span style="position: absolute; left: -26px; top: 4px; width: 10px; height: 10px; border-radius: 50%; background: #22c55e; box-shadow: 0 0 8px #22c55e;"></span>
-                <span style="font-size: 0.75rem; color: #22c55e; font-weight: 800; text-transform: uppercase; display: block; margin-bottom: 4px;">🧠 10:30 AM - 01:30 PM · Deep Focus Execution</span>
-                <p style="font-size: 0.88rem; color: var(--text-secondary); margin: 0; line-height: 1.5;">Uninterrupted high-value problem solving, technical/strategic execution, and core milestone building.</p>
-            </div>
-            <div style="position: relative;">
-                <span style="position: absolute; left: -26px; top: 4px; width: 10px; height: 10px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 8px var(--accent);"></span>
-                <span style="font-size: 0.75rem; color: var(--accent); font-weight: 800; text-transform: uppercase; display: block; margin-bottom: 4px;">🤝 02:30 PM - 04:30 PM · Collaboration & Review</span>
-                <p style="font-size: 0.88rem; color: var(--text-secondary); margin: 0; line-height: 1.5;">Stakeholder feedback loops, peer reviews, technical architecture sessions, and mentoring junior peers.</p>
-            </div>
-            <div style="position: relative;">
-                <span style="position: absolute; left: -26px; top: 4px; width: 10px; height: 10px; border-radius: 50%; background: #a855f7; box-shadow: 0 0 8px #a855f7;"></span>
-                <span style="font-size: 0.75rem; color: #a855f7; font-weight: 800; text-transform: uppercase; display: block; margin-bottom: 4px;">🚀 04:30 PM - 06:00 PM · Quality Audit & Learning</span>
-                <p style="font-size: 0.88rem; color: var(--text-secondary); margin: 0; line-height: 1.5;">Testing & validating day's work, updating task boards, and spending 30 mins exploring cutting-edge AI tools.</p>
-            </div>
-        </div>
+        <!-- Day-in-the-Life Daily duty timeline & Fast-track leveling dynamic generator -->
+        ${(() => {
+            const cName = (data.career || career || "Professional").trim();
+            const cLow = cName.toLowerCase();
+            
+            let t1_title = "Morning Alignment & Standup";
+            let t1_desc = "Sync with cross-functional teams, triage daily priorities, and review critical operational deliverables.";
+            let t2_title = "Deep Focus Execution";
+            let t2_desc = "Uninterrupted high-value problem solving, technical/strategic execution, and core milestone building.";
+            let t3_title = "Collaboration & Review";
+            let t3_desc = "Stakeholder feedback loops, peer reviews, technical architecture sessions, and mentoring junior peers.";
+            let t4_title = "Quality Audit & Learning";
+            let t4_desc = "Testing & validating day's work, updating task boards, and spending 30 mins exploring cutting-edge AI tools.";
 
-        <h3 style="margin-top: 10px;"><i class="fa-solid fa-chart-line"></i> Fast-Track Career Leveling & Promotion Roadmap</h3>
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; margin-bottom: 24px;">
-            <div style="background: rgba(34, 197, 94, 0.04); border: 1px solid rgba(34, 197, 94, 0.3); border-radius: 14px; padding: 18px;">
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
-                    <span style="font-size: 0.78rem; color: #22c55e; font-weight: 800; text-transform: uppercase;">🟢 Level 1: Junior (0 - 2 Yrs)</span>
-                    <span style="font-size: 0.7rem; background: rgba(34, 197, 94, 0.15); color: #22c55e; padding: 2px 8px; border-radius: 12px; font-weight: 700;">Execution</span>
+            let l1_title = "Task Reliability & Core Skills";
+            let l1_desc = "Deliver assigned deliverables on time with zero hand-holding and maintain clean documentation.";
+            let l1_trigger = "<5% rework rate & proactive daily updates.";
+
+            let l2_title = "End-to-End System Design";
+            let l2_desc = "Own complex module features, lead technical reviews, and mentor junior team members.";
+            let l2_trigger = "Leading 2+ major projects boosting team efficiency.";
+
+            let l3_title = "Enterprise Strategy & Architecture";
+            let l3_desc = "Architect long-term technology roadmaps, resolve critical bottlenecks, and align goals with business ROI.";
+            let l3_trigger = "Driving strategic ROI & shaping organizational standards.";
+
+            if (cLow.includes("software") || cLow.includes("developer") || cLow.includes("backend") || cLow.includes("frontend") || cLow.includes("coder") || cLow.includes("programmer") || cLow.includes("engineer")) {
+                t1_title = "Daily Standup & Triage";
+                t1_desc = "Sync with the engineering team, review sprint boards, and coordinate daily coding tasks.";
+                t2_title = "Core Coding & Deep Focus";
+                t2_desc = "Implement complex algorithms, design API endpoints, or write clean, unit-tested features.";
+                t3_title = "System Design & Review";
+                t3_desc = "Review pull requests, collaborate on architecture diagrams, and pair-program with junior developers.";
+                t4_title = "Refactoring & Documentation";
+                t4_desc = "Clean up legacy code, update system documentation, and run automated testing pipelines.";
+                
+                l1_title = "Task Reliability & Code Quality";
+                l1_desc = "Deliver high-quality tasks on-time with clean code and thorough test coverage.";
+                l1_trigger = "Clean code reviews & zero critical bugs in production.";
+                
+                l2_title = "System Ownership & Design";
+                l2_desc = "Own complex services, direct sprint goals, and review architecture blueprints.";
+                l2_trigger = "Successfully leading 2+ major feature launches.";
+                
+                l3_title = "Enterprise Architecture & Strategy";
+                l3_desc = "Define technological vision, optimize system scalability, and direct resource budgets.";
+                l3_trigger = "Driving strategic architecture transformation and system ROI.";
+            } else if (cLow.includes("doctor") || cLow.includes("nurse") || cLow.includes("medical") || cLow.includes("dentist") || cLow.includes("surgeon") || cLow.includes("physician") || cLow.includes("clinical") || cLow.includes("pharmacist")) {
+                t1_title = "Morning Rounds & Vitals Check";
+                t1_desc = "Check patient vitals, review laboratory charts, and conduct critical ward rounds.";
+                t2_title = "Clinical Consultations & Surgery";
+                t2_desc = "Perform targeted medical procedures, execute surgical plans, or consult outpatients.";
+                t3_title = "Interdisciplinary Diagnostics";
+                t3_desc = "Collaborate with radiology and lab specialists to review complex patient profiles.";
+                t4_title = "EHR Documentation & Patient Care";
+                t4_desc = "Update Electronic Health Records, prescribe medications, and check patient recovery status.";
+
+                l1_title = "Clinical Execution & Direct Care";
+                l1_desc = "Safely manage primary care tasks, patient triage, and follow standard hospital checklists.";
+                l1_trigger = "Accurate diagnostic logs & positive peer reviews.";
+
+                l2_title = "Specialist Diagnosis & Management";
+                l2_desc = "Direct complex patient treatment pathways, manage ward shifts, and train junior residents.";
+                l2_trigger = "Leading specialized diagnostic units with high clinical success.";
+
+                l3_title = "Clinical Leadership & Governance";
+                l3_desc = "Direct department policies, spearhead clinical trials, and oversee medical board reviews.";
+                l3_trigger = "Appointed Head of Department or managing hospital advisory boards.";
+            } else if (cLow.includes("manager") || cLow.includes("director") || cLow.includes("lead") || cLow.includes("executive") || cLow.includes("product") || cLow.includes("consultant") || cLow.includes("analyst") || cLow.includes("marketing") || cLow.includes("hr") || cLow.includes("sales")) {
+                t1_title = "Stakeholder Alignment & Standup";
+                t1_desc = "Coordinate with cross-functional partners, align milestone timelines, and unblock execution paths.";
+                t2_title = "Roadmap Strategy & Execution";
+                t2_desc = "Analyze performance metrics, draft strategic briefs, and outline product/campaign roadmaps.";
+                t3_title = "Resource Planning & Prioritization";
+                t3_desc = "Lead refinement sessions, negotiate budgets, and resolve cross-team dependencies.";
+                t4_title = "Deliverable Audit & ROI Reporting";
+                t4_desc = "Review project status dashboards, compile leadership decks, and analyze program performance.";
+
+                l1_title = "Process Delivery & Coordination";
+                l1_desc = "Ensure operational tasks are tracked, update status boards, and maintain team alignment.";
+                l1_trigger = "On-time milestone tracking and clean team sprint hygiene.";
+
+                l2_title = "Product & Lifecycle Ownership";
+                l2_desc = "Own end-to-end product features, campaigns or portfolios, shape roadmaps, and negotiate scopes.";
+                l2_trigger = "Successful delivery of 2+ complex cross-functional product cycles.";
+
+                l3_title = "Strategic Portfolio Governance";
+                l3_desc = "Set long-term business objectives, align division budgets, and steer organizational culture.";
+                l3_trigger = "Demonstrated double-digit growth in business line value or divisional ROI.";
+            } else if (cLow.includes("design") || cLow.includes("artist") || cLow.includes("3d") || cLow.includes("vfx") || cLow.includes("animat") || cLow.includes("creative") || cLow.includes("graphic") || cLow.includes("writer") || cLow.includes("video")) {
+                t1_title = "Creative Briefing & Moodboards";
+                t1_desc = "Review client briefs, research current design trends, and align on visual direction.";
+                t2_title = "Asset Creation & Layout";
+                t2_desc = "Develop detailed design wireframes, craft high-fidelity 3D assets, or write copy.";
+                t3_title = "Critique Loops & Iteration";
+                t3_desc = "Present prototype drafts to feedback boards and iterate designs based on user data.";
+                t4_title = "Asset Hand-off & Token Updates";
+                t4_desc = "Prepare deliverable files, update team style libraries, and document visual guidelines.";
+
+                l1_title = "Craft Mastery & Execution";
+                l1_desc = "Create high-quality individual visual assets following the design system guidelines.";
+                l1_trigger = "High aesthetic quality with low feedback iteration loops.";
+
+                l2_title = "System Ownership & Art Direction";
+                l2_desc = "Define the brand style system, direct project art styles, and mentor junior artists.";
+                l2_trigger = "Leading design campaigns or art-directing major feature updates.";
+
+                l3_title = "Creative Strategy & Brand Vision";
+                l3_desc = "Align design language with business goals, lead design innovation labs, and win enterprise briefs.";
+                l3_trigger = "Defining multi-platform design strategy that drives product conversion metrics.";
+            } else if (cLow.includes("lawyer") || cLow.includes("advocate") || cLow.includes("legal") || cLow.includes("judge") || cLow.includes("solicitor") || cLow.includes("paralegal") || cLow.includes("law")) {
+                t1_title = "Case Preparation & Client Sync";
+                t1_desc = "Review case notes, consult clients, and finalize litigation strategy briefings.";
+                t2_title = "Courtroom Advocacy & Trial";
+                t2_desc = "Represent clients in court trials or lead high-stakes corporate contract negotiations.";
+                t3_title = "Legal Research & Drafting";
+                t3_desc = "Analyze statutes, precedents, and draft formal petitions or commercial contracts.";
+                t4_title = "Compliance Auditing & Records";
+                t4_desc = "Ensure absolute statutory compliance, archive case records, and advise corporate boards.";
+
+                l1_title = "Research Accuracy & Drafting";
+                l1_desc = "Conduct thorough legal research and draft precise agreements, contracts, and case summaries.";
+                l1_trigger = "Zero compliance errors and high-quality legal brief drafting.";
+
+                l2_title = "Litigation & Case Management";
+                l2_desc = "Independently manage courtroom trials, run client portfolios, and draft corporate mergers.";
+                l2_trigger = "Successful litigation record and ownership of complex client accounts.";
+
+                l3_title = "Senior Advisory & Judicial Leadership";
+                l3_desc = "Provide executive board counsel, steer landmark litigation, or serve in judicial governance.";
+                l3_trigger = "Promotion to partner level or appointment to senior judicial boards.";
+            } else if (cLow.includes("ias") || cLow.includes("ips") || cLow.includes("upsc") || cLow.includes("police") || cLow.includes("civil") || cLow.includes("government") || cLow.includes("municipal") || cLow.includes("civic") || cLow.includes("bmc")) {
+                t1_title = "Public Grievance & Ward Review";
+                t1_desc = "Meet citizen representatives, review local petitions, and align department staff.";
+                t2_title = "Policy Enforcement & Field Audit";
+                t2_desc = "Lead on-field inspections, enforce zoning compliance, or review municipal projects.";
+                t3_title = "Administrative Budgeting";
+                t3_desc = "Review development proposals, audit department funds, and draft government orders.";
+                t4_title = "Crisis Management & Reporting";
+                t4_desc = "Coordinate with safety agencies, review emergency response preparedness, and log reports.";
+
+                l1_title = "Field Inspections & Compliance";
+                l1_desc = "Ensure correct field implementation, enforce civic rules, and maintain public records.";
+                l1_trigger = "Timely resolution of local ward issues & clean compliance audits.";
+
+                l2_title = "Ward / Subdivision Administration";
+                l2_desc = "Manage subdivision municipal departments, approve local development plans, and lead grievance resolutions.";
+                l2_trigger = "Successfully implementation of subdivision infrastructure upgrades.";
+
+                l3_title = "Policy Formulation & Governance";
+                l3_desc = "Formulate state/national policies, manage massive urban budgets, and steer emergency resilience.";
+                l3_trigger = "Shaping cabinet-level policies and directing district administrations.";
+            } else if (cLow.includes("chef") || cLow.includes("cook") || cLow.includes("culinary") || cLow.includes("bakery") || cLow.includes("hotel") || cLow.includes("restaurant")) {
+                t1_title = "Mis En Place & Kitchen Sync";
+                t1_desc = "Inspect raw inventory, prep ingredients, set up cooking stations, and coordinate line positions.";
+                t2_title = "Lunch Service & Expo";
+                t2_desc = "Manage high-speed food preparation, oversee line cooks, and ensure beautiful dish plating.";
+                t3_title = "Menu Planning & Costing";
+                t3_desc = "Engineer new recipes, calculate food portion costs, and consult local food purveyors.";
+                t4_title = "HACCP Safety Audit & Close";
+                t4_desc = "Enforce strict kitchen sanitation checklists, log waste reports, and lock down cold storage.";
+
+                l1_title = "Station Cook & Line Prep";
+                l1_desc = "Master knife skills, manage a designated line station (sauces/grill), and execute recipes accurately.";
+                l1_trigger = "Consistent portion sizes, speed of execution, and clean health logs.";
+
+                l2_title = "Sous Chef & Kitchen Ops";
+                l2_desc = "Oversee daily kitchen staff shifts, control inventory, and run service expediting.";
+                l2_trigger = "Managing daily service with zero guest complaints and low food costs.";
+
+                l3_title = "Executive Chef & Concept Director";
+                l3_desc = "Design signature menus, control overall P&L margins, and direct multi-venue operations.";
+                l3_trigger = "Earning industry recognition (e.g. Michelin/awards) and optimized kitchen profits.";
+            }
+
+            return `
+            <h3 style="margin-top: 10px; margin-bottom: 16px;"><i class="fa-solid fa-clock"></i> Day-in-the-Life & Daily Duty Workflow</h3>
+            <div style="display: flex; flex-direction: column; gap: 16px; border-left: 2px solid rgba(250, 204, 21, 0.15); padding-left: 20px; margin-left: 10px; margin-bottom: 28px;">
+                <div style="position: relative;">
+                    <span style="position: absolute; left: -26px; top: 4px; width: 10px; height: 10px; border-radius: 50%; background: #3b82f6; box-shadow: 0 0 8px #3b82f6;"></span>
+                    <span style="font-size: 0.75rem; color: #3b82f6; font-weight: 800; text-transform: uppercase; display: block; margin-bottom: 4px;">🌅 09:00 AM - 10:30 AM · ${t1_title}</span>
+                    <p style="font-size: 0.88rem; color: var(--text-secondary); margin: 0; line-height: 1.5;">${t1_desc}</p>
                 </div>
-                <strong style="color: var(--text-heading); font-size: 0.92rem; display: block; margin-bottom: 6px;">Task Reliability & Core Skills</strong>
-                <p style="font-size: 0.8rem; color: var(--text-secondary); margin: 0 0 10px; line-height: 1.4;">Deliver assigned deliverables on time with zero hand-holding and maintain clean documentation.</p>
-                <div style="font-size: 0.75rem; color: #22c55e; font-weight: 700;">🎯 Promotion Trigger: <span style="color: var(--text-primary); font-weight: 400;">&lt;5% rework rate &amp; proactive daily updates.</span></div>
+                <div style="position: relative;">
+                    <span style="position: absolute; left: -26px; top: 4px; width: 10px; height: 10px; border-radius: 50%; background: #22c55e; box-shadow: 0 0 8px #22c55e;"></span>
+                    <span style="font-size: 0.75rem; color: #22c55e; font-weight: 800; text-transform: uppercase; display: block; margin-bottom: 4px;">🧠 10:30 AM - 01:30 PM · ${t2_title}</span>
+                    <p style="font-size: 0.88rem; color: var(--text-secondary); margin: 0; line-height: 1.5;">${t2_desc}</p>
+                </div>
+                <div style="position: relative;">
+                    <span style="position: absolute; left: -26px; top: 4px; width: 10px; height: 10px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 8px var(--accent);"></span>
+                    <span style="font-size: 0.75rem; color: var(--accent); font-weight: 800; text-transform: uppercase; display: block; margin-bottom: 4px;">🤝 02:30 PM - 04:30 PM · ${t3_title}</span>
+                    <p style="font-size: 0.88rem; color: var(--text-secondary); margin: 0; line-height: 1.5;">${t3_desc}</p>
+                </div>
+                <div style="position: relative;">
+                    <span style="position: absolute; left: -26px; top: 4px; width: 10px; height: 10px; border-radius: 50%; background: #a855f7; box-shadow: 0 0 8px #a855f7;"></span>
+                    <span style="font-size: 0.75rem; color: #a855f7; font-weight: 800; text-transform: uppercase; display: block; margin-bottom: 4px;">🚀 04:30 PM - 06:00 PM · ${t4_title}</span>
+                    <p style="font-size: 0.88rem; color: var(--text-secondary); margin: 0; line-height: 1.5;">${t4_desc}</p>
+                </div>
             </div>
 
-            <div style="background: rgba(250, 204, 21, 0.04); border: 1px solid rgba(250, 204, 21, 0.3); border-radius: 14px; padding: 18px;">
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
-                    <span style="font-size: 0.78rem; color: var(--accent); font-weight: 800; text-transform: uppercase;">🟡 Level 2: Mid-Level (2 - 5 Yrs)</span>
-                    <span style="font-size: 0.7rem; background: rgba(250, 204, 21, 0.15); color: var(--accent); padding: 2px 8px; border-radius: 12px; font-weight: 700;">Ownership</span>
+            <h3 style="margin-top: 10px;"><i class="fa-solid fa-chart-line"></i> Fast-Track Career Leveling & Promotion Roadmap</h3>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; margin-bottom: 24px;">
+                <div style="background: rgba(34, 197, 94, 0.04); border: 1px solid rgba(34, 197, 94, 0.3); border-radius: 14px; padding: 18px;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                        <span style="font-size: 0.78rem; color: #22c55e; font-weight: 800; text-transform: uppercase;">🟢 Level 1: Junior (0 - 2 Yrs)</span>
+                        <span style="font-size: 0.7rem; background: rgba(34, 197, 94, 0.15); color: #22c55e; padding: 2px 8px; border-radius: 12px; font-weight: 700;">Execution</span>
+                    </div>
+                    <strong style="color: var(--text-heading); font-size: 0.92rem; display: block; margin-bottom: 6px;">${l1_title}</strong>
+                    <p style="font-size: 0.8rem; color: var(--text-secondary); margin: 0 0 10px; line-height: 1.4;">${l1_desc}</p>
+                    <div style="font-size: 0.75rem; color: #22c55e; font-weight: 700;">🎯 Promotion Trigger: <span style="color: var(--text-primary); font-weight: 400;">${l1_trigger}</span></div>
                 </div>
-                <strong style="color: var(--text-heading); font-size: 0.92rem; display: block; margin-bottom: 6px;">End-to-End System Design</strong>
-                <p style="font-size: 0.8rem; color: var(--text-secondary); margin: 0 0 10px; line-height: 1.4;">Own complex module features, lead technical reviews, and mentor junior team members.</p>
-                <div style="font-size: 0.75rem; color: var(--accent); font-weight: 700;">🎯 Promotion Trigger: <span style="color: var(--text-primary); font-weight: 400;">Leading 2+ major projects boosting team efficiency.</span></div>
-            </div>
 
-            <div style="background: rgba(168, 85, 247, 0.04); border: 1px solid rgba(168, 85, 247, 0.3); border-radius: 14px; padding: 18px;">
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
-                    <span style="font-size: 0.78rem; color: #a855f7; font-weight: 800; text-transform: uppercase;">🟣 Level 3: Senior / Lead (5+ Yrs)</span>
-                    <span style="font-size: 0.7rem; background: rgba(168, 85, 247, 0.15); color: #a855f7; padding: 2px 8px; border-radius: 12px; font-weight: 700;">Strategy</span>
+                <div style="background: rgba(250, 204, 21, 0.04); border: 1px solid rgba(250, 204, 21, 0.3); border-radius: 14px; padding: 18px;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                        <span style="font-size: 0.78rem; color: var(--accent); font-weight: 800; text-transform: uppercase;">🟡 Level 2: Mid-Level (2 - 5 Yrs)</span>
+                        <span style="font-size: 0.7rem; background: rgba(250, 204, 21, 0.15); color: var(--accent); padding: 2px 8px; border-radius: 12px; font-weight: 700;">Ownership</span>
+                    </div>
+                    <strong style="color: var(--text-heading); font-size: 0.92rem; display: block; margin-bottom: 6px;">${l2_title}</strong>
+                    <p style="font-size: 0.8rem; color: var(--text-secondary); margin: 0 0 10px; line-height: 1.4;">${l2_desc}</p>
+                    <div style="font-size: 0.75rem; color: var(--accent); font-weight: 700;">🎯 Promotion Trigger: <span style="color: var(--text-primary); font-weight: 400;">${l2_trigger}</span></div>
                 </div>
-                <strong style="color: var(--text-heading); font-size: 0.92rem; display: block; margin-bottom: 6px;">Enterprise Strategy &amp; Architecture</strong>
-                <p style="font-size: 0.8rem; color: var(--text-secondary); margin: 0 0 10px; line-height: 1.4;">Architect long-term technology roadmaps, resolve critical bottlenecks, and align goals with business ROI.</p>
-                <div style="font-size: 0.75rem; color: #a855f7; font-weight: 700;">🎯 Promotion Trigger: <span style="color: var(--text-primary); font-weight: 400;">Driving strategic ROI &amp; shaping organizational standards.</span></div>
+
+                <div style="background: rgba(168, 85, 247, 0.04); border: 1px solid rgba(168, 85, 247, 0.3); border-radius: 14px; padding: 18px;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                        <span style="font-size: 0.78rem; color: #a855f7; font-weight: 800; text-transform: uppercase;">🟣 Level 3: Senior / Lead (5+ Yrs)</span>
+                        <span style="font-size: 0.7rem; background: rgba(168, 85, 247, 0.15); color: #a855f7; padding: 2px 8px; border-radius: 12px; font-weight: 700;">Strategy</span>
+                    </div>
+                    <strong style="color: var(--text-heading); font-size: 0.92rem; display: block; margin-bottom: 6px;">${l3_title}</strong>
+                    <p style="font-size: 0.8rem; color: var(--text-secondary); margin: 0 0 10px; line-height: 1.4;">${l3_desc}</p>
+                    <div style="font-size: 0.75rem; color: #a855f7; font-weight: 700;">🎯 Promotion Trigger: <span style="color: var(--text-primary); font-weight: 400;">${l3_trigger}</span></div>
+                </div>
             </div>
-        </div>
+            `;
+        })()}
 
         <!-- PAGE FOOTER NAV -->
         <div class="page-footer-nav" style="display: flex; justify-content: space-between; align-items: center; margin-top: 32px; padding-top: 16px; border-top: 1px solid var(--border);">
@@ -792,14 +970,14 @@ async function generateRoadmapNow() {
             <div style="background: rgba(25, 25, 25, 0.7); border: 1px solid var(--border); border-radius: 16px; padding: 20px;">
                 <h3 style="margin-top: 0; color: var(--accent);"><i class="fa-solid fa-screwdriver-wrench"></i> Recommended Tools & Software</h3>
                 <div class="chip-grid" style="display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px;">
-                    ${(tools || ["Git", "Excel", "Terminal"]).map(t => `<span class="chip-item">🛠 ${t}</span>`).join("")}
+                    ${(tools && tools.length ? tools : [`Professional ${data.career || career || "Career"} Tools`, "Standard Industry Utilities", "Collaboration Software"]).map(t => `<span class="chip-item">🛠 ${t}</span>`).join("")}
                 </div>
             </div>
 
             <div style="background: rgba(25, 25, 25, 0.7); border: 1px solid var(--border); border-radius: 16px; padding: 20px;">
                 <h3 style="margin-top: 0; color: #3b82f6;"><i class="fa-solid fa-certificate"></i> Key Professional Certifications</h3>
                 <div style="display: flex; flex-direction: column; gap: 8px; margin-top: 12px;">
-                    ${(certifications || ["Google Cloud Professional Certification", "AWS Practitioner", "Project Management Professional (PMP)"]).map(cert => `
+                    ${(certifications && certifications.length ? certifications : [`Certified ${data.career || career || "Career"} Specialist`, "Standard Professional Credentials", "Industry Operations License"]).map(cert => `
                         <div style="font-size: 0.88rem; color: var(--text-secondary); padding: 8px; background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.04); border-radius: 8px; display: flex; align-items: center; gap: 8px;">
                             <i class="fa-solid fa-award" style="color: #3b82f6;"></i> ${cert}
                         </div>
@@ -920,21 +1098,21 @@ async function generateRoadmapNow() {
             <div style="background: rgba(25, 25, 25, 0.7); border: 1px solid var(--border); border-radius: 16px; padding: 20px;">
                 <h3 style="margin-top: 0; color: var(--accent);"><i class="fa-solid fa-clipboard-question"></i> Top 5 Interview Prep Questions</h3>
                 <ul style="margin: 0; padding-left: 20px; font-size: 0.88rem; color: var(--text-secondary); line-height: 1.5; gap: 8px; display: flex; flex-direction: column;">
-                    ${(interview || ["Prepare core technical questions in your domain", "Mock architectural design exercises"]).map(i => `<li>💬 ${i}</li>`).join("")}
+                    ${(interview && interview.length ? interview : ["Prepare core professional questions in your domain", "Mock case study/operational scenarios review"]).map(i => `<li>💬 ${i}</li>`).join("")}
                 </ul>
             </div>
 
             <div style="background: rgba(25, 25, 25, 0.7); border: 1px solid var(--border); border-radius: 16px; padding: 20px;">
                 <h3 style="margin-top: 0; color: #3b82f6;"><i class="fa-solid fa-bullseye"></i> Top 5 Portfolio Building Hacks</h3>
                 <ul style="margin: 0; padding-left: 20px; font-size: 0.88rem; color: var(--text-secondary); line-height: 1.5; gap: 8px; display: flex; flex-direction: column;">
-                    ${(portfolio || ["Host active live demonstrations of all projects", "Write highly technical case studies on Github"]).map(p => `<li>🎯 ${p}</li>`).join("")}
+                    ${(portfolio && portfolio.length ? portfolio : ["Host/present documentation of your completed practical tasks", "Write precise case studies details on professional portfolio platforms"]).map(p => `<li>🎯 ${p}</li>`).join("")}
                 </ul>
             </div>
 
             <div style="background: rgba(25, 25, 25, 0.7); border: 1px solid var(--border); border-radius: 16px; padding: 20px;">
                 <h3 style="margin-top: 0; color: #a855f7;"><i class="fa-solid fa-wand-magic-sparkles"></i> Top 5 AI Hacks / Prompt Models</h3>
                 <ul style="margin: 0; padding-left: 20px; font-size: 0.88rem; color: var(--text-secondary); line-height: 1.5; gap: 8px; display: flex; flex-direction: column;">
-                    ${(aiTips || ["Ask AI to review your design patterns & structures", "Simulate live coding interviews using specialized prompt roles"]).map(a => `<li>🤖 ${a}</li>`).join("")}
+                    ${(aiTips && aiTips.length ? aiTips : [`Ask AI to critique your completed ${data.career || career || "Professional"} case studies`, "Simulate live specialist panel interviews using specialized prompts"]).map(a => `<li>🤖 ${a}</li>`).join("")}
                 </ul>
             </div>
         </div>
