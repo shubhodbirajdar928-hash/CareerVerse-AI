@@ -3,10 +3,12 @@
    ===================================================== */
 
 .col-page {
+    position: relative;
     max-width: 1200px;
     margin: 0 auto;
     padding: 120px 24px 80px;
     text-align: center;
+    overflow: hidden;
 }
 
 .col-page h1 {
