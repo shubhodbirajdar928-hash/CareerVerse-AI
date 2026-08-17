@@ -263,7 +263,7 @@ def validate_career_universal(career_input):
         }
 
     # 2. Reject symbol spam / invalid punctuation
-    if re.search(r'[@#$%^&*~`_={}\[\]|\\<>;:"]', clean):
+    if re.search(r'[@$%^*~`_={}\[\]|\\<>;:"]', clean):
         return {
             "valid": False,
             "normalized_input": None,
