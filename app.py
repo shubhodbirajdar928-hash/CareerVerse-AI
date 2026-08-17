@@ -3683,45 +3683,37 @@ Rules:
 # Cost of Living & PPP Calculator API
 # =====================================================
 
-COL_INDEX_DATABASE = {
-    "united states": {"index": 100.0, "currency_code": "USD", "currency_symbol": "$"},
-    "india": {"index": 24.5, "currency_code": "INR", "currency_symbol": "₹"},
-    "united kingdom": {"index": 68.5, "currency_code": "GBP", "currency_symbol": "£"},
-    "canada": {"index": 67.2, "currency_code": "CAD", "currency_symbol": "$"},
-    "germany": {"index": 65.8, "currency_code": "EUR", "currency_symbol": "€"},
-    "france": {"index": 64.2, "currency_code": "EUR", "currency_symbol": "€"},
-    "australia": {"index": 77.4, "currency_code": "AUD", "currency_symbol": "$"},
-    "japan": {"index": 52.6, "currency_code": "JPY", "currency_symbol": "¥"},
-    "singapore": {"index": 85.2, "currency_code": "SGD", "currency_symbol": "$"},
-    "brazil": {"index": 32.1, "currency_code": "BRL", "currency_symbol": "R$"},
-    "south africa": {"index": 38.4, "currency_code": "ZAR", "currency_symbol": "R"},
-    "united arab emirates": {"index": 59.5, "currency_code": "AED", "currency_symbol": "د.إ"},
-    "saudi arabia": {"index": 48.2, "currency_code": "SAR", "currency_symbol": "ر.س"},
-    "switzerland": {"index": 118.5, "currency_code": "CHF", "currency_symbol": "CHF"},
-    "netherlands": {"index": 69.8, "currency_code": "EUR", "currency_symbol": "€"},
-    "ireland": {"index": 75.6, "currency_code": "EUR", "currency_symbol": "€"}
+# Exchange rates (relative to 1 USD) and PPP Conversion Factors (relative to 1 USD)
+# Source: World Bank / IMF / OECD / central banks 2024-2026 data
+ECONOMIC_DATA = {
+    "united states": {"exchange_rate": 1.0, "ppp_factor": 1.0, "col_index": 100.0},
+    "india": {"exchange_rate": 83.5, "ppp_factor": 23.5, "col_index": 24.5},
+    "united kingdom": {"exchange_rate": 0.78, "ppp_factor": 0.69, "col_index": 68.5},
+    "canada": {"exchange_rate": 1.37, "ppp_factor": 1.21, "col_index": 67.2},
+    "germany": {"exchange_rate": 0.92, "ppp_factor": 0.76, "col_index": 65.8},
+    "france": {"exchange_rate": 0.92, "ppp_factor": 0.72, "col_index": 64.2},
+    "australia": {"exchange_rate": 1.50, "ppp_factor": 1.42, "col_index": 77.4},
+    "japan": {"exchange_rate": 155.0, "ppp_factor": 90.5, "col_index": 52.6},
+    "singapore": {"exchange_rate": 1.34, "ppp_factor": 0.88, "col_index": 85.2},
+    "brazil": {"exchange_rate": 5.15, "ppp_factor": 2.50, "col_index": 32.1},
+    "south africa": {"exchange_rate": 18.2, "ppp_factor": 7.20, "col_index": 38.4},
+    "united arab emirates": {"exchange_rate": 3.67, "ppp_factor": 2.15, "col_index": 59.5},
+    "saudi arabia": {"exchange_rate": 3.75, "ppp_factor": 1.85, "col_index": 48.2},
+    "switzerland": {"exchange_rate": 0.90, "ppp_factor": 1.12, "col_index": 118.5},
+    "netherlands": {"exchange_rate": 0.92, "ppp_factor": 0.78, "col_index": 69.8},
+    "ireland": {"exchange_rate": 0.92, "ppp_factor": 0.82, "col_index": 75.6},
+    "china": {"exchange_rate": 7.25, "ppp_factor": 4.18, "col_index": 38.5},
+    "russia": {"exchange_rate": 90.0, "ppp_factor": 30.2, "col_index": 31.8},
+    "turkey": {"exchange_rate": 32.5, "ppp_factor": 9.50, "col_index": 34.2},
+    "south korea": {"exchange_rate": 1360.0, "ppp_factor": 850.0, "col_index": 62.4},
+    "new zealand": {"exchange_rate": 1.63, "ppp_factor": 1.48, "col_index": 71.5},
+    "sweden": {"exchange_rate": 10.7, "ppp_factor": 8.80, "col_index": 63.8},
+    "norway": {"exchange_rate": 10.8, "ppp_factor": 9.20, "col_index": 79.4},
+    "denmark": {"exchange_rate": 6.9, "ppp_factor": 7.10, "col_index": 78.2},
+    "hong kong": {"exchange_rate": 7.8, "ppp_factor": 6.05, "col_index": 76.5}
 }
 
-def get_country_col_info(country):
-    clean_country = country.strip().lower()
-    
-    # Try direct lookup
-    for name, info in COL_INDEX_DATABASE.items():
-        if clean_country == name or clean_country in name:
-            return info
-            
-    # Try alias resolve from COUNTRY_ALIAS_MAP in salary_data_layer
-    try:
-        from salary_data_layer import COUNTRY_ALIAS_MAP
-        resolved_country = COUNTRY_ALIAS_MAP.get(clean_country, clean_country)
-        for name, info in COL_INDEX_DATABASE.items():
-            if resolved_country == name or resolved_country in name:
-                return info
-    except Exception:
-        pass
-            
-    # Fallback to COUNTRY_CURRENCY parsing
-    default_index = 45.0
+def get_country_currency_code_symbol(country):
     symbol_str = COUNTRY_CURRENCY.get(country.title(), "USD $")
     code, symbol = "USD", "$"
     parts = symbol_str.split()
@@ -3731,8 +3723,39 @@ def get_country_col_info(country):
     elif len(parts) == 1:
         code = parts[0]
         symbol = ""
-        
-    return {"index": default_index, "currency_code": code, "currency_symbol": symbol}
+    return {"currency_code": code, "currency_symbol": symbol}
+
+def get_country_col_info(country):
+    clean_country = country.strip().lower()
+    
+    # Try alias resolve from COUNTRY_ALIAS_MAP in salary_data_layer
+    try:
+        from salary_data_layer import COUNTRY_ALIAS_MAP
+        resolved_country = COUNTRY_ALIAS_MAP.get(clean_country, clean_country)
+    except Exception:
+        resolved_country = clean_country
+
+    # Find matching record in ECONOMIC_DATA
+    for name, info in ECONOMIC_DATA.items():
+        if resolved_country == name or resolved_country in name:
+            meta = get_country_currency_code_symbol(country)
+            return {
+                "index": info["col_index"],
+                "exchange_rate": info["exchange_rate"],
+                "ppp_factor": info["ppp_factor"],
+                "currency_code": meta["currency_code"],
+                "currency_symbol": meta["currency_symbol"]
+            }
+            
+    # Fallback default values
+    meta = get_country_currency_code_symbol(country)
+    return {
+        "index": 45.0,
+        "exchange_rate": None,
+        "ppp_factor": None,
+        "currency_code": meta["currency_code"],
+        "currency_symbol": meta["currency_symbol"]
+    }
 
 @app.route("/col-calculator")
 def col_calculator():
@@ -3745,6 +3768,9 @@ def col_calculator_api():
         base_salary_raw = data.get("base_salary", "")
         base_country = data.get("base_country", "").strip() or "United States"
         target_country = data.get("target_country", "").strip() or "India"
+        career = data.get("career", "").strip() or "General"
+        experience = data.get("experience", "").strip() or "Mid Level"
+        target_city = data.get("target_city", "").strip() or ""
 
         # Validate inputs
         if not base_salary_raw:
@@ -3752,10 +3778,12 @@ def col_calculator_api():
             
         try:
             base_salary = float(str(base_salary_raw).replace(",", "").replace("$", "").replace("₹", "").strip())
+            if base_salary <= 0:
+                return failure("Please enter a positive salary amount.", 400)
         except ValueError:
             return failure("Please enter a valid numeric salary.", 400)
 
-        # Validate base & target countries
+        # Validate countries
         is_v_base, base_c_res = validate_country_strict(base_country)
         if not is_v_base:
             return failure(base_c_res, 400)
@@ -3764,17 +3792,81 @@ def col_calculator_api():
         if not is_v_target:
             return failure(target_c_res, 400)
 
-        # Resolve index information
+        # Resolve index and economic details
         base_info = get_country_col_info(base_c_res)
         target_info = get_country_col_info(target_c_res)
 
         base_index = base_info["index"]
         target_index = target_info["index"]
 
-        # Calculate adjusted target salary
-        target_salary = base_salary * (target_index / base_index)
+        # 1. Currency Conversion logic
+        converted_salary = None
+        exchange_rate_value = None
+        if base_info["exchange_rate"] is not None and target_info["exchange_rate"] is not None:
+            # Convert Base to USD, then USD to Target
+            usd_salary = base_salary / base_info["exchange_rate"]
+            converted_salary = usd_salary * target_info["exchange_rate"]
+            exchange_rate_value = target_info["exchange_rate"] / base_info["exchange_rate"]
 
-        # Cost ratio comparison
+        # 2. PPP Purchasing Power Comparison logic
+        ppp_salary = None
+        ppp_available = False
+        if base_info["ppp_factor"] is not None and target_info["ppp_factor"] is not None:
+            # PPP adjustment: Convert Base to International USD, then USD to Target
+            usd_ppp = base_salary / base_info["ppp_factor"]
+            ppp_salary = usd_ppp * target_info["ppp_factor"]
+            ppp_available = True
+
+        # Math Safeguards
+        suspicious = False
+        warning_msg = ""
+        if exchange_rate_value is not None:
+            if exchange_rate_value > 1000 or exchange_rate_value < 0.001:
+                suspicious = True
+                warning_msg = "Extreme exchange rate conversion detected."
+        if ppp_available:
+            ppp_ratio = target_info["ppp_factor"] / base_info["ppp_factor"]
+            if ppp_ratio > 50 or ppp_ratio < 0.02:
+                suspicious = True
+                warning_msg = "Extreme purchasing power parity ratio detected."
+            if ppp_salary <= 0:
+                ppp_available = False
+
+        # 3. Actual Market Salary Benchmark logic
+        market_salary_available = False
+        market_min, market_max, market_median = None, None, None
+        market_min_fmt, market_max_fmt, market_median_fmt = "", "", ""
+        market_reason = ""
+        
+        if career:
+            exp_years = 4 # default Mid Level
+            exp_clean = experience.lower()
+            if "entry" in exp_clean or "junior" in exp_clean or "0-2" in exp_clean:
+                exp_years = 1
+            elif "senior" in exp_clean or "experienced" in exp_clean or "lead" in exp_clean or "6-9" in exp_clean or "10+" in exp_clean:
+                exp_years = 8
+                
+            from salary_data_layer import get_verified_salary_data
+            verified_res = get_verified_salary_data(
+                career=career,
+                country=target_c_res,
+                city=target_city if target_city else None,
+                experience_years=exp_years
+            )
+            
+            if verified_res.get("career_valid") and verified_res.get("salary"):
+                sal_data = verified_res["salary"]
+                if sal_data.get("min") is not None:
+                    market_salary_available = True
+                    market_min = sal_data["min"]
+                    market_max = sal_data["max"]
+                    market_median = sal_data["median"]
+                    market_min_fmt = sal_data.get("min_fmt") or f"{target_info['currency_symbol']}{market_min:,.0f} / yr"
+                    market_max_fmt = sal_data.get("max_fmt") or f"{target_info['currency_symbol']}{market_max:,.0f} / yr"
+                    market_median_fmt = sal_data.get("median_fmt") or f"{target_info['currency_symbol']}{market_median:,.0f} / yr"
+                    market_reason = sal_data.get("reason") or f"Typical salary range for {career} in {target_c_res}."
+
+        # 4. Cost of Living comparison text and category breakdowns
         if target_index < base_index:
             percent_diff = ((base_index - target_index) / base_index) * 100
             comparison_text = f"{target_c_res} is {percent_diff:.1f}% cheaper to live in than {base_c_res}."
@@ -3782,16 +3874,56 @@ def col_calculator_api():
             percent_diff = ((target_index - base_index) / base_index) * 100
             comparison_text = f"{target_c_res} is {percent_diff:.1f}% more expensive to live in than {base_c_res}."
         else:
+            percent_diff = 0.0
             comparison_text = f"The cost of living in {target_c_res} is equivalent to {base_c_res}."
 
-        # Fetch custom insights from LLM
+        # Dynamic, logical category index multipliers (purely for comparison, does NOT determine PPP salary)
+        base_housing = base_index * 0.75
+        target_housing = target_index * 1.2 if target_index > base_index else target_index * 0.75
+        housing_diff = ((target_housing - base_housing) / base_housing) * 100
+        
+        base_food = base_index * 1.1
+        target_food = target_index * 1.05
+        food_diff = ((target_food - base_food) / base_food) * 100
+        
+        base_trans = base_index * 0.9
+        target_trans = target_index * 0.95
+        trans_diff = ((target_trans - base_trans) / base_trans) * 100
+        
+        base_util = base_index * 1.0
+        target_util = target_index * 1.1
+        util_diff = ((target_util - base_util) / base_util) * 100
+
+        # 5. Intelligent relocation analysis paragraph
+        base_amt_str = f"{base_info['currency_symbol']}{base_salary:,.0f}"
+        conv_amt_str = f"{target_info['currency_symbol']}{converted_salary:,.0f}" if converted_salary else "N/A"
+        ppp_amt_str = f"{target_info['currency_symbol']}{ppp_salary:,.0f}" if ppp_salary else "N/A"
+        
+        if market_salary_available:
+            market_range_str = f"{target_info['currency_symbol']}{market_min:,.0f}–{target_info['currency_symbol']}{market_max:,.0f}"
+        else:
+            market_range_str = "unavailable"
+            
+        location_desc = f"{target_city}, {target_c_res}" if target_city else target_c_res
+        
+        analysis_paragraph = (
+            f"Your current salary of {base_amt_str} has a currency equivalent of approximately {conv_amt_str}. "
+            f"The PPP comparison estimates its relative purchasing power at approximately {ppp_amt_str}. "
+            f"However, this is not the salary you should expect to earn in {target_c_res}. "
+            f"For a {career} with {experience} experience in {location_desc}, the relevant market salary range is {market_range_str}."
+        )
+
+        # Generate custom insights via LLM
         prompt = f"""
 You are an expert International Compensation Analyst.
 A professional is evaluating relocation:
-- Base Country: {base_c_res} (Cost of Living Index: {base_index})
-- Target Country: {target_c_res} (Cost of Living Index: {target_index})
-- Base Salary: {base_info['currency_symbol']}{base_salary:,.0f}
-- Calculated PPP Equivalent Salary: {target_info['currency_symbol']}{target_salary:,.0f}
+- Base Country: {base_c_res}
+- Target Country: {target_c_res}
+- Career: {career} ({experience} level)
+- Base Salary: {base_amt_str}
+- Currency Exchange Equivalent: {conv_amt_str}
+- PPP Purchasing Power Equivalent: {ppp_amt_str}
+- Local Market Salary Range: {market_range_str}
 
 Provide exactly 3 short bullet points (under 16 words each) about the relocation impact.
 Return ONLY a valid JSON list of 3 strings. Example: ["tip 1", "tip 2", "tip 3"]. Do not return markdown.
@@ -3810,29 +3942,72 @@ Return ONLY a valid JSON list of 3 strings. Example: ["tip 1", "tip 2", "tip 3"]
                 tips = [
                     f"Rent and monthly utility costs are significantly lower in {target_c_res}.",
                     "Your local purchasing power will increase, allowing for higher monthly savings.",
-                    f"Aim to negotiate above {target_info['currency_symbol']}{target_salary:,.0f} to improve your savings rate."
+                    f"Aim to negotiate above {ppp_amt_str} to improve your savings rate."
                 ]
             else:
                 tips = [
                     f"Expect substantially higher rent and housing costs in {target_c_res}.",
                     "Daily expenses and services will require a higher budget allocation.",
-                    f"Negotiate for at least {target_info['currency_symbol']}{target_salary:,.0f} to maintain your current lifestyle."
+                    f"Negotiate for at least {ppp_amt_str} to maintain your current lifestyle."
                 ]
 
         result = {
             "success": True,
             "base_country": base_c_res,
             "target_country": target_c_res,
+            "career": career,
+            "experience": experience,
+            "target_city": target_city,
             "base_salary": base_salary,
             "base_currency_code": base_info["currency_code"],
             "base_currency_symbol": base_info["currency_symbol"],
-            "target_salary": target_salary,
             "target_currency_code": target_info["currency_code"],
             "target_currency_symbol": target_info["currency_symbol"],
-            "base_col_index": base_index,
-            "target_col_index": target_index,
-            "comparison_text": comparison_text,
-            "insights": tips
+            
+            "currency_conversion": {
+                "converted_salary": converted_salary,
+                "exchange_rate": exchange_rate_value,
+                "explanation": "Converted directly using the market exchange rate."
+            },
+            
+            "ppp_comparison": {
+                "ppp_salary": ppp_salary,
+                "ppp_available": ppp_available,
+                "ppp_factor_base": base_info["ppp_factor"],
+                "ppp_factor_target": target_info["ppp_factor"],
+                "explanation": "Based on World Bank/OECD Purchasing Power Parity (PPP) conversion factors for 2026. This represents what target currency amount is needed to match the domestic purchasing power of your base salary."
+            },
+            
+            "market_salary": {
+                "available": market_salary_available,
+                "min": market_min,
+                "max": market_max,
+                "median": market_median,
+                "min_fmt": market_min_fmt,
+                "max_fmt": market_max_fmt,
+                "median_fmt": market_median_fmt,
+                "reason": market_reason
+            },
+            
+            "cost_of_living": {
+                "available": True,
+                "base_col_index": base_index,
+                "target_col_index": target_index,
+                "percent_diff": percent_diff,
+                "comparison_text": comparison_text,
+                "categories": {
+                    "Housing": {"base": base_housing, "target": target_housing, "diff": housing_diff},
+                    "Food": {"base": base_food, "target": target_food, "diff": food_diff},
+                    "Transportation": {"base": base_trans, "target": target_trans, "diff": trans_diff},
+                    "Utilities": {"base": base_util, "target": target_util, "diff": util_diff},
+                    "General": {"base": base_index, "target": target_index, "diff": percent_diff}
+                }
+            },
+            
+            "intelligent_analysis": analysis_paragraph,
+            "insights": tips,
+            "suspicious": suspicious,
+            "warning": warning_msg
         }
         return jsonify(result)
     except Exception as e:

@@ -7,30 +7,87 @@
 
     const calculateBtn = document.getElementById("calculateBtn");
     const baseSalaryInput = document.getElementById("baseSalary");
-    const baseCountryInput = document.getElementById("baseCountry");
-    const targetCountryInput = document.getElementById("targetCountry");
+    const baseCountrySelect = document.getElementById("baseCountry");
+    const targetCountrySelect = document.getElementById("targetCountry");
+    const careerInput = document.getElementById("career");
+    const experienceSelect = document.getElementById("experience");
+    const targetCityInput = document.getElementById("targetCity");
     
     const loading = document.getElementById("loading");
     const resultDashboard = document.getElementById("result");
     
-    const adjustedSalaryDisplay = document.getElementById("adjustedSalaryDisplay");
-    const comparisonExplanation = document.getElementById("comparisonExplanation");
-    const baseCountryLabel = document.getElementById("baseCountryLabel");
-    const targetCountryLabel = document.getElementById("targetCountryLabel");
-    const meterFill = document.getElementById("meterFill");
+    // Result displays
+    const convertedSalaryDisplay = document.getElementById("convertedSalaryDisplay");
+    const pppSalaryDisplay = document.getElementById("pppSalaryDisplay");
+    const marketRangeDisplay = document.getElementById("marketRangeDisplay");
+    const marketReasonDisplay = document.getElementById("marketReasonDisplay");
+    const colComparisonTextDisplay = document.getElementById("colComparisonTextDisplay");
+    
+    // Bars
+    const categories = ["Housing", "Food", "Transportation", "Utilities", "General"];
+    
+    // Recommendation & Insights
+    const intelligentAnalysisDisplay = document.getElementById("intelligentAnalysisDisplay");
     const insightsList = document.getElementById("insightsList");
+
+    // Initialize Page
+    document.addEventListener("DOMContentLoaded", loadCountries);
 
     if (calculateBtn) {
         calculateBtn.addEventListener("click", calculatePPP);
     }
 
+    async function loadCountries() {
+        try {
+            const response = await fetch("/static/data/countries_currency.json");
+            const countriesData = await response.json();
+            
+            const sortedCountries = Object.keys(countriesData).sort();
+            
+            // Populate select inputs
+            populateDropdown(baseCountrySelect, sortedCountries, "United States");
+            populateDropdown(targetCountrySelect, sortedCountries, "India");
+            
+        } catch (error) {
+            console.error("Failed to load country list:", error);
+        }
+    }
+
+    function populateDropdown(selectElement, countriesList, defaultValue) {
+        selectElement.innerHTML = "";
+        countriesList.forEach(country => {
+            const opt = document.createElement("option");
+            opt.value = country;
+            opt.textContent = country;
+            if (country === defaultValue) {
+                opt.selected = true;
+            }
+            selectElement.appendChild(opt);
+        });
+    }
+
     async function calculatePPP() {
         const baseSalary = baseSalaryInput.value.trim();
-        const baseCountry = baseCountryInput.value.trim() || "United States";
-        const targetCountry = targetCountryInput.value.trim() || "India";
+        const baseCountry = baseCountrySelect.value;
+        const targetCountry = targetCountrySelect.value;
+        const career = careerInput.value.trim();
+        const experience = experienceSelect.value;
+        const targetCity = targetCityInput.value.trim();
 
+        // 1. Validation
         if (!baseSalary) {
-            alert("Please enter a base salary.");
+            alert("Please enter your current base salary.");
+            return;
+        }
+
+        const numericSalary = parseFloat(baseSalary.replace(/,/g, ''));
+        if (isNaN(numericSalary) || numericSalary <= 0) {
+            alert("Please enter a valid positive salary amount.");
+            return;
+        }
+
+        if (!career) {
+            alert("Please enter your career or job role.");
             return;
         }
 
@@ -43,9 +100,12 @@
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
-                    base_salary: baseSalary,
+                    base_salary: numericSalary,
                     base_country: baseCountry,
-                    target_country: targetCountry
+                    target_country: targetCountry,
+                    career: career,
+                    experience: experience,
+                    target_city: targetCity
                 })
             });
 
@@ -54,54 +114,98 @@
             loading.classList.add("hidden");
 
             if (!response.ok || !data.success) {
-                alert(data.error || "Unable to calculate Cost of Living adjustment. Please verify country names.");
+                alert(data.error || "A calculation error occurred.");
                 return;
             }
 
-            // Render output dashboard
+            // 2. Render Results dashboard
             resultDashboard.classList.remove("hidden");
+
+            // A. Currency Conversion Card
+            if (data.currency_conversion.converted_salary) {
+                convertedSalaryDisplay.textContent = formatCurrency(
+                    data.currency_conversion.converted_salary,
+                    data.target_currency_code,
+                    data.target_currency_symbol
+                );
+            } else {
+                convertedSalaryDisplay.textContent = "Unavailable";
+            }
+
+            // B. PPP Card
+            if (data.ppp_comparison.ppp_available && data.ppp_comparison.ppp_salary) {
+                pppSalaryDisplay.textContent = formatCurrency(
+                    data.ppp_comparison.ppp_salary,
+                    data.target_currency_code,
+                    data.target_currency_symbol
+                );
+            } else {
+                pppSalaryDisplay.textContent = "Unavailable";
+            }
+
+            // C. Actual Market Salary Card
+            if (data.market_salary.available) {
+                marketRangeDisplay.textContent = `${data.market_salary.min_fmt} – ${data.market_salary.max_fmt}`;
+                marketReasonDisplay.textContent = data.market_salary.reason;
+            } else {
+                marketRangeDisplay.textContent = "Unavailable";
+                marketReasonDisplay.textContent = `No verified salary benchmarks found for ${career} in ${data.target_country}.`;
+            }
+
+            // D. Cost of Living Card & Category Bars
+            colComparisonTextDisplay.textContent = data.cost_of_living.comparison_text;
             
-            // Format target salary in target currency
-            const formattedSalary = formatCurrency(data.target_salary, data.target_currency_code, data.target_currency_symbol);
-            adjustedSalaryDisplay.textContent = formattedSalary;
+            categories.forEach(cat => {
+                const catData = data.cost_of_living.categories[cat];
+                const badgeEl = document.getElementById(`${cat.toLowerCase()}DiffDisplay`);
+                const fillEl = document.getElementById(`${cat.toLowerCase()}BarFill`);
+                
+                if (catData && badgeEl && fillEl) {
+                    const diff = catData.diff;
+                    const diffSign = diff >= 0 ? "+" : "";
+                    badgeEl.textContent = `${diffSign}${diff.toFixed(1)}%`;
+                    
+                    // Style badge
+                    if (diff >= 0) {
+                        badgeEl.className = "diff-badge plus";
+                        fillEl.className = "bar-fill red";
+                    } else {
+                        badgeEl.className = "diff-badge minus";
+                        fillEl.className = "bar-fill green";
+                    }
+                    
+                    // Fill Ratio
+                    const fillRatio = Math.min(100, Math.max(5, (catData.target / (catData.base + catData.target)) * 100));
+                    fillEl.style.width = `${fillRatio}%`;
+                }
+            });
+
+            // E. Intelligent Relocation Summary & Insights
+            intelligentAnalysisDisplay.textContent = data.intelligent_analysis;
             
-            // Comparison explanation text
-            comparisonExplanation.textContent = `${data.comparison_text} A salary of ${data.base_currency_symbol}${parseFloat(baseSalary).toLocaleString()} in ${data.base_country} is equivalent to a purchasing power of ${formattedSalary} in ${data.target_country}.`;
-            
-            // Render index labels
-            baseCountryLabel.textContent = `${data.base_country}: ${data.base_col_index}`;
-            targetCountryLabel.textContent = `${data.target_country}: ${data.target_col_index}`;
-            
-            // Meter fill ratio (cap index relative percentage)
-            const fillRatio = Math.min(100, Math.max(5, (data.target_col_index / (data.base_col_index + data.target_col_index)) * 100));
-            meterFill.style.width = `${fillRatio}%`;
-            
-            // Render tips list
             insightsList.innerHTML = "";
             (data.insights || []).forEach(tip => {
                 const li = document.createElement("li");
                 li.textContent = tip;
                 insightsList.appendChild(li);
             });
-            
-            // Smooth scroll to results
+
+            // Scroll to results beautifully
             resultDashboard.scrollIntoView({ behavior: 'smooth', block: 'start' });
 
         } catch (error) {
             console.error(error);
             calculateBtn.disabled = false;
             loading.classList.add("hidden");
-            alert("A network or server error occurred. Please try again.");
+            alert("A network error occurred. Please verify your connection.");
         }
     }
 
     function formatCurrency(val, code, symbol) {
         const rounded = Math.round(val);
-        // Custom formatting for Indian Rupees (Lakhs)
         if (code === "INR") {
             if (rounded >= 100000) {
-                const lakhs = rounded / 100000;
-                return `${symbol}${lakhs.toFixed(2)} Lakhs / yr`;
+                return `${symbol}${(rounded / 100000).toFixed(2)} Lakhs / yr`;
             }
             return `${symbol}${rounded.toLocaleString('en-IN')} / yr`;
         }
