@@ -123,8 +123,11 @@
 
             // A. Currency Conversion Card
             if (data.currency_conversion.converted_salary) {
-                convertedSalaryDisplay.textContent = formatCurrency(
+                animateNumber(
+                    convertedSalaryDisplay,
+                    0,
                     data.currency_conversion.converted_salary,
+                    1000,
                     data.target_currency_code,
                     data.target_currency_symbol
                 );
@@ -134,8 +137,11 @@
 
             // B. PPP Card
             if (data.ppp_comparison.ppp_available && data.ppp_comparison.ppp_salary) {
-                pppSalaryDisplay.textContent = formatCurrency(
+                animateNumber(
+                    pppSalaryDisplay,
+                    0,
                     data.ppp_comparison.ppp_salary,
+                    1200,
                     data.target_currency_code,
                     data.target_currency_symbol
                 );
@@ -199,6 +205,24 @@
             loading.classList.add("hidden");
             alert("A network error occurred. Please verify your connection.");
         }
+    }
+
+    function animateNumber(element, start, end, duration, code, symbol) {
+        if (isNaN(end) || end <= 0) {
+            element.textContent = "Unavailable";
+            return;
+        }
+        let startTimestamp = null;
+        const step = (timestamp) => {
+            if (!startTimestamp) startTimestamp = timestamp;
+            const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+            const currentVal = Math.floor(progress * (end - start) + start);
+            element.textContent = formatCurrency(currentVal, code, symbol);
+            if (progress < 1) {
+                window.requestAnimationFrame(step);
+            }
+        };
+        window.requestAnimationFrame(step);
     }
 
     function formatCurrency(val, code, symbol) {
