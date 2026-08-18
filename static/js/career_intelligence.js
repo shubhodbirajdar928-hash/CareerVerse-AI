@@ -157,7 +157,9 @@ function renderSalaryChart(chart) {
     let rawVals = chart.values || [];
     let salaryValues = [];
 
-    const parseSalaryNum = (str) => {
+    const parseSalaryNum = (val) => {
+        if (val === null || val === undefined) return 0;
+        const str = String(val);
         if (!str) return 0;
         const matches = str.match(/(\d+(\.\d+)?)/g);
         if (matches && matches.length > 0) {
