@@ -3589,12 +3589,26 @@ Rules:
         from salary_data_layer import get_verified_salary_data
         verified_res = get_verified_salary_data(career, country)
         
-        if verified_res.get("salary") and verified_res["salary"]["min"]:
+        if verified_res.get("salary") and (verified_res["salary"].get("min") or verified_res["salary"].get("fresher")):
             v_sal = verified_res["salary"]
-            summary["fresher_salary"] = v_sal["min"]
-            summary["mid_salary"] = v_sal["median"]
-            summary["senior_salary"] = v_sal["max"]
-            summary["average_salary"] = v_sal["median"]
+            f_sal = v_sal.get("fresher") or v_sal.get("min")
+            m_sal = v_sal.get("mid") or v_sal.get("median")
+            s_sal = v_sal.get("senior") or v_sal.get("max")
+            
+            currency_symbol = verified_res.get("currency", {}).get("symbol", "$")
+            def format_val(val):
+                if val is None or val == "":
+                    return ""
+                if isinstance(val, (int, float)):
+                    if verified_res.get("currency", {}).get("code") == "INR":
+                        return f"₹{val/100000:.1f}L / yr"
+                    return f"{currency_symbol}{val:,} / yr"
+                return str(val)
+                
+            summary["fresher_salary"] = format_val(f_sal)
+            summary["mid_salary"] = format_val(m_sal)
+            summary["senior_salary"] = format_val(s_sal)
+            summary["average_salary"] = format_val(m_sal)
         else:
             is_india = "india" in country.lower()
             summary["fresher_salary"] = "₹5.0L - ₹9.0L / yr" if is_india else "$65,000 - $85,000 / yr"
