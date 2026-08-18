@@ -123,7 +123,7 @@ function renderSummary(data) {
     const midEl = document.getElementById("midSalary");
     const seniorEl = document.getElementById("seniorSalary");
 
-    const isIndia = (countryInput?.value || "India").toLowerCase().includes("india") || (summary.average_salary || "").includes("₹");
+    const isIndia = (countryInput?.value || "India").toLowerCase().includes("india") || String(summary.average_salary || "").includes("₹");
 
     if (fresherEl) fresherEl.textContent = summary.fresher_salary && summary.fresher_salary !== "--" ? summary.fresher_salary : (isIndia ? "₹5L - ₹9L / yr" : "$65,000 - $90,000 / yr");
     if (midEl) midEl.textContent = summary.mid_salary && summary.mid_salary !== "--" ? summary.mid_salary : (isIndia ? "₹12L - ₹22L / yr" : "$110,000 - $155,000 / yr");
@@ -152,7 +152,7 @@ function renderSalaryChart(chart) {
 
     const ctx = canvas.getContext("2d");
     const summary = window.lastSummaryData || {};
-    const isIndia = (countryInput?.value || "India").toLowerCase().includes("india") || (summary.average_salary || "").includes("₹");
+    const isIndia = (countryInput?.value || "India").toLowerCase().includes("india") || String(summary.average_salary || "").includes("₹");
 
     let rawVals = chart.values || [];
     let salaryValues = [];
