@@ -12,6 +12,8 @@ if (btn) {
         const skills = document.getElementById("skills").value.trim();
         const country = document.getElementById("country").value.trim();
         const city = document.getElementById("city").value.trim();
+        const seniority = document.getElementById("seniority").value.trim();
+        const sector = document.getElementById("sector").value;
 
         if (role === "") {
             alert("Please enter a Target Job Role.");
@@ -43,7 +45,9 @@ if (btn) {
                     experience,
                     skills,
                     country,
-                    city
+                    city,
+                    seniority,
+                    sector
                 })
             });
 
@@ -220,6 +224,55 @@ if (btn) {
                             <div style="background: var(--bg-primary); border: 1px solid rgba(34, 197, 94, 0.4); border-radius: 10px; padding: 14px;">
                                 <span style="font-size: 0.76rem; color: #22c55e; font-weight: 600;">90th Percentile (Lead)</span>
                                 <h4 style="color: #22c55e; font-size: 1.05rem; margin: 4px 0 0; font-weight: 800;">${percentiles.p90}</h4>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- DETAILED SALARY DIAGNOSTIC BREAKDOWN (10 MANDATORY FIELDS) -->
+                    <div class="salary-card" style="background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px; padding: 24px;">
+                        <h3 style="color: var(--accent); font-size: 1.15rem; margin-bottom: 20px; display: flex; align-items: center; gap: 8px;">
+                            <i class="fa-solid fa-list-check"></i> Compensation Diagnostic Breakdown (Official Accuracy Metrics)
+                        </h3>
+                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px;">
+                            <div style="background: var(--bg-primary); border: 1px solid var(--border); padding: 16px; border-radius: 12px;">
+                                <span style="font-size: 0.8rem; color: var(--text-secondary); display: block;">📍 Entry-Level Salary</span>
+                                <strong style="font-size: 1.1rem; color: var(--text-heading); display: block; margin-top: 4px;">${data.entry_level_salary || 'N/A'}</strong>
+                            </div>
+                            <div style="background: var(--bg-primary); border: 1px solid var(--border); padding: 16px; border-radius: 12px;">
+                                <span style="font-size: 0.8rem; color: var(--text-secondary); display: block;">📍 7+ Years Salary</span>
+                                <strong style="font-size: 1.1rem; color: var(--text-heading); display: block; margin-top: 4px;">${data.seven_plus_years_salary || 'N/A'}</strong>
+                            </div>
+                            <div style="background: var(--bg-primary); border: 1px solid var(--border); padding: 16px; border-radius: 12px;">
+                                <span style="font-size: 0.8rem; color: var(--text-secondary); display: block;">📍 Senior Salary</span>
+                                <strong style="font-size: 1.1rem; color: var(--text-heading); display: block; margin-top: 4px;">${data.senior_salary || 'N/A'}</strong>
+                            </div>
+                            <div style="background: var(--bg-primary); border: 1px solid var(--border); padding: 16px; border-radius: 12px;">
+                                <span style="font-size: 0.8rem; color: var(--text-secondary); display: block;">📅 Annual Salary</span>
+                                <strong style="font-size: 1.1rem; color: var(--accent); display: block; margin-top: 4px;">${data.annual_salary || 'N/A'}</strong>
+                            </div>
+                            <div style="background: var(--bg-primary); border: 1px solid var(--border); padding: 16px; border-radius: 12px;">
+                                <span style="font-size: 0.8rem; color: var(--text-secondary); display: block;">📆 Monthly Salary</span>
+                                <strong style="font-size: 1.1rem; color: var(--text-heading); display: block; margin-top: 4px;">${data.monthly_salary || 'N/A'}</strong>
+                            </div>
+                            <div style="background: var(--bg-primary); border: 1px solid var(--border); padding: 16px; border-radius: 12px;">
+                                <span style="font-size: 0.8rem; color: var(--text-secondary); display: block;">💱 Currency Code</span>
+                                <strong style="font-size: 1.1rem; color: var(--text-heading); display: block; margin-top: 4px;">${data.currency || 'N/A'}</strong>
+                            </div>
+                            <div style="background: var(--bg-primary); border: 1px solid var(--border); padding: 16px; border-radius: 12px;">
+                                <span style="font-size: 0.8rem; color: var(--text-secondary); display: block;">🇮🇳 INR Conversion</span>
+                                <strong style="font-size: 1.1rem; color: #22c55e; display: block; margin-top: 4px;">${data.inr_conversion || 'N/A'}</strong>
+                            </div>
+                            <div style="background: var(--bg-primary); border: 1px solid var(--border); padding: 16px; border-radius: 12px;">
+                                <span style="font-size: 0.8rem; color: var(--text-secondary); display: block;">⚖️ Gross/Net Designation</span>
+                                <strong style="font-size: 1.1rem; color: var(--text-heading); display: block; margin-top: 4px; text-transform: uppercase;">${data.gross_net_designation || 'GROSS'}</strong>
+                            </div>
+                            <div style="background: var(--bg-primary); border: 1px solid var(--border); padding: 16px; border-radius: 12px;">
+                                <span style="font-size: 0.8rem; color: var(--text-secondary); display: block;">📄 Source or Data Basis</span>
+                                <strong style="font-size: 0.95rem; color: var(--text-heading); display: block; margin-top: 4px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">${data.source_or_basis || 'N/A'}</strong>
+                            </div>
+                            <div style="background: var(--bg-primary); border: 1px solid var(--border); padding: 16px; border-radius: 12px;">
+                                <span style="font-size: 0.8rem; color: var(--text-secondary); display: block;">🎯 Confidence Level</span>
+                                <strong style="font-size: 1.1rem; color: #3b82f6; display: block; margin-top: 4px;">${data.confidence_level || 'N/A'}</strong>
                             </div>
                         </div>
                     </div>

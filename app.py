@@ -1,4 +1,5 @@
 import os
+import io
 import json
 import traceback
 import pdfplumber
@@ -9,6 +10,18 @@ from flask import Flask, render_template, request, jsonify, session
 from werkzeug.utils import secure_filename
 from datetime import datetime
 import re
+
+from secure_processing import (
+    get_secure_provider,
+    process_sensitive_data,
+    secure_inference,
+    get_security_status,
+    get_attestation_report,
+    audit_logger,
+    rate_limit_sensitive,
+    apply_security_headers,
+    validate_pdf_stream
+)
 
 def allowed_file(filename):
     return "." in filename and filename.rsplit(".", 1)[1].lower() == "pdf"
@@ -97,13 +110,19 @@ def generate_with_fallback(prompt):
 
 app = Flask(__name__)
 app.secret_key = os.getenv("SECRET_KEY", "careerverse_secure_session_secret_key_2026")
+app.config["MAX_CONTENT_LENGTH"] = 10 * 1024 * 1024  # 10MB maximum upload limit
+
+@app.errorhandler(413)
+def request_entity_too_large(error):
+    audit_logger.log_event("UPLOAD_EXCEEDED_MAX_SIZE", "BLOCKED", level=30)
+    return failure("Uploaded file is too large. Maximum allowed size is 10MB.", 413)
 
 @app.after_request
-def add_no_cache_headers(response):
+def add_security_headers(response):
     response.headers["Cache-Control"] = "no-cache, no-store, must-revalidate, max-age=0"
     response.headers["Pragma"] = "no-cache"
     response.headers["Expires"] = "0"
-    return response
+    return apply_security_headers(response)
 
 UPLOAD_FOLDER = "uploads"
 
@@ -500,47 +519,51 @@ def get_total_months(duration):
 # =====================================================
 
 def handle_gemini_error(e):
+    raw_error = str(e)
+    audit_logger.log_event(
+        event_type="GEMINI_API_ERROR",
+        status="FAILURE",
+        details={"error_type": type(e).__name__},
+        level=30
+    )
 
-    error = str(e)
-
-    if "RESOURCE_EXHAUSTED" in error or "429" in error:
-
+    if "RESOURCE_EXHAUSTED" in raw_error or "429" in raw_error:
         return failure(
             "🚫 Gemini API quota exceeded. Please wait 1 minute and try again, or use another API key.",
             429
         )
 
-    if "401" in error or "UNAUTHENTICATED" in error:
-
+    if "401" in raw_error or "UNAUTHENTICATED" in raw_error:
         return failure(
-            "🔑 Invalid Gemini API Key.",
+            "🔑 Authentication failure with upstream AI service. Please verify server API key configuration.",
             401
         )
 
-    return failure(error)
+    # Scrub potential secrets or API keys
+    safe_error = audit_logger.sanitize_message(raw_error)
+    if "Traceback" in safe_error or "File \"" in safe_error or "api_key" in safe_error.lower():
+        safe_error = "An error occurred during AI processing. Please try again or refine your query."
+
+    return failure(safe_error)
 
     
 
 # =====================================================
-# Debug (Run Once)
+# Startup Diagnostics (Safe / Non-blocking)
 # =====================================================
 
 try:
-
     print("\n===============================")
-    print("CareerVerse AI Started")
+    print("CareerVerse AI Started with Secure Processing Layer")
+    print(f"Security Mode: {get_security_status()['display_badge']}")
     print("===============================")
-
-    print("Available Models:\n")
-
-    for model in client.models.list():
-        print(model.name)
-
-    print("\n===============================\n")
-
+    if os.getenv("PROBE_MODELS_ON_STARTUP", "false").lower() == "true":
+        print("Available Models:\n")
+        for model in client.models.list():
+            print(model.name)
+        print("===============================\n")
 except Exception as e:
-
-    print(e)
+    print(f"Startup notice: {e}")
 
 
 # =====================================================
@@ -2501,6 +2524,8 @@ def salary_predictor_api():
         skills = data.get("skills", "").strip()
         country_raw = data.get("country", "").strip() or "India"
         city = data.get("city", "").strip()
+        seniority = data.get("seniority", "").strip() or None
+        sector = data.get("sector", "").strip() or None
 
         # Import verified data layer
         from salary_data_layer import get_verified_salary_data
@@ -2524,7 +2549,9 @@ def salary_predictor_api():
             specialization=data.get("specialization"),
             industry=data.get("industry"),
             force_rate_limit_fail=force_rate_limit,
-            force_api_fail=force_api_fail
+            force_api_fail=force_api_fail,
+            seniority=seniority,
+            sector=sector
         )
 
         # Handle validation failures / configured provider unavailability
@@ -2629,26 +2656,132 @@ Return ONLY valid JSON:
             {"level": "Senior Level (8+ Yrs)", "salary": bench["senior"]}
         ]
 
+        # Helper calculations for the 10 required diagnostic fields
+        import re
+        def extract_num(val):
+            if val is None or val == "":
+                return 0.0
+            if isinstance(val, (int, float)):
+                return float(val)
+            # Remove currency symbols and commas
+            clean_str = str(val).replace(",", "").replace("$", "").replace("€", "").replace("£", "").replace("₹", "").replace("¥", "").strip()
+            matches = re.findall(r"(\d+(?:\.\d+)?)", clean_str)
+            if matches:
+                num = float(matches[0])
+                if "L" in str(val) or "lakh" in str(val).lower():
+                    num *= 100000
+                elif "k" in str(val).lower():
+                    num *= 1000
+                elif "m" in str(val).lower():
+                    num *= 1000000
+                return num
+            return 0.0
+
+        def convert_to_inr(local_amount, currency_code, country_name):
+            try:
+                num_val = extract_num(local_amount)
+                if num_val <= 0:
+                    return "N/A"
+                if currency_code == "INR":
+                    inr_val = num_val
+                else:
+                    rates = {
+                        "USD": 1.0,
+                        "INR": 83.5,
+                        "GBP": 0.78,
+                        "EUR": 0.92,
+                        "CAD": 1.37,
+                        "AUD": 1.50,
+                        "JPY": 155.0,
+                        "SGD": 1.34,
+                        "AED": 3.67,
+                        "SAR": 3.75,
+                        "CHF": 0.90,
+                        "CNY": 7.25,
+                        "RUB": 90.0,
+                        "TRY": 32.5,
+                        "KRW": 1360.0,
+                        "NZD": 1.63,
+                        "SEK": 10.7,
+                        "NOK": 10.8,
+                        "DKK": 6.9,
+                        "HKD": 7.8
+                    }
+                    rate_to_usd = rates.get(currency_code)
+                    if not rate_to_usd:
+                        for name, info in ECONOMIC_DATA.items():
+                            if country_name.lower() in name:
+                                rate_to_usd = info["exchange_rate"]
+                                break
+                    if not rate_to_usd:
+                        rate_to_usd = 1.0
+                    usd_val = num_val / rate_to_usd
+                    inr_val = usd_val * 83.5
+                if inr_val >= 100000:
+                    return f"₹{inr_val/100000:.2f} Lakhs / yr"
+                return f"₹{inr_val:,.0f} / yr"
+            except Exception:
+                return "N/A"
+
+        # Annual base median value extraction
+        median_num = extract_num(v_sal.get("median")) or extract_num(v_sal.get("min")) or 0.0
+        currency_code = verified_res.get("currency", {}).get("code", "USD")
+        
+        # Calculate monthly representation
+        monthly_val = median_num / 12.0
+        if currency_code == "INR":
+            monthly_str = f"₹{monthly_val/100000:.2f} Lakhs / mo" if monthly_val >= 100000 else f"₹{monthly_val:,.0f} / mo"
+        else:
+            monthly_str = f"{curr_symbol}{monthly_val:,.2f} / mo"
+
+        # Safe formatting helper for Entry / 7+ / Senior bands
+        def format_field_val(val):
+            if val is None or val == "":
+                return "N/A"
+            if isinstance(val, (int, float)):
+                if currency_code == "INR":
+                    return f"₹{val/100000:.1f}L / yr"
+                return f"{curr_symbol}{val:,} / yr"
+            return str(val)
+
+        entry_val = format_field_val(v_sal.get("fresher") or v_sal.get("min"))
+        seven_plus_val = format_field_val(v_sal.get("mid") or v_sal.get("median"))
+        senior_val = format_field_val(v_sal.get("senior") or v_sal.get("max"))
+        
+        annual_val = f"{curr_symbol}{v_sal['min']:,} - {curr_symbol}{v_sal['max']:,} / yr" if isinstance(v_sal.get("min"), (int, float)) and isinstance(v_sal.get("max"), (int, float)) else f"{format_field_val(v_sal.get('min'))} - {format_field_val(v_sal.get('max'))}"
+
         # Combine verified results with LLM metadata
         final_res = verified_res.copy()
         final_res.update({
             "success": True,
-            "estimated_salary": f"{v_sal['min']} - {v_sal['max']}",
+            "estimated_salary": annual_val,
             "confidence_score": int(verified_res["confidence_score"] * 100),
             "market_demand": 85,
             "growth_score": 82,
             "percentiles": {
-                "p25": v_sal['min'],
-                "p50": v_sal['median'],
-                "p75": v_sal['max'],
-                "p90": f"{curr_symbol}{int(verified_res['confidence_score']*200000):,}" if v_sal['period'] != 'monthly' else f"{v_sal['max']}"
+                "p25": format_field_val(v_sal.get("min")),
+                "p50": format_field_val(v_sal.get("median")),
+                "p75": format_field_val(v_sal.get("max")),
+                "p90": f"{curr_symbol}{int(verified_res['confidence_score']*200000):,}" if v_sal.get('period') != 'monthly' and isinstance(v_sal.get("max"), (int, float)) else f"{v_sal.get('max')}"
             },
             "top_companies": llm_res.get("top_companies", []),
             "best_cities": llm_res.get("best_cities", []),
             "recommended_skills": llm_res.get("recommended_skills", []),
             "salary_progression": salary_progression,
             "recommendation": llm_res.get("recommendation", ""),
-            "salary_reason": llm_res.get("salary_reason", f"Compensation levels for a {role} reflect high cognitive demand, specialized technical expertise, and local talent scarcity.")
+            "salary_reason": llm_res.get("salary_reason", f"Compensation levels for a {role} reflect high cognitive demand, specialized technical expertise, and local talent scarcity."),
+            
+            # The 10 Mandatory Diagnostic Accuracy fields
+            "entry_level_salary": entry_val,
+            "seven_plus_years_salary": seven_plus_val,
+            "senior_salary": senior_val,
+            "annual_salary": annual_val,
+            "monthly_salary": monthly_str,
+            "currency": currency_code,
+            "inr_conversion": convert_to_inr(v_sal.get("median") or v_sal.get("max") or 0.0, currency_code, country_raw),
+            "gross_net_designation": v_sal.get("gross_or_net", "Gross").title(),
+            "source_or_basis": v_sal.get("source_or_basis") or (verified_res["sources"][0]["source_name"] if verified_res.get("sources") else "Verified labor market registries"),
+            "confidence_level": "High" if verified_res.get("confidence") == "HIGH" else ("Medium" if verified_res.get("confidence") == "MEDIUM" else "Low")
         })
 
         return success(final_res)
@@ -3030,15 +3163,14 @@ JSON Format:
         traceback.print_exc()
 
         return handle_gemini_error(e)
-    # =====================================================
-# Resume Analyzer API
+# =====================================================
+# Resume Analyzer API (Protected by Secure Processing Layer)
 # =====================================================
 
 @app.route("/resume-api", methods=["POST"])
+@rate_limit_sensitive
 def resume_api():
-
     try:
-
         if "resume" not in request.files:
             return failure("Please upload a resume.", 400)
 
@@ -3050,37 +3182,30 @@ def resume_api():
         if not allowed_file(file.filename):
             return failure("Invalid file type. Only PDF files are allowed.", 400)
 
-        safe_name = secure_filename(file.filename)
-        filepath = os.path.join(
-            app.config["UPLOAD_FOLDER"],
-            safe_name
-        )
+        # 1. Zero Disk Retention: In-memory stream processing with validation
+        pdf_bytes = file.read()
+        file_stream = io.BytesIO(pdf_bytes)
 
-        file.save(filepath)
+        is_valid_pdf, val_err = validate_pdf_stream(file_stream, max_size_bytes=10 * 1024 * 1024)
+        if not is_valid_pdf:
+            audit_logger.log_event("INVALID_PDF_UPLOAD_REJECTED", "BLOCKED", details={"error": val_err}, level=30)
+            return failure(val_err, 400)
 
         resume_text = ""
         try:
-            try:
-                with pdfplumber.open(filepath) as pdf:
-                    for page in pdf.pages:
-                        text = page.extract_text()
-                        if text:
-                            resume_text += text + "\n"
-            except Exception as pdf_err:
-                print(f"Error reading PDF with pdfplumber: {pdf_err}")
-                return failure("Unable to read the uploaded resume or the file is corrupted.", 400)
+            with pdfplumber.open(file_stream) as pdf:
+                for page in pdf.pages:
+                    text = page.extract_text()
+                    if text:
+                        resume_text += text + "\n"
+        except Exception as pdf_err:
+            audit_logger.log_event("PDF_EXTRACTION_ERROR", "FAILURE", details={"error": str(pdf_err)}, level=30)
+            return failure("Unable to read the uploaded resume or the file is corrupted.", 400)
         finally:
-            try:
-                if os.path.exists(filepath):
-                    os.remove(filepath)
-            except Exception as clean_err:
-                print(f"Error cleaning up temporary upload file: {clean_err}")
+            file_stream.close()
 
         if resume_text.strip() == "":
-            return failure(
-                "Unable to read the uploaded resume.",
-                400
-            )
+            return failure("Unable to read any text from the uploaded resume.", 400)
 
         target_role = request.form.get("target_role", "").strip()
         if target_role:
@@ -3088,14 +3213,18 @@ def resume_api():
             if not is_v_r:
                 return failure(role_err, 400)
 
+        # 2. Secure Processing Layer: PII Minimization and Redaction inside Secure Enclave
+        sec_res = process_sensitive_data(resume_text, options={"target_role": target_role})
+        sanitized_resume_text = sec_res["processed_text"]
+
         prompt = f"""
 You are a Senior FAANG Executive Recruiter, ATS Optimization Specialist, and Technical Hiring Manager.
 
 EVALUATION TASK:
-Analyze the candidate's resume PDF text and perform a hyper-rigorous, accurate ATS evaluation specifically for the Target Job Role: "{target_role if target_role else 'General Role'}".
+Analyze the candidate's resume text and perform a hyper-rigorous, accurate ATS evaluation specifically for the Target Job Role: "{target_role if target_role else 'General Role'}".
 
-Candidate Resume Content:
-{resume_text}
+Candidate Resume Content (PII-Minimally De-identified):
+{sanitized_resume_text}
 
 CRITICAL ACCURACY INSTRUCTIONS:
 1. ATS Compatibility Score (ats_score): Measure exact keyword match, section formatting, and skill alignment for "{target_role if target_role else 'General Role'}". If key industry tools/keywords for "{target_role if target_role else 'General Role'}" are missing, penalize the score accurately.
@@ -3134,41 +3263,75 @@ Scoring & Format Rules:
 """
 
         text = generate_with_fallback(prompt)
-
         text = clean_json(text)
 
-
         try:
-
             result = json.loads(text)
-
         except Exception:
+            audit_logger.log_event("AI_INVALID_JSON_RESPONSE", "FAILURE", level=30)
+            return failure("AI returned invalid JSON. Try again.")
 
-            print("Gemini Response:")
-            print(text)
+        # Attach authentic, verified security metadata
+        sec_status = get_security_status()
+        result["security"] = {
+            "mode": sec_res["security_metadata"]["mode"],
+            "hardware_isolated": sec_res["security_metadata"]["hardware_isolated"],
+            "display_badge": sec_status["display_badge"],
+            "badge_color": sec_status["badge_color"],
+            "pii_entities_redacted": sec_res["redacted_entities_count"],
+            "redacted_types": sec_res["redacted_types"],
+            "entities_breakdown": sec_res["entities_breakdown"],
+            "zero_disk_retention": True
+        }
 
-            return failure(
-                "AI returned invalid JSON. Try again."
-            )
-
+        audit_logger.log_event(
+            event_type="RESUME_EVALUATION_COMPLETED",
+            status="SUCCESS",
+            details={
+                "target_role": target_role or "General Role",
+                "pii_redacted_count": sec_res["redacted_entities_count"],
+                "hardware_isolated": sec_res["security_metadata"]["hardware_isolated"]
+            }
+        )
 
         return success(result)
 
-
     except json.JSONDecodeError:
-
         traceback.print_exc()
-
-        return failure(
-            "Gemini returned invalid JSON."
-        )
-
+        return failure("Gemini returned invalid JSON.")
 
     except Exception as e:
-
         traceback.print_exc()
-
         return handle_gemini_error(e)
+
+
+# =====================================================
+# Security & Confidential Computing Diagnostics API
+# =====================================================
+
+@app.route("/api/security-status", methods=["GET"])
+def security_status_api():
+    """Returns honest, verifiable security status of the running instance."""
+    status = get_security_status()
+    return jsonify({
+        "success": True,
+        "security": status
+    })
+
+
+@app.route("/api/security-attestation", methods=["GET", "POST"])
+def security_attestation_api():
+    """Returns cryptographic attestation report from TEE provider or simulation diagnostic."""
+    nonce = request.args.get("nonce")
+    if not nonce and request.is_json:
+        nonce = request.json.get("nonce")
+    nonce_bytes = nonce.encode("utf-8") if nonce else None
+    report = get_attestation_report(nonce_bytes)
+    return jsonify({
+        "success": True,
+        "attestation": report
+    })
+
 # =====================================================
 # Career Reality AI API
 # =====================================================

@@ -57,6 +57,19 @@
                 <label for="city"><i class="fa-solid fa-city"></i> City / Region (Optional)</label>
                 <input type="text" id="city" class="salary-input" placeholder="e.g. San Francisco, Bangalore, London, Remote">
             </div>
+
+            <div class="salary-input-group">
+                <label for="seniority"><i class="fa-solid fa-medal"></i> Seniority / Pay Grade (Optional)</label>
+                <input type="text" id="seniority" class="salary-input" placeholder="e.g. Grade E2, Evaluation III, Senior Officer">
+            </div>
+
+            <div class="salary-input-group">
+                <label for="sector"><i class="fa-solid fa-building-shield"></i> Employment Sector</label>
+                <select id="sector" class="salary-input" style="background: rgba(15, 15, 15, 0.95); color: var(--text-primary); border: 1px solid var(--border); border-radius: 10px; height: 48px; padding: 0 16px; width: 100%;">
+                    <option value="private">Private Sector</option>
+                    <option value="public">Public / Government Sector</option>
+                </select>
+            </div>
         </div>
 
         <button id="predictBtn" class="salary-btn" type="button">
