@@ -24,14 +24,18 @@
 <div align="center">
 
 ### 🌟 [CareerVerse AI](https://github.com/shubhodbirajdar928-hash/CareerVerse-AI)
-**Navigate Your Future with Universal AI Career Intelligence**
+**Navigate Your Future with Universal AI Career Intelligence & Confidential Computing**
 
-[![Python](https://img.shields.io/badge/Python-3.9%2B-blue.svg)](https://www.python.org/)
-[![Flask](https://img.shields.io/badge/Framework-Flask-black.svg)](https://flask.palletsprojects.com/)
-[![AI Engine](https://img.shields.io/badge/AI-Google%20Gemini-yellow.svg)](https://ai.google.dev/)
-[![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
+[![Python](https://img.shields.io/badge/Python-3.11%2B-3776AB.svg?logo=python&logoColor=white)](https://www.python.org/)
+[![Flask](https://img.shields.io/badge/Framework-Flask-000000.svg?logo=flask&logoColor=white)](https://flask.palletsprojects.com/)
+[![AI Engine](https://img.shields.io/badge/AI-Google%20Gemini-8E75B2.svg?logo=google&logoColor=white)](https://ai.google.dev/)
+[![Render](https://img.shields.io/badge/Live%20Demo-Render-46E3B7.svg?logo=render&logoColor=white)](https://careerverse-ai.onrender.com)
+[![Security](https://img.shields.io/badge/Architecture-Confidential%20Computing-22c55e.svg)](https://github.com/shubhodbirajdar928-hash/CareerVerse-AI/blob/main/SECURITY.md)
+[![License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
-*An all-in-one AI platform providing personalized learning roadmaps, multi-currency salary bands, side-by-side career comparisons, ATS resume evaluation, and an interactive ChatGPT-style AI Career Mentor for every career field globally.*
+*An all-in-one AI platform providing personalized learning roadmaps, multi-currency salary bands, side-by-side career comparisons, privacy-first ATS resume evaluation with Confidential Computing, and an interactive AI Career Mentor for every career field globally.*
+
+🌐 **Live on Render**: [https://careerverse-ai.onrender.com](https://careerverse-ai.onrender.com)
 
 </div>
 
