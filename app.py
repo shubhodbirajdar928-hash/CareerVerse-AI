@@ -32,19 +32,35 @@ def allowed_file(filename):
 
 load_dotenv()
 # =====================================================
-# Country Currency Database
-# =====================================================
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+json_path = os.path.join(BASE_DIR, "static", "data", "countries_currency.json")
+if os.path.exists(json_path):
+    with open(json_path, "r", encoding="utf-8") as f:
+        COUNTRY_CURRENCY = json.load(f)
+else:
+    COUNTRY_CURRENCY = {}
 
-with open("static/data/countries_currency.json", "r", encoding="utf-8") as f:
-    COUNTRY_CURRENCY = json.load(f)
+API_KEY = os.getenv("GEMINI_API_KEY", "").strip()
+client = None
 
-API_KEY = os.getenv("GEMINI_API_KEY")
-print("Gemini API Loaded Successfully")
+def get_gemini_client():
+    global client, API_KEY
+    if client is not None:
+        return client
+    API_KEY = os.getenv("GEMINI_API_KEY", "").strip()
+    if not API_KEY:
+        raise ValueError("GEMINI_API_KEY is not configured in server environment variables.")
+    client = genai.Client(api_key=API_KEY)
+    return client
 
-if not API_KEY:
-    raise Exception("❌ GEMINI_API_KEY not found in .env")
-
-client = genai.Client(api_key=API_KEY)
+if API_KEY:
+    try:
+        client = genai.Client(api_key=API_KEY)
+        print("Gemini API Loaded Successfully")
+    except Exception as e:
+        print(f"Notice: Gemini client init deferred: {e}")
+else:
+    print("[WARNING] GEMINI_API_KEY not set in environment variables. Web app is running; AI features will require GEMINI_API_KEY.")
 
 # =====================================================
 # Gemini Model Fallback System
@@ -71,7 +87,8 @@ GEMINI_MODELS = [
 def get_active_models():
     models = list(GEMINI_MODELS)
     try:
-        remote_models = [m.name.replace("models/", "") for m in client.models.list()]
+        active_client = get_gemini_client()
+        remote_models = [m.name.replace("models/", "") for m in active_client.models.list()]
         exclude = ['tts', 'image', 'imagen', 'veo', 'lyria', 'embedding', 'audio', 'robotics', 'banana', 'aqa', 'computer-use', 'live-translate']
         filtered = [m for m in remote_models if not any(x in m for x in exclude)]
         for m in reversed(filtered):
@@ -83,13 +100,14 @@ def get_active_models():
 
 
 def generate_with_fallback(prompt):
+    active_client = get_gemini_client()
     models_to_try = get_active_models()
     last_error = None
 
     for model in models_to_try:
         try:
             print(f"Trying Gemini model: {model}")
-            response = client.models.generate_content(
+            response = active_client.models.generate_content(
                 model=model,
                 contents=prompt
             )
@@ -124,7 +142,7 @@ def add_security_headers(response):
     response.headers["Expires"] = "0"
     return apply_security_headers(response)
 
-UPLOAD_FOLDER = "uploads"
+UPLOAD_FOLDER = os.path.join(BASE_DIR, "uploads")
 
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 
