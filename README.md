@@ -277,7 +277,7 @@ python scratch/verify_ppp_logic.py
 **Shubhod Birajdar**  
 *AI & Machine Learning Software Engineer*  
 - **GitHub**: [@shubhodbirajdar928-hash](https://github.com/shubhodbirajdar928-hash)  
-- **LinkedIn**: [shubhodbirajdar](https://linkedin.com/in/shubhodbirajdar)
+- **LinkedIn**: [shubhod-birajdar-90b5a832a](https://www.linkedin.com/in/shubhod-birajdar-90b5a832a)
 
 ---
 
